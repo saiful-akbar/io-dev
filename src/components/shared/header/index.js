@@ -21,10 +21,10 @@ const useStyles = makeStyles((theme) => ({
     left: 50,
     [theme.breakpoints.down("lg")]: {
       top: 10,
-      left: 20,
+      left: 25,
     },
     [theme.breakpoints.down("md")]: {
-      left: 10,
+      left: 15,
     },
   },
   link: {
@@ -59,7 +59,7 @@ const useStyles = makeStyles((theme) => ({
     borderBottom: `2px solid ${theme.palette.text.secondary}`,
     width: 10,
     marginLeft: 7,
-    [theme.breakpoints.down("md")]: {
+    [theme.breakpoints.down("lg")]: {
       display: "none",
     },
   },
@@ -117,7 +117,7 @@ const Header = () => {
       <Link to="/">
         <img
           className={classes.logo}
-          src="/assets/images/logo/logo512.png"
+          src="/assets/images/logo/logo.png"
           alt="Logo"
           width={60}
           hright={60}
