@@ -1,5 +1,6 @@
 import { createTheme } from "@mui/material/styles";
 import { grey } from "@mui/material/colors";
+import typography from "./typography";
 
 const theme = createTheme({
   palette: {
@@ -9,10 +10,11 @@ const theme = createTheme({
       paper: "#fff",
     },
     text: {
-      primary: grey[900],
+      primary: grey[800],
       secondary: grey[400],
     },
   },
+  typography,
 });
 
 export default theme;

@@ -3,12 +3,12 @@ import React from "react";
 import MainLayout from "src/components/layouts/main-layout";
 import Hero from "src/components/shared/hero";
 
-const About = () => {
+const Work = () => {
   return (
-    <MainLayout pageTitle="About Us">
+    <MainLayout pageTitle="Work">
       <section id="hero">
         <Container>
-          <Hero title="About Us" />
+          <Hero title="Work" />
         </Container>
       </section>
 
@@ -20,7 +20,7 @@ const About = () => {
                 Halaman
               </Typography>
               <Typography variant="h2" color="textSecondary">
-                About Us
+                Work
               </Typography>
             </Grid>
           </Grid>
@@ -30,4 +30,4 @@ const About = () => {
   );
 };
 
-export default About;
+export default Work;

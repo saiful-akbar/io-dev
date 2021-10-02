@@ -4,6 +4,8 @@ import { ThemeProvider } from "@mui/material/styles";
 import { CssBaseline } from "@mui/material";
 import theme from "src/theme";
 import Cursor from "src/components/shared/cursor";
+import Header from "src/components/shared/header";
+import Footer from "src/components/shared/footer";
 
 function App() {
   React.useEffect(() => {
@@ -18,8 +20,9 @@ function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Cursor />
-
+      <Header />
       <Router />
+      <Footer />
     </ThemeProvider>
   );
 }

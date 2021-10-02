@@ -17,8 +17,8 @@ const useStyles = makeStyles(() => ({
     border: `2px solid #fff`,
     backgroundColor: "#fff",
     borderRadius: "50%",
-    width: 28,
-    height: 28,
+    width: 26,
+    height: 26,
   },
 }));
 
@@ -28,15 +28,15 @@ const useStyles = makeStyles(() => ({
  */
 const Cursor = () => {
   const classes = useStyles();
-  const x = motionValue(0);
-  const y = motionValue(0);
+  const x = motionValue(-13);
+  const y = motionValue(-13);
   const scale = motionValue(1);
   const color = motionValue("transparent");
 
   const handleMouseMove = React.useCallback(
     (e) => {
-      x.set(e.clientX - 14);
-      y.set(e.clientY - 14);
+      x.set(e.clientX - 13);
+      y.set(e.clientY - 13);
     },
     [x, y]
   );

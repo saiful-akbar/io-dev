@@ -12,3 +12,9 @@ body {
 a {
   text-decoration: none;
 }
+
+@media (min-width: 960px) {
+  .MuiContainer-maxWidthLg {
+    max-width: 1030px !important;
+  }
+}
