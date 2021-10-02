@@ -13,6 +13,9 @@ const theme = createTheme({
       primary: grey[800],
       secondary: grey[400],
     },
+    primary: {
+      main: grey[800],
+    },
   },
   typography,
 });

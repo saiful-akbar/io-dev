@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
       left: 25,
     },
     [theme.breakpoints.down("md")]: {
-      left: 15,
+      left: 20,
     },
   },
   link: {
@@ -75,7 +75,7 @@ const menus = [
 const headerVariants = {
   hidden: {
     opacity: 0,
-    y: 150,
+    y: 100,
   },
   visible: {
     y: 0,
@@ -88,7 +88,7 @@ const headerVariants = {
   },
   exit: {
     opacity: 0,
-    y: -100,
+    y: -50,
     transition: {
       duration: 0.5,
       ease: "easeOut",
@@ -103,8 +103,8 @@ const headerVariants = {
 const Header = () => {
   const classes = useStyles();
   const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.down("md"));
-  const transition = { duration: 0.5, ease: "easeInOut" };
+  const matches = useMediaQuery(theme.breakpoints.down("lg"));
+  const transition = { duration: 0.3, ease: "easeInOut" };
 
   return (
     <motion.header
@@ -135,7 +135,7 @@ const Header = () => {
             activeClassName={classes.linkActive}
           >
             <Typography
-              variant="subtitle1"
+              variant={matches ? "subtitle1" : "subtitle2"}
               component={motion.h6}
               style={{ originX: matches ? 0.5 : 1 }}
               transition={{ ...transition }}

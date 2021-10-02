@@ -43,23 +43,18 @@ const heroVariants = {
   visible: {
     opacity: 1,
     transition: {
-      duration: 0.5,
-      ease: "easeOut",
       staggerChildren: 0.01,
     },
   },
   exit: {
     opacity: 0,
-    duration: 0.5,
-    ease: "easeOut",
-    staggerChildren: 0.01,
   },
 };
 
 const titleVariants = {
   hidden: {
     opacity: 0,
-    y: 150,
+    y: 100,
     skewY: 10,
   },
   visible: {
@@ -73,11 +68,6 @@ const titleVariants = {
   },
   exit: {
     opacity: 0,
-    y: -150,
-    transition: {
-      duration: 0.5,
-      ease: "easeOut",
-    },
   },
 };
 
@@ -98,7 +88,7 @@ const dividerVariants = {
     opacity: 0,
     width: 0,
     transition: {
-      duration: 0.5,
+      duration: 1,
       ease: "easeOut",
     },
   },
