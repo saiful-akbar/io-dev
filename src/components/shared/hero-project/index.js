@@ -19,12 +19,12 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.text.tertiary,
     fontWeight: 400,
     lineHeight: "100%",
-    fontSize: "6rem",
+    fontSize: "5rem",
     [theme.breakpoints.down("md")]: {
-      fontSize: "5rem",
+      fontSize: "4rem",
     },
     [theme.breakpoints.down("sm")]: {
-      fontSize: "4rem",
+      fontSize: "3rem",
     },
   },
   heroDivider: {
@@ -99,6 +99,7 @@ const dividerVariants = {
   exit: {
     opacity: 0,
     width: 0,
+    y: -50,
     transition: {
       duration: 1,
       ease: "easeOut",
@@ -136,7 +137,7 @@ const HeroProject = ({ project }) => {
           </Grid>
 
           <Grid item xs={12}>
-            <Box my={10}>
+            <Box style={{ marginTop: "11vh", marginBottom: "11vh" }}>
               <motion.div variants={dividerVariants}>
                 <div className={classes.heroDivider} />
               </motion.div>
@@ -152,10 +153,20 @@ const HeroProject = ({ project }) => {
                   component={motion.h6}
                   variants={titleVariants}
                 >
-                  Category :
+                  Category
                 </Typography>
               </Grid>
-              <Grid item md={10} xs={9}>
+              <Grid item xs={1}>
+                <Typography
+                  variant="body1"
+                  className={classes.textTertiary}
+                  component={motion.h6}
+                  variants={titleVariants}
+                >
+                  :
+                </Typography>
+              </Grid>
+              <Grid item md={9} xs={8}>
                 <Typography
                   variant="body1"
                   className={classes.textTertiary}
@@ -173,10 +184,20 @@ const HeroProject = ({ project }) => {
                   component={motion.h6}
                   variants={titleVariants}
                 >
-                  Tags :
+                  Tags
                 </Typography>
               </Grid>
-              <Grid item md={10} xs={9}>
+              <Grid item xs={1}>
+                <Typography
+                  variant="body1"
+                  className={classes.textTertiary}
+                  component={motion.h6}
+                  variants={titleVariants}
+                >
+                  :
+                </Typography>
+              </Grid>
+              <Grid item md={9} xs={8}>
                 <Typography
                   variant="body1"
                   className={classes.textTertiary}

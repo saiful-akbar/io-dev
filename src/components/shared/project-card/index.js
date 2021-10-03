@@ -21,7 +21,9 @@ const useStyles = makeStyles((theme) => ({
   projectBanner: {
     position: "absolute",
     top: 0,
+    bottom: 0,
     left: 0,
+    right: 0,
     width: "100%",
     height: "100%",
     borderRadius: 6,
@@ -47,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    padding: theme.spacing(3, 5),
+    padding: theme.spacing(4, 5),
     color: theme.palette.text.tertiary,
     width: "100%",
   },
@@ -58,7 +60,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    padding: theme.spacing(3, 5),
+    padding: theme.spacing(4, 5),
     color: theme.palette.text.tertiary,
     width: "100%",
     [theme.breakpoints.down("md")]: {
@@ -135,7 +137,6 @@ const projectTitleVariants = {
     },
   },
   clicked: {
-    y: -50,
     opacity: 0,
     transition: {
       duration: 0.5,
