@@ -1,9 +1,9 @@
 import { Typography, useMediaQuery } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 import { makeStyles } from "@mui/styles";
+import { motion } from "framer-motion";
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
-import { motion } from "framer-motion";
-import { useTheme } from "@mui/material/styles";
 
 const useStyles = makeStyles((theme) => ({
   header: {
@@ -11,6 +11,7 @@ const useStyles = makeStyles((theme) => ({
     top: 0,
     left: 0,
     width: "100%",
+    zIndex: theme.zIndex.appBar,
     [theme.breakpoints.down("lg")]: {
       position: "static",
     },
@@ -114,6 +115,7 @@ const Header = () => {
       initial="hidden"
       animate="visible"
       exit="exit"
+      id="header"
     >
       <Link to="/">
         <img

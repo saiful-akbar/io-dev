@@ -2,88 +2,55 @@ import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import { Container, Grid } from "@mui/material";
 import Tab from "@mui/material/Tab";
-import { AnimatePresence, motion } from "framer-motion";
 import React from "react";
 import { useSelector } from "react-redux";
 import MainLayout from "src/components/layouts/main-layout";
+import Footer from "src/components/shared/footer";
 import Hero from "src/components/shared/hero";
-import Project from "src/components/shared/project";
+import ProjectCard from "src/components/shared/project-card";
+import Section from "src/components/shared/section";
 
-// animate variants
-const sectionVariants = {
-  hidden: {
-    opacity: 0,
-    y: 100,
-  },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.5,
-      ease: "easeOut",
-    },
-  },
-  exit: {
-    opacity: 0,
-    y: -50,
-    transition: {
-      duration: 0.5,
-      ease: "easeOut",
-    },
-  },
-};
-
+/**
+ * Komponen utama
+ * @returns
+ */
 const Work = () => {
-  // redux state
-  const { categories, projects } = useSelector((state) => state.workReducer);
+  const result = useSelector((state) => state.workReducer);
 
-  // tab value
   const [value, setValue] = React.useState("web");
+  const [work, setWork] = React.useState(null);
 
-  // render element
+  React.useEffect(() => {
+    setWork(result);
+  }, [result, setWork]);
+
   return (
-    <MainLayout pageTitle="Work">
-      {/* section hero */}
-      <motion.section
-        id="hero"
-        variants={sectionVariants}
-        initial="hidden"
-        animate="visible"
-        exit="exit"
-      >
-        <Container>
+    <MainLayout pageTitle="Work" pt={20}>
+      <Container>
+        <Section id="hero">
           <Hero title="Work" />
-        </Container>
-      </motion.section>
-      {/* end section hero */}
+        </Section>
 
-      {/* section project list */}
-      <motion.section
-        id="content"
-        variants={sectionVariants}
-        initial="hidden"
-        animate="visible"
-        exit="exit"
-      >
-        <Container>
-          {/* tab project list */}
-          <TabContext value={value}>
+        {/* project list */}
+        <TabContext value={value}>
+          <Section id="project-tab">
             <TabList onChange={(e, newValue) => setValue(newValue)}>
-              {categories.map((category) => (
-                <Tab label={category} value={category} key={category} />
-              ))}
+              {work !== null &&
+                work.categories.map((category) => (
+                  <Tab label={category} value={category} key={category} />
+                ))}
             </TabList>
-            {/* end tab project list */}
+          </Section>
 
-            {/* project list */}
-
-            <AnimatePresence exitBeforeEnter>
-              <Grid container spacing={2} key={value}>
-                {projects.map(
+          {/* project item */}
+          <section id="project-item">
+            <Grid container spacing={2}>
+              {work !== null &&
+                work.projects.map(
                   (project) =>
                     project.category === value && (
                       <Grid item xs={12} key={project.slug}>
-                        <Project
+                        <ProjectCard
                           name={project.name}
                           year={project.year}
                           category={project.category}
@@ -94,13 +61,14 @@ const Work = () => {
                       </Grid>
                     )
                 )}
-              </Grid>
-            </AnimatePresence>
-            {/* end project list */}
-          </TabContext>
-        </Container>
-      </motion.section>
-      {/* end section project list */}
+            </Grid>
+          </section>
+        </TabContext>
+      </Container>
+
+      <Section id="footer">
+        <Footer />
+      </Section>
     </MainLayout>
   );
 };

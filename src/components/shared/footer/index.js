@@ -13,7 +13,7 @@ const Footer = () => {
   const classes = useStyles();
 
   return (
-    <footer>
+    <footer id="footer">
       <Box p={2} display="flex" justifyContent="center" alignItems="center">
         <a
           href="https://instagram.com/saifulakbar13"

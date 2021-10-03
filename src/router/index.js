@@ -1,8 +1,9 @@
 import { AnimatePresence } from "framer-motion";
 import React from "react";
-import { Route, Switch, useLocation } from "react-router-dom";
+import { Route, Switch, useLocation, Redirect } from "react-router-dom";
 import About from "src/pages/about";
 import Work from "src/pages/work";
+import Project from "src/pages/project";
 import NotFound from "src/pages/_error/404";
 
 function Router() {
@@ -13,7 +14,12 @@ function Router() {
       <Switch location={location} key={location.pathname}>
         <Route path="/" exact component={Work} />
         <Route path="/about" exact component={About} />
-        <Route component={NotFound} />
+        <Route path="/project/:slug" exact component={Project} />
+        <Route path="/404" exact component={NotFound} />
+
+        <Route path="*">
+          <Redirect to="/404" />
+        </Route>
       </Switch>
     </AnimatePresence>
   );

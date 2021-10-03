@@ -1,4 +1,5 @@
 import { makeStyles } from "@mui/styles";
+import { Box } from "@mui/material";
 import { PropTypes } from "prop-types";
 import React from "react";
 import { useSelector } from "react-redux";
@@ -11,7 +12,6 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     minHeight: "100vh",
     backgroundColor: theme.palette.background.default,
-    padding: theme.spacing(25, 0, 10, 0),
   },
 }));
 
@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
  * @param {*} param0
  * @returns
  */
-const MainLayout = ({ children, pageTitle }) => {
+const MainLayout = ({ children, pageTitle, ...rest }) => {
   const classes = useStyles();
 
   // redux
@@ -35,7 +35,11 @@ const MainLayout = ({ children, pageTitle }) => {
     }
   }, [pageTitle, appName]);
 
-  return <main className={classes.main}>{children}</main>;
+  return (
+    <Box component="main" className={classes.main} {...rest}>
+      {children}
+    </Box>
+  );
 };
 
 // prop type

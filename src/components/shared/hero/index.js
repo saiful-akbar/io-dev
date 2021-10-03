@@ -1,4 +1,4 @@
-import { Divider, Grid } from "@mui/material";
+import { Grid } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { motion } from "framer-motion";
 import PropTypes from "prop-types";
@@ -10,7 +10,7 @@ import { useSelector } from "react-redux";
  */
 const useStyles = makeStyles((theme) => ({
   hero: {
-    paddingBottom: theme.spacing(10),
+    paddingBottom: theme.spacing(15),
   },
   heroTitle: {
     fontWeight: 500,
@@ -29,9 +29,9 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: 13,
   },
   heroDivider: {
-    borderWidth: "2px !important",
-    borderColor: `${theme.palette.text.primary} !important`,
-    marginTop: `${theme.spacing(15)} !important`,
+    width: "100%",
+    borderBottom: `3px solid ${theme.palette.text.primary}`,
+    marginTop: theme.spacing(10),
   },
 }));
 
@@ -43,7 +43,7 @@ const heroVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.01,
+      staggerChildren: 0.02,
     },
   },
   exit: {
@@ -127,7 +127,7 @@ const Hero = ({ title }) => {
 
         <Grid item xs={12}>
           <motion.div variants={dividerVariants}>
-            <Divider className={classes.heroDivider} />
+            <div className={classes.heroDivider} />
           </motion.div>
         </Grid>
       </Grid>

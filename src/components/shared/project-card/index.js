@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Typography } from "@mui/material";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { InView } from "react-intersection-observer";
+import { useHistory } from "react-router-dom";
 
 /**
  * Style
@@ -47,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "space-between",
     alignItems: "center",
     padding: theme.spacing(3, 5),
-    color: "#fff",
+    color: theme.palette.text.tertiary,
     width: "100%",
   },
   projectTitleBottom: {
@@ -58,7 +59,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "space-between",
     alignItems: "center",
     padding: theme.spacing(3, 5),
-    color: "#fff",
+    color: theme.palette.text.tertiary,
     width: "100%",
     [theme.breakpoints.down("md")]: {
       display: "none",
@@ -83,9 +84,28 @@ const projectVariants = {
   },
   exit: {
     opacity: 0,
+    y: -50,
+  },
+  clicked: {
+    opacity: 1,
     transition: {
       when: "afterChildren",
     },
+  },
+};
+
+const projectImageVariants = {
+  hidden: {
+    opacity: 0,
+  },
+  visible: {
+    opacity: 1,
+  },
+  exit: {
+    opacity: 0,
+  },
+  clicked: {
+    opacity: 0,
   },
 };
 
@@ -107,6 +127,15 @@ const projectTitleVariants = {
     },
   },
   exit: {
+    y: -50,
+    opacity: 0,
+    transition: {
+      duration: 0.5,
+      ease: "easeOut",
+    },
+  },
+  clicked: {
+    y: -50,
     opacity: 0,
     transition: {
       duration: 0.5,
@@ -125,7 +154,7 @@ const projectTitleVariants = {
  * @param {String} slug
  * @returns
  */
-const Project = ({
+const ProjectCard = ({
   bannerColor,
   name,
   image,
@@ -134,24 +163,37 @@ const Project = ({
   slug,
   ...rest
 }) => {
-  const classes = useStyles();
   const transition = { duration: 0.5, ease: "easeOut" };
+
+  const classes = useStyles();
+  const history = useHistory();
+
+  const [isClicked, setClicked] = React.useState(false);
+
+  // handle click card
+  const handleClick = () => {
+    setClicked(true);
+    history.push(`/project/${slug}`);
+  };
 
   return (
     <motion.div
       {...rest}
+      onClick={handleClick}
       className={classes.projectContainer}
       variants={projectVariants}
+      transition={{ ...transition }}
       initial="hidden"
       animate="visible"
-      exit="exit"
+      exit={isClicked ? "clicked" : "exit"}
+      layoutId={`banner_${slug}`}
     >
       {/* banner */}
       <motion.div
         className={classes.projectBanner}
         style={{ backgroundColor: bannerColor }}
-        transition={{ ...transition }}
         whileHover={{ scale: 0.98 }}
+        transition={{ ...transition }}
       />
 
       {/* image */}
@@ -160,6 +202,7 @@ const Project = ({
         alt={`project_${slug}`}
         src={image}
         className={classes.projectHeroImage}
+        variants={projectImageVariants}
       />
 
       {/* title top */}
@@ -191,8 +234,8 @@ const Project = ({
             className={classes.projectTitleBottom}
             ref={ref}
             variants={projectTitleVariants}
-            initial="hidden"
             animate={inView ? "visible" : "hidden"}
+            initial="hidden"
             exit="exit"
           >
             <Typography variant="subtitle2" noWrap>
@@ -208,7 +251,7 @@ const Project = ({
   );
 };
 
-Project.propTypes = {
+ProjectCard.propTypes = {
   bannerColor: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
@@ -217,4 +260,4 @@ Project.propTypes = {
   slug: PropTypes.string.isRequired,
 };
 
-export default Project;
+export default ProjectCard;

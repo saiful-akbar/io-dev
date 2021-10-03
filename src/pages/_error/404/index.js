@@ -50,7 +50,7 @@ const titleVariants = {
 
 const NotFound = () => {
   return (
-    <MainLayout pageTitle="404 Page Not Found">
+    <MainLayout pageTitle="404" pt={20}>
       <Container>
         <Grid container spacing={2}>
           <Grid item xs={12}>

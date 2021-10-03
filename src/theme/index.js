@@ -12,6 +12,7 @@ const theme = createTheme({
     text: {
       primary: grey[800],
       secondary: grey[400],
+      tertiary: grey[50],
     },
     primary: {
       main: grey[800],

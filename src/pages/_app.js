@@ -1,12 +1,11 @@
-import React from "react";
-import Router from "src/router";
-import { ThemeProvider } from "@mui/material/styles";
 import { CssBaseline } from "@mui/material";
-import theme from "src/theme";
+import { ThemeProvider } from "@mui/material/styles";
+import { AnimateSharedLayout } from "framer-motion";
+import React from "react";
 import Cursor from "src/components/shared/cursor";
 import Header from "src/components/shared/header";
-import Footer from "src/components/shared/footer";
-
+import Router from "src/router";
+import theme from "src/theme";
 function App() {
   React.useEffect(() => {
     const rootEl = document.querySelector("#root");
@@ -18,11 +17,12 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <Cursor />
-      <Header />
-      <Router />
-      <Footer />
+      <AnimateSharedLayout type="crossfade">
+        <CssBaseline />
+        <Cursor />
+        <Header />
+        <Router />
+      </AnimateSharedLayout>
     </ThemeProvider>
   );
 }

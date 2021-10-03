@@ -1,47 +1,22 @@
 import { Container } from "@mui/material";
-import { motion } from "framer-motion";
 import React from "react";
 import MainLayout from "src/components/layouts/main-layout";
+import Footer from "src/components/shared/footer";
 import Hero from "src/components/shared/hero";
-
-// animate variants
-const sectionVariants = {
-  hidden: {
-    opacity: 0,
-    y: 100,
-  },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.5,
-      ease: "easeOut",
-    },
-  },
-  exit: {
-    opacity: 0,
-    y: -50,
-    transition: {
-      duration: 0.5,
-      ease: "easeOut",
-    },
-  },
-};
+import Section from "src/components/shared/section";
 
 const About = () => {
   return (
-    <MainLayout pageTitle="About Us">
-      <motion.section
-        id="hero"
-        variants={sectionVariants}
-        initial="hidden"
-        animate="visible"
-        exit="exit"
-      >
-        <Container>
+    <MainLayout pageTitle="About Us" pt={20}>
+      <Container>
+        <Section id="hero">
           <Hero title="About Us" />
-        </Container>
-      </motion.section>
+        </Section>
+      </Container>
+
+      <Section>
+        <Footer />
+      </Section>
     </MainLayout>
   );
 };
