@@ -16,15 +16,16 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   logo: {
+    width: 80,
+    height: 80,
     position: "absolute",
     top: 50,
-    left: 50,
+    left: 30,
     [theme.breakpoints.down("lg")]: {
+      width: 70,
+      height: 70,
       top: 10,
-      left: 25,
-    },
-    [theme.breakpoints.down("md")]: {
-      left: 20,
+      left: 5,
     },
   },
   link: {
@@ -117,10 +118,8 @@ const Header = () => {
       <Link to="/">
         <img
           className={classes.logo}
-          src="/assets/images/logo/logo.png"
+          src="/assets/images/logo/logo2.png"
           alt="Logo"
-          width={60}
-          hright={60}
           loading="lazy"
         />
       </Link>
