@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
   heroDivider: {
     width: "100%",
     borderBottom: `3px solid ${theme.palette.text.primary}`,
-    marginTop: theme.spacing(10),
+    marginTop: "10vh",
   },
 }));
 
