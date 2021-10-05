@@ -1,7 +1,8 @@
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
-import { Container, Grid } from "@mui/material";
+import { Container, Grid, Box } from "@mui/material";
 import Tab from "@mui/material/Tab";
+import { makeStyles } from "@mui/styles";
 import React from "react";
 import { useSelector } from "react-redux";
 import MainLayout from "src/components/layouts/main-layout";
@@ -11,12 +12,33 @@ import ProjectCard from "src/components/shared/project-card";
 import Section from "src/components/shared/section";
 
 /**
+ * Style
+ */
+const useStyles = makeStyles((theme) => ({
+  tab: {
+    [theme.breakpoints.down("md")]: {
+      position: "sticky",
+      top: 0,
+      zIndex: theme.zIndex.appBar,
+      backgroundColor: theme.palette.background.default,
+      width: "100%",
+      padding: theme.spacing(1, 0),
+      // border: "1px solid black",
+    },
+  },
+}));
+
+/**
  * Komponen utama
  * @returns
  */
 const Work = () => {
+  const classes = useStyles();
+
+  // redux
   const result = useSelector((state) => state.workReducer);
 
+  // state
   const [value, setValue] = React.useState("web");
   const [work, setWork] = React.useState(null);
 
@@ -33,7 +55,7 @@ const Work = () => {
 
         {/* project list */}
         <TabContext value={value}>
-          <Section id="project-tab">
+          <Section id="project-tab" className={classes.tab}>
             <TabList onChange={(e, newValue) => setValue(newValue)}>
               {work !== null &&
                 work.categories.map((category) => (
@@ -43,7 +65,7 @@ const Work = () => {
           </Section>
 
           {/* project item */}
-          <section id="project-item">
+          <Box px={1}>
             <Grid container spacing={2}>
               {work !== null &&
                 work.projects.map(
@@ -62,7 +84,7 @@ const Work = () => {
                     )
                 )}
             </Grid>
-          </section>
+          </Box>
         </TabContext>
       </Container>
 
