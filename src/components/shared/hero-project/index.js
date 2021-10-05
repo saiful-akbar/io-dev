@@ -16,9 +16,9 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "center",
   },
-  beroBanner: {
+  heroBanner: {
     padding: theme.spacing(20, 0, 10, 0),
-    height: "100vh",
+    minHeight: "100vh",
     width: "100%",
   },
   heroTitle: {
@@ -143,7 +143,7 @@ const HeroProject = ({ project }) => {
     <div className={classes.hero} ref={ref}>
       <motion.div
         style={{ backgroundColor: project.bannerColor }}
-        className={classes.beroBanner}
+        className={classes.heroBanner}
         layoutId={project.slug}
         initial="hidden"
         animate="visible"
@@ -158,7 +158,7 @@ const HeroProject = ({ project }) => {
               domRect.right && domRect.left
                 ? Math.ceil(domRect.right - domRect.left)
                 : "100%",
-            height:
+            minHeight:
               domRect.bottom && domRect.top
                 ? Math.ceil(domRect.bottom - domRect.top)
                 : "100vh",
@@ -167,7 +167,7 @@ const HeroProject = ({ project }) => {
             opacity: 1,
             y: 0,
             width: "100%",
-            height: "100vh",
+            minHeight: "100vh",
             borderRadius: 0,
             transition: {
               duration: domRect.top ? 0.5 : 0.7,
