@@ -3,7 +3,9 @@ import { useTheme } from "@mui/material/styles";
 import { makeStyles } from "@mui/styles";
 import { motion } from "framer-motion";
 import React from "react";
+import { useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
+import clsx from "clsx";
 
 const useStyles = makeStyles((theme) => ({
   header: {
@@ -17,25 +19,27 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   logo: {
+    zIndex: theme.zIndex.appBar,
     width: 80,
     height: 80,
     position: "absolute",
-    top: 50,
+    top: 30,
     left: 30,
     [theme.breakpoints.down("lg")]: {
       width: 70,
       height: 70,
-      top: 10,
+      top: 5,
       left: 5,
     },
   },
   link: {
+    zIndex: theme.zIndex.appBar,
     position: "absolute",
     display: "flex",
     justifyContent: "space-evenly",
     flexDirection: "column",
     alignItems: "flex-end",
-    top: 50,
+    top: 30,
     right: 50,
     [theme.breakpoints.down("lg")]: {
       flexDirection: "row",
@@ -48,8 +52,8 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
-    color: theme.palette.text.secondary,
     margin: theme.spacing(1),
+    color: theme.palette.text.secondary,
     [theme.breakpoints.down("lg")]: {
       margin: theme.spacing(2, 1.5),
     },
@@ -64,6 +68,9 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("lg")]: {
       display: "none",
     },
+  },
+  textTertiary: {
+    color: theme.palette.text.tertiary,
   },
 }));
 
@@ -108,6 +115,9 @@ const Header = () => {
   const matches = useMediaQuery(theme.breakpoints.down("lg"));
   const transition = { duration: 0.3, ease: "easeInOut" };
 
+  // redux
+  const { header } = useSelector((state) => state.globalReducer);
+
   return (
     <motion.header
       className={classes.header}
@@ -120,9 +130,11 @@ const Header = () => {
       <Link to="/">
         <img
           className={classes.logo}
-          src="/assets/images/logo/logo2.png"
           alt="Logo"
-          loading="lazy"
+          loading="eager"
+          src={`/assets/images/logo/${
+            header.color === "dark" ? "logo_t_black.png" : "logo_t_white.png"
+          }`}
         />
       </Link>
 
@@ -132,8 +144,10 @@ const Header = () => {
             key={menu.href}
             exact
             to={menu.href}
-            className={classes.linkItem}
             activeClassName={classes.linkActive}
+            className={clsx(classes.linkItem, {
+              [classes.textTertiary]: Boolean(header.color === "light"),
+            })}
           >
             <Typography
               variant={matches ? "subtitle1" : "subtitle2"}

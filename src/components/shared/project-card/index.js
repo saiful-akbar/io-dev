@@ -6,6 +6,8 @@ import { Typography } from "@mui/material";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { InView } from "react-intersection-observer";
 import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import actionType from "src/reducer/actionType";
 
 /**
  * Style
@@ -86,7 +88,6 @@ const projectVariants = {
   },
   exit: {
     opacity: 0,
-    y: -50,
   },
   clicked: {
     opacity: 1,
@@ -129,19 +130,10 @@ const projectTitleVariants = {
     },
   },
   exit: {
-    y: -50,
     opacity: 0,
-    transition: {
-      duration: 0.5,
-      ease: "easeOut",
-    },
   },
   clicked: {
     opacity: 0,
-    transition: {
-      duration: 0.5,
-      ease: "easeOut",
-    },
   },
 };
 
@@ -165,29 +157,35 @@ const ProjectCard = ({
   ...rest
 }) => {
   const transition = { duration: 0.5, ease: "easeOut" };
-
   const classes = useStyles();
   const history = useHistory();
+  const ref = React.useRef(null);
+  const [clicked, setClicked] = React.useState(false);
 
-  const [isClicked, setClicked] = React.useState(false);
+  // redux
+  const dispatch = useDispatch();
 
   // handle click card
   const handleClick = () => {
     setClicked(true);
+    dispatch({
+      type: actionType.setWorkDomRect,
+      value: ref.current.getBoundingClientRect(),
+    });
     history.push(`/project/${slug}`);
   };
 
   return (
     <motion.div
       {...rest}
+      ref={ref}
       onClick={handleClick}
       className={classes.projectContainer}
       variants={projectVariants}
       transition={{ ...transition }}
       initial="hidden"
       animate="visible"
-      exit={isClicked ? "clicked" : "exit"}
-      layoutId={`banner_${slug}`}
+      exit={clicked ? "clicked" : "exit"}
     >
       {/* banner */}
       <motion.div
@@ -207,7 +205,7 @@ const ProjectCard = ({
       />
 
       {/* title top */}
-      <InView>
+      <InView delay={200}>
         {({ ref, inView }) => (
           <motion.div
             className={classes.projectTitleTop}
@@ -229,14 +227,14 @@ const ProjectCard = ({
       </InView>
 
       {/* title top */}
-      <InView>
+      <InView delay={200}>
         {({ ref, inView }) => (
           <motion.div
             className={classes.projectTitleBottom}
             ref={ref}
             variants={projectTitleVariants}
-            animate={inView ? "visible" : "hidden"}
             initial="hidden"
+            animate={inView ? "visible" : "hidden"}
             exit="exit"
           >
             <Typography variant="subtitle2" noWrap>

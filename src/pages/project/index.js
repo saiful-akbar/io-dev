@@ -8,12 +8,12 @@ import HeroProject from "src/components/shared/hero-project";
  * @param {String} slug
  * @returns
  */
-const Project = ({ match, history }) => {
-  const { slug } = match.params;
+const Project = (props) => {
+  const { match, history } = props;
 
   // redux
   const project = useSelector((state) =>
-    state.workReducer.projects.find((data) => data.slug === slug)
+    state.workReducer.projects.find((data) => data.slug === match.params.slug)
   );
 
   // cek apakan project dengan slug yang dikirim ada atau tidak
@@ -23,8 +23,8 @@ const Project = ({ match, history }) => {
 
   return (
     <MainLayout pageTitle={project && project.name}>
-      <section id="hero-project">
-        <HeroProject project={project && project} />
+      <section style={{ minHeight: "250vh" }}>
+        {project && <HeroProject project={project} />}
       </section>
     </MainLayout>
   );

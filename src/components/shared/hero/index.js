@@ -48,6 +48,9 @@ const heroVariants = {
   },
   exit: {
     opacity: 0,
+    transition: {
+      when: "afterChildren",
+    },
   },
 };
 
@@ -68,6 +71,10 @@ const titleVariants = {
   },
   exit: {
     opacity: 0,
+    transition: {
+      duration: 0.5,
+      ease: "easeOut",
+    },
   },
 };
 
@@ -88,7 +95,7 @@ const dividerVariants = {
     opacity: 0,
     width: 0,
     transition: {
-      duration: 1,
+      duration: 0.5,
       ease: "easeOut",
     },
   },
