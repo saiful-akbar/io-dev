@@ -21,11 +21,6 @@ const sectionVariants = {
   },
   exit: {
     opacity: 0,
-    y: -50,
-    transition: {
-      duration: 0.5,
-      ease: "easeOut",
-    },
   },
 };
 

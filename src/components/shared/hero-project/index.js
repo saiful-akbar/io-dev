@@ -3,23 +3,32 @@ import { makeStyles } from "@mui/styles";
 import { motion } from "framer-motion";
 import PropTypes from "prop-types";
 import React from "react";
+import { useInView } from "react-intersection-observer";
+import { useDispatch, useSelector } from "react-redux";
+import actionType from "src/reducer/actionType";
 
-/**
- * Style
- */
 /**
  * Style
  */
 const useStyles = makeStyles((theme) => ({
   hero: {
-    minHeight: "100vh",
-    padding: theme.spacing(20, 0, 5, 0),
+    width: "100%",
+    display: "flex",
+    justifyContent: "center",
+  },
+  beroBanner: {
+    padding: theme.spacing(20, 0, 10, 0),
+    height: "100vh",
+    width: "100%",
   },
   heroTitle: {
     color: theme.palette.text.tertiary,
     fontWeight: 400,
     lineHeight: "100%",
-    fontSize: "5rem",
+    fontSize: "6rem",
+    [theme.breakpoints.down("lg")]: {
+      fontSize: "5rem",
+    },
     [theme.breakpoints.down("md")]: {
       fontSize: "4rem",
     },
@@ -39,35 +48,15 @@ const useStyles = makeStyles((theme) => ({
 /**
  * Animate variants
  */
-const heroVariants = {
-  hidden: {
-    opacity: 1,
-  },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.02,
-      when: "beforeChildren",
-    },
-  },
-  exit: {
-    opacity: 0,
-    transition: {
-      when: "afterChildren",
-    },
-  },
-};
 
 const titleVariants = {
   hidden: {
     opacity: 0,
     y: 100,
-    skewY: 5,
   },
   visible: {
     opacity: 1,
     y: 0,
-    skewY: 0,
     transition: {
       duration: 0.5,
       ease: "easeOut",
@@ -87,12 +76,14 @@ const dividerVariants = {
   hidden: {
     opacity: 0,
     width: 0,
+    y: 100,
   },
   visible: {
     opacity: 1,
     width: "100%",
+    y: 0,
     transition: {
-      duration: 1,
+      duration: 0.5,
       ease: "easeOut",
     },
   },
@@ -101,7 +92,7 @@ const dividerVariants = {
     width: 0,
     y: -50,
     transition: {
-      duration: 1,
+      duration: 0.5,
       ease: "easeOut",
     },
   },
@@ -114,104 +105,171 @@ const dividerVariants = {
  */
 const HeroProject = ({ project }) => {
   const transition = { duration: 0.5, ease: "easeOut" };
-
   const classes = useStyles();
+  const { ref, inView } = useInView();
+
+  // redux
+  const dispatch = useDispatch();
+  const { domRect } = useSelector((state) => state.workReducer);
+  const { header } = useSelector((state) => state.globalReducer);
+
+  // set warna header ketika element heri ada tau tidak dalam viewport
+  React.useEffect(() => {
+    const newHeader = header;
+
+    if (inView) {
+      newHeader.color = "light";
+    } else {
+      newHeader.color = "dark";
+    }
+
+    dispatch({
+      type: actionType.setGlobalHeader,
+      value: newHeader,
+    });
+
+    return () => {
+      newHeader.color = "dark";
+      dispatch({
+        type: actionType.setGlobalHeader,
+        value: newHeader,
+      });
+    };
+
+    // eslint-disable-next-line
+  }, [dispatch, inView]);
 
   return (
-    <motion.div
-      className={classes.hero}
-      variants={heroVariants}
-      initial="hidden"
-      animate="visible"
-      exit="exit"
-      transition={{ ...transition }}
-      layoutId={`banner_${project.slug}`}
-      style={{ backgroundColor: project.bannerColor }}
-    >
-      <Container>
-        <Grid container spacing={2}>
-          <Grid item xs={12}>
-            <motion.h1 className={classes.heroTitle} variants={titleVariants}>
-              {project.name}
-            </motion.h1>
-          </Grid>
+    <div className={classes.hero} ref={ref}>
+      <motion.div
+        style={{ backgroundColor: project.bannerColor }}
+        className={classes.beroBanner}
+        layoutId={project.slug}
+        initial="hidden"
+        animate="visible"
+        exit="exit"
+        transition={{ ...transition }}
+        variants={{
+          hidden: {
+            borderRadius: 6,
+            opacity: domRect.top ? 1 : 0,
+            y: domRect.top ? Math.ceil(domRect.top) : 250,
+            width:
+              domRect.right && domRect.left
+                ? Math.ceil(domRect.right - domRect.left)
+                : "100%",
+            height:
+              domRect.bottom && domRect.top
+                ? Math.ceil(domRect.bottom - domRect.top)
+                : "100vh",
+          },
+          visible: {
+            opacity: 1,
+            y: 0,
+            width: "100%",
+            height: "100vh",
+            borderRadius: 0,
+            transition: {
+              duration: domRect.top ? 0.5 : 0.7,
+              staggerChildren: 0.02,
+              ease: "easeOut",
+              when: "beforeChildren",
+            },
+          },
+          exit: {
+            opacity: 0,
+            transition: {
+              when: "afterChildren",
+              staggerChildren: 0.02,
+            },
+          },
+        }}
+      >
+        <Container>
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <motion.h1 className={classes.heroTitle} variants={titleVariants}>
+                {project.name}
+              </motion.h1>
+            </Grid>
 
-          <Grid item xs={12}>
-            <Box style={{ marginTop: "11vh", marginBottom: "11vh" }}>
-              <motion.div variants={dividerVariants}>
-                <div className={classes.heroDivider} />
-              </motion.div>
-            </Box>
-          </Grid>
+            <Grid item xs={12}>
+              <Box my={10}>
+                <motion.div variants={dividerVariants}>
+                  <div className={classes.heroDivider} />
+                </motion.div>
+              </Box>
+            </Grid>
 
-          <Grid item lg={10} xs={12}>
-            <Grid container spacing={1}>
-              <Grid item md={2} xs={3}>
-                <Typography
-                  variant="body1"
-                  className={classes.textTertiary}
-                  component={motion.h6}
-                  variants={titleVariants}
-                >
-                  Category
-                </Typography>
-              </Grid>
-              <Grid item xs={1}>
-                <Typography
-                  variant="body1"
-                  className={classes.textTertiary}
-                  component={motion.h6}
-                  variants={titleVariants}
-                >
-                  :
-                </Typography>
-              </Grid>
-              <Grid item md={9} xs={8}>
-                <Typography
-                  variant="body1"
-                  className={classes.textTertiary}
-                  component={motion.h6}
-                  variants={titleVariants}
-                >
-                  {project.category}
-                </Typography>
-              </Grid>
+            <Grid item lg={10} xs={12}>
+              <Grid container spacing={1}>
+                <Grid item md={2} xs={4}>
+                  <Typography
+                    variant="body1"
+                    className={classes.textTertiary}
+                    component={motion.h6}
+                    variants={titleVariants}
+                  >
+                    Category
+                  </Typography>
+                </Grid>
+                <Grid item xs={1}>
+                  <Typography
+                    variant="body1"
+                    className={classes.textTertiary}
+                    component={motion.h6}
+                    variants={titleVariants}
+                  >
+                    :
+                  </Typography>
+                </Grid>
+                <Grid item md={9} xs={7}>
+                  <Typography
+                    variant="body1"
+                    className={classes.textTertiary}
+                    component={motion.h6}
+                    variants={titleVariants}
+                  >
+                    {project.category}
+                  </Typography>
+                </Grid>
 
-              <Grid item md={2} xs={3}>
-                <Typography
-                  variant="body1"
-                  className={classes.textTertiary}
-                  component={motion.h6}
-                  variants={titleVariants}
-                >
-                  Tags
-                </Typography>
-              </Grid>
-              <Grid item xs={1}>
-                <Typography
-                  variant="body1"
-                  className={classes.textTertiary}
-                  component={motion.h6}
-                  variants={titleVariants}
-                >
-                  :
-                </Typography>
-              </Grid>
-              <Grid item md={9} xs={8}>
-                <Typography
-                  variant="body1"
-                  className={classes.textTertiary}
-                  component={motion.h6}
-                  variants={titleVariants}
-                >
-                  {project.tags.join(", ")}
-                </Typography>
+                <Grid item md={2} xs={4}>
+                  <Typography
+                    variant="body1"
+                    className={classes.textTertiary}
+                    component={motion.h6}
+                    variants={titleVariants}
+                  >
+                    Tags
+                  </Typography>
+                </Grid>
+                <Grid item xs={1}>
+                  <Typography
+                    variant="body1"
+                    className={classes.textTertiary}
+                    component={motion.h6}
+                    variants={titleVariants}
+                  >
+                    :
+                  </Typography>
+                </Grid>
+                <Grid item md={9} xs={7}>
+                  <Typography
+                    variant="body1"
+                    className={classes.textTertiary}
+                    component={motion.h6}
+                    variants={titleVariants}
+                  >
+                    {project.tags.join(", ")}
+                  </Typography>
+                </Grid>
               </Grid>
             </Grid>
           </Grid>
-        </Grid>
-      </Container>
-    </motion.div>
+        </Container>
+      </motion.div>
+    </div>
   );
 };
 

@@ -2,7 +2,7 @@ import actionType from "./actionType";
 
 // initial state
 const initialState = {
-  categories: ["web", "ui/ux", "mobile"],
+  categories: ["web", "ui/ux"],
   projects: [
     {
       id: 1,
@@ -85,6 +85,16 @@ const initialState = {
       ],
     },
   ],
+  domRect: {
+    bottom: null,
+    height: null,
+    left: null,
+    right: null,
+    top: null,
+    width: null,
+    x: null,
+    y: null,
+  },
 };
 
 const projectReducer = (state = initialState, action) => {
@@ -99,6 +109,12 @@ const projectReducer = (state = initialState, action) => {
       return {
         ...state,
         categories: action.value,
+      };
+
+    case actionType.setWorkDomRect:
+      return {
+        ...state,
+        domRect: action.value,
       };
 
     default:
