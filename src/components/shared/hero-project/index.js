@@ -158,10 +158,10 @@ const HeroProject = ({ project }) => {
               domRect.right && domRect.left
                 ? Math.ceil(domRect.right - domRect.left)
                 : "100%",
-            minHeight:
+            height:
               domRect.bottom && domRect.top
                 ? Math.ceil(domRect.bottom - domRect.top)
-                : "100vh",
+                : "100%",
           },
           visible: {
             opacity: 1,
