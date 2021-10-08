@@ -1,6 +1,6 @@
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
-import { Container, Grid, Box } from "@mui/material";
+import { Box, Container, Grid } from "@mui/material";
 import Tab from "@mui/material/Tab";
 import { makeStyles } from "@mui/styles";
 import React from "react";
@@ -23,7 +23,6 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: theme.palette.background.default,
       width: "100%",
       padding: theme.spacing(1, 0),
-      // border: "1px solid black",
     },
   },
 }));
@@ -85,7 +84,9 @@ const Work = () => {
                 )}
             </Grid>
           </Box>
+          {/* end project item */}
         </TabContext>
+        {/* end project list */}
       </Container>
 
       <Section id="footer">

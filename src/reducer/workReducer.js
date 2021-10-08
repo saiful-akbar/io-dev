@@ -86,14 +86,8 @@ const initialState = {
     },
   ],
   domRect: {
-    bottom: null,
-    height: null,
-    left: null,
-    right: null,
-    top: null,
-    width: null,
-    x: null,
-    y: null,
+    banner: null,
+    name: null,
   },
 };
 

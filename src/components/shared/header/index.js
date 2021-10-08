@@ -1,70 +1,87 @@
-import { Typography, useMediaQuery } from "@mui/material";
+import { useMediaQuery } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { makeStyles } from "@mui/styles";
 import { motion } from "framer-motion";
 import React from "react";
-import { useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
 import clsx from "clsx";
+import { useSelector } from "react-redux";
 
+/**
+ * Style
+ */
 const useStyles = makeStyles((theme) => ({
-  header: {
-    position: "fixed",
-    top: 0,
-    left: 0,
-    width: "100%",
-    zIndex: theme.zIndex.appBar,
-    [theme.breakpoints.down("lg")]: {
-      position: "static",
-    },
-  },
   logo: {
-    zIndex: theme.zIndex.appBar,
-    width: 80,
-    height: 80,
-    position: "absolute",
-    top: 30,
-    left: 30,
-    [theme.breakpoints.down("lg")]: {
-      width: 70,
-      height: 70,
-      top: 5,
-      left: 5,
-    },
-  },
-  link: {
-    zIndex: theme.zIndex.appBar,
-    position: "absolute",
+    position: "fixed",
+    top: 50,
+    left: 50,
+    color: theme.palette.text.primary,
     display: "flex",
-    justifyContent: "space-evenly",
     flexDirection: "column",
-    alignItems: "flex-end",
-    top: 30,
-    right: 50,
-    [theme.breakpoints.down("lg")]: {
-      flexDirection: "row",
-      alignItems: "center",
-      top: 10,
-      right: 10,
-    },
-  },
-  linkItem: {
-    display: "flex",
-    flexDirection: "row",
+    justifyContent: "center",
     alignItems: "center",
-    margin: theme.spacing(1),
-    color: theme.palette.text.secondary,
+    zIndex: theme.zIndex.appBar,
     [theme.breakpoints.down("lg")]: {
-      margin: theme.spacing(2, 1.5),
+      position: "absolute",
+      top: 10,
+      left: 15,
+    },
+    "& h1": {
+      fontSize: "3em",
+      fontWeight: 600,
+      lineHeight: "100%",
+      marginBottom: 5,
+      [theme.breakpoints.down("lg")]: {
+        fontSize: "2.5em",
+      },
+    },
+    "& h2": {
+      fontSize: "0.8em",
+      fontWeight: 600,
+      lineHeight: "100%",
+      [theme.breakpoints.down("lg")]: {
+        fontSize: "0.8em",
+      },
     },
   },
-  linkActive: {
+  nav: {
+    position: "fixed",
+    top: 50,
+    right: 50,
+    zIndex: theme.zIndex.appBar,
+    [theme.breakpoints.down("lg")]: {
+      position: "absolute",
+      top: 30,
+      right: 15,
+      "& ul": {
+        display: "flex",
+        flexDirection: "row",
+      },
+    },
+  },
+  navItem: {
+    listStyle: "none",
+    display: "flex",
+    justifyContent: "flex-end",
+    alignItems: "center",
+    marginBottom: theme.spacing(2),
+    [theme.breakpoints.down("lg")]: {
+      marginBottom: 0,
+      marginLeft: theme.spacing(3),
+    },
+  },
+  navLink: {
+    color: theme.palette.text.secondary,
+    fontSize: theme.spacing(1.8),
+  },
+  active: {
+    fontWeight: 600,
     color: theme.palette.text.primary,
   },
-  strip: {
-    borderBottom: `2px solid ${theme.palette.text.secondary}`,
+  minus: {
     width: 10,
-    marginLeft: 7,
+    borderBottom: `2px solid ${theme.palette.text.secondary}`,
+    marginLeft: theme.spacing(1),
     [theme.breakpoints.down("lg")]: {
       display: "none",
     },
@@ -75,9 +92,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // list menu
-const menus = [
+const links = [
   { name: "Work", href: "/" },
-  { name: "About Us", href: "/about" },
+  { name: "About", href: "/about" },
+  { name: "Contact", href: "/contact" },
 ];
 
 // animation variants
@@ -92,7 +110,6 @@ const headerVariants = {
     transition: {
       duration: 0.5,
       ease: "easeOut",
-      staggerChildren: 0.01,
     },
   },
   exit: {
@@ -119,53 +136,68 @@ const Header = () => {
   const { header } = useSelector((state) => state.globalReducer);
 
   return (
-    <motion.header
-      className={classes.header}
-      variants={headerVariants}
-      initial="hidden"
-      animate="visible"
-      exit="exit"
-      id="header"
-    >
-      <Link to="/">
-        <img
-          className={classes.logo}
-          alt="Logo"
-          loading="eager"
-          src={`/assets/images/logo/${
-            header.color === "dark" ? "logo_t_black.png" : "logo_t_white.png"
-          }`}
-        />
+    <>
+      <Link
+        to="/"
+        className={clsx(classes.logo, {
+          [classes.textTertiary]: Boolean(header.color === "light"),
+        })}
+      >
+        <motion.h1
+          initial="hidden"
+          animate="visible"
+          exit="exit"
+          variants={headerVariants}
+        >
+          io
+        </motion.h1>
+        <motion.h2
+          initial="hidden"
+          animate="visible"
+          exit="exit"
+          variants={headerVariants}
+        >
+          DEV
+        </motion.h2>
       </Link>
 
-      <div className={classes.link}>
-        {menus.map((menu) => (
-          <NavLink
-            key={menu.href}
-            exact
-            to={menu.href}
-            activeClassName={classes.linkActive}
-            className={clsx(classes.linkItem, {
-              [classes.textTertiary]: Boolean(header.color === "light"),
-            })}
-          >
-            <Typography
-              variant={matches ? "subtitle1" : "subtitle2"}
-              component={motion.h6}
-              style={{ originX: matches ? 0.5 : 1 }}
-              transition={{ ...transition }}
-              whileHover={{
-                scale: 1.2,
-                originX: matches ? 0.5 : 1,
-              }}
-            >
-              {menu.name}
-            </Typography>
-            <div className={classes.strip} />
-          </NavLink>
-        ))}
-      </div>
-    </motion.header>
+      <motion.nav className={classes.nav}>
+        <ul>
+          {links.map((link, key) => (
+            <li className={classes.navItem} key={key}>
+              <motion.div
+                style={{ originX: matches ? 0.5 : 1 }}
+                whileHover={{ scale: 1.2, originX: matches ? 0.5 : 1 }}
+                transition={{ ...transition }}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+                variants={headerVariants}
+              >
+                <NavLink
+                  exact
+                  to={link.href}
+                  activeClassName={classes.active}
+                  className={clsx(classes.navLink, {
+                    [classes.textTertiary]: Boolean(header.color === "light"),
+                  })}
+                >
+                  {link.name}
+                </NavLink>
+              </motion.div>
+
+              <motion.div
+                className={classes.minus}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+                variants={headerVariants}
+              />
+            </li>
+          ))}
+        </ul>
+      </motion.nav>
+    </>
   );
 };
 
