@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
     right: 0,
     width: "100%",
     height: "100%",
-    borderRadius: 6,
+    borderRadius: 10,
   },
   projectHeroImage: {
     pointerEvents: "none",
@@ -159,7 +159,7 @@ const ProjectCard = ({
   const transition = { duration: 0.5, ease: "easeOut" };
   const classes = useStyles();
   const history = useHistory();
-  const ref = React.useRef(null);
+  const bannerRef = React.useRef(null);
   const [clicked, setClicked] = React.useState(false);
 
   // redux
@@ -170,7 +170,10 @@ const ProjectCard = ({
     setClicked(true);
     dispatch({
       type: actionType.setWorkDomRect,
-      value: ref.current.getBoundingClientRect(),
+      value: {
+        banner: bannerRef.current.getBoundingClientRect(),
+        name: null,
+      },
     });
     history.push(`/project/${slug}`);
   };
@@ -178,7 +181,7 @@ const ProjectCard = ({
   return (
     <motion.div
       {...rest}
-      ref={ref}
+      ref={bannerRef}
       onClick={handleClick}
       className={classes.projectContainer}
       variants={projectVariants}
@@ -213,7 +216,7 @@ const ProjectCard = ({
             variants={projectTitleVariants}
             initial="hidden"
             animate={inView ? "visible" : "hidden"}
-            exit="exit"
+            exit={clicked ? "clicked" : "exit"}
           >
             <Typography variant="subtitle1" noWrap>
               {name}
