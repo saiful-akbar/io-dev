@@ -1,7 +1,8 @@
-import { Container, Grid, Typography, Box } from "@mui/material";
+import { Box, Container, Typography } from "@mui/material";
+import { motion } from "framer-motion";
 import React from "react";
 import MainLayout from "src/components/layouts/main-layout";
-import { motion } from "framer-motion";
+import Section from "src/components/shared/section";
 
 const containerVariants = {
   hidden: {
@@ -17,22 +18,19 @@ const containerVariants = {
   },
   exit: {
     opacity: 0,
-    transition: {
-      duration: 0.5,
-      ease: "easeOut",
-      staggerChildren: 0.02,
-    },
   },
 };
 
 const titleVariants = {
   hidden: {
     opacity: 0,
-    y: 150,
+    y: 100,
+    skewY: 10,
   },
   visible: {
     opacity: 1,
     y: 0,
+    skewY: 0,
     transition: {
       duration: 0.5,
       ease: "easeOut",
@@ -40,7 +38,6 @@ const titleVariants = {
   },
   exit: {
     opacity: 0,
-    y: -150,
     transition: {
       duration: 0.5,
       ease: "easeOut",
@@ -50,42 +47,40 @@ const titleVariants = {
 
 const NotFound = () => {
   return (
-    <MainLayout pageTitle="404" pt={20}>
-      <Container>
-        <Grid container spacing={2}>
-          <Grid item xs={12}>
-            <Box
-              display="flex"
-              flexDirection="column"
-              justifyContent="center"
-              alignItems="center"
-              component={motion.div}
-              variants={containerVariants}
-              initial="hidden"
-              animate="visible"
-              exit="exit"
+    <MainLayout pageTitle="404" pt={25}>
+      <Section>
+        <Container>
+          <Box
+            display="flex"
+            flexDirection="column"
+            justifyContent="center"
+            alignItems="center"
+            component={motion.div}
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+          >
+            <Typography
+              variant="h1"
+              color="textPrimary"
+              component={motion.h1}
+              variants={titleVariants}
             >
-              <Typography
-                variant="h1"
-                color="textPrimary"
-                component={motion.h1}
-                variants={titleVariants}
-              >
-                404
-              </Typography>
-              <Typography
-                variant="h2"
-                color="textPrimary"
-                component={motion.h2}
-                variants={titleVariants}
-                align="center"
-              >
-                Page Not Found
-              </Typography>
-            </Box>
-          </Grid>
-        </Grid>
-      </Container>
+              404
+            </Typography>
+            <Typography
+              variant="h3"
+              color="textPrimary"
+              component={motion.h2}
+              variants={titleVariants}
+              align="center"
+            >
+              Page Not Found
+            </Typography>
+          </Box>
+        </Container>
+      </Section>
     </MainLayout>
   );
 };

@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
   heroDivider: {
     width: "100%",
     borderBottom: `3px solid ${theme.palette.text.primary}`,
-    marginTop: "10vh",
+    marginTop: "15vh",
   },
 }));
 
@@ -48,9 +48,6 @@ const heroVariants = {
   },
   exit: {
     opacity: 0,
-    transition: {
-      when: "afterChildren",
-    },
   },
 };
 
@@ -133,9 +130,10 @@ const Hero = ({ title }) => {
         </Grid>
 
         <Grid item xs={12}>
-          <motion.div variants={dividerVariants}>
-            <div className={classes.heroDivider} />
-          </motion.div>
+          <motion.div
+            className={classes.heroDivider}
+            variants={dividerVariants}
+          />
         </Grid>
       </Grid>
     </motion.div>

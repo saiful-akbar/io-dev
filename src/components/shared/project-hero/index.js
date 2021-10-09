@@ -1,4 +1,4 @@
-import { Box, Container, Grid } from "@mui/material";
+import { Box, Container, Grid, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { motion } from "framer-motion";
 import PropTypes from "prop-types";
@@ -16,32 +16,47 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
   },
   beroBanner: {
-    padding: theme.spacing(20, 0, 5, 0),
+    padding: theme.spacing(25, 0, 10, 0),
     minHeight: "70vh",
     width: "100%",
   },
   heroTitle: {
     color: theme.palette.text.tertiary,
-    fontWeight: 500,
+    fontWeight: 400,
     lineHeight: "100%",
-    fontSize: "6rem",
+    fontSize: "7rem",
+    [theme.breakpoints.down("lg")]: {
+      fontSize: "6rem",
+    },
     [theme.breakpoints.down("md")]: {
+      fontSize: "5rem",
+    },
+    [theme.breakpoints.down("sm")]: {
       fontSize: "4.5rem",
     },
   },
   heroDivider: {
     width: "100%",
-    borderBottom: `3px solid ${theme.palette.text.tertiary}`,
+    borderBottom: `2px solid ${theme.palette.text.tertiary}`,
   },
   textTertiary: {
     color: theme.palette.text.tertiary,
+  },
+  imageWrapper: {
+    width: "100%",
+    border: "1px solid white",
+  },
+  heroImage: {
+    objectFit: "contain",
+    maxWidth: "100%",
+    maxHeight: 500,
   },
 }));
 
 /**
  * Animate variants
  */
-const nameVariants = {
+const titleVariants = {
   hidden: {
     opacity: 0,
     y: 100,
@@ -56,11 +71,6 @@ const nameVariants = {
   },
   exit: {
     opacity: 0,
-    y: -50,
-    transition: {
-      duration: 0.5,
-      ease: "easeOut",
-    },
   },
 };
 
@@ -82,11 +92,28 @@ const dividerVariants = {
   exit: {
     opacity: 0,
     width: 0,
-    y: -50,
     transition: {
       duration: 0.5,
       ease: "easeOut",
     },
+  },
+};
+
+const imageVariants = {
+  hidden: {
+    opacity: 0,
+    y: 100,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: "easeOut",
+    },
+  },
+  exit: {
+    opacity: 0,
   },
 };
 
@@ -95,7 +122,7 @@ const dividerVariants = {
  * @param {Object} project
  * @returns
  */
-const HeroProject = ({ project }) => {
+const ProjectHero = ({ project }) => {
   const transition = { duration: 0.5, ease: "easeOut" };
   const classes = useStyles();
   const { ref, inView } = useInView();
@@ -159,8 +186,8 @@ const HeroProject = ({ project }) => {
             width: "100%",
             height: "100%",
             transition: {
-              duration: domRect.top ? 0.5 : 0.7,
               staggerChildren: 0.02,
+              duration: 0.5,
               ease: "easeOut",
               when: "beforeChildren",
             },
@@ -169,7 +196,6 @@ const HeroProject = ({ project }) => {
             opacity: 0,
             transition: {
               when: "afterChildren",
-              staggerChildren: 0.02,
             },
           },
         }}
@@ -180,7 +206,7 @@ const HeroProject = ({ project }) => {
               <motion.h1
                 className={classes.heroTitle}
                 transition={transition}
-                variants={nameVariants}
+                variants={titleVariants}
               >
                 {project.name}
               </motion.h1>
@@ -188,9 +214,84 @@ const HeroProject = ({ project }) => {
 
             <Grid item xs={12}>
               <Box my={10}>
-                <motion.div variants={dividerVariants}>
-                  <div className={classes.heroDivider} />
-                </motion.div>
+                <motion.div
+                  className={classes.heroDivider}
+                  variants={dividerVariants}
+                />
+              </Box>
+            </Grid>
+
+            <Grid item xs={12}>
+              <Grid container>
+                <Grid item md={2} xs={4}>
+                  <Typography
+                    variant="subtitle1"
+                    className={classes.textTertiary}
+                    component={motion.div}
+                    transition={transition}
+                    variants={titleVariants}
+                  >
+                    Category :
+                  </Typography>
+                </Grid>
+                <Grid item md={10} xs={8}>
+                  <Typography
+                    variant="body1"
+                    className={classes.textTertiary}
+                    component={motion.div}
+                    transition={transition}
+                    variants={titleVariants}
+                  >
+                    {project.category}
+                  </Typography>
+                </Grid>
+
+                <Grid item md={2} xs={4}>
+                  <Typography
+                    variant="subtitle1"
+                    className={classes.textTertiary}
+                    component={motion.div}
+                    transition={transition}
+                    variants={titleVariants}
+                  >
+                    Tags :
+                  </Typography>
+                </Grid>
+                <Grid item md={10} xs={8}>
+                  <Typography
+                    variant="body1"
+                    className={classes.textTertiary}
+                    component={motion.div}
+                    transition={transition}
+                    variants={titleVariants}
+                  >
+                    {project.tags.join(", ")}
+                  </Typography>
+                </Grid>
+              </Grid>
+            </Grid>
+
+            <Grid item xs={12}>
+              <Box my={10}>
+                <motion.div
+                  className={classes.heroDivider}
+                  variants={dividerVariants}
+                />
+              </Box>
+            </Grid>
+
+            <Grid item xs={12}>
+              <Box
+                style={{ width: "100%" }}
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+              >
+                <motion.img
+                  className={classes.heroImage}
+                  src={project.heroImage}
+                  variants={imageVariants}
+                />
               </Box>
             </Grid>
           </Grid>
@@ -200,11 +301,11 @@ const HeroProject = ({ project }) => {
   );
 };
 
-HeroProject.propTypes = {
+ProjectHero.propTypes = {
   project: PropTypes.object.isRequired,
 };
-HeroProject.defaultProps = {
+ProjectHero.defaultProps = {
   project: {},
 };
 
-export default HeroProject;
+export default ProjectHero;

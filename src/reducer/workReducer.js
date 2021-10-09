@@ -52,6 +52,7 @@ const initialState = {
         "https://source.unsplash.com/random/1000x600/",
       ],
     },
+
     {
       id: 4,
       name: "Slow Motor Inventory",
