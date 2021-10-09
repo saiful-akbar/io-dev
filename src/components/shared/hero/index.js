@@ -44,17 +44,24 @@ const heroVariants = {
     opacity: 1,
     transition: {
       staggerChildren: 0.02,
+      duration: 0.5,
+      ease: "easeOut",
     },
   },
   exit: {
     opacity: 0,
+    y: -50,
+    transition: {
+      duration: 0.5,
+      ease: "easeOut",
+    },
   },
 };
 
 const titleVariants = {
   hidden: {
     opacity: 0,
-    y: 100,
+    y: 150,
     skewY: 10,
   },
   visible: {

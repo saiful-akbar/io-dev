@@ -1,7 +1,8 @@
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
-import { Box, Container, Grid } from "@mui/material";
+import { Container, Grid } from "@mui/material";
 import Tab from "@mui/material/Tab";
+import { motion } from "framer-motion";
 import React from "react";
 import { useSelector } from "react-redux";
 import MainLayout from "src/components/layouts/main-layout";
@@ -11,63 +12,85 @@ import ProjectCard from "src/components/shared/project-card";
 import Section from "src/components/shared/section";
 
 /**
+ * animation variants
+ */
+const tabVariants = {
+  hidden: {
+    opacity: 0,
+    y: 100,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: "easeOut",
+    },
+  },
+  exit: {
+    opacity: 0,
+    y: -50,
+    transition: {
+      duration: 0.5,
+      ease: "easeOut",
+    },
+  },
+};
+
+/**
  * Komponen utama
  * @returns
  */
 const Work = () => {
-  // redux
-  const result = useSelector((state) => state.workReducer);
-
-  // state
+  const { categories, projects } = useSelector((state) => state.workReducer);
   const [value, setValue] = React.useState("web");
-  const [work, setWork] = React.useState(null);
-
-  React.useEffect(() => {
-    setWork(result);
-  }, [result, setWork]);
 
   return (
     <MainLayout pageTitle="Work" pt={25}>
       <Container>
-        <Section id="hero">
+        <section id="hero">
           <Hero title="Work" />
-        </Section>
+        </section>
 
         {/* project list */}
-        <TabContext value={value}>
-          <Section id="project-tab">
-            <TabList onChange={(e, newValue) => setValue(newValue)}>
-              {work !== null &&
-                work.categories.map((category) => (
+        <section id="content">
+          <TabContext value={value}>
+            <motion.div
+              variants={tabVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+            >
+              <TabList onChange={(e, newValue) => setValue(newValue)}>
+                {categories.map((category) => (
                   <Tab label={category} value={category} key={category} />
                 ))}
-            </TabList>
-          </Section>
+              </TabList>
+            </motion.div>
 
-          {/* project item */}
-          <Box px={1}>
+            {/* project item */}
             <Grid container spacing={2}>
-              {work !== null &&
-                work.projects.map(
-                  (project) =>
-                    project.category === value && (
-                      <Grid item xs={12} key={project.slug}>
-                        <ProjectCard
-                          name={project.name}
-                          year={project.year}
-                          category={project.category}
-                          bannerColor={project.bannerColor}
-                          slug={project.slug}
-                          image={project.heroImage}
-                        />
-                      </Grid>
-                    )
-                )}
+              {projects.map((project) => {
+                if (project.category === value) {
+                  return (
+                    <Grid item xs={12} key={project.slug}>
+                      <ProjectCard
+                        name={project.name}
+                        year={project.year}
+                        category={project.category}
+                        bannerColor={project.bannerColor}
+                        slug={project.slug}
+                        image={project.heroImage}
+                      />
+                    </Grid>
+                  );
+                }
+
+                return null;
+              })}
             </Grid>
-          </Box>
-          {/* end project item */}
-        </TabContext>
-        {/* end project list */}
+          </TabContext>
+        </section>
       </Container>
 
       <Section id="footer">

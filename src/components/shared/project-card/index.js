@@ -15,7 +15,7 @@ import actionType from "src/reducer/actionType";
 const useStyles = makeStyles((theme) => ({
   projectContainer: {
     position: "relative",
-    minHeight: 460,
+    minHeight: 500,
     width: "100%",
     margin: theme.spacing(5, 0),
     overflow: "hidden",
@@ -88,6 +88,11 @@ const projectVariants = {
   },
   exit: {
     opacity: 0,
+    y: -50,
+    transition: {
+      duration: 0.5,
+      ease: "easeOut",
+    },
   },
   clicked: {
     opacity: 1,
@@ -134,6 +139,11 @@ const projectTitleVariants = {
   },
   clicked: {
     opacity: 0,
+    y: -30,
+    transition: {
+      duration: 0.5,
+      ease: "easeOut",
+    },
   },
 };
 
@@ -211,8 +221,8 @@ const ProjectCard = ({
       <InView delay={200}>
         {({ ref, inView }) => (
           <motion.div
-            className={classes.projectTitleTop}
             ref={ref}
+            className={classes.projectTitleTop}
             variants={projectTitleVariants}
             initial="hidden"
             animate={inView ? "visible" : "hidden"}
@@ -233,12 +243,12 @@ const ProjectCard = ({
       <InView delay={200}>
         {({ ref, inView }) => (
           <motion.div
-            className={classes.projectTitleBottom}
             ref={ref}
+            className={classes.projectTitleBottom}
             variants={projectTitleVariants}
             initial="hidden"
             animate={inView ? "visible" : "hidden"}
-            exit="exit"
+            exit={clicked ? "clicked" : "exit"}
           >
             <Typography variant="subtitle2" noWrap>
               {category}

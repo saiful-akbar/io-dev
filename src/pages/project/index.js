@@ -3,7 +3,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import MainLayout from "src/components/layouts/main-layout";
 import ProjectHero from "src/components/shared/project-hero";
-import ProjectFooter from "src/components/shared/projectFooter";
+import ProjectFooter from "src/components/shared/project-footer";
 import { motion } from "framer-motion";
 
 const contentVariants = {

@@ -2,7 +2,7 @@ import { makeStyles } from "@mui/styles";
 import React from "react";
 import { motion, motionValue } from "framer-motion";
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   cursorOuter: {
     position: "fixed",
     top: 0,
@@ -14,11 +14,22 @@ const useStyles = makeStyles(() => ({
   },
   cursorInner: {
     pointerEvents: "none",
-    border: `3px solid #fff`,
+    border: `2px solid #fff`,
     backgroundColor: "#fff",
     borderRadius: "50%",
     width: 26,
     height: 26,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  cursorDot: {
+    pointerEvents: "none",
+    borderRadius: "50%",
+    backgroundColor: "#fff",
+    width: 3,
+    height: 3,
+    mixBlendMode: "difference",
   },
 }));
 
@@ -76,7 +87,9 @@ const Cursor = () => {
           backgroundColor: color,
           transition: "linear 0.2s",
         }}
-      />
+      >
+        <div className={classes.cursorDot} />
+      </motion.div>
     </motion.div>
   );
 };
