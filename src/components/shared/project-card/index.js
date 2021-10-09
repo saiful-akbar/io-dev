@@ -218,7 +218,7 @@ const ProjectCard = ({
       />
 
       {/* title top */}
-      <InView delay={200}>
+      <InView threshold={1}>
         {({ ref, inView }) => (
           <motion.div
             ref={ref}
@@ -239,8 +239,8 @@ const ProjectCard = ({
         )}
       </InView>
 
-      {/* title top */}
-      <InView delay={200}>
+      {/* title bottom */}
+      <InView threshold={1}>
         {({ ref, inView }) => (
           <motion.div
             ref={ref}
