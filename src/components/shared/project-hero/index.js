@@ -79,14 +79,12 @@ const dividerVariants = {
   hidden: {
     opacity: 0,
     width: 0,
-    y: 100,
   },
   visible: {
     opacity: 1,
     width: "100%",
-    y: 0,
     transition: {
-      duration: 0.5,
+      duration: 1,
       ease: "easeOut",
     },
   },
@@ -195,8 +193,10 @@ const ProjectHero = ({ project }) => {
           },
           exit: {
             opacity: 0,
+            y: -50,
             transition: {
-              when: "afterChildren",
+              duration: 0.5,
+              ease: "easeOut",
             },
           },
         }}
@@ -214,7 +214,7 @@ const ProjectHero = ({ project }) => {
             </Grid>
 
             <Grid item xs={12}>
-              <Box my={10}>
+              <Box mb={10} mt={15}>
                 <motion.div
                   className={classes.heroDivider}
                   variants={dividerVariants}
@@ -273,7 +273,7 @@ const ProjectHero = ({ project }) => {
             </Grid>
 
             <Grid item xs={12}>
-              <Box my={10}>
+              <Box mt={10} mb={15}>
                 <motion.div
                   className={classes.heroDivider}
                   variants={dividerVariants}

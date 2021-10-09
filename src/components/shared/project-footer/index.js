@@ -1,12 +1,12 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { motion } from "framer-motion";
-import { useHistory } from "react-router-dom";
-import { makeStyles } from "@mui/styles";
-import { Container, Grid, Typography } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
-import actionType from "src/reducer/actionType";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import { Container, Grid, Typography } from "@mui/material";
+import { makeStyles } from "@mui/styles";
+import { motion } from "framer-motion";
+import PropTypes from "prop-types";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+import actionType from "src/reducer/actionType";
 
 /**
  * Style
@@ -14,18 +14,33 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
-    padding: theme.spacing(18, 0),
-    cursor: "pointer",
-    [theme.breakpoints.down("md")]: {
-      padding: theme.spacing(10, 0),
-    },
+    position: "relative",
+    bottom: 0,
+    minHeight: 300,
+    display: "flex !important",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  banner: {
+    position: "absolute",
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    width: "100%",
+    height: "100%",
+  },
+  container: {
+    pointerEvents: "none",
+    position: "absolute",
+    top: "50%",
+    transform: "translateY(-50%)",
   },
   textTertiary: {
     color: theme.palette.text.tertiary,
   },
   icon: {
     color: theme.palette.text.tertiary,
-    fontSize: "4em !important",
   },
 }));
 
@@ -44,10 +59,10 @@ const bannerVariants = {
   },
   exit: {
     opacity: 0,
+    scaleY: 1.2,
     transition: {
       duration: 0.5,
       ease: "easeOut",
-      when: "afterChildren",
     },
   },
   clicked: {
@@ -137,7 +152,6 @@ const ProjectFooter = ({ next }) => {
 
   // state
   const [isClicked, setClicked] = React.useState(false);
-  const [isHover, setHover] = React.useState(false);
 
   // redux
   const dispatch = useDispatch();
@@ -161,25 +175,24 @@ const ProjectFooter = ({ next }) => {
   return (
     <motion.footer
       onClick={handleClick}
-      ref={ref}
-      style={{ backgroundColor: next.bannerColor }}
       className={classes.root}
       variants={bannerVariants}
       transition={transition}
       initial="hidden"
       animate="visible"
       exit={isClicked ? "clicked" : "exit"}
-      onHoverStart={() => setHover(true)}
-      onHoverEnd={() => setHover(false)}
     >
-      <Container>
-        <Grid
-          container
-          spacing={2}
-          display="flex"
-          alignItems="center"
-          justifyContent="space-between"
-        >
+      <motion.div
+        ref={ref}
+        className={classes.banner}
+        style={{ backgroundColor: next.bannerColor }}
+        transition={transition}
+        variants={bannerVariants}
+        whileHover={{ scaleY: 1.1 }}
+      />
+
+      <Container className={classes.container}>
+        <Grid container spacing={2} display="flex" alignItems="center">
           <Grid item md={2} xs={12}>
             <Typography
               variant="subtitle1"
@@ -190,7 +203,8 @@ const ProjectFooter = ({ next }) => {
               Next
             </Typography>
           </Grid>
-          <Grid item md={8} xs={12}>
+
+          <Grid item md={9} xs={12}>
             <Typography
               variant="h4"
               className={classes.textTertiary}
@@ -201,14 +215,12 @@ const ProjectFooter = ({ next }) => {
             </Typography>
           </Grid>
 
-          <Grid item md={2} xs={12}>
-            <motion.span
-              variants={iconVariants}
-              initial="hidden"
-              animate={isHover ? "visible" : "exit"}
-              exit={isClicked ? "clicked" : "exit"}
-            >
-              <ArrowForwardIcon className={classes.icon} />
+          <Grid item md={1} xs={12}>
+            <motion.span variants={iconVariants}>
+              <ArrowForwardIcon
+                className={classes.icon}
+                style={{ fontSize: 40 }}
+              />
             </motion.span>
           </Grid>
         </Grid>
