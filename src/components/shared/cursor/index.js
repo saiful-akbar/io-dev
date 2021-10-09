@@ -14,7 +14,7 @@ const useStyles = makeStyles(() => ({
   },
   cursorInner: {
     pointerEvents: "none",
-    border: `2px solid #fff`,
+    border: `3px solid #fff`,
     backgroundColor: "#fff",
     borderRadius: "50%",
     width: 26,

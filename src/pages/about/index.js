@@ -7,7 +7,7 @@ import Section from "src/components/shared/section";
 
 const About = () => {
   return (
-    <MainLayout pageTitle="About Us" pt={20}>
+    <MainLayout pageTitle="About Us" pt={25}>
       <Container>
         <Section id="hero">
           <Hero title="About Us" />
