@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "center",
   },
-  beroBanner: {
+  heroBanner: {
     padding: theme.spacing(25, 0, 10, 0),
     minHeight: "70vh",
     width: "100%",
@@ -165,7 +165,7 @@ const ProjectHero = ({ project }) => {
     <div className={classes.hero} ref={ref}>
       <motion.div
         style={{ backgroundColor: project.bannerColor }}
-        className={classes.beroBanner}
+        className={classes.heroBanner}
         layoutId={project.slug}
         initial="hidden"
         animate="visible"
