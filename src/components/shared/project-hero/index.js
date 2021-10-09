@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
   },
   heroBanner: {
     padding: theme.spacing(25, 0, 10, 0),
-    minHeight: "70vh",
+    minHeight: "100vh",
     width: "100%",
   },
   heroTitle: {
