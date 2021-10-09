@@ -16,7 +16,8 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
   },
   heroBanner: {
-    padding: theme.spacing(25, 0, 10, 0),
+    paddingTop: theme.spacing(25),
+    paddingBottom: theme.spacing(10),
     minHeight: "100vh",
     width: "100%",
   },
