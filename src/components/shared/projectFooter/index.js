@@ -16,6 +16,9 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     padding: theme.spacing(18, 0),
     cursor: "pointer",
+    [theme.breakpoints.down("md")]: {
+      padding: theme.spacing(10, 0),
+    },
   },
   textTertiary: {
     color: theme.palette.text.tertiary,
