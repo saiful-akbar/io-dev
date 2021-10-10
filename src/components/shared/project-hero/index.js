@@ -187,9 +187,14 @@ const ProjectHero = ({ bannerColor, heroImage, name, category }) => {
         exit="exit"
         variants={animateVariants.banner}
       >
-        <Grid container spacing={3} justifyContent="center" alignItems="center">
+        <Grid
+          container
+          spacing={3}
+          justifyContent="space-between"
+          alignItems="center"
+        >
           <Grid item md={3} xs={6} order={{ md: 1, xs: 2 }}>
-            <Box display="flex" justifyContent="flex-start" p={3}>
+            <Box display="flex" justifyContent="flex-start" px={3}>
               <motion.h1
                 className={classes.title}
                 variants={animateVariants.title}
@@ -209,7 +214,7 @@ const ProjectHero = ({ bannerColor, heroImage, name, category }) => {
             />
           </Grid>
           <Grid item md={3} xs={6} order={{ md: 3, xs: 3 }}>
-            <Box display="flex" justifyContent="flex-end" p={3}>
+            <Box display="flex" justifyContent="flex-end" px={3}>
               <motion.h1
                 className={classes.title}
                 variants={animateVariants.title}

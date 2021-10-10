@@ -124,7 +124,7 @@ const projectImageVariants = {
   },
   clicked: {
     opacity: 0,
-    y: "-80%",
+    y: "-60%",
     transition: {
       duration: 0.5,
       ease: "easeOut",
