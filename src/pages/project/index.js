@@ -131,36 +131,6 @@ const Project = (props) => {
             quaerat alias, quia, molestias eveniet? Placeat vitae quo animi aut
             sit. Officia, aliquid.
           </p>
-          <br />
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis
-            modi possimus totam voluptatem sint, provident enim debitis fugit
-            quisquam ipsa dignissimos nemo, perspiciatis sit sunt maxime illo
-            unde, illum quibusdam facilis non. Nesciunt velit voluptas illum
-            suscipit sint hic asperiores. Doloremque quidem velit, vero sequi
-            magnam dolorem ab dolorum! Adipisci fugit earum eius itaque
-            repudiandae hic iure pariatur. Maiores, non, quibusdam tempora quod
-            nam officiis sequi ducimus, aspernatur dignissimos temporibus
-            laboriosam amet delectus ad deleniti perspiciatis eos. Nihil
-            sapiente ipsa beatae unde a minima cumque consequuntur doloribus
-            quaerat alias, quia, molestias eveniet? Placeat vitae quo animi aut
-            sit. Officia, aliquid.
-          </p>
-          <br />
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis
-            modi possimus totam voluptatem sint, provident enim debitis fugit
-            quisquam ipsa dignissimos nemo, perspiciatis sit sunt maxime illo
-            unde, illum quibusdam facilis non. Nesciunt velit voluptas illum
-            suscipit sint hic asperiores. Doloremque quidem velit, vero sequi
-            magnam dolorem ab dolorum! Adipisci fugit earum eius itaque
-            repudiandae hic iure pariatur. Maiores, non, quibusdam tempora quod
-            nam officiis sequi ducimus, aspernatur dignissimos temporibus
-            laboriosam amet delectus ad deleniti perspiciatis eos. Nihil
-            sapiente ipsa beatae unde a minima cumque consequuntur doloribus
-            quaerat alias, quia, molestias eveniet? Placeat vitae quo animi aut
-            sit. Officia, aliquid.
-          </p>
         </Container>
       </Box>
 

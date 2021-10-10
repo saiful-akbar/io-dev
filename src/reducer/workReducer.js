@@ -1,4 +1,10 @@
 import actionType from "./actionType";
+import image1 from "src/assets/images/project/1.jpg";
+import image2 from "src/assets/images/project/2.jpg";
+import image3 from "src/assets/images/project/3.jpg";
+import image4 from "src/assets/images/project/4.jpg";
+import image5 from "src/assets/images/project/5.jpg";
+import image6 from "src/assets/images/project/6.jpg";
 
 // initial state
 const initialState = {
@@ -13,7 +19,7 @@ const initialState = {
       year: "2021",
       bannerColor: "#0069bf",
       tags: ["Javascript", "jQuery", "PHP", "Laravel", "Bootstrap 5"],
-      heroImage: "/assets/images/project/1.jpg",
+      heroImage: image1,
       images: [
         "https://source.unsplash.com/random/1000x600/",
         "https://source.unsplash.com/random/1000x600/",
@@ -27,9 +33,9 @@ const initialState = {
       slug: "scooter-work-shop",
       category: "web",
       year: "2021",
-      bannerColor: "#544f96",
+      bannerColor: "#4c4c4c",
       tags: ["Javascript", "React JS", "Framer Motion", "Material UI"],
-      heroImage: "/assets/images/project/scooter-ws/hero.png",
+      heroImage: image2,
       images: [
         "https://source.unsplash.com/random/1000x600/",
         "https://source.unsplash.com/random/1000x600/",
@@ -43,9 +49,9 @@ const initialState = {
       slug: "slow-motor-inventory",
       category: "web",
       year: "2021",
-      bannerColor: "#00685e",
+      bannerColor: "#BF6202",
       tags: ["Javascript", "React JS", "Framer Motion", "Material UI"],
-      heroImage: "/assets/images/project/sm-inventory/hero.png",
+      heroImage: image3,
       images: [
         "https://source.unsplash.com/random/1000x600/",
         "https://source.unsplash.com/random/1000x600/",
@@ -62,7 +68,7 @@ const initialState = {
       year: "2021",
       bannerColor: "#990113",
       tags: ["Javascript", "React JS", "Framer Motion", "Material UI"],
-      heroImage: "/assets/images/project/4.jpg",
+      heroImage: image4,
       images: [
         "https://source.unsplash.com/random/1000x600/",
         "https://source.unsplash.com/random/1000x600/",
@@ -78,7 +84,23 @@ const initialState = {
       year: "2021",
       bannerColor: "#81a02c",
       tags: ["Javascript", "React JS", "Framer Motion", "Material UI"],
-      heroImage: "/assets/images/project/5.jpg",
+      heroImage: image5,
+      images: [
+        "https://source.unsplash.com/random/1000x600/",
+        "https://source.unsplash.com/random/1000x600/",
+        "https://source.unsplash.com/random/1000x600/",
+        "https://source.unsplash.com/random/1000x600/",
+      ],
+    },
+    {
+      id: 5,
+      name: "Point Of Sales",
+      slug: "point-of-sales",
+      category: "ui/ux",
+      year: "2021",
+      bannerColor: "#825135",
+      tags: ["Javascript", "php", "jQuery", "Bootstrap"],
+      heroImage: image6,
       images: [
         "https://source.unsplash.com/random/1000x600/",
         "https://source.unsplash.com/random/1000x600/",
