@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     alignItems: "center",
     [theme.breakpoints.down("md")]: {
-      paddingTop: "10vh",
+      paddingTop: "15vh",
     },
   },
   heroImage: {
@@ -99,14 +99,14 @@ const ProjectHero = ({ bannerColor, heroImage, name, category }) => {
         opacity: domRect ? 1 : 0,
         y: domRect ? domRect.banner.top : 100,
         width: domRect ? domRect.banner.width : "100%",
-        height: domRect ? domRect.banner.height : "100vh",
+        minHeight: domRect ? domRect.banner.height : "100vh",
       },
       visible: {
         borderRaius: 0,
         opacity: 1,
         y: 0,
         width: "100%",
-        height: "100vh",
+        minHeight: "100vh",
         transition: {
           duration: 0.5,
           ease: "easeOut",
@@ -194,7 +194,7 @@ const ProjectHero = ({ bannerColor, heroImage, name, category }) => {
           alignItems="center"
         >
           <Grid item md={3} xs={6} order={{ md: 1, xs: 2 }}>
-            <Box display="flex" justifyContent="flex-start" px={3}>
+            <Box display="flex" justifyContent="flex-start" px={3} pb={5}>
               <motion.h1
                 className={classes.title}
                 variants={animateVariants.title}
@@ -214,7 +214,7 @@ const ProjectHero = ({ bannerColor, heroImage, name, category }) => {
             />
           </Grid>
           <Grid item md={3} xs={6} order={{ md: 3, xs: 3 }}>
-            <Box display="flex" justifyContent="flex-end" px={3}>
+            <Box display="flex" justifyContent="flex-end" px={3} pb={5}>
               <motion.h1
                 className={classes.title}
                 variants={animateVariants.title}
