@@ -60,11 +60,13 @@ const useStyles = makeStyles((theme) => ({
 const titleVariants = {
   hidden: {
     opacity: 0,
-    y: 100,
+    y: 150,
+    skewY: 10,
   },
   visible: {
     opacity: 1,
     y: 0,
+    skewY: 0,
     transition: {
       duration: 0.5,
       ease: "easeOut",

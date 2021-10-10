@@ -75,7 +75,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: theme.spacing(1.8),
   },
   active: {
-    fontWeight: 600,
+    fontWeight: 800,
     color: theme.palette.text.primary,
   },
   minus: {
@@ -95,7 +95,6 @@ const useStyles = makeStyles((theme) => ({
 const links = [
   { name: "Work", href: "/" },
   { name: "About", href: "/about" },
-  { name: "Contact", href: "/contact" },
 ];
 
 // animation variants

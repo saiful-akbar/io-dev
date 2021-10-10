@@ -1,8 +1,11 @@
 import { makeStyles } from "@mui/styles";
-import React from "react";
 import { motion, motionValue } from "framer-motion";
+import React from "react";
 
-const useStyles = makeStyles((theme) => ({
+/**
+ * Style
+ */
+const useStyles = makeStyles(() => ({
   cursorOuter: {
     position: "fixed",
     top: 0,
@@ -83,7 +86,7 @@ const Cursor = () => {
       <motion.div
         className={classes.cursorInner}
         style={{
-          scale: scale,
+          scale,
           backgroundColor: color,
           transition: "linear 0.2s",
         }}

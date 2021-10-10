@@ -1,6 +1,5 @@
 import { CssBaseline } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
-import { AnimateSharedLayout } from "framer-motion";
 import React from "react";
 import Cursor from "src/components/shared/cursor";
 import Header from "src/components/shared/header";
@@ -17,12 +16,10 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <AnimateSharedLayout type="crossfade">
-        <CssBaseline />
-        <Cursor />
-        <Header />
-        <Router />
-      </AnimateSharedLayout>
+      <CssBaseline />
+      <Cursor />
+      <Header />
+      <Router />
     </ThemeProvider>
   );
 }

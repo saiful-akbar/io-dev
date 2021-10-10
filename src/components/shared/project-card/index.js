@@ -218,11 +218,11 @@ const ProjectCard = ({
       />
 
       {/* title top */}
-      <InView threshold={1}>
+      <InView>
         {({ ref, inView }) => (
           <motion.div
-            ref={ref}
             className={classes.projectTitleTop}
+            ref={ref}
             variants={projectTitleVariants}
             initial="hidden"
             animate={inView ? "visible" : "hidden"}
@@ -240,11 +240,11 @@ const ProjectCard = ({
       </InView>
 
       {/* title bottom */}
-      <InView threshold={1}>
+      <InView>
         {({ ref, inView }) => (
           <motion.div
-            ref={ref}
             className={classes.projectTitleBottom}
+            ref={ref}
             variants={projectTitleVariants}
             initial="hidden"
             animate={inView ? "visible" : "hidden"}

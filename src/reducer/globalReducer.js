@@ -11,6 +11,7 @@ const initialState = {
   header: {
     color: "dark",
   },
+  cursorHover: false,
 };
 
 // fungsi reducer untuk mengambil atau merubah state
@@ -26,6 +27,12 @@ const globalReducer = (state = initialState, action) => {
       return {
         ...state,
         header: action.value,
+      };
+
+    case actionType.setGlobalCursorHover:
+      return {
+        ...state,
+        cursorHover: action.value,
       };
 
     default:

@@ -71,9 +71,10 @@ const Project = (props) => {
         {project !== null && <ProjectHero project={project} />}
       </section>
 
-      <section id="project-content" style={{ minHeight: "100vh" }}>
-        <Container
-          component={motion.div}
+      <Container>
+        <motion.section
+          id="project-content"
+          style={{ minHeight: "100vh" }}
           variants={contentVariants}
           initial="hidden"
           animate="visible"
@@ -85,8 +86,8 @@ const Project = (props) => {
             totam excepturi rem aliquid, culpa laboriosam, labore est
             accusantium doloremque.
           </Box>
-        </Container>
-      </section>
+        </motion.section>
+      </Container>
 
       <section id="project-footer">
         {nextProject !== null && <ProjectFooter next={nextProject} />}
