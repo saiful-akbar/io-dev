@@ -68,7 +68,14 @@ const Project = (props) => {
   return (
     <MainLayout pageTitle={project && project.name}>
       <section id="project-hero">
-        {project !== null && <ProjectHero project={project} />}
+        {project !== null && (
+          <ProjectHero
+            bannerColor={project.bannerColor}
+            heroImage={project.heroImage}
+            name={project.name}
+            category={project.category}
+          />
+        )}
       </section>
 
       <Container>

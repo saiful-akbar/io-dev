@@ -2,6 +2,7 @@ import actionType from "./actionType";
 
 // initial state
 const initialState = {
+  domRect: null,
   categories: ["web", "ui/ux"],
   projects: [
     {
@@ -86,10 +87,6 @@ const initialState = {
       ],
     },
   ],
-  domRect: {
-    banner: null,
-    name: null,
-  },
 };
 
 const projectReducer = (state = initialState, action) => {

@@ -18,7 +18,6 @@ const useStyles = makeStyles(() => ({
   cursorInner: {
     pointerEvents: "none",
     border: `2px solid #fff`,
-    backgroundColor: "#fff",
     borderRadius: "50%",
     width: 26,
     height: 26,
@@ -42,6 +41,8 @@ const useStyles = makeStyles(() => ({
  */
 const Cursor = () => {
   const classes = useStyles();
+
+  // motion value
   const x = motionValue(-13);
   const y = motionValue(-13);
   const scale = motionValue(1);
@@ -86,7 +87,7 @@ const Cursor = () => {
       <motion.div
         className={classes.cursorInner}
         style={{
-          scale,
+          scale: scale,
           backgroundColor: color,
           transition: "linear 0.2s",
         }}

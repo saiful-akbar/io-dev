@@ -13,7 +13,7 @@ import { useSelector } from "react-redux";
 const useStyles = makeStyles((theme) => ({
   logo: {
     position: "fixed",
-    top: 50,
+    top: 40,
     left: 50,
     color: theme.palette.text.primary,
     display: "flex",
@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
   },
   nav: {
     position: "fixed",
-    top: 50,
+    top: 40,
     right: 50,
     zIndex: theme.zIndex.appBar,
     [theme.breakpoints.down("lg")]: {

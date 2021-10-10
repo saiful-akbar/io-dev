@@ -159,8 +159,8 @@ const ProjectFooter = ({ next }) => {
 
   // fungsi handle click go to next project
   const handleClick = () => {
-    const newDomRect = domRect;
-    newDomRect.banner = ref.current.getBoundingClientRect();
+    let newDomRect = domRect;
+    newDomRect = { banner: ref.current.getBoundingClientRect() };
 
     // ubah state domRect pada project
     dispatch({
