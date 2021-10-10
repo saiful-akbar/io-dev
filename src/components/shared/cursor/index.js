@@ -1,8 +1,11 @@
 import { makeStyles } from "@mui/styles";
-import React from "react";
 import { motion, motionValue } from "framer-motion";
+import React from "react";
 
-const useStyles = makeStyles((theme) => ({
+/**
+ * Style
+ */
+const useStyles = makeStyles(() => ({
   cursorOuter: {
     position: "fixed",
     top: 0,
@@ -15,7 +18,6 @@ const useStyles = makeStyles((theme) => ({
   cursorInner: {
     pointerEvents: "none",
     border: `2px solid #fff`,
-    backgroundColor: "#fff",
     borderRadius: "50%",
     width: 26,
     height: 26,
@@ -39,6 +41,8 @@ const useStyles = makeStyles((theme) => ({
  */
 const Cursor = () => {
   const classes = useStyles();
+
+  // motion value
   const x = motionValue(-13);
   const y = motionValue(-13);
   const scale = motionValue(1);

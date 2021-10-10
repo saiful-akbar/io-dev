@@ -8,11 +8,12 @@ const theme = createTheme({
     background: {
       default: grey[100],
       paper: "#fff",
+      dark: grey[800],
     },
     text: {
       primary: grey[800],
-      secondary: grey[400],
-      tertiary: grey[100],
+      secondary: grey[500],
+      tertiary: grey[200],
     },
     primary: {
       main: grey[800],

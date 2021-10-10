@@ -2,6 +2,7 @@ import actionType from "./actionType";
 
 // initial state
 const initialState = {
+  domRect: null,
   categories: ["web", "ui/ux"],
   projects: [
     {
@@ -10,7 +11,7 @@ const initialState = {
       slug: "naikdaun",
       category: "web",
       year: "2021",
-      bannerColor: "#007CE2",
+      bannerColor: "#0069bf",
       tags: ["Javascript", "jQuery", "PHP", "Laravel", "Bootstrap 5"],
       heroImage: "/assets/images/project/1.jpg",
       images: [
@@ -26,9 +27,9 @@ const initialState = {
       slug: "scooter-work-shop",
       category: "web",
       year: "2021",
-      bannerColor: "#904E12",
+      bannerColor: "#544f96",
       tags: ["Javascript", "React JS", "Framer Motion", "Material UI"],
-      heroImage: "/assets/images/project/2.jpg",
+      heroImage: "/assets/images/project/scooter-ws/hero.png",
       images: [
         "https://source.unsplash.com/random/1000x600/",
         "https://source.unsplash.com/random/1000x600/",
@@ -38,13 +39,13 @@ const initialState = {
     },
     {
       id: 3,
-      name: "IO Dev",
-      slug: "io-dev",
+      name: "Slow Motor Inventory",
+      slug: "slow-motor-inventory",
       category: "web",
       year: "2021",
-      bannerColor: "#AE5D00",
+      bannerColor: "#00685e",
       tags: ["Javascript", "React JS", "Framer Motion", "Material UI"],
-      heroImage: "/assets/images/project/3.jpg",
+      heroImage: "/assets/images/project/sm-inventory/hero.png",
       images: [
         "https://source.unsplash.com/random/1000x600/",
         "https://source.unsplash.com/random/1000x600/",
@@ -55,11 +56,11 @@ const initialState = {
 
     {
       id: 4,
-      name: "Slow Motor Inventory",
-      slug: "slow-motor-inventory",
+      name: "IO Dev",
+      slug: "io-dev",
       category: "ui/ux",
       year: "2021",
-      bannerColor: "#B60118",
+      bannerColor: "#990113",
       tags: ["Javascript", "React JS", "Framer Motion", "Material UI"],
       heroImage: "/assets/images/project/4.jpg",
       images: [
@@ -75,7 +76,7 @@ const initialState = {
       slug: "portfolio",
       category: "ui/ux",
       year: "2021",
-      bannerColor: "#9FC739",
+      bannerColor: "#81a02c",
       tags: ["Javascript", "React JS", "Framer Motion", "Material UI"],
       heroImage: "/assets/images/project/5.jpg",
       images: [
@@ -86,10 +87,6 @@ const initialState = {
       ],
     },
   ],
-  domRect: {
-    banner: null,
-    name: null,
-  },
 };
 
 const projectReducer = (state = initialState, action) => {

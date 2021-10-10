@@ -1,4 +1,4 @@
-import { Box, Container, Grid, Typography } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { motion } from "framer-motion";
 import PropTypes from "prop-types";
@@ -15,113 +15,47 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "center",
   },
-  heroBanner: {
-    paddingTop: theme.spacing(25),
-    paddingBottom: theme.spacing(10),
-    minHeight: "100vh",
-    width: "100%",
-  },
-  heroTitle: {
-    color: theme.palette.text.tertiary,
-    fontWeight: 400,
-    lineHeight: "100%",
-    fontSize: "7rem",
-    [theme.breakpoints.down("lg")]: {
-      fontSize: "6rem",
-    },
+  banner: {
+    display: "flex",
+    alignItems: "center",
     [theme.breakpoints.down("md")]: {
-      fontSize: "5rem",
+      paddingTop: "10vh",
     },
-    [theme.breakpoints.down("sm")]: {
-      fontSize: "4.5rem",
-    },
-  },
-  heroDivider: {
-    width: "100%",
-    borderBottom: `2px solid ${theme.palette.text.tertiary}`,
-  },
-  textTertiary: {
-    color: theme.palette.text.tertiary,
-  },
-  imageWrapper: {
-    width: "100%",
-    border: "1px solid white",
   },
   heroImage: {
     objectFit: "contain",
-    maxWidth: "100%",
-    maxHeight: 500,
+    width: "100%",
+    height: "80vh",
+    [theme.breakpoints.down("md")]: {
+      height: "70vh",
+    },
+    [theme.breakpoints.down("md")]: {
+      height: "60vh",
+    },
+  },
+  title: {
+    color: theme.palette.text.tertiary,
+    fontWeight: 400,
+    lineHeight: "100%",
+    fontSize: "4em",
+    [theme.breakpoints.down("lg")]: {
+      fontSize: "3em",
+    },
+    [theme.breakpoints.down("md")]: {
+      fontSize: "2em",
+    },
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "1.5em",
+    },
   },
 }));
-
-/**
- * Animate variants
- */
-const titleVariants = {
-  hidden: {
-    opacity: 0,
-    y: 100,
-  },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.5,
-      ease: "easeOut",
-    },
-  },
-  exit: {
-    opacity: 0,
-  },
-};
-
-const dividerVariants = {
-  hidden: {
-    opacity: 0,
-    width: 0,
-  },
-  visible: {
-    opacity: 1,
-    width: "100%",
-    transition: {
-      duration: 1,
-      ease: "easeOut",
-    },
-  },
-  exit: {
-    opacity: 0,
-    width: 0,
-    transition: {
-      duration: 0.5,
-      ease: "easeOut",
-    },
-  },
-};
-
-const imageVariants = {
-  hidden: {
-    opacity: 0,
-    y: 100,
-  },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.5,
-      ease: "easeOut",
-    },
-  },
-  exit: {
-    opacity: 0,
-  },
-};
 
 /**
  * Komponen utama
  * @param {Object} project
  * @returns
  */
-const ProjectHero = ({ project }) => {
+const ProjectHero = ({ bannerColor, heroImage, name, category }) => {
   const transition = { duration: 0.5, ease: "easeOut" };
   const classes = useStyles();
   const { ref, inView } = useInView();
@@ -131,10 +65,7 @@ const ProjectHero = ({ project }) => {
   const { header } = useSelector((state) => state.globalReducer);
   const { domRect } = useSelector((state) => state.workReducer);
 
-  // destructering domRect
-  const { banner } = domRect;
-
-  // set warna header ketika element heri ada tau tidak dalam viewport
+  // set warna header ketika element ada dalam viewport
   React.useEffect(() => {
     const newHeader = header;
 
@@ -160,153 +91,149 @@ const ProjectHero = ({ project }) => {
     // eslint-disable-next-line
   }, [dispatch, inView]);
 
+  // animation variants
+  const animateVariants = {
+    banner: {
+      hidden: {
+        borderRaius: 10,
+        opacity: domRect ? 1 : 0,
+        y: domRect ? domRect.banner.top : 100,
+        width: domRect ? domRect.banner.width : "100%",
+        height: domRect ? domRect.banner.height : "100vh",
+      },
+      visible: {
+        borderRaius: 0,
+        opacity: 1,
+        y: 0,
+        width: "100%",
+        height: "100vh",
+        transition: {
+          duration: 0.5,
+          ease: "easeOut",
+          staggerChildren: 0.02,
+          when: domRect && "beforeChildren",
+        },
+      },
+      exit: {
+        opacity: 0,
+        y: -50,
+        transition: {
+          duration: 0.5,
+          ease: "easeOut",
+          when: "afterChildren",
+        },
+      },
+    },
+    heroImage: {
+      hidden: {
+        opacity: 0,
+        y: 100,
+        originY: 1,
+        scaleY: 0,
+      },
+      visible: {
+        opacity: 1,
+        y: 0,
+        scaleY: 1,
+        transition: {
+          duration: 0.5,
+          ease: "easeOut",
+        },
+      },
+      exit: {
+        opacity: 0,
+        y: -50,
+        transition: {
+          ease: "easeOut",
+          duration: 0.5,
+        },
+      },
+    },
+    title: {
+      hidden: {
+        opacity: 0,
+        y: 100,
+        originY: 1,
+        scaleY: 0,
+      },
+      visible: {
+        opacity: 1,
+        y: 0,
+        scaleY: 1,
+        transition: {
+          duration: 0.5,
+          ease: "easeOut",
+        },
+      },
+      exit: {
+        opacity: 0,
+        y: -50,
+        transition: {
+          ease: "easeOut",
+          duration: 0.5,
+        },
+      },
+    },
+  };
+
   return (
-    <div className={classes.hero} ref={ref}>
+    <div className={classes.hero}>
       <motion.div
-        style={{ backgroundColor: project.bannerColor }}
-        className={classes.heroBanner}
-        layoutId={project.slug}
+        ref={ref}
+        style={{ backgroundColor: bannerColor }}
+        className={classes.banner}
         initial="hidden"
         animate="visible"
         exit="exit"
-        transition={{ ...transition }}
-        variants={{
-          hidden: {
-            borderRaius: 10,
-            opacity: banner ? 1 : 0,
-            y: banner ? Math.ceil(banner.top) : 100,
-            width: banner ? Math.ceil(banner.right - banner.left) : "100%",
-            height: banner ? Math.ceil(banner.bottom - banner.top) : "100%",
-          },
-          visible: {
-            borderRaius: 0,
-            opacity: 1,
-            y: 0,
-            width: "100%",
-            height: "100%",
-            transition: {
-              staggerChildren: 0.02,
-              duration: 0.5,
-              ease: "easeOut",
-              when: "beforeChildren",
-            },
-          },
-          exit: {
-            opacity: 0,
-            y: -50,
-            transition: {
-              duration: 0.5,
-              ease: "easeOut",
-            },
-          },
-        }}
+        variants={animateVariants.banner}
       >
-        <Container>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
+        <Grid
+          container
+          spacing={3}
+          justifyContent="space-between"
+          alignItems="center"
+        >
+          <Grid item md={3} xs={6} order={{ md: 1, xs: 2 }}>
+            <Box display="flex" justifyContent="flex-start" px={3}>
               <motion.h1
-                className={classes.heroTitle}
-                transition={transition}
-                variants={titleVariants}
+                className={classes.title}
+                variants={animateVariants.title}
               >
-                {project.name}
+                {name}
               </motion.h1>
-            </Grid>
-
-            <Grid item xs={12}>
-              <Box mb={10} mt={15}>
-                <motion.div
-                  className={classes.heroDivider}
-                  variants={dividerVariants}
-                />
-              </Box>
-            </Grid>
-
-            <Grid item xs={12}>
-              <Grid container>
-                <Grid item md={2} xs={4}>
-                  <Typography
-                    variant="subtitle1"
-                    className={classes.textTertiary}
-                    component={motion.div}
-                    transition={transition}
-                    variants={titleVariants}
-                  >
-                    Category :
-                  </Typography>
-                </Grid>
-                <Grid item md={10} xs={8}>
-                  <Typography
-                    variant="body1"
-                    className={classes.textTertiary}
-                    component={motion.div}
-                    transition={transition}
-                    variants={titleVariants}
-                  >
-                    {project.category}
-                  </Typography>
-                </Grid>
-
-                <Grid item md={2} xs={4}>
-                  <Typography
-                    variant="subtitle1"
-                    className={classes.textTertiary}
-                    component={motion.div}
-                    transition={transition}
-                    variants={titleVariants}
-                  >
-                    Tags :
-                  </Typography>
-                </Grid>
-                <Grid item md={10} xs={8}>
-                  <Typography
-                    variant="body1"
-                    className={classes.textTertiary}
-                    component={motion.div}
-                    transition={transition}
-                    variants={titleVariants}
-                  >
-                    {project.tags.join(", ")}
-                  </Typography>
-                </Grid>
-              </Grid>
-            </Grid>
-
-            <Grid item xs={12}>
-              <Box mt={10} mb={15}>
-                <motion.div
-                  className={classes.heroDivider}
-                  variants={dividerVariants}
-                />
-              </Box>
-            </Grid>
-
-            <Grid item xs={12}>
-              <Box
-                style={{ width: "100%" }}
-                display="flex"
-                alignItems="center"
-                justifyContent="center"
-              >
-                <motion.img
-                  className={classes.heroImage}
-                  src={project.heroImage}
-                  variants={imageVariants}
-                />
-              </Box>
-            </Grid>
+            </Box>
           </Grid>
-        </Container>
+          <Grid item md={6} xs={12} order={{ md: 2, xs: 1 }}>
+            <motion.img
+              loading="eager"
+              src={heroImage}
+              alt={name}
+              className={classes.heroImage}
+              variants={animateVariants.heroImage}
+              transition={transition}
+            />
+          </Grid>
+          <Grid item md={3} xs={6} order={{ md: 3, xs: 3 }}>
+            <Box display="flex" justifyContent="flex-end" px={3}>
+              <motion.h1
+                className={classes.title}
+                variants={animateVariants.title}
+              >
+                {category}
+              </motion.h1>
+            </Box>
+          </Grid>
+        </Grid>
       </motion.div>
     </div>
   );
 };
 
 ProjectHero.propTypes = {
-  project: PropTypes.object.isRequired,
-};
-ProjectHero.defaultProps = {
-  project: {},
+  bannerColor: PropTypes.string.isRequired,
+  heroImage: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  category: PropTypes.string.isRequired,
 };
 
 export default ProjectHero;
