@@ -6,7 +6,7 @@ import { Typography } from "@mui/material";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { InView } from "react-intersection-observer";
 import { useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import actionType from "src/reducer/actionType";
 
 /**
@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
     objectFit: "contain",
     top: "50%",
     left: "50%",
-    transform: "translate(-50%, -50%)",
+    // transform: "translate(-50%, -50%)",
     borderRadius: 6,
     height: 300,
     width: "60%",
@@ -80,10 +80,9 @@ const projectVariants = {
     opacity: 1,
     y: 0,
     transition: {
+      staggerChildren: 0.02,
       duration: 0.5,
       ease: "easeOut",
-      when: "beforeChildren",
-      staggerChildren: 0.02,
     },
   },
   exit: {
@@ -105,15 +104,31 @@ const projectVariants = {
 const projectImageVariants = {
   hidden: {
     opacity: 0,
+    x: "-50%",
+    y: "-30%",
   },
   visible: {
     opacity: 1,
+    y: "-50%",
+    transition: {
+      duration: 0.5,
+      ease: "easeOut",
+    },
   },
   exit: {
     opacity: 0,
+    transition: {
+      duration: 0.5,
+      ease: "easeOut",
+    },
   },
   clicked: {
     opacity: 0,
+    y: "-60%",
+    transition: {
+      duration: 0.5,
+      ease: "easeOut",
+    },
   },
 };
 
@@ -174,38 +189,38 @@ const ProjectCard = ({
 
   // redux
   const dispatch = useDispatch();
+  const { domRect } = useSelector((state) => state.workReducer);
 
   // handle click card
   const handleClick = () => {
     setClicked(true);
-    dispatch({
-      type: actionType.setWorkDomRect,
-      value: {
-        banner: bannerRef.current.getBoundingClientRect(),
-        name: null,
-      },
-    });
+
+    let newDomRect = domRect;
+    newDomRect = {
+      banner: bannerRef.current.getBoundingClientRect(),
+    };
+
+    dispatch({ type: actionType.setWorkDomRect, value: newDomRect });
     history.push(`/project/${slug}`);
   };
 
   return (
     <motion.div
       {...rest}
-      ref={bannerRef}
       onClick={handleClick}
       className={classes.projectContainer}
       variants={projectVariants}
-      transition={{ ...transition }}
       initial="hidden"
       animate="visible"
       exit={clicked ? "clicked" : "exit"}
     >
       {/* banner */}
       <motion.div
+        ref={bannerRef}
         className={classes.projectBanner}
         style={{ backgroundColor: bannerColor }}
+        transition={transition}
         whileHover={{ scale: 0.98 }}
-        transition={{ ...transition }}
       />
 
       {/* image */}
@@ -218,7 +233,7 @@ const ProjectCard = ({
       />
 
       {/* title top */}
-      <InView>
+      <InView delay={200}>
         {({ ref, inView }) => (
           <motion.div
             className={classes.projectTitleTop}
@@ -240,7 +255,7 @@ const ProjectCard = ({
       </InView>
 
       {/* title bottom */}
-      <InView>
+      <InView delay={200}>
         {({ ref, inView }) => (
           <motion.div
             className={classes.projectTitleBottom}

@@ -68,26 +68,101 @@ const Project = (props) => {
   return (
     <MainLayout pageTitle={project && project.name}>
       <section id="project-hero">
-        {project !== null && <ProjectHero project={project} />}
+        {project !== null && (
+          <ProjectHero
+            bannerColor={project.bannerColor}
+            heroImage={project.heroImage}
+            name={project.name}
+            category={project.category}
+          />
+        )}
       </section>
 
-      <Container>
-        <motion.section
-          id="project-content"
-          style={{ minHeight: "100vh" }}
-          variants={contentVariants}
-          initial="hidden"
-          animate="visible"
-          exit="exit"
-        >
-          <Box py={15}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta sint
-            vel facilis, nostrum nam similique? Vel facilis soluta iste quis
-            totam excepturi rem aliquid, culpa laboriosam, labore est
-            accusantium doloremque.
-          </Box>
-        </motion.section>
-      </Container>
+      <Box
+        py={15}
+        id="project-content"
+        component={motion.section}
+        variants={contentVariants}
+        initial="hidden"
+        animate="visible"
+        exit="exit"
+      >
+        <Container>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis
+            modi possimus totam voluptatem sint, provident enim debitis fugit
+            quisquam ipsa dignissimos nemo, perspiciatis sit sunt maxime illo
+            unde, illum quibusdam facilis non. Nesciunt velit voluptas illum
+            suscipit sint hic asperiores. Doloremque quidem velit, vero sequi
+            magnam dolorem ab dolorum! Adipisci fugit earum eius itaque
+            repudiandae hic iure pariatur. Maiores, non, quibusdam tempora quod
+            nam officiis sequi ducimus, aspernatur dignissimos temporibus
+            laboriosam amet delectus ad deleniti perspiciatis eos. Nihil
+            sapiente ipsa beatae unde a minima cumque consequuntur doloribus
+            quaerat alias, quia, molestias eveniet? Placeat vitae quo animi aut
+            sit. Officia, aliquid.
+          </p>
+          <br />
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis
+            modi possimus totam voluptatem sint, provident enim debitis fugit
+            quisquam ipsa dignissimos nemo, perspiciatis sit sunt maxime illo
+            unde, illum quibusdam facilis non. Nesciunt velit voluptas illum
+            suscipit sint hic asperiores. Doloremque quidem velit, vero sequi
+            magnam dolorem ab dolorum! Adipisci fugit earum eius itaque
+            repudiandae hic iure pariatur. Maiores, non, quibusdam tempora quod
+            nam officiis sequi ducimus, aspernatur dignissimos temporibus
+            laboriosam amet delectus ad deleniti perspiciatis eos. Nihil
+            sapiente ipsa beatae unde a minima cumque consequuntur doloribus
+            quaerat alias, quia, molestias eveniet? Placeat vitae quo animi aut
+            sit. Officia, aliquid.
+          </p>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis
+            modi possimus totam voluptatem sint, provident enim debitis fugit
+            quisquam ipsa dignissimos nemo, perspiciatis sit sunt maxime illo
+            unde, illum quibusdam facilis non. Nesciunt velit voluptas illum
+            suscipit sint hic asperiores. Doloremque quidem velit, vero sequi
+            magnam dolorem ab dolorum! Adipisci fugit earum eius itaque
+            repudiandae hic iure pariatur. Maiores, non, quibusdam tempora quod
+            nam officiis sequi ducimus, aspernatur dignissimos temporibus
+            laboriosam amet delectus ad deleniti perspiciatis eos. Nihil
+            sapiente ipsa beatae unde a minima cumque consequuntur doloribus
+            quaerat alias, quia, molestias eveniet? Placeat vitae quo animi aut
+            sit. Officia, aliquid.
+          </p>
+          <br />
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis
+            modi possimus totam voluptatem sint, provident enim debitis fugit
+            quisquam ipsa dignissimos nemo, perspiciatis sit sunt maxime illo
+            unde, illum quibusdam facilis non. Nesciunt velit voluptas illum
+            suscipit sint hic asperiores. Doloremque quidem velit, vero sequi
+            magnam dolorem ab dolorum! Adipisci fugit earum eius itaque
+            repudiandae hic iure pariatur. Maiores, non, quibusdam tempora quod
+            nam officiis sequi ducimus, aspernatur dignissimos temporibus
+            laboriosam amet delectus ad deleniti perspiciatis eos. Nihil
+            sapiente ipsa beatae unde a minima cumque consequuntur doloribus
+            quaerat alias, quia, molestias eveniet? Placeat vitae quo animi aut
+            sit. Officia, aliquid.
+          </p>
+          <br />
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis
+            modi possimus totam voluptatem sint, provident enim debitis fugit
+            quisquam ipsa dignissimos nemo, perspiciatis sit sunt maxime illo
+            unde, illum quibusdam facilis non. Nesciunt velit voluptas illum
+            suscipit sint hic asperiores. Doloremque quidem velit, vero sequi
+            magnam dolorem ab dolorum! Adipisci fugit earum eius itaque
+            repudiandae hic iure pariatur. Maiores, non, quibusdam tempora quod
+            nam officiis sequi ducimus, aspernatur dignissimos temporibus
+            laboriosam amet delectus ad deleniti perspiciatis eos. Nihil
+            sapiente ipsa beatae unde a minima cumque consequuntur doloribus
+            quaerat alias, quia, molestias eveniet? Placeat vitae quo animi aut
+            sit. Officia, aliquid.
+          </p>
+        </Container>
+      </Box>
 
       <section id="project-footer">
         {nextProject !== null && <ProjectFooter next={nextProject} />}

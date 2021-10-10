@@ -20,7 +20,7 @@ const typography = {
   overline: {
     fontWeight: 600,
   },
-  fontFamily: ['"jost"', "roboto", "sans-serif"].join(","),
+  fontFamily: ["roboto", "sans-serif"].join(","),
 };
 
 export default typography;

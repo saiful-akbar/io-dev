@@ -32,6 +32,9 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     borderBottom: `3px solid ${theme.palette.text.primary}`,
     marginTop: "15vh",
+    [theme.breakpoints.down("md")]: {
+      marginTop: "10vh",
+    },
   },
 }));
 

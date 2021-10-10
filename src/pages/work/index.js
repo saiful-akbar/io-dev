@@ -46,7 +46,7 @@ const Work = () => {
   const [value, setValue] = React.useState("web");
 
   return (
-    <MainLayout pageTitle="Work" pt={25}>
+    <MainLayout pageTitle="Work" pt={20}>
       <Container>
         <section id="hero">
           <Hero title="Work" />
