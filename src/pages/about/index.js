@@ -9,9 +9,9 @@ const About = () => {
   return (
     <MainLayout pageTitle="About" pt={20}>
       <Container>
-        <Section id="hero">
+        <section id="hero">
           <Hero title="About" />
-        </Section>
+        </section>
       </Container>
 
       <Section>

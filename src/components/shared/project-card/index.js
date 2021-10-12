@@ -75,22 +75,22 @@ const useStyles = makeStyles((theme) => ({
  * animation variants
  */
 const projectVariants = {
-  hidden: { opacity: 0, y: 100 },
+  hidden: { opacity: 0, y: "20vh" },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
       staggerChildren: 0.02,
-      duration: 0.5,
-      ease: "easeOut",
+      duration: 0.7,
+      ease: "easeInOut",
     },
   },
   exit: {
     opacity: 0,
-    y: -50,
+    y: "-10vh",
     transition: {
-      duration: 0.5,
-      ease: "easeOut",
+      duration: 0.7,
+      ease: "easeInOut",
     },
   },
   clicked: {
@@ -111,42 +111,42 @@ const projectImageVariants = {
     opacity: 1,
     y: "-50%",
     transition: {
-      duration: 0.5,
-      ease: "easeOut",
+      duration: 0.7,
+      ease: "easeInOut",
     },
   },
   exit: {
     opacity: 0,
     transition: {
-      duration: 0.5,
-      ease: "easeOut",
+      duration: 0.7,
+      ease: "easeInOut",
     },
   },
   clicked: {
     opacity: 0,
-    y: "-60%",
+    y: "-75%",
     transition: {
-      duration: 0.5,
-      ease: "easeOut",
+      duration: 0.7,
+      ease: "easeInOut",
     },
   },
 };
 
 const projectTitleVariants = {
   hidden: {
-    y: 50,
+    y: "10vh",
     opacity: 0,
     transition: {
-      duration: 0.5,
-      ease: "easeOut",
+      duration: 0.7,
+      ease: "easeInOut",
     },
   },
   visible: {
     y: 0,
     opacity: 1,
     transition: {
-      duration: 0.5,
-      ease: "easeOut",
+      duration: 0.7,
+      ease: "easeInOut",
     },
   },
   exit: {
@@ -154,10 +154,10 @@ const projectTitleVariants = {
   },
   clicked: {
     opacity: 0,
-    y: -30,
+    y: "-10vh",
     transition: {
-      duration: 0.5,
-      ease: "easeOut",
+      duration: 0.7,
+      ease: "easeInOut",
     },
   },
 };
@@ -181,7 +181,7 @@ const ProjectCard = ({
   slug,
   ...rest
 }) => {
-  const transition = { duration: 0.5, ease: "easeOut" };
+  const transition = { duration: 0.7, ease: "easeInOut" };
   const classes = useStyles();
   const history = useHistory();
   const bannerRef = React.useRef(null);
@@ -233,7 +233,7 @@ const ProjectCard = ({
       />
 
       {/* title top */}
-      <InView delay={200}>
+      <InView delay={100}>
         {({ ref, inView }) => (
           <motion.div
             className={classes.projectTitleTop}
@@ -255,7 +255,7 @@ const ProjectCard = ({
       </InView>
 
       {/* title bottom */}
-      <InView delay={200}>
+      <InView delay={100}>
         {({ ref, inView }) => (
           <motion.div
             className={classes.projectTitleBottom}
@@ -266,7 +266,7 @@ const ProjectCard = ({
             exit={clicked ? "clicked" : "exit"}
           >
             <Typography variant="subtitle2" noWrap>
-              {category}
+              {category.toUpperCase()}
             </Typography>
             <Typography variant="subtitle2" noWrap>
               {year}

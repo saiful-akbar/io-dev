@@ -76,6 +76,7 @@ const useStyles = makeStyles((theme) => ({
   },
   active: {
     fontWeight: 800,
+    fontSize: theme.spacing(2),
     color: theme.palette.text.primary,
   },
   minus: {
@@ -95,28 +96,29 @@ const useStyles = makeStyles((theme) => ({
 const links = [
   { name: "Work", href: "/" },
   { name: "About", href: "/about" },
+  { name: "Contact", href: "/contact" },
 ];
 
 // animation variants
 const headerVariants = {
   hidden: {
     opacity: 0,
-    y: 100,
+    y: "20vh",
   },
   visible: {
     y: 0,
     opacity: 1,
     transition: {
-      duration: 0.5,
-      ease: "easeOut",
+      duration: 0.7,
+      ease: "easeInOut",
     },
   },
   exit: {
     opacity: 0,
-    y: -50,
+    y: "-10vh",
     transition: {
-      duration: 0.5,
-      ease: "easeOut",
+      duration: 0.7,
+      ease: "easeInOut",
     },
   },
 };
@@ -166,7 +168,7 @@ const Header = () => {
             <li className={classes.navItem} key={key}>
               <motion.div
                 style={{ originX: matches ? 0.5 : 1 }}
-                whileHover={{ scale: 1.2, originX: matches ? 0.5 : 1 }}
+                whileHover={{ scale: 1.15, originX: matches ? 0.5 : 1 }}
                 transition={{ ...transition }}
                 initial="hidden"
                 animate="visible"

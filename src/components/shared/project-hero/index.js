@@ -1,4 +1,4 @@
-import { Grid } from "@mui/material";
+import { Grid, Container } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { motion } from "framer-motion";
 import PropTypes from "prop-types";
@@ -15,27 +15,36 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "center",
   },
-  banner: {
-    display: "flex",
-    alignItems: "center",
-  },
   heroContainer: {
     minHeight: "100vh",
-    width: "100%",
-    paddingBottom: theme.spacing(10),
-    paddingTop: theme.spacing(5),
-    [theme.breakpoints.down("md")]: {
-      paddingTop: theme.spacing(15),
-    },
+    padding: theme.spacing(15, 0, 10, 0),
+    display: "flex !important",
+    alignItems: "center",
   },
   heroImage: {
     objectFit: "contain",
-    maxWidth: "90%",
-    maxHeight: 600,
+    width: "100%",
+    maxHeight: 500,
   },
   title: {
+    textAlign: "center",
+    marginBottom: theme.spacing(3),
     color: theme.palette.text.tertiary,
-    fontWeight: 400,
+    lineHeight: "100%",
+    fontWeight: 500,
+    fontSize: "5em",
+    [theme.breakpoints.down("lg")]: {
+      fontSize: "4em",
+    },
+    [theme.breakpoints.down("md")]: {
+      fontSize: "3em",
+    },
+  },
+  category: {
+    textAlign: "center",
+    color: theme.palette.text.tertiary,
+    lineHeight: "100%",
+    fontWeight: 500,
     fontSize: "3em",
     [theme.breakpoints.down("lg")]: {
       fontSize: "2em",
@@ -52,7 +61,6 @@ const useStyles = makeStyles((theme) => ({
  * @returns
  */
 const ProjectHero = ({ bannerColor, heroImage, name, category }) => {
-  const transition = { duration: 0.5, ease: "easeOut" };
   const classes = useStyles();
   const { ref, inView } = useInView();
 
@@ -88,12 +96,12 @@ const ProjectHero = ({ bannerColor, heroImage, name, category }) => {
   }, [dispatch, inView]);
 
   // animation variants
-  const animateVariants = {
+  const variants = {
     banner: {
       hidden: {
         borderRaius: 10,
         opacity: domRect ? 1 : 0,
-        y: domRect ? domRect.banner.top : 100,
+        y: domRect ? domRect.banner.top : "20vh",
         width: domRect ? domRect.banner.width : "100%",
         height: domRect ? domRect.banner.height : "auto",
       },
@@ -104,63 +112,66 @@ const ProjectHero = ({ bannerColor, heroImage, name, category }) => {
         width: "100%",
         height: "auto",
         transition: {
-          duration: 0.5,
-          ease: "easeOut",
+          duration: 0.7,
+          ease: "easeInOut",
           staggerChildren: 0.02,
           when: "beforeChildren",
         },
       },
       exit: {
         opacity: 0,
-        y: -50,
+        y: "-10vh",
         transition: {
-          duration: 0.5,
-          ease: "easeOut",
-          when: "afterChildren",
+          duration: 0.7,
+          ease: "easeInOut",
         },
       },
     },
     heroImage: {
       hidden: {
         opacity: 0,
-        y: 100,
+        scaleY: 0,
+        originY: 1,
       },
       visible: {
         opacity: 1,
-        y: 0,
+        scaleY: 1,
+        originY: 1,
         transition: {
-          duration: 0.5,
-          ease: "easeOut",
+          duration: 0.7,
+          ease: "easeInOut",
         },
       },
       exit: {
+        y: "-10vh",
         opacity: 0,
-        y: -50,
         transition: {
-          ease: "easeOut",
-          duration: 0.5,
+          ease: "easeInOut",
+          duration: 0.7,
         },
       },
     },
     title: {
       hidden: {
         opacity: 0,
-        y: 100,
+        originY: 1,
+        scaleY: 0,
       },
       visible: {
         opacity: 1,
-        y: 0,
+        originY: 1,
+        scaleY: 1,
         transition: {
-          duration: 0.5,
-          ease: "easeOut",
+          duration: 0.7,
+          ease: "easeInOut",
         },
       },
       exit: {
         opacity: 0,
-        y: -50,
+        y: "-10vh",
         transition: {
-          ease: "easeOut",
-          duration: 0.5,
+          ease: "easeInOut",
+          duration: 0.7,
         },
       },
     },
@@ -171,76 +182,62 @@ const ProjectHero = ({ bannerColor, heroImage, name, category }) => {
       <motion.div
         ref={ref}
         style={{ backgroundColor: bannerColor }}
-        className={classes.banner}
         initial="hidden"
         animate="visible"
         exit="exit"
-        variants={animateVariants.banner}
+        variants={variants.banner}
       >
-        <Grid
-          container
-          justifyContent="space-between"
-          alignItems="center"
-          className={classes.heroContainer}
-        >
+        <Container className={classes.heroContainer}>
           <Grid
-            item
-            md={3}
-            xs={8}
-            order={{ md: 1, xs: 2 }}
-            sx={{
-              display: "flex",
-              justifyContent: "flex-start",
-              px: 3,
-              pt: 5,
-            }}
+            container
+            justifyContent="center"
+            alignItems="center"
+            spacing={5}
           >
-            <motion.h1
-              className={classes.title}
-              variants={animateVariants.title}
+            <Grid
+              item
+              mb={3}
+              md={8}
+              xs={12}
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
             >
-              {name}
-            </motion.h1>
-          </Grid>
-          <Grid
-            item
-            md={6}
-            xs={12}
-            order={{ md: 2, xs: 1 }}
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-            }}
-          >
-            <motion.img
-              loading="eager"
-              src={heroImage}
-              alt={name}
-              className={classes.heroImage}
-              variants={animateVariants.heroImage}
-              transition={transition}
-            />
-          </Grid>
-          <Grid
-            item
-            md={3}
-            xs={4}
-            order={{ md: 3, xs: 3 }}
-            sx={{
-              display: "flex",
-              justifyContent: "flex-end",
-              px: 3,
-              pt: 5,
-            }}
-          >
-            <motion.h1
-              className={classes.title}
-              variants={animateVariants.title}
+              <motion.img
+                loading="eager"
+                src={heroImage}
+                alt={name}
+                className={classes.heroImage}
+                variants={variants.heroImage}
+                transition={{
+                  duration: 0.7,
+                  ease: "easeInOut",
+                }}
+              />
+            </Grid>
+            <Grid
+              item
+              md={4}
+              xs={12}
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                flexDirection: "column",
+              }}
+              component={motion.div}
+              variants={variants.title}
             >
-              {category}
-            </motion.h1>
+              <h1 className={classes.title}>{name}</h1>
+              <br />
+              <h1 className={classes.category}>
+                -- {category.toUpperCase()} --
+              </h1>
+            </Grid>
           </Grid>
-        </Grid>
+        </Container>
       </motion.div>
     </div>
   );
