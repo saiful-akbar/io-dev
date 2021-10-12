@@ -17,22 +17,22 @@ import Section from "src/components/shared/section";
 const tabVariants = {
   hidden: {
     opacity: 0,
-    y: 100,
+    y: "20vh",
   },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.5,
-      ease: "easeOut",
+      duration: 0.7,
+      ease: "easeInOut",
     },
   },
   exit: {
     opacity: 0,
-    y: -50,
+    y: "-10vh",
     transition: {
-      duration: 0.5,
-      ease: "easeOut",
+      duration: 0.7,
+      ease: "easeInOut",
     },
   },
 };
@@ -41,9 +41,27 @@ const tabVariants = {
  * Komponen utama
  * @returns
  */
-const Work = () => {
+const Work = (props) => {
+  const { history, location } = props;
+  const qs = new URLSearchParams(location.search);
+  const qsCategory = qs.get("category") === null ? "web" : qs.get("category");
+
+  // redux
   const { categories, projects } = useSelector((state) => state.workReducer);
-  const [value, setValue] = React.useState("web");
+  const resultCategory = categories.find(
+    (result) => result.toLowerCase() === qsCategory.toLowerCase()
+  );
+
+  // state
+  const [value, setValue] = React.useState(
+    resultCategory ? resultCategory : "web"
+  );
+
+  // handle change tab
+  const handleChangeTab = (e, value) => {
+    setValue(value.toLowerCase());
+    history.push(`/?category=${value.toLowerCase()}`);
+  };
 
   return (
     <MainLayout pageTitle="Work" pt={20}>
@@ -61,7 +79,7 @@ const Work = () => {
               animate="visible"
               exit="exit"
             >
-              <TabList onChange={(e, newValue) => setValue(newValue)}>
+              <TabList onChange={handleChangeTab}>
                 {categories.map((category) => (
                   <Tab label={category} value={category} key={category} />
                 ))}

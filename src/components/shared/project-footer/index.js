@@ -47,29 +47,32 @@ const useStyles = makeStyles((theme) => ({
 const bannerVariants = {
   hidden: {
     opacity: 0,
-    y: 100,
+    scaleY: 0.5,
+    originY: 1,
   },
   visible: {
     opacity: 1,
-    y: 0,
+    scaleY: 1,
+    originY: 1,
     transition: {
-      duration: 0.5,
-      ease: "easeOut",
+      duration: 0.7,
+      ease: "easeInOut",
     },
   },
   exit: {
+    originY: 1,
     opacity: 0,
     scaleY: 1.2,
     transition: {
-      duration: 0.5,
-      ease: "easeOut",
+      duration: 0.7,
+      ease: "easeInOut",
     },
   },
   clicked: {
     opacity: 1,
     transition: {
-      duration: 0.5,
-      ease: "easeOut",
+      duration: 0.7,
+      ease: "easeInOut",
     },
   },
 };
@@ -77,7 +80,7 @@ const bannerVariants = {
 const titleVariants = {
   hidden: {
     opacity: 0,
-    y: 100,
+    y: "20vh",
     skewY: 5,
   },
   visible: {
@@ -85,23 +88,23 @@ const titleVariants = {
     y: 0,
     skewY: 0,
     transition: {
-      duration: 0.5,
-      ease: "easeOut",
+      duration: 0.7,
+      ease: "easeInOut",
     },
   },
   exit: {
     opacity: 0,
-    y: -50,
+    y: "-10vh",
     transition: {
-      duration: 0.5,
-      ease: "easeOut",
+      duration: 0.7,
+      ease: "easeInOut",
     },
   },
   clicked: {
     opacity: 0,
     transition: {
-      duration: 0.5,
-      ease: "easeOut",
+      duration: 0.7,
+      ease: "easeInOut",
     },
   },
 };
@@ -109,7 +112,7 @@ const titleVariants = {
 const iconVariants = {
   hidden: {
     opacity: 0,
-    y: 100,
+    y: "20vh",
     skewY: 5,
   },
   visible: {
@@ -117,23 +120,23 @@ const iconVariants = {
     y: 0,
     skewY: 0,
     transition: {
-      duration: 0.5,
-      ease: "easeOut",
+      duration: 0.7,
+      ease: "easeInOut",
     },
   },
   exit: {
     opacity: 0,
-    y: -50,
+    y: "-10vh",
     transition: {
-      duration: 0.5,
-      ease: "easeOut",
+      duration: 0.7,
+      ease: "easeInOut",
     },
   },
   clicked: {
     opacity: 0,
     transition: {
-      duration: 0.5,
-      ease: "easeOut",
+      duration: 0.7,
+      ease: "easeInOut",
     },
   },
 };
@@ -144,7 +147,7 @@ const iconVariants = {
  * @returns
  */
 const ProjectFooter = ({ next }) => {
-  const transition = { duration: 0.5, ease: "easeOut" };
+  const transition = { duration: 0.7, ease: "easeInOut" };
 
   const classes = useStyles();
   const history = useHistory();
@@ -188,7 +191,7 @@ const ProjectFooter = ({ next }) => {
         style={{ backgroundColor: next.bannerColor }}
         transition={transition}
         variants={bannerVariants}
-        whileHover={{ scaleY: 1.1 }}
+        whileHover={{ scaleY: 1.1, originY: 1 }}
       />
 
       <Container className={classes.container}>

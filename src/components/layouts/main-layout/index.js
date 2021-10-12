@@ -1,8 +1,7 @@
-import { makeStyles } from "@mui/styles";
 import { Box } from "@mui/material";
+import { makeStyles } from "@mui/styles";
 import { PropTypes } from "prop-types";
 import React from "react";
-import { useSelector } from "react-redux";
 
 /**
  * Styles
@@ -31,18 +30,16 @@ const useStyles = makeStyles((theme) => ({
  */
 const MainLayout = ({ children, pageTitle, ...rest }) => {
   const classes = useStyles();
-
-  // redux
-  const { appName } = useSelector((state) => state.globalReducer);
+  const { REACT_APP_NAME } = process.env;
 
   // set title pada document
   React.useEffect(() => {
     if (pageTitle !== "") {
-      document.title = `${pageTitle} - ${appName}`;
+      document.title = `${pageTitle} - ${REACT_APP_NAME}`;
     } else {
-      document.title = appName;
+      document.title = REACT_APP_NAME;
     }
-  }, [pageTitle, appName]);
+  }, [pageTitle, REACT_APP_NAME]);
 
   return (
     <Box component="main" className={classes.main} {...rest}>
