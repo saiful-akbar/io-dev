@@ -9,18 +9,23 @@ import { Box } from "@mui/material";
 const sectionVariants = {
   hidden: {
     opacity: 0,
-    y: 100,
+    y: "20vh",
   },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.5,
-      ease: "easeOut",
+      duration: 0.7,
+      ease: "easeInOut",
     },
   },
   exit: {
     opacity: 0,
+    y: "-10vh",
+    transition: {
+      duration: 0.7,
+      ease: "easeInOut",
+    },
   },
 };
 

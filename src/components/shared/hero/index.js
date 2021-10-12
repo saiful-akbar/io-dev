@@ -47,16 +47,16 @@ const heroVariants = {
     opacity: 1,
     transition: {
       staggerChildren: 0.02,
-      duration: 0.5,
-      ease: "easeOut",
+      duration: 0.7,
+      ease: "easeInOut",
     },
   },
   exit: {
     opacity: 0,
-    y: -50,
+    y: "-10vh",
     transition: {
-      duration: 0.5,
-      ease: "easeOut",
+      duration: 0.7,
+      ease: "easeInOut",
     },
   },
 };
@@ -64,7 +64,7 @@ const heroVariants = {
 const titleVariants = {
   hidden: {
     opacity: 0,
-    y: 150,
+    y: "25vh",
     skewY: 10,
   },
   visible: {
@@ -72,15 +72,15 @@ const titleVariants = {
     y: 0,
     skewY: 0,
     transition: {
-      duration: 0.5,
-      ease: "easeOut",
+      duration: 0.7,
+      ease: "easeInOut",
     },
   },
   exit: {
     opacity: 0,
     transition: {
-      duration: 0.5,
-      ease: "easeOut",
+      duration: 0.7,
+      ease: "easeInOut",
     },
   },
 };
@@ -95,15 +95,15 @@ const dividerVariants = {
     width: "100%",
     transition: {
       duration: 1,
-      ease: "easeOut",
+      ease: "easeInOut",
     },
   },
   exit: {
     opacity: 0,
     width: 0,
     transition: {
-      duration: 0.5,
-      ease: "easeOut",
+      duration: 0.7,
+      ease: "easeInOut",
     },
   },
 };
