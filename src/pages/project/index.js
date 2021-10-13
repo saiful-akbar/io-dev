@@ -155,7 +155,7 @@ const Project = (props) => {
             </Grid>
 
             {project !== null && project.tags.map((tag) => (
-               <Grid item xs key={tag}>
+               <Grid item key={tag}>
                  <Chip label={tag.toLowerCase()} />
                </Grid>
             ))}
