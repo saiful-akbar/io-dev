@@ -124,7 +124,7 @@ const projectImageVariants = {
   },
   clicked: {
     opacity: 0,
-    y: "-75%",
+    y: "-65%",
     transition: {
       duration: 0.7,
       ease: "easeInOut",
@@ -154,7 +154,7 @@ const projectTitleVariants = {
   },
   clicked: {
     opacity: 0,
-    y: "-10vh",
+    y: "-5vh",
     transition: {
       duration: 0.7,
       ease: "easeInOut",
