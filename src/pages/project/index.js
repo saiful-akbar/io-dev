@@ -5,7 +5,6 @@ import {
   Typography,
   Divider,
   Chip,
-  Stack,
 } from "@mui/material";
 import React from "react";
 import { useSelector } from "react-redux";
@@ -95,7 +94,7 @@ const Project = (props) => {
         <Container maxWidth="md">
           <Grid container spacing={3} py={15}>
             <Grid item xs={12}>
-              <Typography variant="caption">- Overview -</Typography>
+              <Typography variant="subtitle2" color="textSecondary">- Overview -</Typography>
             </Grid>
             <Grid item xs={12}>
               <Typography variant="body1">
@@ -113,7 +112,7 @@ const Project = (props) => {
         <Container maxWidth="md">
           <Grid container spacing={3} py={15}>
             <Grid item xs={12}>
-              <Typography variant="caption">- UI -</Typography>
+              <Typography variant="subtitle2" color="textSecondary">- UI -</Typography>
             </Grid>
             <Grid item xs={12}>
               <Typography variant="body1">
@@ -152,16 +151,14 @@ const Project = (props) => {
         <Container maxWidth="md">
           <Grid container spacing={3} py={15}>
             <Grid item xs={12}>
-              <Typography variant="caption">- Tags -</Typography>
+              <Typography variant="subtitle2" color="textSecondary">- Tags -</Typography>
             </Grid>
-            <Grid item xs={12}>
-              <Stack direction="row" spacing={1}>
-                {project !== null &&
-                  project.tags.map((tag) => (
-                    <Chip color="primary" label={tag.toLowerCase()} key={tag} />
-                  ))}
-              </Stack>
-            </Grid>
+
+            {project !== null && project.tags.map((tag) => (
+               <Grid item xs key={tag}>
+                 <Chip label={tag.toLowerCase()} />
+               </Grid>
+            ))}
           </Grid>
         </Container>
       </Box>
