@@ -96,7 +96,7 @@ const ProjectHero = ({ bannerColor, heroImage, name, category }) => {
   }, [dispatch, inView]);
 
   // animation variants
-  const variants = {
+  const animateVariants = {
     banner: {
       hidden: {
         borderRaius: 10,
@@ -132,11 +132,13 @@ const ProjectHero = ({ bannerColor, heroImage, name, category }) => {
         opacity: 0,
         scaleY: 0,
         originY: 1,
+        y: "10vh",
       },
       visible: {
         opacity: 1,
         scaleY: 1,
         originY: 1,
+        y: 0,
         transition: {
           duration: 0.7,
           ease: "easeInOut",
@@ -185,7 +187,7 @@ const ProjectHero = ({ bannerColor, heroImage, name, category }) => {
         initial="hidden"
         animate="visible"
         exit="exit"
-        variants={variants.banner}
+        variants={animateVariants.banner}
       >
         <Container className={classes.heroContainer}>
           <Grid
@@ -210,7 +212,7 @@ const ProjectHero = ({ bannerColor, heroImage, name, category }) => {
                 src={heroImage}
                 alt={name}
                 className={classes.heroImage}
-                variants={variants.heroImage}
+                variants={animateVariants.heroImage}
                 transition={{
                   duration: 0.7,
                   ease: "easeInOut",
@@ -228,7 +230,7 @@ const ProjectHero = ({ bannerColor, heroImage, name, category }) => {
                 flexDirection: "column",
               }}
               component={motion.div}
-              variants={variants.title}
+              variants={animateVariants.title}
             >
               <h1 className={classes.title}>{name}</h1>
               <br />
