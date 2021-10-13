@@ -44,111 +44,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const bannerVariants = {
-  hidden: {
-    opacity: 0,
-    scaleY: 0.5,
-    originY: 1,
-  },
-  visible: {
-    opacity: 1,
-    scaleY: 1,
-    originY: 1,
-    transition: {
-      duration: 0.7,
-      ease: "easeInOut",
-    },
-  },
-  exit: {
-    originY: 1,
-    opacity: 0,
-    scaleY: 1.2,
-    transition: {
-      duration: 0.7,
-      ease: "easeInOut",
-    },
-  },
-  clicked: {
-    opacity: 1,
-    transition: {
-      duration: 0.7,
-      ease: "easeInOut",
-    },
-  },
-};
-
-const titleVariants = {
-  hidden: {
-    opacity: 0,
-    y: "20vh",
-    skewY: 5,
-  },
-  visible: {
-    opacity: 1,
-    y: 0,
-    skewY: 0,
-    transition: {
-      duration: 0.7,
-      ease: "easeInOut",
-    },
-  },
-  exit: {
-    opacity: 0,
-    y: "-10vh",
-    transition: {
-      duration: 0.7,
-      ease: "easeInOut",
-    },
-  },
-  clicked: {
-    opacity: 0,
-    transition: {
-      duration: 0.7,
-      ease: "easeInOut",
-    },
-  },
-};
-
-const iconVariants = {
-  hidden: {
-    opacity: 0,
-    y: "20vh",
-    skewY: 5,
-  },
-  visible: {
-    opacity: 1,
-    y: 0,
-    skewY: 0,
-    transition: {
-      duration: 0.7,
-      ease: "easeInOut",
-    },
-  },
-  exit: {
-    opacity: 0,
-    y: "-10vh",
-    transition: {
-      duration: 0.7,
-      ease: "easeInOut",
-    },
-  },
-  clicked: {
-    opacity: 0,
-    transition: {
-      duration: 0.7,
-      ease: "easeInOut",
-    },
-  },
-};
-
 /**
  * komponen utama
  * @param {*} param0
  * @returns
  */
 const ProjectFooter = ({ next }) => {
-  const transition = { duration: 0.7, ease: "easeInOut" };
-
   const classes = useStyles();
   const history = useHistory();
   const ref = React.useRef(null);
@@ -159,6 +60,90 @@ const ProjectFooter = ({ next }) => {
   // redux
   const dispatch = useDispatch();
   const { domRect } = useSelector((state) => state.workReducer);
+  const { transition } = useSelector((state) => state.animateReducer);
+
+  // animate variants
+  const animateVariants = {
+    banner: {
+      hidden: {
+        opacity: 0,
+        scaleY: 0.5,
+        originY: 1,
+      },
+      visible: {
+        opacity: 1,
+        scaleY: 1,
+        originY: 1,
+        transition: {
+          ...transition,
+        },
+      },
+      exit: {
+        originY: 1,
+        opacity: 0,
+        scaleY: 1.2,
+        transition: {
+          ...transition,
+        },
+      },
+      clicked: {
+        opacity: 1,
+        transition: {
+          ...transition,
+        },
+      },
+    },
+    title: {
+      hidden: {
+        opacity: 0,
+        y: "20vh",
+        skewY: 5,
+      },
+      visible: {
+        opacity: 1,
+        y: 0,
+        skewY: 0,
+        transition: {
+          ...transition,
+        },
+      },
+      exit: {
+        opacity: 0,
+        y: "-10vh",
+        transition: {
+          ...transition,
+        },
+      },
+      clicked: {
+        opacity: 0,
+        transition: {
+          ...transition,
+        },
+      },
+    },
+    icon: {
+      hidden: {
+        opacity: 0,
+        y: "20vh",
+        skewY: 5,
+      },
+      visible: {
+        opacity: 1,
+        y: 0,
+        skewY: 0,
+        transition,
+      },
+      exit: {
+        opacity: 0,
+        y: "-10vh",
+        transition,
+      },
+      clicked: {
+        opacity: 0,
+        transition,
+      },
+    },
+  };
 
   // fungsi handle click go to next project
   const handleClick = () => {
@@ -179,7 +164,7 @@ const ProjectFooter = ({ next }) => {
     <motion.footer
       onClick={handleClick}
       className={classes.root}
-      variants={bannerVariants}
+      variants={animateVariants.banner}
       transition={transition}
       initial="hidden"
       animate="visible"
@@ -188,9 +173,8 @@ const ProjectFooter = ({ next }) => {
       <motion.div
         ref={ref}
         className={classes.banner}
-        style={{ backgroundColor: next.bannerColor }}
+        style={{ backgroundColor: next.bannerColor, originY: 1 }}
         transition={transition}
-        variants={bannerVariants}
         whileHover={{ scaleY: 1.1, originY: 1 }}
       />
 
@@ -201,7 +185,7 @@ const ProjectFooter = ({ next }) => {
               variant="subtitle1"
               className={classes.textTertiary}
               component={motion.h6}
-              variants={titleVariants}
+              variants={animateVariants.title}
             >
               Next
             </Typography>
@@ -212,14 +196,14 @@ const ProjectFooter = ({ next }) => {
               variant="h4"
               className={classes.textTertiary}
               component={motion.h4}
-              variants={titleVariants}
+              variants={animateVariants.title}
             >
               {next.name}
             </Typography>
           </Grid>
 
           <Grid item md={1} xs={12}>
-            <motion.span variants={iconVariants}>
+            <motion.span variants={animateVariants.icon}>
               <ArrowForwardIcon
                 className={classes.icon}
                 style={{ fontSize: 40 }}

@@ -68,6 +68,7 @@ const ProjectHero = ({ bannerColor, heroImage, name, category }) => {
   const dispatch = useDispatch();
   const { header } = useSelector((state) => state.globalReducer);
   const { domRect } = useSelector((state) => state.workReducer);
+  const { transition } = useSelector((state) => state.animateReducer);
 
   // set warna header ketika element ada dalam viewport
   React.useEffect(() => {
@@ -101,7 +102,7 @@ const ProjectHero = ({ bannerColor, heroImage, name, category }) => {
       hidden: {
         borderRaius: 10,
         opacity: domRect ? 1 : 0,
-        y: domRect ? domRect.banner.top : "20vh",
+        y: domRect ? domRect.banner.top : "25vh",
         width: domRect ? domRect.banner.width : "100%",
         height: domRect ? domRect.banner.height : "auto",
       },
@@ -112,68 +113,56 @@ const ProjectHero = ({ bannerColor, heroImage, name, category }) => {
         width: "100%",
         height: "auto",
         transition: {
-          duration: 0.7,
-          ease: "easeInOut",
-          staggerChildren: 0.02,
+          ...transition,
+          staggerChildren: 0.04,
           when: "beforeChildren",
         },
       },
       exit: {
         opacity: 0,
-        y: "-10vh",
+        y: "-0vh",
         transition: {
-          duration: 0.7,
-          ease: "easeInOut",
+          ...transition,
         },
       },
     },
     heroImage: {
       hidden: {
         opacity: 0,
-        scaleY: 0,
-        originY: 1,
-        y: "10vh",
+        y: "25vh",
       },
       visible: {
         opacity: 1,
-        scaleY: 1,
-        originY: 1,
         y: 0,
         transition: {
-          duration: 0.7,
-          ease: "easeInOut",
+          ...transition,
         },
       },
       exit: {
         y: "-10vh",
         opacity: 0,
         transition: {
-          ease: "easeInOut",
-          duration: 0.7,
+          ...transition,
         },
       },
     },
     title: {
       hidden: {
         opacity: 0,
-        originY: 1,
-        scaleY: 0,
+        y: "25vh",
       },
       visible: {
         opacity: 1,
-        originY: 1,
-        scaleY: 1,
+        y: 0,
         transition: {
-          duration: 0.7,
-          ease: "easeInOut",
+          ...transition,
         },
       },
       exit: {
         opacity: 0,
         y: "-10vh",
         transition: {
-          ease: "easeInOut",
-          duration: 0.7,
+          ...transition,
         },
       },
     },
@@ -229,14 +218,20 @@ const ProjectHero = ({ bannerColor, heroImage, name, category }) => {
                 alignItems: "center",
                 flexDirection: "column",
               }}
-              component={motion.div}
-              variants={animateVariants.title}
             >
-              <h1 className={classes.title}>{name}</h1>
+              <motion.h1
+                className={classes.title}
+                variants={animateVariants.title}
+              >
+                {name}
+              </motion.h1>
               <br />
-              <h1 className={classes.category}>
+              <motion.h1
+                className={classes.category}
+                variants={animateVariants.title}
+              >
                 -- {category.toUpperCase()} --
-              </h1>
+              </motion.h1>
             </Grid>
           </Grid>
         </Container>

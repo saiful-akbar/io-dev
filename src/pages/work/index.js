@@ -12,32 +12,6 @@ import ProjectCard from "src/components/shared/project-card";
 import Section from "src/components/shared/section";
 
 /**
- * animation variants
- */
-const tabVariants = {
-  hidden: {
-    opacity: 0,
-    y: "20vh",
-  },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.7,
-      ease: "easeInOut",
-    },
-  },
-  exit: {
-    opacity: 0,
-    y: "-10vh",
-    transition: {
-      duration: 0.7,
-      ease: "easeInOut",
-    },
-  },
-};
-
-/**
  * Komponen utama
  * @returns
  */
@@ -47,6 +21,7 @@ const Work = (props) => {
   const qsCategory = qs.get("category") === null ? "web" : qs.get("category");
 
   // redux
+  const { transition } = useSelector((state) => state.animateReducer);
   const { categories, projects } = useSelector((state) => state.workReducer);
   const resultCategory = categories.find(
     (result) => result.toLowerCase() === qsCategory.toLowerCase()
@@ -56,6 +31,26 @@ const Work = (props) => {
   const [value, setValue] = React.useState(
     resultCategory ? resultCategory : "web"
   );
+
+  // animate variants
+  const animateVariants = {
+    tab: {
+      hidden: {
+        opacity: 0,
+        y: "20vh",
+      },
+      visible: {
+        opacity: 1,
+        y: 0,
+        transition,
+      },
+      exit: {
+        opacity: 0,
+        y: "-10vh",
+        transition,
+      },
+    },
+  };
 
   // handle change tab
   const handleChangeTab = (e, value) => {
@@ -74,7 +69,7 @@ const Work = (props) => {
         <section id="content">
           <TabContext value={value}>
             <motion.div
-              variants={tabVariants}
+              variants={animateVariants.tab}
               initial="hidden"
               animate="visible"
               exit="exit"
@@ -109,11 +104,11 @@ const Work = (props) => {
             </Grid>
           </TabContext>
         </section>
-      </Container>
 
-      <Section id="footer">
-        <Footer />
-      </Section>
+        <Section id="footer">
+          <Footer />
+        </Section>
+      </Container>
     </MainLayout>
   );
 };
