@@ -1,12 +1,12 @@
-import React from "react";
-import PropTypes from "prop-types";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import { Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { motion } from "framer-motion";
-import { Typography } from "@mui/material";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import PropTypes from "prop-types";
+import React from "react";
 import { InView } from "react-intersection-observer";
-import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import actionType from "src/reducer/actionType";
 
 /**
@@ -36,7 +36,6 @@ const useStyles = makeStyles((theme) => ({
     objectFit: "contain",
     top: "50%",
     left: "50%",
-    // transform: "translate(-50%, -50%)",
     borderRadius: 6,
     height: 300,
     width: "60%",
@@ -47,120 +46,29 @@ const useStyles = makeStyles((theme) => ({
   projectTitleTop: {
     pointerEvents: "none",
     position: "absolute",
-    top: 0,
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    padding: theme.spacing(4, 5),
     color: theme.palette.text.tertiary,
-    width: "100%",
+    // top: 0,
+    // display: "flex",
+    // justifyContent: "space-between",
+    // alignItems: "center",
+    // padding: theme.spacing(4, 5),
+    // width: "100%",
   },
   projectTitleBottom: {
     pointerEvents: "none",
     position: "absolute",
-    bottom: 0,
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    padding: theme.spacing(4, 5),
     color: theme.palette.text.tertiary,
-    width: "100%",
     [theme.breakpoints.down("md")]: {
       display: "none",
     },
+    // bottom: 0,
+    // display: "flex",
+    // justifyContent: "space-between",
+    // alignItems: "center",
+    // padding: theme.spacing(4, 5),
+    // width: "100%",
   },
 }));
-
-/**
- * animation variants
- */
-const projectVariants = {
-  hidden: { opacity: 0, y: "20vh" },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      staggerChildren: 0.02,
-      duration: 0.7,
-      ease: "easeInOut",
-    },
-  },
-  exit: {
-    opacity: 0,
-    y: "-10vh",
-    transition: {
-      duration: 0.7,
-      ease: "easeInOut",
-    },
-  },
-  clicked: {
-    opacity: 1,
-    transition: {
-      when: "afterChildren",
-    },
-  },
-};
-
-const projectImageVariants = {
-  hidden: {
-    opacity: 0,
-    x: "-50%",
-    y: "-30%",
-  },
-  visible: {
-    opacity: 1,
-    y: "-50%",
-    transition: {
-      duration: 0.7,
-      ease: "easeInOut",
-    },
-  },
-  exit: {
-    opacity: 0,
-    transition: {
-      duration: 0.7,
-      ease: "easeInOut",
-    },
-  },
-  clicked: {
-    opacity: 0,
-    y: "-65%",
-    transition: {
-      duration: 0.7,
-      ease: "easeInOut",
-    },
-  },
-};
-
-const projectTitleVariants = {
-  hidden: {
-    y: "10vh",
-    opacity: 0,
-    transition: {
-      duration: 0.7,
-      ease: "easeInOut",
-    },
-  },
-  visible: {
-    y: 0,
-    opacity: 1,
-    transition: {
-      duration: 0.7,
-      ease: "easeInOut",
-    },
-  },
-  exit: {
-    opacity: 0,
-  },
-  clicked: {
-    opacity: 0,
-    y: "-5vh",
-    transition: {
-      duration: 0.7,
-      ease: "easeInOut",
-    },
-  },
-};
 
 /**
  * komponen utama
@@ -181,7 +89,6 @@ const ProjectCard = ({
   slug,
   ...rest
 }) => {
-  const transition = { duration: 0.7, ease: "easeInOut" };
   const classes = useStyles();
   const history = useHistory();
   const bannerRef = React.useRef(null);
@@ -190,6 +97,88 @@ const ProjectCard = ({
   // redux
   const dispatch = useDispatch();
   const { domRect } = useSelector((state) => state.workReducer);
+  const { transition } = useSelector((state) => state.animateReducer);
+
+  // animate variants
+  const animateVariants = {
+    project: {
+      hidden: { opacity: 0, y: "20vh" },
+      visible: {
+        opacity: 1,
+        y: 0,
+        transition: {
+          staggerChildren: 0.02,
+          ...transition,
+        },
+      },
+      exit: {
+        opacity: 0,
+        y: "-10vh",
+        transition: {
+          ...transition,
+        },
+      },
+      clicked: {
+        opacity: 1,
+        transition: {
+          when: "afterChildren",
+        },
+      },
+    },
+    image: {
+      hidden: {
+        opacity: 0,
+        x: "-50%",
+        y: "-30%",
+      },
+      visible: {
+        opacity: 1,
+        y: "-50%",
+        transition: {
+          ...transition,
+        },
+      },
+      exit: {
+        opacity: 0,
+        transition: {
+          ...transition,
+        },
+      },
+      clicked: {
+        opacity: 0,
+        y: "-65%",
+        transition: {
+          ...transition,
+        },
+      },
+    },
+    title: {
+      hidden: {
+        y: "5vh",
+        opacity: 0,
+        transition: {
+          ...transition,
+        },
+      },
+      visible: {
+        y: 0,
+        opacity: 1,
+        transition: {
+          ...transition,
+        },
+      },
+      exit: {
+        opacity: 0,
+      },
+      clicked: {
+        opacity: 0,
+        y: "-5vh",
+        transition: {
+          ...transition,
+        },
+      },
+    },
+  };
 
   // handle click card
   const handleClick = () => {
@@ -209,7 +198,7 @@ const ProjectCard = ({
       {...rest}
       onClick={handleClick}
       className={classes.projectContainer}
-      variants={projectVariants}
+      variants={animateVariants.project}
       initial="hidden"
       animate="visible"
       exit={clicked ? "clicked" : "exit"}
@@ -219,7 +208,7 @@ const ProjectCard = ({
         ref={bannerRef}
         className={classes.projectBanner}
         style={{ backgroundColor: bannerColor }}
-        transition={transition}
+        transition={{ duration: 0.5, ease: "easeInOut" }}
         whileHover={{ scale: 0.98 }}
       />
 
@@ -229,49 +218,80 @@ const ProjectCard = ({
         alt={`project_${slug}`}
         src={image}
         className={classes.projectHeroImage}
-        variants={projectImageVariants}
+        variants={animateVariants.image}
       />
 
-      {/* title top */}
+      {/* title top left */}
       <InView delay={100}>
         {({ ref, inView }) => (
-          <motion.div
+          <Typography
+            variant="subtitle1"
+            component={motion.h6}
             className={classes.projectTitleTop}
             ref={ref}
-            variants={projectTitleVariants}
+            variants={animateVariants.title}
             initial="hidden"
             animate={inView ? "visible" : "hidden"}
             exit={clicked ? "clicked" : "exit"}
+            style={{ top: 45, left: 40 }}
           >
-            <Typography variant="subtitle1" noWrap>
-              {name}
-            </Typography>
-
-            <motion.span>
-              <ChevronRightIcon style={{ fontSize: 30 }} />
-            </motion.span>
-          </motion.div>
+            {name}
+          </Typography>
         )}
       </InView>
 
-      {/* title bottom */}
+      {/* title top right */}
       <InView delay={100}>
         {({ ref, inView }) => (
-          <motion.div
-            className={classes.projectTitleBottom}
+          <motion.span
             ref={ref}
-            variants={projectTitleVariants}
+            className={classes.projectTitleTop}
+            variants={animateVariants.title}
             initial="hidden"
             animate={inView ? "visible" : "hidden"}
             exit={clicked ? "clicked" : "exit"}
+            style={{ top: 45, right: 40 }}
           >
-            <Typography variant="subtitle2" noWrap>
-              {category.toUpperCase()}
-            </Typography>
-            <Typography variant="subtitle2" noWrap>
-              {year}
-            </Typography>
-          </motion.div>
+            <ChevronRightIcon style={{ fontSize: 40 }} />
+          </motion.span>
+        )}
+      </InView>
+
+      {/* title bottom left */}
+      <InView delay={100}>
+        {({ ref, inView }) => (
+          <Typography
+            variant="subtitle2"
+            component={motion.h6}
+            className={classes.projectTitleBottom}
+            ref={ref}
+            variants={animateVariants.title}
+            initial="hidden"
+            animate={inView ? "visible" : "hidden"}
+            exit={clicked ? "clicked" : "exit"}
+            style={{ bottom: 45, left: 40 }}
+          >
+            {category.toUpperCase()}
+          </Typography>
+        )}
+      </InView>
+
+      {/* title bottom right */}
+      <InView delay={100}>
+        {({ ref, inView }) => (
+          <Typography
+            variant="subtitle2"
+            component={motion.h6}
+            className={classes.projectTitleBottom}
+            ref={ref}
+            variants={animateVariants.title}
+            initial="hidden"
+            animate={inView ? "visible" : "hidden"}
+            exit={clicked ? "clicked" : "exit"}
+            style={{ bottom: 45, right: 40 }}
+          >
+            {year}
+          </Typography>
         )}
       </InView>
     </motion.div>

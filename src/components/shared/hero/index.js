@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
   heroTitle: {
     fontWeight: 500,
     lineHeight: "100%",
-    fontSize: "9rem",
+    fontSize: "9.5rem",
     [theme.breakpoints.down("md")]: {
       fontSize: "8rem",
     },
@@ -38,76 +38,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-// animation variants
-const heroVariants = {
-  hidden: {
-    opacity: 0,
-  },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.02,
-      duration: 0.7,
-      ease: "easeInOut",
-    },
-  },
-  exit: {
-    opacity: 0,
-    y: "-10vh",
-    transition: {
-      duration: 0.7,
-      ease: "easeInOut",
-    },
-  },
-};
-
-const titleVariants = {
-  hidden: {
-    opacity: 0,
-    y: "25vh",
-    skewY: 10,
-  },
-  visible: {
-    opacity: 1,
-    y: 0,
-    skewY: 0,
-    transition: {
-      duration: 0.7,
-      ease: "easeInOut",
-    },
-  },
-  exit: {
-    opacity: 0,
-    transition: {
-      duration: 0.7,
-      ease: "easeInOut",
-    },
-  },
-};
-
-const dividerVariants = {
-  hidden: {
-    opacity: 0,
-    width: 0,
-  },
-  visible: {
-    opacity: 1,
-    width: "100%",
-    transition: {
-      duration: 1,
-      ease: "easeInOut",
-    },
-  },
-  exit: {
-    opacity: 0,
-    width: 0,
-    transition: {
-      duration: 0.7,
-      ease: "easeInOut",
-    },
-  },
-};
-
 /**
  * Komponen utama
  * @param {String} title
@@ -117,32 +47,102 @@ const Hero = ({ title }) => {
   const classes = useStyles();
 
   // redux
-  const { appVersion } = useSelector((state) => state.globalReducer);
+  const { transition } = useSelector((state) => state.animateReducer);
+
+  // animate variants
+  const animateVariants = {
+    hero: {
+      hidden: {
+        opacity: 0,
+      },
+      visible: {
+        opacity: 1,
+        transition: {
+          ...transition,
+          staggerChildren: 0.02,
+        },
+      },
+      exit: {
+        opacity: 0,
+        y: "-10vh",
+        transition: {
+          ...transition,
+        },
+      },
+    },
+    title: {
+      hidden: {
+        opacity: 0,
+        y: "25vh",
+        skewY: 10,
+      },
+      visible: {
+        opacity: 1,
+        y: 0,
+        skewY: 0,
+        transition: {
+          ...transition,
+        },
+      },
+      exit: {
+        opacity: 0,
+        transition: {
+          ...transition,
+        },
+      },
+    },
+    divider: {
+      hidden: {
+        opacity: 0,
+        width: 0,
+      },
+      visible: {
+        opacity: 1,
+        width: "100%",
+        transition: {
+          duration: 1,
+          ease: "easeInOut",
+        },
+      },
+      exit: {
+        opacity: 0,
+        width: 0,
+        transition: {
+          ...transition,
+        },
+      },
+    },
+  };
 
   // render
   return (
     <motion.div
       className={classes.hero}
-      variants={heroVariants}
+      variants={animateVariants.hero}
       initial="hidden"
       animate="visible"
       exit="exit"
     >
       <Grid container spacing={2}>
         <Grid item lg={10} xs={12}>
-          <motion.h1 className={classes.heroTitle} variants={titleVariants}>
+          <motion.h1
+            className={classes.heroTitle}
+            variants={animateVariants.title}
+          >
             {title}
           </motion.h1>
         </Grid>
 
         <Grid item lg={2} xs={12} className={classes.heroVersion}>
-          <motion.h4 variants={titleVariants}>{appVersion}</motion.h4>
+          <motion.h5 variants={animateVariants.title}>
+            v{process.env.REACT_APP_VERSION}
+          </motion.h5>
         </Grid>
 
         <Grid item xs={12}>
           <motion.div
             className={classes.heroDivider}
-            variants={dividerVariants}
+            variants={animateVariants.divider}
           />
         </Grid>
       </Grid>

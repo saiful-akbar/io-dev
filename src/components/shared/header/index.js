@@ -99,30 +99,6 @@ const links = [
   { name: "Contact", href: "/contact" },
 ];
 
-// animation variants
-const headerVariants = {
-  hidden: {
-    opacity: 0,
-    y: "20vh",
-  },
-  visible: {
-    y: 0,
-    opacity: 1,
-    transition: {
-      duration: 0.7,
-      ease: "easeInOut",
-    },
-  },
-  exit: {
-    opacity: 0,
-    y: "-10vh",
-    transition: {
-      duration: 0.7,
-      ease: "easeInOut",
-    },
-  },
-};
-
 /**
  * Komponen utama
  * @returns
@@ -131,10 +107,34 @@ const Header = () => {
   const classes = useStyles();
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down("lg"));
-  const transition = { duration: 0.3, ease: "easeInOut" };
 
   // redux
   const { header } = useSelector((state) => state.globalReducer);
+  const { transition } = useSelector((state) => state.animateReducer);
+
+  // animateVariants
+  const animateVariants = {
+    header: {
+      hidden: {
+        opacity: 0,
+        y: "20vh",
+      },
+      visible: {
+        y: 0,
+        opacity: 1,
+        transition: {
+          ...transition,
+        },
+      },
+      exit: {
+        opacity: 0,
+        y: "-10vh",
+        transition: {
+          ...transition,
+        },
+      },
+    },
+  };
 
   return (
     <>
@@ -148,7 +148,7 @@ const Header = () => {
           initial="hidden"
           animate="visible"
           exit="exit"
-          variants={headerVariants}
+          variants={animateVariants.header}
         >
           io
         </motion.h1>
@@ -156,7 +156,7 @@ const Header = () => {
           initial="hidden"
           animate="visible"
           exit="exit"
-          variants={headerVariants}
+          variants={animateVariants.header}
         >
           DEV
         </motion.h2>
@@ -173,7 +173,7 @@ const Header = () => {
                 initial="hidden"
                 animate="visible"
                 exit="exit"
-                variants={headerVariants}
+                variants={animateVariants.header}
               >
                 <NavLink
                   exact
@@ -192,7 +192,7 @@ const Header = () => {
                 initial="hidden"
                 animate="visible"
                 exit="exit"
-                variants={headerVariants}
+                variants={animateVariants.header}
               />
             </li>
           ))}

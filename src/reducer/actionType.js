@@ -5,6 +5,7 @@ const actionType = {
   setWorkCategories: "SET_WORK_CATEGORIES",
   setWorkProjects: "SET_WORK_PROJECTS",
   setWorkDomRect: "SET_WORK_DOM_RECT",
+  setAnimateTransition: "SET_ANIMATE_TRANSITION",
 };
 
 export default actionType;
