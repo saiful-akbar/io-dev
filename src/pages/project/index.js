@@ -89,10 +89,10 @@ const Project = (props) => {
         variants={animateVariants.content}
         initial="hidden"
         animate="visible"
-        axit="exit"
+        exit="exit"
       >
         <Container maxWidth="md">
-          <Grid container spacing={3} py={15}>
+          <Grid container spacing={3} py={10}>
             <Grid item xs={12}>
               <Typography variant="subtitle2" color="textSecondary">- Overview -</Typography>
             </Grid>
@@ -110,7 +110,7 @@ const Project = (props) => {
         <Divider />
 
         <Container maxWidth="md">
-          <Grid container spacing={3} py={15}>
+          <Grid container spacing={3} py={10}>
             <Grid item xs={12}>
               <Typography variant="subtitle2" color="textSecondary">- UI -</Typography>
             </Grid>
@@ -125,22 +125,7 @@ const Project = (props) => {
                 assumenda hic. Quasi ipsam nostrum tempore iste iusto! Vitae
                 incidunt voluptatibus neque illum qui veritatis temporibus
                 provident numquam, cumque quod, ipsum, molestiae consequatur
-                error tempore eos. Perferendis fuga itaque sint rerum dolores
-                assumenda ducimus delectus neque sit dignissimos ullam est
-                provident consequatur eum suscipit et minima harum similique
-                aliquid, aut, eos iusto! Deleniti eum nobis nihil distinctio
-                aperiam, facere unde nam odit quasi harum? Nostrum quibusdam
-                minima molestias esse vitae voluptate corrupti accusamus
-                cupiditate at similique earum, quae iure labore sit ex officia
-                atque commodi exercitationem alias eaque voluptates sequi
-                repellendus odit ullam! Cum quo incidunt expedita, quasi
-                provident explicabo deserunt temporibus quidem sed hic in
-                voluptates natus. Magnam assumenda ea cupiditate. Beatae ipsa
-                natus dignissimos iure laboriosam, error est dicta qui eum
-                soluta quo quaerat, maiores dolorem! Accusamus nobis optio
-                laborum quos esse ipsa aliquam magnam autem quidem a rem, fuga
-                quaerat corrupti! Mollitia velit doloribus natus repellendus.
-                Iure, minima!
+                error tempore eos.
               </Typography>
             </Grid>
           </Grid>
@@ -149,16 +134,15 @@ const Project = (props) => {
         <Divider />
 
         <Container maxWidth="md">
-          <Grid container spacing={3} py={15}>
+          <Grid container spacing={3} py={10}>
             <Grid item xs={12}>
               <Typography variant="subtitle2" color="textSecondary">- Tags -</Typography>
             </Grid>
-
-            {project !== null && project.tags.map((tag) => (
-               <Grid item xs key={tag}>
-                 <Chip label={tag.toLowerCase()} />
-               </Grid>
-            ))}
+             <Grid item xs key={tag}>
+              {project !== null && project.tags.map((tag) => (
+                <Chip label={tag.toLowerCase()} sx={{ mx: 1 }} />      
+              ))}
+            </Grid>
           </Grid>
         </Container>
       </Box>
