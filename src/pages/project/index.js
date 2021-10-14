@@ -138,7 +138,7 @@ const Project = (props) => {
             <Grid item xs={12}>
               <Typography variant="subtitle2" color="textSecondary">- Tags -</Typography>
             </Grid>
-             <Grid item xs={12} >
+            <Grid item xs={12} >
               {project !== null && project.tags.map((tag) => (
                 <Chip
                   key={tag}
