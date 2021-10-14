@@ -50,12 +50,13 @@ const MainLayout = ({ children, pageTitle, ...rest }) => {
 
 // prop type
 MainLayout.propTypes = {
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
   pageTitle: PropTypes.string,
 };
 
 // default props
 MainLayout.defaultProps = {
+  children: <div />,
   pageTitle: "",
 };
 

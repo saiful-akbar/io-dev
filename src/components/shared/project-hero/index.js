@@ -129,7 +129,7 @@ const ProjectHero = ({ bannerColor, heroImage, name, category }) => {
     heroImage: {
       hidden: {
         opacity: 0,
-        y: "25vh",
+        y: "20vh",
       },
       visible: {
         opacity: 1,
@@ -179,12 +179,7 @@ const ProjectHero = ({ bannerColor, heroImage, name, category }) => {
         variants={animateVariants.banner}
       >
         <Container className={classes.heroContainer}>
-          <Grid
-            container
-            justifyContent="center"
-            alignItems="center"
-            spacing={5}
-          >
+          <Grid container spacing={5}>
             <Grid
               item
               mb={3}

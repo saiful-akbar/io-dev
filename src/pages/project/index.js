@@ -1,17 +1,10 @@
-import {
-  Container,
-  Box,
-  Grid,
-  Typography,
-  Divider,
-  Chip,
-} from "@mui/material";
+import { Chip, Container, Divider, Grid, Typography } from "@mui/material";
+import { motion } from "framer-motion";
 import React from "react";
 import { useSelector } from "react-redux";
 import MainLayout from "src/components/layouts/main-layout";
-import ProjectHero from "src/components/shared/project-hero";
 import ProjectFooter from "src/components/shared/project-footer";
-import { motion } from "framer-motion";
+import ProjectHero from "src/components/shared/project-hero";
 
 /**
  * Komponen utama
@@ -21,27 +14,29 @@ import { motion } from "framer-motion";
 const Project = (props) => {
   const { match, history } = props;
   const { slug } = match.params;
-  const [nextProject, setNextProject] = React.useState(null);
 
-  // redux
+  // redux state
   const { transition } = useSelector((state) => state.animateReducer);
   const { projects } = useSelector((state) => state.workReducer);
   const project = useSelector((state) =>
     state.workReducer.projects.find((result) => result.slug === slug)
   );
 
+  // state
+  const [nextProject, setNextProject] = React.useState(null);
+
+  // animasi varian
   const animateVariants = {
     content: {
       hidden: {
         opacity: 0,
-        y: "25vh",
+        y: "20vh",
       },
       visible: {
         opacity: 1,
         y: 0,
         transition: {
           ...transition,
-          staggerChildren: 0.02,
         },
       },
       exit: {
@@ -73,87 +68,98 @@ const Project = (props) => {
 
   return (
     <MainLayout pageTitle={project && project.name}>
-      <section id="project-hero">
-        {project !== null && (
-          <ProjectHero
-            bannerColor={project.bannerColor}
-            heroImage={project.heroImage}
-            name={project.name}
-            category={project.category}
-          />
-        )}
-      </section>
+      {project && (
+        <>
+          {/* hero */}
+          <section id="project-hero">
+            <ProjectHero
+              bannerColor={project.bannerColor}
+              heroImage={project.heroImage}
+              name={project.name}
+              category={project.category}
+            />
+          </section>
+          {/* end hero */}
 
-      <Box
-        component={motion.section}
-        variants={animateVariants.content}
-        initial="hidden"
-        animate="visible"
-        exit="exit"
-      >
-        <Container maxWidth="md">
-          <Grid container spacing={3} py={10}>
-            <Grid item xs={12}>
-              <Typography variant="subtitle2" color="textSecondary">- Overview -</Typography>
-            </Grid>
-            <Grid item xs={12}>
-              <Typography variant="body1">
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quae
-                voluptate ipsa esse neque fugiat iste magni suscipit! A
-                laboriosam voluptatem, iure incidunt architecto nulla sit minus
-                corporis delectus excepturi? Dicta!
-              </Typography>
-            </Grid>
-          </Grid>
-        </Container>
+          {/* content */}
+          <motion.section
+            id="project-content"
+            variants={animateVariants.content}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+          >
+            <Container maxWidth="md">
+              <Grid container spacing={3} py={10}>
+                <Grid item xs={12}>
+                  <Typography variant="subtitle2" color="textSecondary">
+                    - Overview -
+                  </Typography>
+                </Grid>
+                <Grid item xs={12}>
+                  <Typography variant="body1">
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                    Quae voluptate ipsa esse neque fugiat iste magni suscipit! A
+                    laboriosam voluptatem, iure incidunt architecto nulla sit
+                    minus corporis delectus excepturi? Dicta!
+                  </Typography>
+                </Grid>
+              </Grid>
+            </Container>
 
-        <Divider />
+            <Divider />
 
-        <Container maxWidth="md">
-          <Grid container spacing={3} py={10}>
-            <Grid item xs={12}>
-              <Typography variant="subtitle2" color="textSecondary">- UI -</Typography>
-            </Grid>
-            <Grid item xs={12}>
-              <Typography variant="body1">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                Explicabo corporis delectus laudantium id exercitationem,
-                placeat molestiae quasi ipsum vel hic iure minima dolorem
-                voluptas non sapiente libero reiciendis? Tenetur recusandae cum
-                officiis, sed, inventore consequuntur modi, repudiandae ab odit
-                perferendis aut fugiat. Modi esse qui quia quis, iure alias
-                assumenda hic. Quasi ipsam nostrum tempore iste iusto! Vitae
-                incidunt voluptatibus neque illum qui veritatis temporibus
-                provident numquam, cumque quod, ipsum, molestiae consequatur
-                error tempore eos.
-              </Typography>
-            </Grid>
-          </Grid>
-        </Container>
+            <Container maxWidth="md">
+              <Grid container spacing={3} py={10}>
+                <Grid item xs={12}>
+                  <Typography variant="subtitle2" color="textSecondary">
+                    - UI -
+                  </Typography>
+                </Grid>
+                <Grid item xs={12}>
+                  <Typography variant="body1">
+                    Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                    Explicabo corporis delectus laudantium id exercitationem,
+                    placeat molestiae quasi ipsum vel hic iure minima dolorem
+                    voluptas non sapiente libero reiciendis? Tenetur recusandae
+                    cum officiis, sed, inventore consequuntur modi, repudiandae
+                    ab odit perferendis aut fugiat. Modi esse qui quia quis,
+                    iure alias assumenda hic. Quasi ipsam nostrum tempore iste
+                    iusto! Vitae incidunt voluptatibus neque illum qui veritatis
+                    temporibus provident numquam, cumque quod, ipsum, molestiae
+                    consequatur error tempore eos.
+                  </Typography>
+                </Grid>
+              </Grid>
+            </Container>
 
-        <Divider />
+            <Divider />
 
-        <Container maxWidth="md">
-          <Grid container spacing={3} py={10}>
-            <Grid item xs={12}>
-              <Typography variant="subtitle2" color="textSecondary">- Tags -</Typography>
-            </Grid>
-            <Grid item xs={12} >
-              {project !== null && project.tags.map((tag) => (
-                <Chip
-                  key={tag}
-                  label={tag.toLowerCase()}
-                  sx={{ m: 1 }}
-                />      
-              ))}
-            </Grid>
-          </Grid>
-        </Container>
-      </Box>
+            <Container maxWidth="md">
+              <Grid container spacing={3} py={10}>
+                <Grid item xs={12}>
+                  <Typography variant="subtitle2" color="textSecondary">
+                    - Tags -
+                  </Typography>
+                </Grid>
+                <Grid item xs={12}>
+                  {project !== null &&
+                    project.tags.map((tag) => (
+                      <Chip key={tag} label={tag.toLowerCase()} sx={{ m: 1 }} />
+                    ))}
+                </Grid>
+              </Grid>
+            </Container>
+          </motion.section>
+          {/* end content */}
 
-      <section id="project-footer">
-        {nextProject !== null && <ProjectFooter next={nextProject} />}
-      </section>
+          {/* footer */}
+          <section id="project-footer">
+            {nextProject !== null && <ProjectFooter next={nextProject} />}
+          </section>
+          {/* end footer */}
+        </>
+      )}
     </MainLayout>
   );
 };

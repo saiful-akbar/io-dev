@@ -5,6 +5,7 @@ import Cursor from "src/components/shared/cursor";
 import Header from "src/components/shared/header";
 import Router from "src/router";
 import theme from "src/theme";
+
 function App() {
   React.useEffect(() => {
     const rootEl = document.querySelector("#root");

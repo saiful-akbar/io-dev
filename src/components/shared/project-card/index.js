@@ -37,22 +37,13 @@ const useStyles = makeStyles((theme) => ({
     top: "50%",
     left: "50%",
     borderRadius: 6,
-    height: 300,
-    width: "60%",
-    [theme.breakpoints.down("md")]: {
-      width: "80%",
-    },
+    maxHeight: 320,
+    width: "80%",
   },
   projectTitleTop: {
     pointerEvents: "none",
     position: "absolute",
     color: theme.palette.text.tertiary,
-    // top: 0,
-    // display: "flex",
-    // justifyContent: "space-between",
-    // alignItems: "center",
-    // padding: theme.spacing(4, 5),
-    // width: "100%",
   },
   projectTitleBottom: {
     pointerEvents: "none",
@@ -61,12 +52,6 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("md")]: {
       display: "none",
     },
-    // bottom: 0,
-    // display: "flex",
-    // justifyContent: "space-between",
-    // alignItems: "center",
-    // padding: theme.spacing(4, 5),
-    // width: "100%",
   },
 }));
 
@@ -129,9 +114,14 @@ const ProjectCard = ({
       hidden: {
         opacity: 0,
         x: "-50%",
-        y: "-30%",
+        y: "-40%",
+        originY: 1,
+        transition: {
+          ...transition,
+        },
       },
       visible: {
+        originY: 1,
         opacity: 1,
         y: "-50%",
         transition: {
@@ -146,7 +136,7 @@ const ProjectCard = ({
       },
       clicked: {
         opacity: 0,
-        y: "-65%",
+        y: "-66%",
         transition: {
           ...transition,
         },
@@ -154,15 +144,17 @@ const ProjectCard = ({
     },
     title: {
       hidden: {
-        y: "5vh",
         opacity: 0,
+        originY: 1,
+        y: "6vh",
         transition: {
           ...transition,
         },
       },
       visible: {
-        y: 0,
         opacity: 1,
+        originY: 1,
+        y: 0,
         transition: {
           ...transition,
         },
@@ -172,7 +164,7 @@ const ProjectCard = ({
       },
       clicked: {
         opacity: 0,
-        y: "-5vh",
+        y: "-6vh",
         transition: {
           ...transition,
         },
@@ -213,13 +205,21 @@ const ProjectCard = ({
       />
 
       {/* image */}
-      <motion.img
-        loading="lazy"
-        alt={`project_${slug}`}
-        src={image}
-        className={classes.projectHeroImage}
-        variants={animateVariants.image}
-      />
+      <InView delay={200}>
+        {({ ref, inView }) => (
+          <motion.img
+            ref={ref}
+            loading="lazy"
+            alt={`project_${slug}`}
+            src={image}
+            className={classes.projectHeroImage}
+            variants={animateVariants.image}
+            initial="hidden"
+            animate={inView ? "visible" : "hidden"}
+            exit={clicked ? "clicked" : "exit"}
+          />
+        )}
+      </InView>
 
       {/* title top left */}
       <InView delay={100}>

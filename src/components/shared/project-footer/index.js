@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     position: "relative",
     bottom: 0,
-    minHeight: 300,
+    minHeight: 250,
     display: "flex !important",
     alignItems: "center",
     justifyContent: "center",
@@ -67,13 +67,11 @@ const ProjectFooter = ({ next }) => {
     banner: {
       hidden: {
         opacity: 0,
-        scaleY: 0.5,
-        originY: 1,
+        y: "20vh",
       },
       visible: {
         opacity: 1,
-        scaleY: 1,
-        originY: 1,
+        y: 0,
         transition: {
           ...transition,
         },
@@ -193,7 +191,7 @@ const ProjectFooter = ({ next }) => {
 
           <Grid item md={9} xs={12}>
             <Typography
-              variant="h4"
+              variant="h5"
               className={classes.textTertiary}
               component={motion.h4}
               variants={animateVariants.title}
@@ -206,7 +204,7 @@ const ProjectFooter = ({ next }) => {
             <motion.span variants={animateVariants.icon}>
               <ArrowForwardIcon
                 className={classes.icon}
-                style={{ fontSize: 40 }}
+                style={{ fontSize: 35 }}
               />
             </motion.span>
           </Grid>
