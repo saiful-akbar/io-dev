@@ -143,7 +143,7 @@ const Project = (props) => {
                 <Chip
                   key={tag}
                   label={tag.toLowerCase()}
-                  sx={{ mx: 1 }}
+                  sx={{ m: 1 }}
                 />      
               ))}
             </Grid>
