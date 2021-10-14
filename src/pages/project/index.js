@@ -138,9 +138,13 @@ const Project = (props) => {
             <Grid item xs={12}>
               <Typography variant="subtitle2" color="textSecondary">- Tags -</Typography>
             </Grid>
-             <Grid item xs key={tag}>
+             <Grid item xs={12} >
               {project !== null && project.tags.map((tag) => (
-                <Chip label={tag.toLowerCase()} sx={{ mx: 1 }} />      
+                <Chip
+                  key={tag}
+                  label={tag.toLowerCase()}
+                  sx={{ mx: 1 }}
+                />      
               ))}
             </Grid>
           </Grid>
