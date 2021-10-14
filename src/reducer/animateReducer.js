@@ -3,7 +3,7 @@ import actionType from "./actionType";
 // state
 const initialState = {
   transition: {
-    duration: 0.7,
+    duration: 0.6,
     ease: [0.6, 0.4, 0.2, 0.9],
   },
 };

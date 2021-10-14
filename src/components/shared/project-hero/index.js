@@ -60,7 +60,7 @@ const useStyles = makeStyles((theme) => ({
  * @param {Object} project
  * @returns
  */
-const ProjectHero = ({ bannerColor, heroImage, name, category }) => {
+const ProjectHero = ({ project }) => {
   const classes = useStyles();
   const { ref, inView } = useInView();
 
@@ -101,8 +101,9 @@ const ProjectHero = ({ bannerColor, heroImage, name, category }) => {
     banner: {
       hidden: {
         borderRaius: 10,
-        opacity: domRect ? 1 : 0,
-        y: domRect ? domRect.banner.top : "25vh",
+        // opacity: domRect ? 1 : 0,
+        opacity: 1,
+        y: domRect ? domRect.banner.top : "20vh",
         width: domRect ? domRect.banner.width : "100%",
         height: domRect ? domRect.banner.height : "auto",
       },
@@ -172,11 +173,12 @@ const ProjectHero = ({ bannerColor, heroImage, name, category }) => {
     <div className={classes.hero}>
       <motion.div
         ref={ref}
-        style={{ backgroundColor: bannerColor }}
+        style={{ backgroundColor: project.bannerColor }}
         initial="hidden"
         animate="visible"
         exit="exit"
         variants={animateVariants.banner}
+        layoutId={`banner-${project.slug}`}
       >
         <Container className={classes.heroContainer}>
           <Grid container spacing={5}>
@@ -193,8 +195,8 @@ const ProjectHero = ({ bannerColor, heroImage, name, category }) => {
             >
               <motion.img
                 loading="eager"
-                src={heroImage}
-                alt={name}
+                src={project.heroImage}
+                alt={project.name}
                 className={classes.heroImage}
                 variants={animateVariants.heroImage}
                 transition={{
@@ -218,14 +220,14 @@ const ProjectHero = ({ bannerColor, heroImage, name, category }) => {
                 className={classes.title}
                 variants={animateVariants.title}
               >
-                {name}
+                {project.name}
               </motion.h1>
               <br />
               <motion.h1
                 className={classes.category}
                 variants={animateVariants.title}
               >
-                -- {category.toUpperCase()} --
+                -- {project.category.toUpperCase()} --
               </motion.h1>
             </Grid>
           </Grid>
@@ -236,10 +238,7 @@ const ProjectHero = ({ bannerColor, heroImage, name, category }) => {
 };
 
 ProjectHero.propTypes = {
-  bannerColor: PropTypes.string.isRequired,
-  heroImage: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  category: PropTypes.string.isRequired,
+  project: PropTypes.object.isRequired,
 };
 
 export default ProjectHero;

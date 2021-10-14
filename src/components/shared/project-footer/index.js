@@ -4,9 +4,8 @@ import { makeStyles } from "@mui/styles";
 import { motion } from "framer-motion";
 import PropTypes from "prop-types";
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import actionType from "src/reducer/actionType";
 
 /**
  * Style
@@ -14,12 +13,17 @@ import actionType from "src/reducer/actionType";
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
+    minHeight: "40vh",
     position: "relative",
     bottom: 0,
-    minHeight: 250,
-    display: "flex !important",
+    display: "flex",
     alignItems: "center",
     justifyContent: "center",
+  },
+  rootClicked: {
+    height: "100vh",
+    position: "fixed",
+    top: 0,
   },
   banner: {
     position: "absolute",
@@ -33,13 +37,8 @@ const useStyles = makeStyles((theme) => ({
   container: {
     pointerEvents: "none",
     position: "absolute",
-    top: "50%",
-    transform: "translateY(-50%)",
   },
   textTertiary: {
-    color: theme.palette.text.tertiary,
-  },
-  icon: {
     color: theme.palette.text.tertiary,
   },
 }));
@@ -55,12 +54,16 @@ const ProjectFooter = ({ next }) => {
   const ref = React.useRef(null);
 
   // state
-  const [isClicked, setClicked] = React.useState(false);
+  const [isClicked, setIsClicked] = React.useState(false);
 
   // redux
-  const dispatch = useDispatch();
-  const { domRect } = useSelector((state) => state.workReducer);
   const { transition } = useSelector((state) => state.animateReducer);
+
+  // fungsi handle click go to next project
+  const handleClick = () => {
+    setIsClicked(true);
+    history.push(`/project/${next.slug}`);
+  };
 
   // animate variants
   const animateVariants = {
@@ -68,6 +71,7 @@ const ProjectFooter = ({ next }) => {
       hidden: {
         opacity: 0,
         y: "20vh",
+        originY: 1,
       },
       visible: {
         opacity: 1,
@@ -77,7 +81,6 @@ const ProjectFooter = ({ next }) => {
         },
       },
       exit: {
-        originY: 1,
         opacity: 0,
         scaleY: 1.2,
         transition: {
@@ -85,7 +88,9 @@ const ProjectFooter = ({ next }) => {
         },
       },
       clicked: {
-        opacity: 1,
+        originY: 1,
+        y: ref.current ? -ref.current.getBoundingClientRect().top : 0,
+        height: "100vh",
         transition: {
           ...transition,
         },
@@ -107,106 +112,56 @@ const ProjectFooter = ({ next }) => {
       },
       exit: {
         opacity: 0,
-        y: "-10vh",
-        transition: {
-          ...transition,
-        },
       },
       clicked: {
         opacity: 0,
-        transition: {
-          ...transition,
-        },
       },
     },
-    icon: {
-      hidden: {
-        opacity: 0,
-        y: "20vh",
-        skewY: 5,
-      },
-      visible: {
-        opacity: 1,
-        y: 0,
-        skewY: 0,
-        transition,
-      },
-      exit: {
-        opacity: 0,
-        y: "-10vh",
-        transition,
-      },
-      clicked: {
-        opacity: 0,
-        transition,
-      },
-    },
-  };
-
-  // fungsi handle click go to next project
-  const handleClick = () => {
-    let newDomRect = domRect;
-    newDomRect = { banner: ref.current.getBoundingClientRect() };
-
-    // ubah state domRect pada project
-    dispatch({
-      type: actionType.setWorkDomRect,
-      value: newDomRect,
-    });
-
-    setClicked(true);
-    history.push(`/project/${next.slug}`);
   };
 
   return (
     <motion.footer
+      ref={ref}
       onClick={handleClick}
       className={classes.root}
       variants={animateVariants.banner}
-      transition={transition}
       initial="hidden"
       animate="visible"
       exit={isClicked ? "clicked" : "exit"}
     >
       <motion.div
-        ref={ref}
-        className={classes.banner}
         style={{ backgroundColor: next.bannerColor, originY: 1 }}
+        className={classes.banner}
         transition={transition}
-        whileHover={{ scaleY: 1.1, originY: 1 }}
+        layoutId={`banner-${next.slug}`}
+        whileHover={{ scaleY: 1.05, originY: 1 }}
       />
 
-      <Container className={classes.container}>
+      <Container
+        className={classes.container}
+        component={motion.div}
+        transition={transition}
+        variants={animateVariants.title}
+        layout
+      >
         <Grid container spacing={2} display="flex" alignItems="center">
           <Grid item md={2} xs={12}>
-            <Typography
-              variant="subtitle1"
-              className={classes.textTertiary}
-              component={motion.h6}
-              variants={animateVariants.title}
-            >
+            <Typography variant="subtitle1" className={classes.textTertiary}>
               Next
             </Typography>
           </Grid>
 
           <Grid item md={9} xs={12}>
-            <Typography
-              variant="h5"
-              className={classes.textTertiary}
-              component={motion.h4}
-              variants={animateVariants.title}
-            >
+            <Typography variant="h5" className={classes.textTertiary}>
               {next.name}
             </Typography>
           </Grid>
 
           <Grid item md={1} xs={12}>
-            <motion.span variants={animateVariants.icon}>
-              <ArrowForwardIcon
-                className={classes.icon}
-                style={{ fontSize: 35 }}
-              />
-            </motion.span>
+            <ArrowForwardIcon
+              className={classes.textTertiary}
+              style={{ fontSize: 35 }}
+            />
           </Grid>
         </Grid>
       </Container>

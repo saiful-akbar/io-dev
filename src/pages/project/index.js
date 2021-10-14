@@ -72,12 +72,7 @@ const Project = (props) => {
         <>
           {/* hero */}
           <section id="project-hero">
-            <ProjectHero
-              bannerColor={project.bannerColor}
-              heroImage={project.heroImage}
-              name={project.name}
-              category={project.category}
-            />
+            <ProjectHero project={project} />
           </section>
           {/* end hero */}
 

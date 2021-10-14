@@ -77,14 +77,18 @@ const ProjectCard = ({
   const classes = useStyles();
   const history = useHistory();
   const bannerRef = React.useRef(null);
-  const [clicked, setClicked] = React.useState(false);
 
-  // redux
+  // redux dispatch
   const dispatch = useDispatch();
+
+  // redux state
   const { domRect } = useSelector((state) => state.workReducer);
   const { transition } = useSelector((state) => state.animateReducer);
 
-  // animate variants
+  // state
+  const [clicked, setClicked] = React.useState(false);
+
+  // animasi varian
   const animateVariants = {
     project: {
       hidden: { opacity: 0, y: "20vh" },
