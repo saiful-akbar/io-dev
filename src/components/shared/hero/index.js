@@ -54,9 +54,7 @@ const heroVariants = {
   },
   exit: {
     opacity: 0,
-    transition: {
-      ...transition,
-    },
+    transition,
   },
 };
 
@@ -76,10 +74,7 @@ const titleVariants = {
   },
   exit: {
     opacity: 0,
-    y: "-10vh",
-    transition: {
-      ...transition,
-    },
+    transition,
   },
 };
 
@@ -93,15 +88,13 @@ const dividerVariants = {
     width: "100%",
     transition: {
       duration: 1,
-      ease: "easeInOut",
+      ease: transition.ease,
     },
   },
   exit: {
     opacity: 0,
     width: 0,
-    transition: {
-      ...transition,
-    },
+    transition,
   },
 };
 

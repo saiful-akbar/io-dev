@@ -24,7 +24,6 @@ const contentVariants = {
   },
   exit: {
     opacity: 0,
-    y: "-10vh",
     transition: {
       ...transition,
     },

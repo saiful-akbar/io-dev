@@ -56,9 +56,21 @@ const useStyles = makeStyles((theme) => ({
 /**
  * Animasi varian
  */
+const projectVariants = {
+  hidden: {
+    opacity: 0,
+  },
+  visible: {
+    opacity: 1,
+  },
+  exit: {
+    opacity: 1,
+  },
+};
+
 const imageVariants = {
   hidden: {
-    y: "10vh",
+    y: "20vh",
     opacity: 0,
   },
   visible: {
@@ -67,7 +79,6 @@ const imageVariants = {
     transition,
   },
   exit: {
-    y: "-10vh",
     opacity: 0,
     transition,
   },
@@ -76,17 +87,18 @@ const imageVariants = {
 const textVariants = {
   hidden: {
     opacity: 0,
-    y: "10vh",
+    y: "20vh",
+    skewY: 10,
     transition,
   },
   visible: {
     opacity: 1,
     y: 0,
+    skewY: 0,
     transition,
   },
   exit: {
     opacity: 0,
-    y: "-10vh",
     transition,
   },
 };
@@ -113,12 +125,8 @@ const ProjectCard = ({ bannerColor, name, image, category, year, slug }) => {
   const [show, setShow] = React.useState(false);
   const [exit, setExit] = React.useState({
     opacity: 0,
-    y: "-10vh",
-    height: "100%",
-    width: "100%",
     transition: {
       ...transition,
-      staggerChildren: "0.5",
     },
   });
 
@@ -159,8 +167,6 @@ const ProjectCard = ({ bannerColor, name, image, category, year, slug }) => {
       width: window.innerWidth,
       transition: {
         ...transition,
-        staggerChildren: 0.5,
-        when: "afterChildren",
         height: {
           ...transition,
           delay: transition.duration / 3,
@@ -185,31 +191,31 @@ const ProjectCard = ({ bannerColor, name, image, category, year, slug }) => {
     <motion.div
       onClick={handleClick}
       className={classes.projectContainer}
-      ref={rootRef}
       initial="hidden"
       animate="visible"
       exit="exit"
-      variants={{
-        hidden: {
-          opacity: 0,
-          y: "20vh",
-        },
-        visible: {
-          opacity: 1,
-          y: 0,
-          transition,
-        },
-        exit: {
-          ...exit,
-        },
-      }}
+      variants={projectVariants}
     >
       <motion.div
+        ref={rootRef}
         className={classes.projectBanner}
         style={{ backgroundColor: bannerColor }}
         transition={transition}
         whileHover={{ scale: 1.03 }}
-        layout
+        variants={{
+          hidden: {
+            opacity: 0,
+            y: "20vh",
+          },
+          visible: {
+            opacity: 1,
+            y: 0,
+            transition,
+          },
+          exit: {
+            ...exit,
+          },
+        }}
       />
 
       {/* image */}

@@ -60,7 +60,7 @@ const useStyles = makeStyles((theme) => ({
 const imageVariants = {
   hidden: {
     opacity: 0,
-    y: "15vh",
+    y: "20vh",
   },
   visible: {
     opacity: 1,
@@ -69,7 +69,6 @@ const imageVariants = {
   },
   exit: {
     opacity: 0,
-    y: "-10vh",
     transition,
   },
 };
@@ -77,7 +76,7 @@ const imageVariants = {
 const titleVariants = {
   hidden: {
     opacity: 0,
-    y: "15vh",
+    y: "20vh",
   },
   visible: {
     opacity: 1,
@@ -86,7 +85,6 @@ const titleVariants = {
   },
   exit: {
     opacity: 0,
-    y: "-10vh",
     transition,
   },
 };
@@ -109,7 +107,7 @@ const ProjectHero = ({ project }) => {
 
   // state
   const [opacity] = React.useState(sharedLayout ? 1 : 0);
-  const [y] = React.useState(sharedLayout ? 0 : "25vh");
+  const [y] = React.useState(sharedLayout ? 0 : "20vh");
 
   // set warna header ketika element ada dalam viewport
   React.useEffect(() => {
@@ -161,7 +159,6 @@ const ProjectHero = ({ project }) => {
         },
         exit: {
           opacity: 0,
-          y: "-10vh",
           transition: {
             ...transition,
             staggerChildren: 0.05,

@@ -96,26 +96,20 @@ const useStyles = makeStyles((theme) => ({
 /**
  * animateVariants
  */
-const animateVariants = {
-  header: {
-    hidden: {
-      opacity: 0,
-      y: "20vh",
+const headerVariants = {
+  hidden: {
+    opacity: 0,
+    y: "20vh",
+  },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      ...transition,
     },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        ...transition,
-      },
-    },
-    exit: {
-      opacity: 0,
-      y: "-10vh",
-      transition: {
-        ...transition,
-      },
-    },
+  },
+  exit: {
+    opacity: 0,
   },
 };
 
@@ -152,7 +146,7 @@ const Header = () => {
           initial="hidden"
           animate="visible"
           exit="exit"
-          variants={animateVariants.header}
+          variants={headerVariants}
         >
           io
         </motion.h1>
@@ -160,7 +154,7 @@ const Header = () => {
           initial="hidden"
           animate="visible"
           exit="exit"
-          variants={animateVariants.header}
+          variants={headerVariants}
         >
           DEV
         </motion.h2>
@@ -177,7 +171,7 @@ const Header = () => {
                 initial="hidden"
                 animate="visible"
                 exit="exit"
-                variants={animateVariants.header}
+                variants={headerVariants}
               >
                 <NavLink
                   exact
@@ -196,7 +190,7 @@ const Header = () => {
                 initial="hidden"
                 animate="visible"
                 exit="exit"
-                variants={animateVariants.header}
+                variants={headerVariants}
               />
             </li>
           ))}

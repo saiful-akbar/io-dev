@@ -17,7 +17,6 @@ const animateVariants = {
     },
     exit: {
       opacity: 0,
-      y: "-10vh",
       transition,
     },
   },

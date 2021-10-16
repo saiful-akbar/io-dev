@@ -60,7 +60,6 @@ const titleVariants = {
   },
   exit: {
     opacity: 0,
-    y: "-10vh",
     transition,
   },
 };
@@ -81,10 +80,9 @@ const ProjectFooter = ({ next }) => {
   // state
   const [exit, setExit] = React.useState({
     y: 0,
-    height: "40vh",
     opacity: 0,
-    scaleY: 1.2,
     originY: 1,
+    transition,
   });
 
   // fungsi handle click go to next project
@@ -93,14 +91,12 @@ const ProjectFooter = ({ next }) => {
 
     // set animasi exit
     setExit({
-      y: -top,
       height: window.innerHeight,
+      y: -top,
       opacity: 1,
-      scaleY: 1,
       originY: 1,
       transition: {
         ...transition,
-        when: "afterChildren",
       },
     });
 
