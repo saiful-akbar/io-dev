@@ -1,11 +1,14 @@
-import { Chip, Container, Divider, Grid, Typography } from "@mui/material";
-import { motion } from "framer-motion";
-import React from "react";
-import { useSelector } from "react-redux";
-import MainLayout from "src/components/layouts/main-layout";
-import ProjectFooter from "src/components/shared/project-footer";
-import ProjectHero from "src/components/shared/project-hero";
-import { transition } from "src/utils/animate";
+import {
+  Chip, Container, Divider, Grid, Typography,
+} from '@mui/material';
+import { motion } from 'framer-motion';
+import React from 'react';
+import { useSelector } from 'react-redux';
+import MainLayout from 'src/components/layouts/main-layout';
+import ProjectFooter from 'src/components/shared/project-footer';
+import ProjectHero from 'src/components/shared/project-hero';
+import { transition } from 'src/utils/animate';
+import { useHistory, useParams } from 'react-router-dom';
 
 /**
  * animasi varian
@@ -13,7 +16,7 @@ import { transition } from "src/utils/animate";
 const contentVariants = {
   hidden: {
     opacity: 0,
-    y: "20vh",
+    y: '20vh',
   },
   visible: {
     opacity: 1,
@@ -35,15 +38,15 @@ const contentVariants = {
  * @param {String} slug
  * @returns
  */
-const Project = (props) => {
-  const { match, history } = props;
-  const { slug } = match.params;
+const Project = () => {
+  const history = useHistory();
+  const { slug } = useParams();
 
   // redux state
   const { projects } = useSelector((state) => state.workReducer);
-  const project = useSelector((state) =>
-    state.workReducer.projects.find((result) => result.slug === slug)
-  );
+  const project = useSelector((state) => state.workReducer.projects.find(
+    (result) => result.slug === slug,
+  ));
 
   // state
   const [nextProject, setNextProject] = React.useState(null);
@@ -51,7 +54,7 @@ const Project = (props) => {
   // cek apakan project dengan slug yang dikirim ada atau tidak
   React.useEffect(() => {
     if (project) {
-      for (let i = 0; i < projects.length; i++) {
+      for (let i = 0; i < projects.length; i += 1) {
         if (projects[i].slug === slug) {
           if (projects[i + 1] === undefined) {
             setNextProject(projects[0]);
@@ -61,7 +64,7 @@ const Project = (props) => {
         }
       }
     } else {
-      history.push("/404");
+      history.push('/404');
     }
   }, [slug, projects, project, history, setNextProject]);
 
@@ -69,9 +72,15 @@ const Project = (props) => {
     <MainLayout pageTitle={project && project.name}>
       {/* hero */}
       <section id="project-hero">
-        {project && <ProjectHero project={project} />}
+        {project && (
+        <ProjectHero
+          bannerColor={project.bannerColor}
+          heroImage={project.heroImage}
+          name={project.name}
+          category={project.category}
+        />
+        )}
       </section>
-      {/* end hero */}
 
       {/* content */}
       <motion.section
@@ -135,21 +144,25 @@ const Project = (props) => {
               </Typography>
             </Grid>
             <Grid item xs={12}>
-              {project !== null &&
-                project.tags.map((tag) => (
+              {project !== null
+                && project.tags.map((tag) => (
                   <Chip key={tag} label={tag.toLowerCase()} sx={{ m: 1 }} />
                 ))}
             </Grid>
           </Grid>
         </Container>
       </motion.section>
-      {/* end content */}
 
       {/* footer */}
       <section id="project-footer">
-        {nextProject !== null && <ProjectFooter next={nextProject} />}
+        {nextProject !== null && (
+          <ProjectFooter
+            slug={nextProject.slug}
+            name={nextProject.name}
+            bannerColor={nextProject.bannerColor}
+          />
+        )}
       </section>
-      {/* end footer */}
     </MainLayout>
   );
 };

@@ -1,39 +1,39 @@
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import { Container, Grid, Typography } from "@mui/material";
-import { makeStyles } from "@mui/styles";
-import { motion } from "framer-motion";
-import PropTypes from "prop-types";
-import React from "react";
-import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
-import actionType from "src/reducer/actionType";
-import { transition } from "src/utils/animate";
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import { Container, Grid, Typography } from '@mui/material';
+import { makeStyles } from '@mui/styles';
+import { motion } from 'framer-motion';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import actionType from 'src/reducer/actionType';
+import { transition } from 'src/utils/animate';
 
 /**
  * Style
  */
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: "100%",
-    minHeight: "40vh",
-    position: "relative",
+    width: '100%',
+    minHeight: '40vh',
+    position: 'relative',
     bottom: 0,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   banner: {
-    position: "absolute",
+    position: 'absolute',
     top: 0,
     bottom: 0,
     left: 0,
     right: 0,
-    width: "100%",
-    height: "100%",
+    width: '100%',
+    height: '100%',
   },
   container: {
-    pointerEvents: "none",
-    position: "absolute",
+    pointerEvents: 'none',
+    position: 'absolute',
   },
   textTertiary: {
     color: theme.palette.text.tertiary,
@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
 const titleVariants = {
   hidden: {
     opacity: 0,
-    y: "20vh",
+    y: '20vh',
     skewY: 5,
   },
   visible: {
@@ -69,7 +69,7 @@ const titleVariants = {
  * @param {*} param0
  * @returns
  */
-const ProjectFooter = ({ next }) => {
+const ProjectFooter = ({ slug, name, bannerColor }) => {
   const classes = useStyles();
   const history = useHistory();
   const ref = React.useRef(null);
@@ -107,7 +107,7 @@ const ProjectFooter = ({ next }) => {
     });
 
     // push
-    history.push(`/project/${next.slug}`);
+    history.push(`/project/${slug}`);
   };
 
   return (
@@ -122,7 +122,7 @@ const ProjectFooter = ({ next }) => {
       variants={{
         hidden: {
           opacity: 0,
-          y: "20vh",
+          y: '20vh',
           originY: 1,
         },
         visible: {
@@ -136,7 +136,7 @@ const ProjectFooter = ({ next }) => {
       }}
     >
       <motion.div
-        style={{ backgroundColor: next.bannerColor, originY: 1 }}
+        style={{ backgroundColor: bannerColor, originY: 1 }}
         className={classes.banner}
         transition={transition}
         whileHover={{ scaleY: 1.05, originY: 1 }}
@@ -157,7 +157,7 @@ const ProjectFooter = ({ next }) => {
 
           <Grid item md={9} xs={12}>
             <Typography variant="h5" className={classes.textTertiary}>
-              {next.name}
+              {name}
             </Typography>
           </Grid>
 
@@ -174,7 +174,9 @@ const ProjectFooter = ({ next }) => {
 };
 
 ProjectFooter.propTypes = {
-  next: PropTypes.object.isRequired,
+  slug: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  bannerColor: PropTypes.string.isRequired,
 };
 
 export default ProjectFooter;

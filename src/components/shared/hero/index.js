@@ -1,9 +1,9 @@
-import { Grid } from "@mui/material";
-import { makeStyles } from "@mui/styles";
-import { motion } from "framer-motion";
-import PropTypes from "prop-types";
-import React from "react";
-import { transition } from "src/utils/animate";
+import { Grid } from '@mui/material';
+import { makeStyles } from '@mui/styles';
+import { motion } from 'framer-motion';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { transition } from 'src/utils/animate';
 
 /**
  * Style
@@ -14,26 +14,26 @@ const useStyles = makeStyles((theme) => ({
   },
   heroTitle: {
     fontWeight: 500,
-    lineHeight: "100%",
-    fontSize: "9.5rem",
-    [theme.breakpoints.down("md")]: {
-      fontSize: "8rem",
+    lineHeight: '100%',
+    fontSize: '9.5rem',
+    [theme.breakpoints.down('md')]: {
+      fontSize: '8rem',
     },
-    [theme.breakpoints.down("sm")]: {
-      fontSize: "6rem",
+    [theme.breakpoints.down('sm')]: {
+      fontSize: '6rem',
     },
   },
   heroVersion: {
-    display: "flex",
-    alignItems: "flex-end",
+    display: 'flex',
+    alignItems: 'flex-end',
     paddingBottom: 13,
   },
   heroDivider: {
-    width: "100%",
+    width: '100%',
     borderBottom: `3px solid ${theme.palette.text.primary}`,
-    marginTop: "15vh",
-    [theme.breakpoints.down("md")]: {
-      marginTop: "10vh",
+    marginTop: '15vh',
+    [theme.breakpoints.down('md')]: {
+      marginTop: '10vh',
     },
   },
 }));
@@ -61,7 +61,7 @@ const heroVariants = {
 const titleVariants = {
   hidden: {
     opacity: 0,
-    y: "30vh",
+    y: '30vh',
     skewY: 10,
   },
   visible: {
@@ -85,7 +85,7 @@ const dividerVariants = {
   },
   visible: {
     opacity: 1,
-    width: "100%",
+    width: '100%',
     transition: {
       duration: 1,
       ease: transition.ease,
@@ -124,7 +124,8 @@ const Hero = ({ title }) => {
 
         <Grid item lg={2} xs={12} className={classes.heroVersion}>
           <motion.h5 variants={titleVariants}>
-            v{process.env.REACT_APP_VERSION}
+            v
+            {process.env.REACT_APP_VERSION}
           </motion.h5>
         </Grid>
 

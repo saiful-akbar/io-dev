@@ -1,54 +1,54 @@
-import { Grid, Container } from "@mui/material";
-import { makeStyles } from "@mui/styles";
-import { motion } from "framer-motion";
-import PropTypes from "prop-types";
-import React from "react";
-import { useInView } from "react-intersection-observer";
-import { useDispatch, useSelector } from "react-redux";
-import actionType from "src/reducer/actionType";
-import { transition } from "src/utils/animate";
+import { Grid, Container } from '@mui/material';
+import { makeStyles } from '@mui/styles';
+import { motion } from 'framer-motion';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { useInView } from 'react-intersection-observer';
+import { useDispatch, useSelector } from 'react-redux';
+import actionType from 'src/reducer/actionType';
+import { transition } from 'src/utils/animate';
 
 /**
  * Style
  */
 const useStyles = makeStyles((theme) => ({
   hero: {
-    width: "100%",
-    minHeight: "100vh",
-    display: "flex",
-    justifyContent: "center",
+    width: '100%',
+    minHeight: '100vh',
+    display: 'flex',
+    justifyContent: 'center',
     padding: theme.spacing(15, 0, 10, 0),
   },
   heroImage: {
-    objectFit: "contain",
-    width: "100%",
-    maxHeight: "70vh",
+    objectFit: 'contain',
+    width: '100%',
+    maxHeight: '70vh',
   },
   projectName: {
-    textAlign: "center",
+    textAlign: 'center',
     marginBottom: theme.spacing(3),
     color: theme.palette.text.tertiary,
-    lineHeight: "100%",
+    lineHeight: '100%',
     fontWeight: 500,
-    fontSize: "5em",
-    [theme.breakpoints.down("lg")]: {
-      fontSize: "4em",
+    fontSize: '5em',
+    [theme.breakpoints.down('lg')]: {
+      fontSize: '4em',
     },
-    [theme.breakpoints.down("md")]: {
-      fontSize: "3em",
+    [theme.breakpoints.down('md')]: {
+      fontSize: '3em',
     },
   },
   projectCategory: {
-    textAlign: "center",
+    textAlign: 'center',
     color: theme.palette.text.tertiary,
-    lineHeight: "100%",
+    lineHeight: '100%',
     fontWeight: 500,
-    fontSize: "3em",
-    [theme.breakpoints.down("lg")]: {
-      fontSize: "2em",
+    fontSize: '3em',
+    [theme.breakpoints.down('lg')]: {
+      fontSize: '2em',
     },
-    [theme.breakpoints.down("md")]: {
-      fontSize: "1.3em",
+    [theme.breakpoints.down('md')]: {
+      fontSize: '1.3em',
     },
   },
 }));
@@ -60,7 +60,7 @@ const useStyles = makeStyles((theme) => ({
 const imageVariants = {
   hidden: {
     opacity: 0,
-    y: "20vh",
+    y: '20vh',
   },
   visible: {
     opacity: 1,
@@ -76,7 +76,7 @@ const imageVariants = {
 const titleVariants = {
   hidden: {
     opacity: 0,
-    y: "20vh",
+    y: '20vh',
   },
   visible: {
     opacity: 1,
@@ -94,7 +94,9 @@ const titleVariants = {
  * @param {Object} project
  * @returns
  */
-const ProjectHero = ({ project }) => {
+const ProjectHero = ({
+  bannerColor, heroImage, name, category,
+}) => {
   const classes = useStyles();
   const { ref, inView } = useInView();
 
@@ -107,16 +109,16 @@ const ProjectHero = ({ project }) => {
 
   // state
   const [opacity] = React.useState(sharedLayout ? 1 : 0);
-  const [y] = React.useState(sharedLayout ? 0 : "20vh");
+  const [y] = React.useState(sharedLayout ? 0 : '20vh');
 
   // set warna header ketika element ada dalam viewport
   React.useEffect(() => {
     const newHeader = header;
 
     if (inView) {
-      newHeader.color = "light";
+      newHeader.color = 'light';
     } else {
-      newHeader.color = "dark";
+      newHeader.color = 'dark';
     }
 
     dispatch({
@@ -125,7 +127,7 @@ const ProjectHero = ({ project }) => {
     });
 
     return () => {
-      newHeader.color = "dark";
+      newHeader.color = 'dark';
       dispatch({
         type: actionType.setGlobalHeader,
         value: newHeader,
@@ -139,7 +141,7 @@ const ProjectHero = ({ project }) => {
     <motion.div
       ref={ref}
       className={classes.hero}
-      style={{ backgroundColor: project.bannerColor }}
+      style={{ backgroundColor: bannerColor }}
       initial="hidden"
       animate="visible"
       exit="exit"
@@ -153,7 +155,7 @@ const ProjectHero = ({ project }) => {
           y: 0,
           transition: {
             ...transition,
-            when: "beforeChildren",
+            when: 'beforeChildren',
             staggerChildren: 0.05,
           },
         },
@@ -174,15 +176,15 @@ const ProjectHero = ({ project }) => {
             md={8}
             xs={12}
             sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
             }}
           >
             <motion.img
               loading="eager"
-              src={project.heroImage}
-              alt={project.name}
+              src={heroImage}
+              alt={name}
               className={classes.heroImage}
               variants={imageVariants}
             />
@@ -192,14 +194,14 @@ const ProjectHero = ({ project }) => {
             md={4}
             xs={12}
             sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              flexDirection: "column",
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              flexDirection: 'column',
             }}
           >
             <motion.h1 className={classes.projectName} variants={titleVariants}>
-              {project.name}
+              {name}
             </motion.h1>
 
             <br />
@@ -208,7 +210,11 @@ const ProjectHero = ({ project }) => {
               className={classes.projectCategory}
               variants={titleVariants}
             >
-              -- {project.category.toUpperCase()} --
+              --
+              {' '}
+              {category.toUpperCase()}
+              {' '}
+              --
             </motion.h1>
           </Grid>
         </Grid>
@@ -218,7 +224,10 @@ const ProjectHero = ({ project }) => {
 };
 
 ProjectHero.propTypes = {
-  project: PropTypes.object.isRequired,
+  bannerColor: PropTypes.string.isRequired,
+  heroImage: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  category: PropTypes.string.isRequired,
 };
 
 export default ProjectHero;

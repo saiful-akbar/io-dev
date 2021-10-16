@@ -1,13 +1,13 @@
-import "./styles/globals.css";
+import './styles/globals.css';
 
-import React from "react";
-import ReactDOM from "react-dom";
-import App from "./pages/_app";
-import reportWebVitals from "./reportWebVitals";
-import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
-import { BrowserRouter } from "react-router-dom";
-import { Provider } from "react-redux";
-import store from "./store";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import App from './pages/_app';
+import reportWebVitals from './reportWebVitals';
+import * as serviceWorkerRegistration from './serviceWorkerRegistration';
+import store from './store';
 
 function RootApp() {
   return (
@@ -23,7 +23,7 @@ ReactDOM.render(
   <React.StrictMode>
     <RootApp />
   </React.StrictMode>,
-  document.getElementById("root")
+  document.getElementById('root'),
 );
 
 // If you want your app to work offline and load faster, you can change

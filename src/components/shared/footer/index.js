@@ -1,13 +1,13 @@
-import React from "react";
-import InstagramIcon from "@mui/icons-material/Instagram";
-import { makeStyles } from "@mui/styles";
+import React from 'react';
+import InstagramIcon from '@mui/icons-material/Instagram';
+import { makeStyles } from '@mui/styles';
 
 const useStyles = makeStyles((theme) => ({
   footer: {
-    width: "100%",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
     paddingTop: theme.spacing(5),
     paddingBottom: theme.spacing(2),
   },

@@ -1,54 +1,54 @@
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import { Typography } from "@mui/material";
-import { makeStyles } from "@mui/styles";
-import { motion } from "framer-motion";
-import PropTypes from "prop-types";
-import React from "react";
-import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
-import actionType from "src/reducer/actionType";
-import { transition } from "src/utils/animate";
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import { Typography } from '@mui/material';
+import { makeStyles } from '@mui/styles';
+import { motion } from 'framer-motion';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import actionType from 'src/reducer/actionType';
+import { transition } from 'src/utils/animate';
 
 /**
  * Style
  */
 const useStyles = makeStyles((theme) => ({
   projectContainer: {
-    position: "relative",
+    position: 'relative',
     minHeight: 500,
-    width: "100%",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   projectBanner: {
-    position: "absolute",
+    position: 'absolute',
     top: 0,
     left: 0,
-    width: "100%",
-    height: "100%",
+    width: '100%',
+    height: '100%',
     borderRadius: 10,
   },
   projectHeroImage: {
-    position: "absolute",
-    pointerEvents: "none",
-    objectFit: "contain",
-    maxHeight: "65%",
-    maxWidth: "80%",
+    position: 'absolute',
+    pointerEvents: 'none',
+    objectFit: 'contain',
+    maxHeight: '65%',
+    maxWidth: '80%',
   },
   projectTitleTop: {
-    pointerEvents: "none",
-    position: "absolute",
+    pointerEvents: 'none',
+    position: 'absolute',
     color: theme.palette.text.tertiary,
-    lineHeight: "100%",
+    lineHeight: '100%',
   },
   projectTitleBottom: {
-    lineHeight: "100%",
-    pointerEvents: "none",
-    position: "absolute",
+    lineHeight: '100%',
+    pointerEvents: 'none',
+    position: 'absolute',
     color: theme.palette.text.tertiary,
-    [theme.breakpoints.down("md")]: {
-      display: "none",
+    [theme.breakpoints.down('md')]: {
+      display: 'none',
     },
   },
 }));
@@ -62,15 +62,17 @@ const projectVariants = {
   },
   visible: {
     opacity: 1,
+    transition,
   },
   exit: {
     opacity: 1,
+    transition,
   },
 };
 
 const imageVariants = {
   hidden: {
-    y: "20vh",
+    y: '10vh',
     opacity: 0,
   },
   visible: {
@@ -87,14 +89,12 @@ const imageVariants = {
 const textVariants = {
   hidden: {
     opacity: 0,
-    y: "20vh",
-    skewY: 10,
+    y: '10vh',
     transition,
   },
   visible: {
     opacity: 1,
     y: 0,
-    skewY: 0,
     transition,
   },
   exit: {
@@ -113,7 +113,9 @@ const textVariants = {
  * @param {String} slug
  * @returns
  */
-const ProjectCard = ({ bannerColor, name, image, category, year, slug }) => {
+const ProjectCard = ({
+  bannerColor, name, image, category, year, slug,
+}) => {
   const classes = useStyles();
   const history = useHistory();
   const rootRef = React.useRef(null);
@@ -125,34 +127,11 @@ const ProjectCard = ({ bannerColor, name, image, category, year, slug }) => {
   const [show, setShow] = React.useState(false);
   const [exit, setExit] = React.useState({
     opacity: 0,
+    borderRadius: 10,
     transition: {
       ...transition,
     },
   });
-
-  // fungsi untuk menampilkan text ketika seluruh elemen ada dalam viewport
-  const handleShowText = React.useCallback(
-    (e) => {
-      const { top, height } = rootRef.current.getBoundingClientRect();
-      const diffTop = window.innerHeight - height;
-
-      if (top < diffTop && top > 0) {
-        setShow(true);
-      } else {
-        setShow(false);
-      }
-    },
-    [rootRef, setShow]
-  );
-
-  // handle viewport scroll
-  React.useEffect(() => {
-    window.addEventListener("scroll", handleShowText);
-
-    return () => {
-      window.removeEventListener("scroll", handleShowText);
-    };
-  }, [handleShowText]);
 
   // handle click card
   const handleClick = () => {
@@ -165,6 +144,7 @@ const ProjectCard = ({ bannerColor, name, image, category, year, slug }) => {
       x: -left,
       height: window.innerHeight,
       width: window.innerWidth,
+      borderRadius: 0,
       transition: {
         ...transition,
         height: {
@@ -187,6 +167,30 @@ const ProjectCard = ({ bannerColor, name, image, category, year, slug }) => {
     history.push(`/project/${slug}`);
   };
 
+  // fungsi untuk menampilkan text ketika seluruh elemen ada dalam viewport
+  const handleShowText = React.useCallback(
+    () => {
+      const { top, height } = rootRef.current.getBoundingClientRect();
+      const diffTop = window.innerHeight - height;
+
+      if (top < diffTop) {
+        setShow(true);
+      } else {
+        setShow(false);
+      }
+    },
+    [rootRef, setShow],
+  );
+
+  // handle viewport scroll
+  React.useEffect(() => {
+    window.addEventListener('scroll', handleShowText);
+
+    return () => {
+      window.removeEventListener('scroll', handleShowText);
+    };
+  }, [handleShowText]);
+
   return (
     <motion.div
       onClick={handleClick}
@@ -205,11 +209,13 @@ const ProjectCard = ({ bannerColor, name, image, category, year, slug }) => {
         variants={{
           hidden: {
             opacity: 0,
-            y: "20vh",
+            y: '10vh',
+            borderRadius: 10,
           },
           visible: {
             opacity: 1,
             y: 0,
+            borderRadius: 10,
             transition,
           },
           exit: {
@@ -236,7 +242,7 @@ const ProjectCard = ({ bannerColor, name, image, category, year, slug }) => {
         style={{ top: 45, left: 40 }}
         variants={textVariants}
         initial="hidden"
-        animate={show ? "visible" : "hidden"}
+        animate={show ? 'visible' : 'hidden'}
         exit="exit"
       >
         {name}
@@ -248,7 +254,7 @@ const ProjectCard = ({ bannerColor, name, image, category, year, slug }) => {
         style={{ top: 40, right: 40 }}
         variants={textVariants}
         initial="hidden"
-        animate={show ? "visible" : "hidden"}
+        animate={show ? 'visible' : 'hidden'}
         exit="exit"
       >
         <ChevronRightIcon style={{ fontSize: 35 }} />
@@ -262,7 +268,7 @@ const ProjectCard = ({ bannerColor, name, image, category, year, slug }) => {
         style={{ bottom: 45, left: 40 }}
         variants={textVariants}
         initial="hidden"
-        animate={show ? "visible" : "hidden"}
+        animate={show ? 'visible' : 'hidden'}
         exit="exit"
       >
         {category.toUpperCase()}
@@ -276,7 +282,7 @@ const ProjectCard = ({ bannerColor, name, image, category, year, slug }) => {
         style={{ bottom: 45, right: 40 }}
         variants={textVariants}
         initial="hidden"
-        animate={show ? "visible" : "hidden"}
+        animate={show ? 'visible' : 'hidden'}
         exit="exit"
       >
         {year}

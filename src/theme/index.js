@@ -1,13 +1,13 @@
-import { createTheme } from "@mui/material/styles";
-import { grey } from "@mui/material/colors";
-import typography from "./typography";
+import { createTheme } from '@mui/material/styles';
+import { grey } from '@mui/material/colors';
+import typography from './typography';
 
 const theme = createTheme({
   palette: {
-    mode: "light",
+    mode: 'light',
     background: {
       default: grey[100],
-      paper: "#fff",
+      paper: '#fff',
       dark: grey[800],
     },
     text: {

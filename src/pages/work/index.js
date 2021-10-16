@@ -1,16 +1,17 @@
-import TabContext from "@mui/lab/TabContext";
-import TabList from "@mui/lab/TabList";
-import { Container, Grid } from "@mui/material";
-import Tab from "@mui/material/Tab";
-import { motion } from "framer-motion";
-import React from "react";
-import { useSelector } from "react-redux";
-import MainLayout from "src/components/layouts/main-layout";
-import Footer from "src/components/shared/footer";
-import Hero from "src/components/shared/hero";
-import ProjectCard from "src/components/shared/project-card";
-import Section from "src/components/shared/section";
-import { transition } from "src/utils/animate";
+import TabContext from '@mui/lab/TabContext';
+import TabList from '@mui/lab/TabList';
+import { Container, Grid } from '@mui/material';
+import Tab from '@mui/material/Tab';
+import { motion } from 'framer-motion';
+import React from 'react';
+import { useSelector } from 'react-redux';
+import MainLayout from 'src/components/layouts/main-layout';
+import Footer from 'src/components/shared/footer';
+import Hero from 'src/components/shared/hero';
+import ProjectCard from 'src/components/shared/project-card';
+import Section from 'src/components/shared/section';
+import { transition } from 'src/utils/animate';
+import { useHistory, useLocation } from 'react-router-dom';
 
 /**
  * animate variants
@@ -19,7 +20,7 @@ const animateVariants = {
   tab: {
     hidden: {
       opacity: 0,
-      y: "20vh",
+      y: '20vh',
     },
     visible: {
       opacity: 1,
@@ -37,26 +38,29 @@ const animateVariants = {
  * Komponen utama
  * @returns
  */
-const Work = (props) => {
-  const { history, location } = props;
+const Work = () => {
+  const history = useHistory();
+  const location = useLocation();
+
+  // url search params
   const qs = new URLSearchParams(location.search);
-  const qsCategory = qs.get("category") === null ? "web" : qs.get("category");
+  const qsCategory = qs.get('category') === null ? 'web' : qs.get('category');
 
   // redux
   const { categories, projects } = useSelector((state) => state.workReducer);
   const resultCategory = categories.find(
-    (result) => result.toLowerCase() === qsCategory.toLowerCase()
+    (result) => result.toLowerCase() === qsCategory.toLowerCase(),
   );
 
   // state
   const [value, setValue] = React.useState(
-    resultCategory ? resultCategory : "web"
+    resultCategory || 'web',
   );
 
   // handle change tab
-  const handleChangeTab = (e, value) => {
-    setValue(value.toLowerCase());
-    history.push(`/?category=${value.toLowerCase()}`);
+  const handleChangeTab = (e, tabValue) => {
+    setValue(tabValue.toLowerCase());
+    history.push(`/?category=${tabValue.toLowerCase()}`);
   };
 
   return (
@@ -85,19 +89,18 @@ const Work = (props) => {
             {/* project item */}
             <Grid container>
               {projects.map(
-                (project) =>
-                  project.category === value && (
-                    <Grid item xs={12} my={7} key={project.slug}>
-                      <ProjectCard
-                        name={project.name}
-                        year={project.year}
-                        category={project.category}
-                        bannerColor={project.bannerColor}
-                        slug={project.slug}
-                        image={project.heroImage}
-                      />
-                    </Grid>
-                  )
+                (project) => project.category === value && (
+                <Grid item xs={12} my={7} key={project.slug}>
+                  <ProjectCard
+                    name={project.name}
+                    year={project.year}
+                    category={project.category}
+                    bannerColor={project.bannerColor}
+                    slug={project.slug}
+                    image={project.heroImage}
+                  />
+                </Grid>
+                ),
               )}
             </Grid>
           </TabContext>
