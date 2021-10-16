@@ -4,8 +4,10 @@ import { makeStyles } from "@mui/styles";
 import { motion } from "framer-motion";
 import PropTypes from "prop-types";
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
+import actionType from "src/reducer/actionType";
+import { transition } from "src/utils/animate";
 
 /**
  * Style
@@ -19,11 +21,6 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-  },
-  rootClicked: {
-    height: "100vh",
-    position: "fixed",
-    top: 0,
   },
   banner: {
     position: "absolute",
@@ -44,6 +41,31 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 /**
+ * Animasi varian
+ * @param {*} param0
+ * @returns
+ */
+
+const titleVariants = {
+  hidden: {
+    opacity: 0,
+    y: "20vh",
+    skewY: 5,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    skewY: 0,
+    transition,
+  },
+  exit: {
+    opacity: 0,
+    y: "-10vh",
+    transition,
+  },
+};
+
+/**
  * komponen utama
  * @param {*} param0
  * @returns
@@ -53,70 +75,43 @@ const ProjectFooter = ({ next }) => {
   const history = useHistory();
   const ref = React.useRef(null);
 
-  // state
-  const [isClicked, setIsClicked] = React.useState(false);
-
   // redux
-  const { transition } = useSelector((state) => state.animateReducer);
+  const dispatch = useDispatch();
+
+  // state
+  const [exit, setExit] = React.useState({
+    y: 0,
+    height: "40vh",
+    opacity: 0,
+    scaleY: 1.2,
+    originY: 1,
+  });
 
   // fungsi handle click go to next project
   const handleClick = () => {
-    setIsClicked(true);
-    history.push(`/project/${next.slug}`);
-  };
+    const { top } = ref.current.getBoundingClientRect();
 
-  // animate variants
-  const animateVariants = {
-    banner: {
-      hidden: {
-        opacity: 0,
-        y: "20vh",
-        originY: 1,
+    // set animasi exit
+    setExit({
+      y: -top,
+      height: window.innerHeight,
+      opacity: 1,
+      scaleY: 1,
+      originY: 1,
+      transition: {
+        ...transition,
+        when: "afterChildren",
       },
-      visible: {
-        opacity: 1,
-        y: 0,
-        transition: {
-          ...transition,
-        },
-      },
-      exit: {
-        opacity: 0,
-        scaleY: 1.2,
-        transition: {
-          ...transition,
-        },
-      },
-      clicked: {
-        originY: 1,
-        y: ref.current ? -ref.current.getBoundingClientRect().top : 0,
-        height: "100vh",
-        transition: {
-          ...transition,
-        },
-      },
-    },
-    title: {
-      hidden: {
-        opacity: 0,
-        y: "20vh",
-        skewY: 5,
-      },
-      visible: {
-        opacity: 1,
-        y: 0,
-        skewY: 0,
-        transition: {
-          ...transition,
-        },
-      },
-      exit: {
-        opacity: 0,
-      },
-      clicked: {
-        opacity: 0,
-      },
-    },
+    });
+
+    // ubah value sharedlayout pada workReducer
+    dispatch({
+      type: actionType.setWorkSharedLayout,
+      value: true,
+    });
+
+    // push
+    history.push(`/project/${next.slug}`);
   };
 
   return (
@@ -124,25 +119,38 @@ const ProjectFooter = ({ next }) => {
       ref={ref}
       onClick={handleClick}
       className={classes.root}
-      variants={animateVariants.banner}
+      transition={transition}
       initial="hidden"
       animate="visible"
-      exit={isClicked ? "clicked" : "exit"}
+      exit="exit"
+      variants={{
+        hidden: {
+          opacity: 0,
+          y: "20vh",
+          originY: 1,
+        },
+        visible: {
+          opacity: 1,
+          y: 0,
+          transition,
+        },
+        exit: {
+          ...exit,
+        },
+      }}
     >
       <motion.div
         style={{ backgroundColor: next.bannerColor, originY: 1 }}
         className={classes.banner}
         transition={transition}
-        layoutId={`banner-${next.slug}`}
         whileHover={{ scaleY: 1.05, originY: 1 }}
+        layout
       />
 
       <Container
         className={classes.container}
         component={motion.div}
-        transition={transition}
-        variants={animateVariants.title}
-        layout
+        variants={titleVariants}
       >
         <Grid container spacing={2} display="flex" alignItems="center">
           <Grid item md={2} xs={12}>

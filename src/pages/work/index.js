@@ -10,6 +10,29 @@ import Footer from "src/components/shared/footer";
 import Hero from "src/components/shared/hero";
 import ProjectCard from "src/components/shared/project-card";
 import Section from "src/components/shared/section";
+import { transition } from "src/utils/animate";
+
+/**
+ * animate variants
+ */
+const animateVariants = {
+  tab: {
+    hidden: {
+      opacity: 0,
+      y: "20vh",
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition,
+    },
+    exit: {
+      opacity: 0,
+      y: "-10vh",
+      transition,
+    },
+  },
+};
 
 /**
  * Komponen utama
@@ -21,7 +44,6 @@ const Work = (props) => {
   const qsCategory = qs.get("category") === null ? "web" : qs.get("category");
 
   // redux
-  const { transition } = useSelector((state) => state.animateReducer);
   const { categories, projects } = useSelector((state) => state.workReducer);
   const resultCategory = categories.find(
     (result) => result.toLowerCase() === qsCategory.toLowerCase()
@@ -31,26 +53,6 @@ const Work = (props) => {
   const [value, setValue] = React.useState(
     resultCategory ? resultCategory : "web"
   );
-
-  // animate variants
-  const animateVariants = {
-    tab: {
-      hidden: {
-        opacity: 0,
-        y: "20vh",
-      },
-      visible: {
-        opacity: 1,
-        y: 0,
-        transition,
-      },
-      exit: {
-        opacity: 0,
-        y: "-10vh",
-        transition,
-      },
-    },
-  };
 
   // handle change tab
   const handleChangeTab = (e, value) => {
@@ -82,11 +84,11 @@ const Work = (props) => {
             </motion.div>
 
             {/* project item */}
-            <Grid container spacing={2}>
-              {projects.map((project) => {
-                if (project.category === value) {
-                  return (
-                    <Grid item xs={12} key={project.slug}>
+            <Grid container>
+              {projects.map(
+                (project) =>
+                  project.category === value && (
+                    <Grid item xs={12} my={7} key={project.slug}>
                       <ProjectCard
                         name={project.name}
                         year={project.year}
@@ -96,19 +98,16 @@ const Work = (props) => {
                         image={project.heroImage}
                       />
                     </Grid>
-                  );
-                }
-
-                return null;
-              })}
+                  )
+              )}
             </Grid>
           </TabContext>
         </section>
-
-        <Section id="footer">
-          <Footer />
-        </Section>
       </Container>
+
+      <Section id="footer">
+        <Footer />
+      </Section>
     </MainLayout>
   );
 };

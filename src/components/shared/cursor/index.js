@@ -1,5 +1,5 @@
 import { makeStyles } from "@mui/styles";
-import { motion, motionValue } from "framer-motion";
+import { motion, useMotionValue } from "framer-motion";
 import React from "react";
 
 /**
@@ -43,11 +43,12 @@ const Cursor = () => {
   const classes = useStyles();
 
   // motion value
-  const x = motionValue(-13);
-  const y = motionValue(-13);
-  const scale = motionValue(1);
-  const color = motionValue("transparent");
+  const x = useMotionValue(-13);
+  const y = useMotionValue(-13);
+  const scale = useMotionValue(1);
+  const color = useMotionValue("transparent");
 
+  // fungsi handle mouse move
   const handleMouseMove = React.useCallback(
     (e) => {
       x.set(e.clientX - 13);
@@ -56,6 +57,7 @@ const Cursor = () => {
     [x, y]
   );
 
+  // fungsi ketika mouse ditekan
   const handleMouseUpDown = React.useCallback(
     (scaleValue, colorValue) => {
       scale.set(scaleValue);
@@ -64,6 +66,7 @@ const Cursor = () => {
     [scale, color]
   );
 
+  // jalankan fungsi handleMouseMove() & handleMouseUpDown() setelah komponen dipasang
   React.useEffect(() => {
     window.addEventListener("mousemove", handleMouseMove);
     window.addEventListener("mousedown", () => handleMouseUpDown(0.8, "#fff"));
@@ -82,6 +85,7 @@ const Cursor = () => {
     };
   }, [handleMouseMove, handleMouseUpDown]);
 
+  // render komponen
   return (
     <motion.div className={classes.cursorOuter} style={{ x, y }}>
       <motion.div

@@ -1,11 +1,12 @@
 import { useMediaQuery } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { makeStyles } from "@mui/styles";
+import clsx from "clsx";
 import { motion } from "framer-motion";
 import React from "react";
-import { Link, NavLink } from "react-router-dom";
-import clsx from "clsx";
 import { useSelector } from "react-redux";
+import { Link, NavLink } from "react-router-dom";
+import { transition } from "src/utils/animate";
 
 /**
  * Style
@@ -24,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("lg")]: {
       position: "absolute",
       top: 10,
-      left: 15,
+      left: 25,
     },
     "& h1": {
       fontSize: "3em",
@@ -52,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("lg")]: {
       position: "absolute",
       top: 30,
-      right: 15,
+      right: 25,
       "& ul": {
         display: "flex",
         flexDirection: "row",
@@ -92,7 +93,35 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-// list menu
+/**
+ * animateVariants
+ */
+const animateVariants = {
+  header: {
+    hidden: {
+      opacity: 0,
+      y: "20vh",
+    },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        ...transition,
+      },
+    },
+    exit: {
+      opacity: 0,
+      y: "-10vh",
+      transition: {
+        ...transition,
+      },
+    },
+  },
+};
+
+/**
+ * list menu
+ */
 const links = [
   { name: "Work", href: "/" },
   { name: "About", href: "/about" },
@@ -110,31 +139,6 @@ const Header = () => {
 
   // redux
   const { header } = useSelector((state) => state.globalReducer);
-  const { transition } = useSelector((state) => state.animateReducer);
-
-  // animateVariants
-  const animateVariants = {
-    header: {
-      hidden: {
-        opacity: 0,
-        y: "20vh",
-      },
-      visible: {
-        y: 0,
-        opacity: 1,
-        transition: {
-          ...transition,
-        },
-      },
-      exit: {
-        opacity: 0,
-        y: "-10vh",
-        transition: {
-          ...transition,
-        },
-      },
-    },
-  };
 
   return (
     <>
@@ -169,7 +173,7 @@ const Header = () => {
               <motion.div
                 style={{ originX: matches ? 0.5 : 1 }}
                 whileHover={{ scale: 1.15, originX: matches ? 0.5 : 1 }}
-                transition={{ ...transition }}
+                transition={{ duration: 0.5, ease: transition.ease }}
                 initial="hidden"
                 animate="visible"
                 exit="exit"

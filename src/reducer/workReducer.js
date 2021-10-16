@@ -12,7 +12,7 @@ import image10 from "src/assets/images/project/10.jpg";
 
 // initial state
 const initialState = {
-  domRect: null,
+  sharedLayout: false,
   categories: ["web", "ui/ux"],
   projects: [
     {
@@ -143,10 +143,10 @@ const projectReducer = (state = initialState, action) => {
         categories: action.value,
       };
 
-    case actionType.setWorkDomRect:
+    case actionType.setWorkSharedLayout:
       return {
         ...state,
-        domRect: action.value,
+        sharedLayout: action.value,
       };
 
     default:

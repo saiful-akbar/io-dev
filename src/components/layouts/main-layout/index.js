@@ -11,15 +11,9 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     minHeight: "100vh",
     backgroundColor: theme.palette.background.default,
-  },
-  bannerLoader: {
-    position: "fixed",
-    top: 0,
-    left: 0,
-    width: "100%",
-    height: "200vh",
-    backgroundColor: theme.palette.background.dark,
-    zIndex: 9998,
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
   },
 }));
 

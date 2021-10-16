@@ -6,27 +6,25 @@ import React from "react";
 import { useInView } from "react-intersection-observer";
 import { useDispatch, useSelector } from "react-redux";
 import actionType from "src/reducer/actionType";
+import { transition } from "src/utils/animate";
 
 /**
  * Style
  */
 const useStyles = makeStyles((theme) => ({
   hero: {
+    width: "100%",
+    minHeight: "100vh",
     display: "flex",
     justifyContent: "center",
-  },
-  heroContainer: {
-    minHeight: "100vh",
     padding: theme.spacing(15, 0, 10, 0),
-    display: "flex !important",
-    alignItems: "center",
   },
   heroImage: {
     objectFit: "contain",
     width: "100%",
-    maxHeight: 500,
+    maxHeight: "70vh",
   },
-  title: {
+  projectName: {
     textAlign: "center",
     marginBottom: theme.spacing(3),
     color: theme.palette.text.tertiary,
@@ -40,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
       fontSize: "3em",
     },
   },
-  category: {
+  projectCategory: {
     textAlign: "center",
     color: theme.palette.text.tertiary,
     lineHeight: "100%",
@@ -56,6 +54,44 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 /**
+ * Animasi varian
+ */
+
+const imageVariants = {
+  hidden: {
+    opacity: 0,
+    y: "15vh",
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition,
+  },
+  exit: {
+    opacity: 0,
+    y: "-10vh",
+    transition,
+  },
+};
+
+const titleVariants = {
+  hidden: {
+    opacity: 0,
+    y: "15vh",
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition,
+  },
+  exit: {
+    opacity: 0,
+    y: "-10vh",
+    transition,
+  },
+};
+
+/**
  * Komponen utama
  * @param {Object} project
  * @returns
@@ -64,11 +100,16 @@ const ProjectHero = ({ project }) => {
   const classes = useStyles();
   const { ref, inView } = useInView();
 
-  // redux
+  // redux dispatch
   const dispatch = useDispatch();
+
+  // redux state
   const { header } = useSelector((state) => state.globalReducer);
-  const { domRect } = useSelector((state) => state.workReducer);
-  const { transition } = useSelector((state) => state.animateReducer);
+  const { sharedLayout } = useSelector((state) => state.workReducer);
+
+  // state
+  const [opacity] = React.useState(sharedLayout ? 1 : 0);
+  const [y] = React.useState(sharedLayout ? 0 : "25vh");
 
   // set warna header ketika element ada dalam viewport
   React.useEffect(() => {
@@ -96,144 +137,86 @@ const ProjectHero = ({ project }) => {
     // eslint-disable-next-line
   }, [dispatch, inView]);
 
-  // animation variants
-  const animateVariants = {
-    banner: {
-      hidden: {
-        borderRaius: 10,
-        // opacity: domRect ? 1 : 0,
-        opacity: 1,
-        y: domRect ? domRect.banner.top : "20vh",
-        width: domRect ? domRect.banner.width : "100%",
-        height: domRect ? domRect.banner.height : "auto",
-      },
-      visible: {
-        borderRaius: 0,
-        opacity: 1,
-        y: 0,
-        width: "100%",
-        height: "auto",
-        transition: {
-          ...transition,
-          staggerChildren: 0.04,
-          when: "beforeChildren",
-        },
-      },
-      exit: {
-        opacity: 0,
-        y: "-0vh",
-        transition: {
-          ...transition,
-        },
-      },
-    },
-    heroImage: {
-      hidden: {
-        opacity: 0,
-        y: "20vh",
-      },
-      visible: {
-        opacity: 1,
-        y: 0,
-        transition: {
-          ...transition,
-        },
-      },
-      exit: {
-        y: "-10vh",
-        opacity: 0,
-        transition: {
-          ...transition,
-        },
-      },
-    },
-    title: {
-      hidden: {
-        opacity: 0,
-        y: "25vh",
-      },
-      visible: {
-        opacity: 1,
-        y: 0,
-        transition: {
-          ...transition,
-        },
-      },
-      exit: {
-        opacity: 0,
-        y: "-10vh",
-        transition: {
-          ...transition,
-        },
-      },
-    },
-  };
-
   return (
-    <div className={classes.hero}>
-      <motion.div
-        ref={ref}
-        style={{ backgroundColor: project.bannerColor }}
-        initial="hidden"
-        animate="visible"
-        exit="exit"
-        variants={animateVariants.banner}
-        layoutId={`banner-${project.slug}`}
-      >
-        <Container className={classes.heroContainer}>
-          <Grid container spacing={5}>
-            <Grid
-              item
-              mb={3}
-              md={8}
-              xs={12}
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <motion.img
-                loading="eager"
-                src={project.heroImage}
-                alt={project.name}
-                className={classes.heroImage}
-                variants={animateVariants.heroImage}
-                transition={{
-                  duration: 0.7,
-                  ease: "easeInOut",
-                }}
-              />
-            </Grid>
-            <Grid
-              item
-              md={4}
-              xs={12}
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                flexDirection: "column",
-              }}
-            >
-              <motion.h1
-                className={classes.title}
-                variants={animateVariants.title}
-              >
-                {project.name}
-              </motion.h1>
-              <br />
-              <motion.h1
-                className={classes.category}
-                variants={animateVariants.title}
-              >
-                -- {project.category.toUpperCase()} --
-              </motion.h1>
-            </Grid>
+    <motion.div
+      ref={ref}
+      className={classes.hero}
+      style={{ backgroundColor: project.bannerColor }}
+      initial="hidden"
+      animate="visible"
+      exit="exit"
+      variants={{
+        hidden: {
+          opacity,
+          y,
+        },
+        visible: {
+          opacity: 1,
+          y: 0,
+          transition: {
+            ...transition,
+            when: "beforeChildren",
+            staggerChildren: 0.05,
+          },
+        },
+        exit: {
+          opacity: 0,
+          y: "-10vh",
+          transition: {
+            ...transition,
+            staggerChildren: 0.05,
+          },
+        },
+      }}
+    >
+      <Container>
+        <Grid container spacing={5}>
+          <Grid
+            item
+            mb={3}
+            md={8}
+            xs={12}
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <motion.img
+              loading="eager"
+              src={project.heroImage}
+              alt={project.name}
+              className={classes.heroImage}
+              variants={imageVariants}
+            />
           </Grid>
-        </Container>
-      </motion.div>
-    </div>
+          <Grid
+            item
+            md={4}
+            xs={12}
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              flexDirection: "column",
+            }}
+          >
+            <motion.h1 className={classes.projectName} variants={titleVariants}>
+              {project.name}
+            </motion.h1>
+
+            <br />
+
+            <motion.h1
+              className={classes.projectCategory}
+              variants={titleVariants}
+            >
+              -- {project.category.toUpperCase()} --
+            </motion.h1>
+          </Grid>
+        </Grid>
+      </Container>
+    </motion.div>
   );
 };
 
