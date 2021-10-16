@@ -1,214 +1,171 @@
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import { Container, Grid, Typography } from "@mui/material";
-import { makeStyles } from "@mui/styles";
-import { motion } from "framer-motion";
-import PropTypes from "prop-types";
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
-import actionType from "src/reducer/actionType";
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import { Container, Grid, Typography } from '@mui/material';
+import { makeStyles } from '@mui/styles';
+import { motion } from 'framer-motion';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import actionType from 'src/reducer/actionType';
+import { transition } from 'src/utils/animate';
 
 /**
  * Style
  */
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: "100%",
-    position: "relative",
+    width: '100%',
+    minHeight: '40vh',
+    position: 'relative',
     bottom: 0,
-    minHeight: 300,
-    display: "flex !important",
-    alignItems: "center",
-    justifyContent: "center",
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   banner: {
-    position: "absolute",
+    position: 'absolute',
     top: 0,
     bottom: 0,
     left: 0,
     right: 0,
-    width: "100%",
-    height: "100%",
+    width: '100%',
+    height: '100%',
   },
   container: {
-    pointerEvents: "none",
-    position: "absolute",
-    top: "50%",
-    transform: "translateY(-50%)",
+    pointerEvents: 'none',
+    position: 'absolute',
   },
   textTertiary: {
     color: theme.palette.text.tertiary,
   },
-  icon: {
-    color: theme.palette.text.tertiary,
-  },
 }));
+
+/**
+ * Animasi varian
+ * @param {*} param0
+ * @returns
+ */
+
+const titleVariants = {
+  hidden: {
+    opacity: 0,
+    y: '20vh',
+    skewY: 5,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    skewY: 0,
+    transition,
+  },
+  exit: {
+    opacity: 0,
+    transition,
+  },
+};
 
 /**
  * komponen utama
  * @param {*} param0
  * @returns
  */
-const ProjectFooter = ({ next }) => {
+const ProjectFooter = ({ slug, name, bannerColor }) => {
   const classes = useStyles();
   const history = useHistory();
   const ref = React.useRef(null);
 
-  // state
-  const [isClicked, setClicked] = React.useState(false);
-
   // redux
   const dispatch = useDispatch();
-  const { domRect } = useSelector((state) => state.workReducer);
-  const { transition } = useSelector((state) => state.animateReducer);
 
-  // animate variants
-  const animateVariants = {
-    banner: {
-      hidden: {
-        opacity: 0,
-        scaleY: 0.5,
-        originY: 1,
-      },
-      visible: {
-        opacity: 1,
-        scaleY: 1,
-        originY: 1,
-        transition: {
-          ...transition,
-        },
-      },
-      exit: {
-        originY: 1,
-        opacity: 0,
-        scaleY: 1.2,
-        transition: {
-          ...transition,
-        },
-      },
-      clicked: {
-        opacity: 1,
-        transition: {
-          ...transition,
-        },
-      },
-    },
-    title: {
-      hidden: {
-        opacity: 0,
-        y: "20vh",
-        skewY: 5,
-      },
-      visible: {
-        opacity: 1,
-        y: 0,
-        skewY: 0,
-        transition: {
-          ...transition,
-        },
-      },
-      exit: {
-        opacity: 0,
-        y: "-10vh",
-        transition: {
-          ...transition,
-        },
-      },
-      clicked: {
-        opacity: 0,
-        transition: {
-          ...transition,
-        },
-      },
-    },
-    icon: {
-      hidden: {
-        opacity: 0,
-        y: "20vh",
-        skewY: 5,
-      },
-      visible: {
-        opacity: 1,
-        y: 0,
-        skewY: 0,
-        transition,
-      },
-      exit: {
-        opacity: 0,
-        y: "-10vh",
-        transition,
-      },
-      clicked: {
-        opacity: 0,
-        transition,
-      },
-    },
-  };
+  // state
+  const [exit, setExit] = React.useState({
+    y: 0,
+    opacity: 0,
+    originY: 1,
+    transition,
+  });
 
   // fungsi handle click go to next project
   const handleClick = () => {
-    let newDomRect = domRect;
-    newDomRect = { banner: ref.current.getBoundingClientRect() };
+    const { top } = ref.current.getBoundingClientRect();
 
-    // ubah state domRect pada project
-    dispatch({
-      type: actionType.setWorkDomRect,
-      value: newDomRect,
+    // set animasi exit
+    setExit({
+      height: window.innerHeight,
+      y: -top,
+      opacity: 1,
+      originY: 1,
+      transition: {
+        ...transition,
+      },
     });
 
-    setClicked(true);
-    history.push(`/project/${next.slug}`);
+    // ubah value sharedlayout pada workReducer
+    dispatch({
+      type: actionType.setWorkSharedLayout,
+      value: true,
+    });
+
+    // push
+    history.push(`/project/${slug}`);
   };
 
   return (
     <motion.footer
+      ref={ref}
       onClick={handleClick}
       className={classes.root}
-      variants={animateVariants.banner}
       transition={transition}
       initial="hidden"
       animate="visible"
-      exit={isClicked ? "clicked" : "exit"}
+      exit="exit"
+      variants={{
+        hidden: {
+          opacity: 0,
+          y: '20vh',
+          originY: 1,
+        },
+        visible: {
+          opacity: 1,
+          y: 0,
+          transition,
+        },
+        exit: {
+          ...exit,
+        },
+      }}
     >
       <motion.div
-        ref={ref}
+        style={{ backgroundColor: bannerColor, originY: 1 }}
         className={classes.banner}
-        style={{ backgroundColor: next.bannerColor, originY: 1 }}
         transition={transition}
-        whileHover={{ scaleY: 1.1, originY: 1 }}
+        whileHover={{ scaleY: 1.05, originY: 1 }}
+        layout
       />
 
-      <Container className={classes.container}>
+      <Container
+        className={classes.container}
+        component={motion.div}
+        variants={titleVariants}
+      >
         <Grid container spacing={2} display="flex" alignItems="center">
           <Grid item md={2} xs={12}>
-            <Typography
-              variant="subtitle1"
-              className={classes.textTertiary}
-              component={motion.h6}
-              variants={animateVariants.title}
-            >
+            <Typography variant="subtitle1" className={classes.textTertiary}>
               Next
             </Typography>
           </Grid>
 
           <Grid item md={9} xs={12}>
-            <Typography
-              variant="h4"
-              className={classes.textTertiary}
-              component={motion.h4}
-              variants={animateVariants.title}
-            >
-              {next.name}
+            <Typography variant="h5" className={classes.textTertiary}>
+              {name}
             </Typography>
           </Grid>
 
           <Grid item md={1} xs={12}>
-            <motion.span variants={animateVariants.icon}>
-              <ArrowForwardIcon
-                className={classes.icon}
-                style={{ fontSize: 40 }}
-              />
-            </motion.span>
+            <ArrowForwardIcon
+              className={classes.textTertiary}
+              style={{ fontSize: 35 }}
+            />
           </Grid>
         </Grid>
       </Container>
@@ -217,7 +174,9 @@ const ProjectFooter = ({ next }) => {
 };
 
 ProjectFooter.propTypes = {
-  next: PropTypes.object.isRequired,
+  slug: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  bannerColor: PropTypes.string.isRequired,
 };
 
 export default ProjectFooter;

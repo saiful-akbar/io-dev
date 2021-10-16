@@ -1,63 +1,60 @@
 import {
-  Container,
-  Box,
-  Grid,
-  Typography,
-  Divider,
-  Chip,
-} from "@mui/material";
-import React from "react";
-import { useSelector } from "react-redux";
-import MainLayout from "src/components/layouts/main-layout";
-import ProjectHero from "src/components/shared/project-hero";
-import ProjectFooter from "src/components/shared/project-footer";
-import { motion } from "framer-motion";
+  Chip, Container, Divider, Grid, Typography,
+} from '@mui/material';
+import { motion } from 'framer-motion';
+import React from 'react';
+import { useSelector } from 'react-redux';
+import MainLayout from 'src/components/layouts/main-layout';
+import ProjectFooter from 'src/components/shared/project-footer';
+import ProjectHero from 'src/components/shared/project-hero';
+import { transition } from 'src/utils/animate';
+import { useHistory, useParams } from 'react-router-dom';
+
+/**
+ * animasi varian
+ */
+const contentVariants = {
+  hidden: {
+    opacity: 0,
+    y: '20vh',
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      ...transition,
+    },
+  },
+  exit: {
+    opacity: 0,
+    transition: {
+      ...transition,
+    },
+  },
+};
 
 /**
  * Komponen utama
  * @param {String} slug
  * @returns
  */
-const Project = (props) => {
-  const { match, history } = props;
-  const { slug } = match.params;
-  const [nextProject, setNextProject] = React.useState(null);
+const Project = () => {
+  const history = useHistory();
+  const { slug } = useParams();
 
-  // redux
-  const { transition } = useSelector((state) => state.animateReducer);
+  // redux state
   const { projects } = useSelector((state) => state.workReducer);
-  const project = useSelector((state) =>
-    state.workReducer.projects.find((result) => result.slug === slug)
-  );
+  const project = useSelector((state) => state.workReducer.projects.find(
+    (result) => result.slug === slug,
+  ));
 
-  const animateVariants = {
-    content: {
-      hidden: {
-        opacity: 0,
-        y: "25vh",
-      },
-      visible: {
-        opacity: 1,
-        y: 0,
-        transition: {
-          ...transition,
-          staggerChildren: 0.02,
-        },
-      },
-      exit: {
-        opacity: 0,
-        y: "-10vh",
-        transition: {
-          ...transition,
-        },
-      },
-    },
-  };
+  // state
+  const [nextProject, setNextProject] = React.useState(null);
 
   // cek apakan project dengan slug yang dikirim ada atau tidak
   React.useEffect(() => {
     if (project) {
-      for (let i = 0; i < projects.length; i++) {
+      for (let i = 0; i < projects.length; i += 1) {
         if (projects[i].slug === slug) {
           if (projects[i + 1] === undefined) {
             setNextProject(projects[0]);
@@ -67,34 +64,38 @@ const Project = (props) => {
         }
       }
     } else {
-      history.push("/404");
+      history.push('/404');
     }
   }, [slug, projects, project, history, setNextProject]);
 
   return (
     <MainLayout pageTitle={project && project.name}>
+      {/* hero */}
       <section id="project-hero">
-        {project !== null && (
-          <ProjectHero
-            bannerColor={project.bannerColor}
-            heroImage={project.heroImage}
-            name={project.name}
-            category={project.category}
-          />
+        {project && (
+        <ProjectHero
+          bannerColor={project.bannerColor}
+          heroImage={project.heroImage}
+          name={project.name}
+          category={project.category}
+        />
         )}
       </section>
 
-      <Box
-        component={motion.section}
-        variants={animateVariants.content}
+      {/* content */}
+      <motion.section
+        id="project-content"
         initial="hidden"
         animate="visible"
         exit="exit"
+        variants={contentVariants}
       >
         <Container maxWidth="md">
-          <Grid container spacing={3} py={10}>
+          <Grid container spacing={3} py={15}>
             <Grid item xs={12}>
-              <Typography variant="subtitle2" color="textSecondary">- Overview -</Typography>
+              <Typography variant="subtitle2" color="textSecondary">
+                - Overview -
+              </Typography>
             </Grid>
             <Grid item xs={12}>
               <Typography variant="body1">
@@ -110,9 +111,11 @@ const Project = (props) => {
         <Divider />
 
         <Container maxWidth="md">
-          <Grid container spacing={3} py={10}>
+          <Grid container spacing={3} py={15}>
             <Grid item xs={12}>
-              <Typography variant="subtitle2" color="textSecondary">- UI -</Typography>
+              <Typography variant="subtitle2" color="textSecondary">
+                - UI -
+              </Typography>
             </Grid>
             <Grid item xs={12}>
               <Typography variant="body1">
@@ -134,25 +137,31 @@ const Project = (props) => {
         <Divider />
 
         <Container maxWidth="md">
-          <Grid container spacing={3} py={10}>
+          <Grid container spacing={3} py={15}>
             <Grid item xs={12}>
-              <Typography variant="subtitle2" color="textSecondary">- Tags -</Typography>
+              <Typography variant="subtitle2" color="textSecondary">
+                - Tags -
+              </Typography>
             </Grid>
-            <Grid item xs={12} >
-              {project !== null && project.tags.map((tag) => (
-                <Chip
-                  key={tag}
-                  label={tag.toLowerCase()}
-                  sx={{ m: 1 }}
-                />      
-              ))}
+            <Grid item xs={12}>
+              {project !== null
+                && project.tags.map((tag) => (
+                  <Chip key={tag} label={tag.toLowerCase()} sx={{ m: 1 }} />
+                ))}
             </Grid>
           </Grid>
         </Container>
-      </Box>
+      </motion.section>
 
+      {/* footer */}
       <section id="project-footer">
-        {nextProject !== null && <ProjectFooter next={nextProject} />}
+        {nextProject !== null && (
+          <ProjectFooter
+            slug={nextProject.slug}
+            name={nextProject.name}
+            bannerColor={nextProject.bannerColor}
+          />
+        )}
       </section>
     </MainLayout>
   );

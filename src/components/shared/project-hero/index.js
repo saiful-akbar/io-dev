@@ -1,83 +1,124 @@
-import { Grid, Container } from "@mui/material";
-import { makeStyles } from "@mui/styles";
-import { motion } from "framer-motion";
-import PropTypes from "prop-types";
-import React from "react";
-import { useInView } from "react-intersection-observer";
-import { useDispatch, useSelector } from "react-redux";
-import actionType from "src/reducer/actionType";
+import { Grid, Container } from '@mui/material';
+import { makeStyles } from '@mui/styles';
+import { motion } from 'framer-motion';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { useInView } from 'react-intersection-observer';
+import { useDispatch, useSelector } from 'react-redux';
+import actionType from 'src/reducer/actionType';
+import { transition } from 'src/utils/animate';
 
 /**
  * Style
  */
 const useStyles = makeStyles((theme) => ({
   hero: {
-    display: "flex",
-    justifyContent: "center",
-  },
-  heroContainer: {
-    minHeight: "100vh",
+    width: '100%',
+    minHeight: '100vh',
+    display: 'flex',
+    justifyContent: 'center',
     padding: theme.spacing(15, 0, 10, 0),
-    display: "flex !important",
-    alignItems: "center",
   },
   heroImage: {
-    objectFit: "contain",
-    width: "100%",
-    maxHeight: 500,
+    objectFit: 'contain',
+    width: '100%',
+    maxHeight: '70vh',
   },
-  title: {
-    textAlign: "center",
+  projectName: {
+    textAlign: 'center',
     marginBottom: theme.spacing(3),
     color: theme.palette.text.tertiary,
-    lineHeight: "100%",
+    lineHeight: '100%',
     fontWeight: 500,
-    fontSize: "5em",
-    [theme.breakpoints.down("lg")]: {
-      fontSize: "4em",
+    fontSize: '5em',
+    [theme.breakpoints.down('lg')]: {
+      fontSize: '4em',
     },
-    [theme.breakpoints.down("md")]: {
-      fontSize: "3em",
+    [theme.breakpoints.down('md')]: {
+      fontSize: '3em',
     },
   },
-  category: {
-    textAlign: "center",
+  projectCategory: {
+    textAlign: 'center',
     color: theme.palette.text.tertiary,
-    lineHeight: "100%",
+    lineHeight: '100%',
     fontWeight: 500,
-    fontSize: "3em",
-    [theme.breakpoints.down("lg")]: {
-      fontSize: "2em",
+    fontSize: '3em',
+    [theme.breakpoints.down('lg')]: {
+      fontSize: '2em',
     },
-    [theme.breakpoints.down("md")]: {
-      fontSize: "1.3em",
+    [theme.breakpoints.down('md')]: {
+      fontSize: '1.3em',
     },
   },
 }));
+
+/**
+ * Animasi varian
+ */
+
+const imageVariants = {
+  hidden: {
+    opacity: 0,
+    y: '20vh',
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition,
+  },
+  exit: {
+    opacity: 0,
+    transition,
+  },
+};
+
+const titleVariants = {
+  hidden: {
+    opacity: 0,
+    y: '20vh',
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition,
+  },
+  exit: {
+    opacity: 0,
+    transition,
+  },
+};
 
 /**
  * Komponen utama
  * @param {Object} project
  * @returns
  */
-const ProjectHero = ({ bannerColor, heroImage, name, category }) => {
+const ProjectHero = ({
+  bannerColor, heroImage, name, category,
+}) => {
   const classes = useStyles();
   const { ref, inView } = useInView();
 
-  // redux
+  // redux dispatch
   const dispatch = useDispatch();
+
+  // redux state
   const { header } = useSelector((state) => state.globalReducer);
-  const { domRect } = useSelector((state) => state.workReducer);
-  const { transition } = useSelector((state) => state.animateReducer);
+  const { sharedLayout } = useSelector((state) => state.workReducer);
+
+  // state
+  const [opacity] = React.useState(sharedLayout ? 1 : 0);
+  const [y] = React.useState(sharedLayout ? 0 : '20vh');
 
   // set warna header ketika element ada dalam viewport
   React.useEffect(() => {
     const newHeader = header;
 
     if (inView) {
-      newHeader.color = "light";
+      newHeader.color = 'light';
     } else {
-      newHeader.color = "dark";
+      newHeader.color = 'dark';
     }
 
     dispatch({
@@ -86,7 +127,7 @@ const ProjectHero = ({ bannerColor, heroImage, name, category }) => {
     });
 
     return () => {
-      newHeader.color = "dark";
+      newHeader.color = 'dark';
       dispatch({
         type: actionType.setGlobalHeader,
         value: newHeader,
@@ -96,147 +137,89 @@ const ProjectHero = ({ bannerColor, heroImage, name, category }) => {
     // eslint-disable-next-line
   }, [dispatch, inView]);
 
-  // animation variants
-  const animateVariants = {
-    banner: {
-      hidden: {
-        borderRaius: 10,
-        opacity: domRect ? 1 : 0,
-        y: domRect ? domRect.banner.top : "25vh",
-        width: domRect ? domRect.banner.width : "100%",
-        height: domRect ? domRect.banner.height : "auto",
-      },
-      visible: {
-        borderRaius: 0,
-        opacity: 1,
-        y: 0,
-        width: "100%",
-        height: "auto",
-        transition: {
-          ...transition,
-          staggerChildren: 0.04,
-          when: "beforeChildren",
-        },
-      },
-      exit: {
-        opacity: 0,
-        y: "-0vh",
-        transition: {
-          ...transition,
-        },
-      },
-    },
-    heroImage: {
-      hidden: {
-        opacity: 0,
-        y: "25vh",
-      },
-      visible: {
-        opacity: 1,
-        y: 0,
-        transition: {
-          ...transition,
-        },
-      },
-      exit: {
-        y: "-10vh",
-        opacity: 0,
-        transition: {
-          ...transition,
-        },
-      },
-    },
-    title: {
-      hidden: {
-        opacity: 0,
-        y: "25vh",
-      },
-      visible: {
-        opacity: 1,
-        y: 0,
-        transition: {
-          ...transition,
-        },
-      },
-      exit: {
-        opacity: 0,
-        y: "-10vh",
-        transition: {
-          ...transition,
-        },
-      },
-    },
-  };
-
   return (
-    <div className={classes.hero}>
-      <motion.div
-        ref={ref}
-        style={{ backgroundColor: bannerColor }}
-        initial="hidden"
-        animate="visible"
-        exit="exit"
-        variants={animateVariants.banner}
-      >
-        <Container className={classes.heroContainer}>
+    <motion.div
+      ref={ref}
+      className={classes.hero}
+      style={{ backgroundColor: bannerColor }}
+      initial="hidden"
+      animate="visible"
+      exit="exit"
+      variants={{
+        hidden: {
+          opacity,
+          y,
+        },
+        visible: {
+          opacity: 1,
+          y: 0,
+          transition: {
+            ...transition,
+            when: 'beforeChildren',
+            staggerChildren: 0.05,
+          },
+        },
+        exit: {
+          opacity: 0,
+          transition: {
+            ...transition,
+            staggerChildren: 0.05,
+          },
+        },
+      }}
+    >
+      <Container>
+        <Grid container spacing={5}>
           <Grid
-            container
-            justifyContent="center"
-            alignItems="center"
-            spacing={5}
+            item
+            mb={3}
+            md={8}
+            xs={12}
+            sx={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
           >
-            <Grid
-              item
-              mb={3}
-              md={8}
-              xs={12}
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <motion.img
-                loading="eager"
-                src={heroImage}
-                alt={name}
-                className={classes.heroImage}
-                variants={animateVariants.heroImage}
-                transition={{
-                  duration: 0.7,
-                  ease: "easeInOut",
-                }}
-              />
-            </Grid>
-            <Grid
-              item
-              md={4}
-              xs={12}
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                flexDirection: "column",
-              }}
-            >
-              <motion.h1
-                className={classes.title}
-                variants={animateVariants.title}
-              >
-                {name}
-              </motion.h1>
-              <br />
-              <motion.h1
-                className={classes.category}
-                variants={animateVariants.title}
-              >
-                -- {category.toUpperCase()} --
-              </motion.h1>
-            </Grid>
+            <motion.img
+              loading="eager"
+              src={heroImage}
+              alt={name}
+              className={classes.heroImage}
+              variants={imageVariants}
+            />
           </Grid>
-        </Container>
-      </motion.div>
-    </div>
+          <Grid
+            item
+            md={4}
+            xs={12}
+            sx={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              flexDirection: 'column',
+            }}
+          >
+            <motion.h1 className={classes.projectName} variants={titleVariants}>
+              {name}
+            </motion.h1>
+
+            <br />
+
+            <motion.h1
+              className={classes.projectCategory}
+              variants={titleVariants}
+            >
+              --
+              {' '}
+              {category.toUpperCase()}
+              {' '}
+              --
+            </motion.h1>
+          </Grid>
+        </Grid>
+      </Container>
+    </motion.div>
   );
 };
 

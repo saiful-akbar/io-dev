@@ -1,15 +1,15 @@
-import actionType from "./actionType";
+import actionType from './actionType';
 
 // state
 const initialState = {
-  appName: "IO Dev",
-  appVersion: "v1.0.0",
+  appName: 'IO Dev',
+  appVersion: 'v1.0.0',
   setting: {
-    themeMode: "light",
-    color: "default",
+    themeMode: 'light',
+    color: 'default',
   },
   header: {
-    color: "dark",
+    color: 'dark',
   },
   cursorHover: false,
 };

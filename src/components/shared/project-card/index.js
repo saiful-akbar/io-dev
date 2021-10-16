@@ -1,74 +1,107 @@
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import { Typography } from "@mui/material";
-import { makeStyles } from "@mui/styles";
-import { motion } from "framer-motion";
-import PropTypes from "prop-types";
-import React from "react";
-import { InView } from "react-intersection-observer";
-import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
-import actionType from "src/reducer/actionType";
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import { Typography } from '@mui/material';
+import { makeStyles } from '@mui/styles';
+import { motion } from 'framer-motion';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import actionType from 'src/reducer/actionType';
+import { transition } from 'src/utils/animate';
 
 /**
  * Style
  */
 const useStyles = makeStyles((theme) => ({
   projectContainer: {
-    position: "relative",
+    position: 'relative',
     minHeight: 500,
-    width: "100%",
-    margin: theme.spacing(5, 0),
-    overflow: "hidden",
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   projectBanner: {
-    position: "absolute",
+    position: 'absolute',
     top: 0,
-    bottom: 0,
     left: 0,
-    right: 0,
-    width: "100%",
-    height: "100%",
+    width: '100%',
+    height: '100%',
     borderRadius: 10,
   },
   projectHeroImage: {
-    pointerEvents: "none",
-    position: "absolute",
-    objectFit: "contain",
-    top: "50%",
-    left: "50%",
-    borderRadius: 6,
-    height: 300,
-    width: "60%",
-    [theme.breakpoints.down("md")]: {
-      width: "80%",
-    },
+    position: 'absolute',
+    pointerEvents: 'none',
+    objectFit: 'contain',
+    maxHeight: '65%',
+    maxWidth: '80%',
   },
   projectTitleTop: {
-    pointerEvents: "none",
-    position: "absolute",
+    pointerEvents: 'none',
+    position: 'absolute',
     color: theme.palette.text.tertiary,
-    // top: 0,
-    // display: "flex",
-    // justifyContent: "space-between",
-    // alignItems: "center",
-    // padding: theme.spacing(4, 5),
-    // width: "100%",
+    lineHeight: '100%',
   },
   projectTitleBottom: {
-    pointerEvents: "none",
-    position: "absolute",
+    lineHeight: '100%',
+    pointerEvents: 'none',
+    position: 'absolute',
     color: theme.palette.text.tertiary,
-    [theme.breakpoints.down("md")]: {
-      display: "none",
+    [theme.breakpoints.down('md')]: {
+      display: 'none',
     },
-    // bottom: 0,
-    // display: "flex",
-    // justifyContent: "space-between",
-    // alignItems: "center",
-    // padding: theme.spacing(4, 5),
-    // width: "100%",
   },
 }));
+
+/**
+ * Animasi varian
+ */
+const projectVariants = {
+  hidden: {
+    opacity: 0,
+  },
+  visible: {
+    opacity: 1,
+    transition,
+  },
+  exit: {
+    opacity: 1,
+    transition,
+  },
+};
+
+const imageVariants = {
+  hidden: {
+    y: '10vh',
+    opacity: 0,
+  },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition,
+  },
+  exit: {
+    opacity: 0,
+    transition,
+  },
+};
+
+const textVariants = {
+  hidden: {
+    opacity: 0,
+    y: '10vh',
+    transition,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition,
+  },
+  exit: {
+    opacity: 0,
+    transition,
+  },
+};
 
 /**
  * komponen utama
@@ -81,219 +114,179 @@ const useStyles = makeStyles((theme) => ({
  * @returns
  */
 const ProjectCard = ({
-  bannerColor,
-  name,
-  image,
-  category,
-  year,
-  slug,
-  ...rest
+  bannerColor, name, image, category, year, slug,
 }) => {
   const classes = useStyles();
   const history = useHistory();
-  const bannerRef = React.useRef(null);
-  const [clicked, setClicked] = React.useState(false);
+  const rootRef = React.useRef(null);
 
-  // redux
+  // redux dispatch
   const dispatch = useDispatch();
-  const { domRect } = useSelector((state) => state.workReducer);
-  const { transition } = useSelector((state) => state.animateReducer);
 
-  // animate variants
-  const animateVariants = {
-    project: {
-      hidden: { opacity: 0, y: "20vh" },
-      visible: {
-        opacity: 1,
-        y: 0,
-        transition: {
-          staggerChildren: 0.02,
-          ...transition,
-        },
-      },
-      exit: {
-        opacity: 0,
-        y: "-10vh",
-        transition: {
-          ...transition,
-        },
-      },
-      clicked: {
-        opacity: 1,
-        transition: {
-          when: "afterChildren",
-        },
-      },
+  // animate exit state
+  const [show, setShow] = React.useState(false);
+  const [exit, setExit] = React.useState({
+    opacity: 0,
+    borderRadius: 10,
+    transition: {
+      ...transition,
     },
-    image: {
-      hidden: {
-        opacity: 0,
-        x: "-50%",
-        y: "-30%",
-      },
-      visible: {
-        opacity: 1,
-        y: "-50%",
-        transition: {
-          ...transition,
-        },
-      },
-      exit: {
-        opacity: 0,
-        transition: {
-          ...transition,
-        },
-      },
-      clicked: {
-        opacity: 0,
-        y: "-65%",
-        transition: {
-          ...transition,
-        },
-      },
-    },
-    title: {
-      hidden: {
-        y: "5vh",
-        opacity: 0,
-        transition: {
-          ...transition,
-        },
-      },
-      visible: {
-        y: 0,
-        opacity: 1,
-        transition: {
-          ...transition,
-        },
-      },
-      exit: {
-        opacity: 0,
-      },
-      clicked: {
-        opacity: 0,
-        y: "-5vh",
-        transition: {
-          ...transition,
-        },
-      },
-    },
-  };
+  });
 
   // handle click card
   const handleClick = () => {
-    setClicked(true);
+    const { top, left } = rootRef.current.getBoundingClientRect();
 
-    let newDomRect = domRect;
-    newDomRect = {
-      banner: bannerRef.current.getBoundingClientRect(),
-    };
+    // set animation exit sharedLayout
+    setExit({
+      opacity: 1,
+      y: -top,
+      x: -left,
+      height: window.innerHeight,
+      width: window.innerWidth,
+      borderRadius: 0,
+      transition: {
+        ...transition,
+        height: {
+          ...transition,
+          delay: transition.duration / 3,
+        },
+        y: {
+          ...transition,
+          delay: transition.duration / 3,
+        },
+      },
+    });
 
-    dispatch({ type: actionType.setWorkDomRect, value: newDomRect });
+    // set state sharedLayout
+    dispatch({
+      type: actionType.setWorkSharedLayout,
+      value: true,
+    });
+
     history.push(`/project/${slug}`);
   };
 
+  // fungsi untuk menampilkan text ketika seluruh elemen ada dalam viewport
+  const handleShowText = React.useCallback(
+    () => {
+      const { top, height } = rootRef.current.getBoundingClientRect();
+      const diffTop = window.innerHeight - height;
+
+      if (top < diffTop) {
+        setShow(true);
+      } else {
+        setShow(false);
+      }
+    },
+    [rootRef, setShow],
+  );
+
+  // handle viewport scroll
+  React.useEffect(() => {
+    window.addEventListener('scroll', handleShowText);
+
+    return () => {
+      window.removeEventListener('scroll', handleShowText);
+    };
+  }, [handleShowText]);
+
   return (
     <motion.div
-      {...rest}
       onClick={handleClick}
       className={classes.projectContainer}
-      variants={animateVariants.project}
       initial="hidden"
       animate="visible"
-      exit={clicked ? "clicked" : "exit"}
+      exit="exit"
+      variants={projectVariants}
     >
-      {/* banner */}
       <motion.div
-        ref={bannerRef}
+        ref={rootRef}
         className={classes.projectBanner}
         style={{ backgroundColor: bannerColor }}
-        transition={{ duration: 0.5, ease: "easeInOut" }}
-        whileHover={{ scale: 0.98 }}
+        transition={transition}
+        whileHover={{ scale: 1.03 }}
+        variants={{
+          hidden: {
+            opacity: 0,
+            y: '10vh',
+            borderRadius: 10,
+          },
+          visible: {
+            opacity: 1,
+            y: 0,
+            borderRadius: 10,
+            transition,
+          },
+          exit: {
+            ...exit,
+          },
+        }}
       />
 
       {/* image */}
       <motion.img
         loading="lazy"
-        alt={`project_${slug}`}
+        alt={name}
         src={image}
         className={classes.projectHeroImage}
-        variants={animateVariants.image}
+        variants={imageVariants}
       />
 
       {/* title top left */}
-      <InView delay={100}>
-        {({ ref, inView }) => (
-          <Typography
-            variant="subtitle1"
-            component={motion.h6}
-            className={classes.projectTitleTop}
-            ref={ref}
-            variants={animateVariants.title}
-            initial="hidden"
-            animate={inView ? "visible" : "hidden"}
-            exit={clicked ? "clicked" : "exit"}
-            style={{ top: 45, left: 40 }}
-          >
-            {name}
-          </Typography>
-        )}
-      </InView>
+      <Typography
+        noWrap
+        variant="subtitle1"
+        component={motion.h6}
+        className={classes.projectTitleTop}
+        style={{ top: 45, left: 40 }}
+        variants={textVariants}
+        initial="hidden"
+        animate={show ? 'visible' : 'hidden'}
+        exit="exit"
+      >
+        {name}
+      </Typography>
 
       {/* title top right */}
-      <InView delay={100}>
-        {({ ref, inView }) => (
-          <motion.span
-            ref={ref}
-            className={classes.projectTitleTop}
-            variants={animateVariants.title}
-            initial="hidden"
-            animate={inView ? "visible" : "hidden"}
-            exit={clicked ? "clicked" : "exit"}
-            style={{ top: 45, right: 40 }}
-          >
-            <ChevronRightIcon style={{ fontSize: 40 }} />
-          </motion.span>
-        )}
-      </InView>
+      <motion.span
+        className={classes.projectTitleTop}
+        style={{ top: 40, right: 40 }}
+        variants={textVariants}
+        initial="hidden"
+        animate={show ? 'visible' : 'hidden'}
+        exit="exit"
+      >
+        <ChevronRightIcon style={{ fontSize: 35 }} />
+      </motion.span>
 
       {/* title bottom left */}
-      <InView delay={100}>
-        {({ ref, inView }) => (
-          <Typography
-            variant="subtitle2"
-            component={motion.h6}
-            className={classes.projectTitleBottom}
-            ref={ref}
-            variants={animateVariants.title}
-            initial="hidden"
-            animate={inView ? "visible" : "hidden"}
-            exit={clicked ? "clicked" : "exit"}
-            style={{ bottom: 45, left: 40 }}
-          >
-            {category.toUpperCase()}
-          </Typography>
-        )}
-      </InView>
+      <Typography
+        variant="caption"
+        component={motion.h6}
+        className={classes.projectTitleBottom}
+        style={{ bottom: 45, left: 40 }}
+        variants={textVariants}
+        initial="hidden"
+        animate={show ? 'visible' : 'hidden'}
+        exit="exit"
+      >
+        {category.toUpperCase()}
+      </Typography>
 
       {/* title bottom right */}
-      <InView delay={100}>
-        {({ ref, inView }) => (
-          <Typography
-            variant="subtitle2"
-            component={motion.h6}
-            className={classes.projectTitleBottom}
-            ref={ref}
-            variants={animateVariants.title}
-            initial="hidden"
-            animate={inView ? "visible" : "hidden"}
-            exit={clicked ? "clicked" : "exit"}
-            style={{ bottom: 45, right: 40 }}
-          >
-            {year}
-          </Typography>
-        )}
-      </InView>
+      <Typography
+        variant="caption"
+        component={motion.h6}
+        className={classes.projectTitleBottom}
+        style={{ bottom: 45, right: 40 }}
+        variants={textVariants}
+        initial="hidden"
+        animate={show ? 'visible' : 'hidden'}
+        exit="exit"
+      >
+        {year}
+      </Typography>
     </motion.div>
   );
 };

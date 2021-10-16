@@ -1,13 +1,15 @@
-import { CssBaseline } from "@mui/material";
-import { ThemeProvider } from "@mui/material/styles";
-import React from "react";
-import Cursor from "src/components/shared/cursor";
-import Header from "src/components/shared/header";
-import Router from "src/router";
-import theme from "src/theme";
+import { CssBaseline } from '@mui/material';
+import { ThemeProvider } from '@mui/material/styles';
+import { AnimateSharedLayout } from 'framer-motion';
+import React from 'react';
+import Cursor from 'src/components/shared/cursor';
+import Header from 'src/components/shared/header';
+import Router from 'src/router';
+import theme from 'src/theme';
+
 function App() {
   React.useEffect(() => {
-    const rootEl = document.querySelector("#root");
+    const rootEl = document.querySelector('#root');
 
     if (rootEl) {
       rootEl.style.backgroundColor = theme.palette.background.default;
@@ -19,7 +21,10 @@ function App() {
       <CssBaseline />
       <Cursor />
       <Header />
-      <Router />
+
+      <AnimateSharedLayout type="crossfade">
+        <Router />
+      </AnimateSharedLayout>
     </ThemeProvider>
   );
 }
