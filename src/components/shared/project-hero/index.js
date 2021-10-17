@@ -17,7 +17,11 @@ const useStyles = makeStyles((theme) => ({
     minHeight: '100vh',
     display: 'flex',
     justifyContent: 'center',
+    alignItems: 'center',
     padding: theme.spacing(15, 0, 10, 0),
+    [theme.breakpoints.down('lg')]: {
+      alignItems: 'flex-start',
+    },
   },
   heroImage: {
     objectFit: 'contain',
@@ -173,7 +177,7 @@ const ProjectHero = ({
           <Grid
             item
             mb={3}
-            md={8}
+            md={6}
             xs={12}
             sx={{
               display: 'flex',
@@ -191,7 +195,7 @@ const ProjectHero = ({
           </Grid>
           <Grid
             item
-            md={4}
+            md={6}
             xs={12}
             sx={{
               display: 'flex',
