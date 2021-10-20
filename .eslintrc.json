@@ -13,10 +13,12 @@
   },
   "plugins": ["react"],
   "rules": {
+    "linebreak-style": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "react/jsx-props-no-spreading": "off",
-    "import/no-unresolved": "off",
-    "import/prefer-default-export": "off",
-    "linebreak-style": "off"
+    "react/require-default-props": "off",
+    "react/forbid-prop-types": "off",
+    "react/react-in-jsx-scope": "off",
+    "import/no-unresolved": "off"
   }
 }

@@ -1,26 +1,27 @@
 const typography = {
   h1: {
-    fontWeight: 600,
+    fontWeight: 500,
   },
   h2: {
-    fontWeight: 600,
+    fontWeight: 500,
   },
   h3: {
-    fontWeight: 600,
+    fontWeight: 500,
   },
   h4: {
-    fontWeight: 600,
+    fontWeight: 500,
   },
   h5: {
-    fontWeight: 600,
+    fontWeight: 500,
   },
   h6: {
-    fontWeight: 600,
+    fontWeight: 500,
   },
   overline: {
-    fontWeight: 600,
+    fontWeight: 500,
   },
-  fontFamily: ['roboto', 'sans-serif'].join(','),
+  button: { textTransform: 'capitalize' },
+  fontFamily: ['"Public Sans"', '"Roboto"', 'sans-serif'].join(','),
 };
 
 export default typography;
