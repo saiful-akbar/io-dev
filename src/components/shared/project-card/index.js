@@ -1,5 +1,5 @@
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import { Typography } from '@mui/material';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import { Box, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { motion } from 'framer-motion';
 import PropTypes from 'prop-types';
@@ -22,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
   },
   projectBanner: {
+    zIndex: theme.zIndex.appBar + 1,
     position: 'absolute',
     top: 0,
     left: 0,
@@ -30,19 +31,22 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: 10,
   },
   projectHeroImage: {
+    zIndex: theme.zIndex.appBar + 2,
     position: 'absolute',
     pointerEvents: 'none',
     objectFit: 'contain',
-    maxHeight: '65%',
+    maxHeight: '70%',
     maxWidth: '80%',
   },
   projectTitleTop: {
+    zIndex: theme.zIndex.appBar + 2,
     pointerEvents: 'none',
     position: 'absolute',
     color: theme.palette.text.tertiary,
     lineHeight: '100%',
   },
   projectTitleBottom: {
+    zIndex: theme.zIndex.appBar + 2,
     lineHeight: '100%',
     pointerEvents: 'none',
     position: 'absolute',
@@ -200,8 +204,10 @@ const ProjectCard = ({
       exit="exit"
       variants={projectVariants}
     >
-      <motion.div
+      <Box
+        boxShadow={3}
         ref={rootRef}
+        component={motion.div}
         className={classes.projectBanner}
         style={{ backgroundColor: bannerColor }}
         transition={transition}
@@ -257,7 +263,7 @@ const ProjectCard = ({
         animate={show ? 'visible' : 'hidden'}
         exit="exit"
       >
-        <ChevronRightIcon style={{ fontSize: 35 }} />
+        <ArrowForwardIcon style={{ fontSize: 30 }} />
       </motion.span>
 
       {/* title bottom left */}

@@ -1,4 +1,4 @@
-import { Grid, Container } from '@mui/material';
+import { Container, Grid } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { motion } from 'framer-motion';
 import PropTypes from 'prop-types';
@@ -17,12 +17,17 @@ const useStyles = makeStyles((theme) => ({
     minHeight: '100vh',
     display: 'flex',
     justifyContent: 'center',
+    alignItems: 'center',
     padding: theme.spacing(15, 0, 10, 0),
+    [theme.breakpoints.down('lg')]: {
+      alignItems: 'flex-start',
+    },
   },
   heroImage: {
+    zIndex: theme.zIndex.appBar + 2,
     objectFit: 'contain',
     width: '100%',
-    maxHeight: '70vh',
+    maxHeight: '80vh',
   },
   projectName: {
     textAlign: 'center',
@@ -50,6 +55,9 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down('md')]: {
       fontSize: '1.3em',
     },
+  },
+  textTertiary: {
+    color: theme.palette.text.tertiary,
   },
 }));
 
@@ -173,7 +181,7 @@ const ProjectHero = ({
           <Grid
             item
             mb={3}
-            md={8}
+            md={6}
             xs={12}
             sx={{
               display: 'flex',
@@ -189,9 +197,10 @@ const ProjectHero = ({
               variants={imageVariants}
             />
           </Grid>
+
           <Grid
             item
-            md={4}
+            md={6}
             xs={12}
             sx={{
               display: 'flex',

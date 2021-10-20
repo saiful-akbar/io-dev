@@ -10,6 +10,7 @@ const initialState = {
   },
   header: {
     color: 'dark',
+    show: true,
   },
   cursorHover: false,
 };
