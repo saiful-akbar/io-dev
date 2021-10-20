@@ -1629,6 +1629,7 @@
     prop-types "^15.7.2"
 
 "@mui/styled-engine-sc@^5.0.0", "@mui/styled-engine@^5.0.1", "@mui/styled-engine@npm:@mui/styled-engine-sc@5.0.0":
+  name "@mui/styled-engine"
   version "5.0.0"
   resolved "https://registry.npmjs.org/@mui/styled-engine-sc/-/styled-engine-sc-5.0.0.tgz"
   integrity sha512-N2+VHdqBE8hOyoHwFyNHIV8r+/wySsavvRysTbLtLIzDPOlsq7FkPdjH2+tQbzZpWcKvdby7vxcat9C8cREelA==

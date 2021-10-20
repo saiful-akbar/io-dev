@@ -7,7 +7,12 @@ import Header from 'src/components/shared/header';
 import Router from 'src/router';
 import theme from 'src/theme';
 
+/**
+ * Komponen utama
+ * @returns
+ */
 function App() {
+  // set background pada id #root
   React.useEffect(() => {
     const rootEl = document.querySelector('#root');
 

@@ -139,7 +139,7 @@ const ProjectFooter = ({ slug, name, bannerColor }) => {
         style={{ backgroundColor: bannerColor, originY: 1 }}
         className={classes.banner}
         transition={transition}
-        whileHover={{ scaleY: 1.05, originY: 1 }}
+        whileHover={{ scaleY: 1.1, originY: 1 }}
         layout
       />
 

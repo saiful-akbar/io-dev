@@ -1,4 +1,4 @@
-import { Grid, Container } from '@mui/material';
+import { Container, Grid } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { motion } from 'framer-motion';
 import PropTypes from 'prop-types';
@@ -24,9 +24,10 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   heroImage: {
+    zIndex: theme.zIndex.appBar + 2,
     objectFit: 'contain',
     width: '100%',
-    maxHeight: '70vh',
+    maxHeight: '80vh',
   },
   projectName: {
     textAlign: 'center',
@@ -54,6 +55,9 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down('md')]: {
       fontSize: '1.3em',
     },
+  },
+  textTertiary: {
+    color: theme.palette.text.tertiary,
   },
 }));
 
@@ -193,6 +197,7 @@ const ProjectHero = ({
               variants={imageVariants}
             />
           </Grid>
+
           <Grid
             item
             md={6}

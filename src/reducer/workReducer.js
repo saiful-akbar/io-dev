@@ -11,10 +11,27 @@ const initialState = {
       slug: 'naikdaun',
       category: 'web',
       year: '2021',
-      bannerColor: '#9479EF',
-      tags: ['PHP', 'Laravel', 'Bootstrap 5', 'javascript', 'jQuery'],
-      heroImage: '/assets/images/projects/naikdaun/naikdaun_laptop_hero.png',
-      images: [],
+      bannerColor: '#421DA0',
+      url: 'https://github.com/saiful-akbar/naikdaun/',
+      technology: ['PHP', 'Laravel', 'Bootstrap 5', 'javascript', 'jQuery'],
+      heroImage: '/assets/images/projects/naikdaun/naikdaun_desktop_home.png',
+      details: [
+        {
+          title: 'Overview',
+          description: 'Naikdaun is an idea and concept generator house. With complete understanding of technology and wide range experience for conventional, digital and integrated media communication campaign.',
+          images: ['/assets/images/projects/naikdaun/naikdaun_hero.jpg'],
+        },
+        {
+          title: 'UI',
+          description: null,
+          images: [
+            '/assets/images/projects/naikdaun/naikdaun_mobile_home.png',
+            '/assets/images/projects/naikdaun/naikdaun_mobile_about.png',
+            '/assets/images/projects/naikdaun/naikdaun_mobile_works.png',
+            '/assets/images/projects/naikdaun/naikdaun_mobile_works_detail.png',
+          ],
+        },
+      ],
     },
   ],
 };
