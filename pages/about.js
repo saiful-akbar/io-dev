@@ -1,12 +1,12 @@
 import { Typography, Container, Box } from '@mui/material';
 import MainLayout from 'src/layouts/MainLayout';
 
-export default function Work() {
+export default function About() {
   return (
-    <MainLayout title="Work">
+    <MainLayout title="About">
       <Container>
         <Box pt={15}>
-          <Typography variant="h1">Work</Typography>
+          <Typography variant="h1">About</Typography>
         </Box>
       </Container>
     </MainLayout>

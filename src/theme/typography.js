@@ -21,7 +21,13 @@ const typography = {
     fontWeight: 500,
   },
   button: { textTransform: 'capitalize' },
-  fontFamily: ['"Public Sans"', '"Roboto"', 'sans-serif'].join(','),
+  fontFamily: [
+    '"-apple-system"',
+    '"Segoe UI"',
+    '"Roboto"',
+    '"Helvetica"',
+    '"sans-serif"',
+  ].join(','),
 };
 
 export default typography;

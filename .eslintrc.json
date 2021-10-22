@@ -19,6 +19,7 @@
     "react/require-default-props": "off",
     "react/forbid-prop-types": "off",
     "react/react-in-jsx-scope": "off",
-    "import/no-unresolved": "off"
+    "import/no-unresolved": "off",
+    "jsx-a11y/anchor-is-valid": "off"
   }
 }

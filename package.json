@@ -33,6 +33,7 @@
     "react-redux": "^7.2.5",
     "redux": "^4.1.1",
     "redux-thunk": "^2.3.0",
+    "sass": "^1.43.3",
     "styled-components": "^5.3.3"
   },
   "devDependencies": {
