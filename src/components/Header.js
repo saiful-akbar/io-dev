@@ -6,6 +6,8 @@ import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import styles from 'src/styles/header.module.scss';
 import transition from 'src/transition';
+import { useDispatch } from 'react-redux';
+import actionType from 'src/redux/actionType';
 
 /**
  * animasi varian
@@ -58,7 +60,7 @@ const NavItem = ({ title, href }) => {
   };
 
   return (
-    <Link href={href}>
+    <Link href={href} scroll={false}>
       <motion.a
         onHoverStart={() => handleHover(true)}
         onHoverEnd={() => handleHover(false)}
@@ -103,45 +105,64 @@ const links = [
  * komponen utama
  * @returns
  */
-const Header = () => (
-  <>
-    {/* logo */}
-    <motion.div
-      className={styles.logo}
-      variants={headerVariants}
-      initial="initial"
-      animate="animate"
-      exit="exit"
-    >
-      <Link href="/">
-        <a>
-          <img
-            src="/images/logo/logo-dark.png"
-            alt="logo"
-            className={styles.image}
-          />
-        </a>
-      </Link>
-    </motion.div>
+const Header = () => {
+  // redux
+  const dispatch = useDispatch();
 
-    {/* navbar */}
-    <motion.nav
-      className={styles.nav}
-      variants={headerVariants}
-      initial="initial"
-      animate="animate"
-      exit="exit"
-    >
-      <ul>
-        {links.map((link) => (
-          <li key={link.href} className={styles.navItem}>
-            <NavItem title={link.title} href={link.href} />
-          </li>
-        ))}
-      </ul>
-    </motion.nav>
-    {/* end navbar */}
-  </>
-);
+  const handleHover = (isHover) => {
+    dispatch({
+      type: actionType.setGlobalCursorHover,
+      value: isHover,
+    });
+  };
+
+  return (
+    <>
+      {/* logo */}
+      <motion.div
+        className={styles.logo}
+        variants={headerVariants}
+        initial="initial"
+        animate="animate"
+        exit="exit"
+        onHoverStart={() => handleHover(true)}
+        onHoverEnd={() => handleHover(false)}
+      >
+        <Link href="/" scroll={false}>
+          <a>
+            <img
+              src="/images/logo/logo-dark.png"
+              alt="logo"
+              className={styles.image}
+            />
+          </a>
+        </Link>
+      </motion.div>
+
+      {/* navbar */}
+      <motion.nav
+        className={styles.nav}
+        variants={headerVariants}
+        initial="initial"
+        animate="animate"
+        exit="exit"
+      >
+        <ul>
+          {links.map((link) => (
+            <motion.li
+              key={link.href}
+              className={styles.navItem}
+              onHoverStart={() => handleHover(true)}
+              onHoverEnd={() => handleHover(false)}
+            >
+              <NavItem title={link.title} href={link.href} />
+            </motion.li>
+          ))}
+        </ul>
+      </motion.nav>
+      {/* end navbar */}
+    </>
+  );
+};
 
 export default Header;

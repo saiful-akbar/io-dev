@@ -1,5 +1,9 @@
 @use "variables";
 
+.root {
+  padding-top: 25vh;
+}
+
 .titleWrapper {
   display: flex;
   flex-direction: row;
