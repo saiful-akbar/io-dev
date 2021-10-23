@@ -1,0 +1,33 @@
+@use "variables";
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  font-family: -apple-system, Segoe UI, Roboto, Helvetica Neue, sans-serif;
+}
+
+body {
+  width: 100%;
+  min-height: 100vh;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* mui Container */
+.MuiContainer-root {
+  padding-left: 25px !important;
+  padding-right: 25px !important;
+}
+
+@media (min-width: 960px) {
+  .MuiContainer-maxWidthLg {
+    max-width: 1030px !important;
+  }
+}

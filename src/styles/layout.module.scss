@@ -1,0 +1,8 @@
+@use "variables";
+
+.main {
+  min-height: 100vh;
+  width: 100%;
+  background-color: variables.$bg-default;
+  padding: 5px 0;
+}

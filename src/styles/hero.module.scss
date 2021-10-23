@@ -1,0 +1,36 @@
+@use "variables";
+
+.titleWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+
+  .title {
+    font-size: 9em;
+    line-height: 100%;
+    font-weight: 600;
+
+    @media screen and (max-width: variables.$breakpoints-lg) {
+      font-size: 7em;
+    }
+
+    @media screen and (max-width: variables.$breakpoints-md) {
+      font-size: 6em;
+    }
+
+    @media screen and (max-width: variables.$breakpoints-sm) {
+      font-size: 5.5em;
+    }
+  }
+}
+
+.version {
+  font-size: 1em;
+  font-weight: bold !important;
+}
+
+.divider {
+  border: 2px solid variables.$text-primary;
+  width: 100%;
+}

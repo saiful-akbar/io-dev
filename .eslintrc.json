@@ -13,10 +13,14 @@
   },
   "plugins": ["react"],
   "rules": {
+    "linebreak-style": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "react/jsx-props-no-spreading": "off",
+    "react/require-default-props": "off",
+    "react/forbid-prop-types": "off",
+    "react/react-in-jsx-scope": "off",
     "import/no-unresolved": "off",
-    "import/prefer-default-export": "off",
-    "linebreak-style": "off"
+    "jsx-a11y/anchor-is-valid": "off",
+    "react/no-array-index-key": "off"
   }
 }

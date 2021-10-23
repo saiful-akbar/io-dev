@@ -1,22 +1,21 @@
 import { createTheme } from '@mui/material/styles';
-import { grey } from '@mui/material/colors';
 import typography from './typography';
 
+// Create a theme instance.
 const theme = createTheme({
   palette: {
     mode: 'light',
     background: {
-      default: grey[100],
+      // default: '#f5f5f5',
+      default: '#fff',
       paper: '#fff',
-      dark: grey[800],
     },
     text: {
-      primary: grey[800],
-      secondary: grey[400],
-      tertiary: grey[200],
+      primary: '#424242',
+      secondary: '#bdbdbd',
     },
     primary: {
-      main: grey[800],
+      main: '#424242',
     },
   },
   typography,
