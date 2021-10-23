@@ -7,6 +7,7 @@ import { Provider } from 'react-redux';
 import App from 'src/App';
 import createEmotionCache from 'src/createEmotionCache';
 import reduxStore from 'src/redux/store';
+import Head from 'next/head';
 import 'src/styles/globals.scss';
 
 // Client-side cache, shared for the whole session of the user in the browser.
@@ -25,6 +26,11 @@ export default function MyApp(props) {
     <Provider store={reduxStore}>
       <CacheProvider value={emotionCache}>
         <StylesProvider generateClassName={generateClassName}>
+          <Head>
+            <title>{process.env.APP_NAME}</title>
+            <meta name="viewport" content="initial-scale=1, width=device-width" />
+          </Head>
+
           <App>
             <AnimatePresence exitBeforeEnter onExitComplete={() => window.scroll(0, 0)}>
               <Component {...pageProps} key={router.route} />

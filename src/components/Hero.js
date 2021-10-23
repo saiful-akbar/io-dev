@@ -1,4 +1,4 @@
-import { Box, Grid, Typography } from '@mui/material';
+import { Grid, Typography } from '@mui/material';
 import { motion } from 'framer-motion';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -13,7 +13,6 @@ const heroVariants = {
   show: {
     opacity: 1,
     transition: {
-      when: 'beforeChildren',
       staggerChildren: 0.02,
     },
   },
@@ -39,6 +38,7 @@ const titleVariants = {
   },
   exit: {
     opacity: 0,
+    transition,
   },
 };
 
@@ -51,12 +51,14 @@ const dividerVariants = {
     opacity: 1,
     width: '100%',
     transition: {
-      duration: 1,
+      duration: 0.8,
       ease: transition.ease,
     },
   },
   exit: {
     opacity: 0,
+    width: 0,
+    transition,
   },
 };
 
@@ -66,9 +68,8 @@ const dividerVariants = {
  * @returns
  */
 const Hero = ({ leftTitle, rightTitle }) => (
-  <Box
-    pt={20}
-    component={motion.div}
+  <motion.div
+    className={styles.root}
     variants={heroVariants}
     initial="hidden"
     animate="show"
@@ -108,7 +109,7 @@ const Hero = ({ leftTitle, rightTitle }) => (
         <motion.div className={styles.divider} variants={dividerVariants} />
       </Grid>
     </Grid>
-  </Box>
+  </motion.div>
 );
 
 Hero.propTypes = {

@@ -4,6 +4,11 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  cursor: none !important;
+}
+
+#__next {
+  background-color: variables.$bg-default;
 }
 
 html,
@@ -28,6 +33,6 @@ a {
 
 @media (min-width: 960px) {
   .MuiContainer-maxWidthLg {
-    max-width: 1030px !important;
+    max-width: 1020px !important;
   }
 }
