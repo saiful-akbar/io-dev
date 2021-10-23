@@ -1,19 +1,16 @@
-import { Box, Container, Typography } from '@mui/material';
-import { useEffect } from 'react';
+import { Container } from '@mui/material';
+import Hero from 'src/components/Hero';
 import MainLayout from 'src/layouts/MainLayout';
 import { projectAllFetch } from 'src/utils/projectFetch';
 
-export default function Work(props) {
-  useEffect(() => {
-    console.log(props);
-  }, []);
-
+export default function Work() {
   return (
     <MainLayout title="Work">
       <Container>
-        <Box pt={15}>
-          <Typography variant="h1">Work</Typography>
-        </Box>
+        <Hero
+          leftTitle={['W', 'o', 'r', 'k', '_']}
+          rightTitle={`v${process.env.APP_VERSION}`}
+        />
       </Container>
     </MainLayout>
   );

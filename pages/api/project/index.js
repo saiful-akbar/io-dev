@@ -12,6 +12,6 @@ export default function handler(req, res) {
     const result = db.projects;
 
     // response berhasil
-    res.status(200).json(result);
+    res.status(200).json({ projects: result });
   }
 }

@@ -5,16 +5,15 @@ import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import styles from 'src/styles/header.module.scss';
+import transition from 'src/transition';
 
 /**
  * animasi varian
  */
-const transition = { duration: 0.7, ease: [0.75, 0.15, 0.20, 0.98] };
-
 const headerVariants = {
   initial: {
     opacity: 0,
-    y: '20vh',
+    y: 100,
   },
   animate: {
     opacity: 1,
@@ -25,10 +24,6 @@ const headerVariants = {
   },
   exit: {
     opacity: 0,
-    y: '-10vh',
-    transition: {
-      ...transition,
-    },
   },
 };
 
@@ -97,56 +92,56 @@ NavItem.propTypes = {
 };
 
 /**
+ * list link menu
+ */
+const links = [
+  { title: 'Work', href: '/' },
+  { title: 'About', href: '/about' },
+];
+
+/**
  * komponen utama
  * @returns
  */
-const Header = () => {
-  const links = [
-    { title: 'Work', href: '/' },
-    { title: 'About', href: '/about' },
-    { title: 'Contact', href: '/contact' },
-  ];
+const Header = () => (
+  <>
+    {/* logo */}
+    <motion.div
+      className={styles.logo}
+      variants={headerVariants}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+    >
+      <Link href="/">
+        <a>
+          <img
+            src="/images/logo/logo-dark.png"
+            alt="logo"
+            className={styles.image}
+          />
+        </a>
+      </Link>
+    </motion.div>
 
-  return (
-    <>
-      {/* logo */}
-      <motion.div
-        className={styles.logo}
-        variants={headerVariants}
-        initial="initial"
-        animate="animate"
-        exit="exit"
-      >
-        <Link href="/">
-          <a>
-            <img
-              src="/images/logo/logo-dark.png"
-              alt="logo"
-              className={styles.image}
-            />
-          </a>
-        </Link>
-      </motion.div>
-
-      {/* navbar */}
-      <motion.nav
-        className={styles.nav}
-        variants={headerVariants}
-        initial="initial"
-        animate="animate"
-        exit="exit"
-      >
-        <ul>
-          {links.map((link) => (
-            <li key={link.href} className={styles.navItem}>
-              <NavItem title={link.title} href={link.href} />
-            </li>
-          ))}
-        </ul>
-      </motion.nav>
-      {/* end navbar */}
-    </>
-  );
-};
+    {/* navbar */}
+    <motion.nav
+      className={styles.nav}
+      variants={headerVariants}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+    >
+      <ul>
+        {links.map((link) => (
+          <li key={link.href} className={styles.navItem}>
+            <NavItem title={link.title} href={link.href} />
+          </li>
+        ))}
+      </ul>
+    </motion.nav>
+    {/* end navbar */}
+  </>
+);
 
 export default Header;

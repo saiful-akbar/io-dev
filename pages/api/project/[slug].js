@@ -18,6 +18,6 @@ export default function handler(req, res) {
     const statusCode = result ? 200 : 404;
 
     // response berhasil
-    res.status(statusCode).json(result);
+    res.status(statusCode).json({ project: result });
   }
 }

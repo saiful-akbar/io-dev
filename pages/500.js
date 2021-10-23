@@ -2,13 +2,13 @@ import { Container } from '@mui/material';
 import Hero from 'src/components/Hero';
 import MainLayout from 'src/layouts/MainLayout';
 
-export default function About() {
+export default function Custom500() {
   return (
-    <MainLayout title="About">
+    <MainLayout title="500">
       <Container>
         <Hero
-          leftTitle={['A', 'b', 'o', 'u', 't', '_']}
-          rightTitle={`v${process.env.APP_VERSION}`}
+          leftTitle={['5', '0', '0', '_']}
+          rightTitle="Internal server error"
         />
       </Container>
     </MainLayout>
