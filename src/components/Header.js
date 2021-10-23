@@ -104,6 +104,7 @@ const Header = () => {
   const links = [
     { title: 'Work', href: '/' },
     { title: 'About', href: '/about' },
+    { title: 'Contact', href: '/contact' },
   ];
 
   return (

@@ -5,6 +5,8 @@ import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import theme from 'src/theme';
 import Header from 'src/components/Header';
+import Head from 'next/head';
+import NextNprogress from 'nextjs-progressbar';
 
 /**
  * komponen utama
@@ -27,12 +29,27 @@ export default function App({ children }) {
   }, []);
 
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <Header />
+    <>
+      <Head>
+        <title>{process.env.APP_NAME}</title>
+        <meta name="viewport" content="initial-scale=1, width=device-width" />
+      </Head>
 
-      {children}
-    </ThemeProvider>
+      <NextNprogress
+        color="#e76f51"
+        startPosition={0.2}
+        stopDelayMs={100}
+        height={2.5}
+        showOnShallow
+        options={{ showSpinner: false }}
+      />
+
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Header />
+        {children}
+      </ThemeProvider>
+    </>
   );
 }
 

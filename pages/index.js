@@ -1,7 +1,13 @@
-import { Typography, Container, Box } from '@mui/material';
+import { Box, Container, Typography } from '@mui/material';
+import { useEffect } from 'react';
 import MainLayout from 'src/layouts/MainLayout';
+import { projectAllFetch } from 'src/utils/projectFetch';
 
-export default function Work() {
+export default function Work(props) {
+  useEffect(() => {
+    console.log(props);
+  }, []);
+
   return (
     <MainLayout title="Work">
       <Container>
@@ -11,4 +17,25 @@ export default function Work() {
       </Container>
     </MainLayout>
   );
+}
+
+/**
+ * request data project dari api server
+ * @returns
+ */
+export async function getServerSideProps() {
+  try {
+    const res = await projectAllFetch();
+
+    return {
+      props: { ...res.data },
+    };
+  } catch (error) {
+    return {
+      redirect: {
+        destination: '/404',
+        permanent: false,
+      },
+    };
+  }
 }
