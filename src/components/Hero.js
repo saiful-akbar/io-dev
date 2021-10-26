@@ -9,15 +9,13 @@ import transition from 'src/transition';
  * animasi variants
  */
 const heroVariants = {
-  hidden: { opacity: 0 },
+  hidden: false,
   show: {
-    opacity: 1,
     transition: {
       staggerChildren: 0.02,
     },
   },
   exit: {
-    opacity: 0,
     transition: {
       when: 'afterChildren',
     },
@@ -27,8 +25,8 @@ const heroVariants = {
 const titleVariants = {
   hidden: {
     opacity: 0,
-    y: 100,
-    skewY: 15,
+    y: 130,
+    skewY: 10,
   },
   show: {
     opacity: 1,
@@ -51,7 +49,7 @@ const dividerVariants = {
     opacity: 1,
     width: '100%',
     transition: {
-      duration: 0.8,
+      duration: 1,
       ease: transition.ease,
     },
   },
@@ -77,24 +75,20 @@ const Hero = ({ leftTitle, rightTitle }) => (
   >
     <Grid
       container
-      spacing={3}
       justifyContent="space-between"
       alignItems="flex-end"
     >
-      <Grid item lg={10} xs={12} className={styles.titleWrapper}>
-        {leftTitle.map((text, key) => (
-          <Typography
-            key={key}
-            className={styles.title}
-            component={motion.h1}
-            variants={titleVariants}
-          >
-            {text}
-          </Typography>
-        ))}
+      <Grid item lg={10} xs={12} mb={3} className={styles.titleWrapper}>
+        <Typography
+          className={styles.title}
+          component={motion.h1}
+          variants={titleVariants}
+        >
+          {leftTitle}
+        </Typography>
       </Grid>
 
-      <Grid item lg={2} xs={12}>
+      <Grid item lg={2} xs={12} mb={3}>
         <Typography
           noWrap
           component={motion.div}
@@ -113,7 +107,7 @@ const Hero = ({ leftTitle, rightTitle }) => (
 );
 
 Hero.propTypes = {
-  leftTitle: PropTypes.array.isRequired,
+  leftTitle: PropTypes.string.isRequired,
   rightTitle: PropTypes.string.isRequired,
 };
 

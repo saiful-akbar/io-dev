@@ -1,8 +1,8 @@
-import projects from 'src/data/projects';
+import iodev from 'src/data/iodev';
 
 class ProjectClass {
   constructor() {
-    this.projects = projects;
+    this.projects = iodev.projects;
   }
 
   // method untuk menganbil semua data project

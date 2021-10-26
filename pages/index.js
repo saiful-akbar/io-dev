@@ -1,21 +1,52 @@
+import TabContext from '@mui/lab/TabContext';
+import TabList from '@mui/lab/TabList';
+import TabPanel from '@mui/lab/TabPanel';
 import { Container, Grid } from '@mui/material';
-import Hero from 'src/components/Hero';
-import MainLayout from 'src/layouts/MainLayout';
-import ProjectClass from 'src/utils/class/ProjectClass';
-import ProjectCard from 'src/components/ProjectCard';
+import Tab from '@mui/material/Tab';
 import PropTypes from 'prop-types';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import Hero from 'src/components/Hero';
+import ProjectCard from 'src/components/ProjectCard';
+import MainLayout from 'src/layouts/MainLayout';
 import actionType from 'src/redux/actionType';
-import { useEffect } from 'react';
+import ProjectClass from 'src/utils/class/ProjectClass';
+import CategoryClass from 'src/utils/class/CategoryClass';
+import { motion } from 'framer-motion';
+import transition from 'src/transition';
+import { useRouter } from 'next/router';
+
+/**
+ * animasi variant
+ */
+const tabVariants = {
+  hidden: {
+    opacity: 0,
+    y: 130,
+  },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition,
+  },
+  exit: {
+    opacity: 0,
+  },
+};
 
 /**
  * komponen utama
  * @param {Array} project
  * @returns
  */
-export default function Work({ projects }) {
+export default function Work({ projects, categories }) {
+  const router = useRouter();
+
   // redux
   const dispatch = useDispatch();
+
+  // state
+  const [tabValue, setTabValue] = useState('web');
 
   // kembalihan cursor hover ke false
   useEffect(() => {
@@ -25,38 +56,98 @@ export default function Work({ projects }) {
     });
   }, [dispatch]);
 
+  // set tabValue jika ada query string
+  useEffect(() => {
+    if (router.query.category !== undefined) {
+      switch (router.query.category) {
+        case 'web':
+          setTabValue('web');
+          break;
+
+        case 'ui/ux':
+          setTabValue('ui/ux');
+          break;
+
+        default:
+          setTabValue('web');
+          break;
+      }
+    }
+  }, [router]);
+
+  // fungsi handle change tab
+  const handleChangeTab = (event, newValue) => {
+    setTabValue(newValue);
+    router.push(`/?category=${newValue}`, undefined, { shallow: true });
+  };
+
   return (
     <MainLayout title="Work">
       <Container>
-        <Grid container spacing={3}>
+        <Grid container>
           <Grid item xs={12}>
             <Hero
-              leftTitle={['W', 'o', 'r', 'k', '_']}
+              leftTitle="Work."
               rightTitle={`v${process.env.APP_VERSION}`}
             />
           </Grid>
 
-          <Grid
-            item
-            xs={12}
-            mt={10}
-            container
-            spacing={3}
-          >
-            {projects.map((project) => (
-              <Grid item xs={12} py={10} key={project.id}>
-                <ProjectCard
-                  bannerColor={project.bannerColor}
-                  image={project.heroImage}
-                  name={project.name}
-                  category={project.category}
-                  year={project.year}
-                />
+          <Grid item xs={12}>
+            <TabContext value={tabValue}>
+              <Grid container>
+                <Grid
+                  item
+                  xs={12}
+                  mt={10}
+                  component={motion.div}
+                  variants={tabVariants}
+                  initial="hidden"
+                  animate="show"
+                  exit="exit"
+                >
+                  <TabList onChange={handleChangeTab} aria-label="tab project">
+                    {categories.map((category) => (
+                      <Tab
+                        key={category}
+                        label={category.toUpperCase()}
+                        value={category.toLowerCase()}
+                      />
+                    ))}
+                  </TabList>
+                </Grid>
+
+                <Grid item xs={12}>
+                  {categories.map((category) => (
+                    <TabPanel key={category} value={category.toLowerCase()}>
+                      <Grid container>
+
+                        {projects.map((project) => {
+                          if (project.category.toLowerCase() === category.toLowerCase()) {
+                            return (
+                              <Grid item xs={12} my={7} key={project.id}>
+                                <ProjectCard
+                                  key={project.id}
+                                  bannerColor={project.bannerColor}
+                                  image={project.heroImage}
+                                  name={project.name}
+                                  category={project.category}
+                                  year={project.year}
+                                />
+                              </Grid>
+                            );
+                          }
+
+                          return null;
+                        })}
+
+                      </Grid>
+                    </TabPanel>
+                  ))}
+                </Grid>
               </Grid>
-            ))}
+            </TabContext>
           </Grid>
         </Grid>
-
       </Container>
     </MainLayout>
   );
@@ -67,6 +158,7 @@ export default function Work({ projects }) {
  */
 Work.propTypes = {
   projects: PropTypes.array.isRequired,
+  categories: PropTypes.array.isRequired,
 };
 
 /**
@@ -75,11 +167,12 @@ Work.propTypes = {
  */
 export function getStaticProps() {
   const project = new ProjectClass();
-  const result = project.all();
+  const category = new CategoryClass();
 
   return {
     props: {
-      projects: result,
+      projects: project.all(),
+      categories: category.all(),
     },
   };
 }

@@ -25,7 +25,7 @@ export default function About() {
     <MainLayout title="About">
       <Container>
         <Hero
-          leftTitle={['A', 'b', 'o', 'u', 't', '_']}
+          leftTitle="About."
           rightTitle={`v${process.env.APP_VERSION}`}
         />
       </Container>
