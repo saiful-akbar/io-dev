@@ -13,20 +13,15 @@ import transition from 'src/transition';
 const rootVariants = {
   hidden: {
     opacity: 0,
-    y: 100,
+    y: 130,
   },
   show: {
     opacity: 1,
     y: 0,
-    transition: {
-      ...transition,
-    },
+    transition,
   },
   exit: {
     opacity: 0,
-    transition: {
-      ...transition,
-    },
   },
 };
 
@@ -40,11 +35,7 @@ const rootVariants = {
  * @returns
  */
 const ProjectCard = ({
-  bannerColor,
-  image,
-  name,
-  category,
-  year,
+  bannerColor, image, name, category, year, ...rest
 }) => {
   // redux
   const dispatch = useDispatch();
@@ -59,6 +50,7 @@ const ProjectCard = ({
 
   return (
     <motion.div
+      {...rest}
       className={styles.root}
       variants={rootVariants}
       initial="hidden"

@@ -15,17 +15,16 @@ import actionType from 'src/redux/actionType';
 const headerVariants = {
   initial: {
     opacity: 0,
-    y: 100,
+    y: 130,
   },
   animate: {
     opacity: 1,
     y: 0,
-    transition: {
-      ...transition,
-    },
+    transition,
   },
   exit: {
     opacity: 0,
+    transition,
   },
 };
 
