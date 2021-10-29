@@ -22,15 +22,19 @@ import { useRouter } from 'next/router';
 const tabVariants = {
   hidden: {
     opacity: 0,
-    y: 130,
+    y: '100%',
   },
   show: {
     opacity: 1,
     y: 0,
-    transition,
+    transition: {
+      ...transition,
+      delay: transition.duration,
+    },
   },
   exit: {
     opacity: 0,
+    transition,
   },
 };
 
@@ -83,11 +87,11 @@ export default function Work({ projects, categories }) {
 
   return (
     <MainLayout title="Work">
-      <Container>
+      <Container maxWidth="md">
         <Grid container>
           <Grid item xs={12}>
             <Hero
-              leftTitle="Work."
+              leftTitle="Work_"
               rightTitle={`v${process.env.APP_VERSION}`}
             />
           </Grid>
@@ -132,6 +136,7 @@ export default function Work({ projects, categories }) {
                                   name={project.name}
                                   category={project.category}
                                   year={project.year}
+                                  slug={project.slug}
                                 />
                               </Grid>
                             );

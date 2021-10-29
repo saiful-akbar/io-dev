@@ -1,4 +1,4 @@
-import { Grid, Typography } from '@mui/material';
+import { Grid } from '@mui/material';
 import { motion } from 'framer-motion';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -12,7 +12,7 @@ const heroVariants = {
   hidden: false,
   show: {
     transition: {
-      staggerChildren: 0.02,
+      staggerChildren: 0.15,
     },
   },
   exit: {
@@ -25,13 +25,11 @@ const heroVariants = {
 const titleVariants = {
   hidden: {
     opacity: 0,
-    y: 130,
-    skewY: 10,
+    y: '80%',
   },
   show: {
     opacity: 1,
     y: 0,
-    skewY: 0,
     transition,
   },
   exit: {
@@ -79,27 +77,26 @@ const Hero = ({ leftTitle, rightTitle }) => (
       alignItems="flex-end"
     >
       <Grid item lg={10} xs={12} mb={3} className={styles.titleWrapper}>
-        <Typography
-          className={styles.title}
-          component={motion.h1}
-          variants={titleVariants}
-        >
-          {leftTitle}
-        </Typography>
+        <h1 className={styles.title}>
+          {leftTitle.split(' ').map((title, key) => (
+            <span className={styles.textMask} key={key}>
+              <motion.span style={{ display: 'inline-block' }} variants={titleVariants}>
+                {title}
+              </motion.span>
+            </span>
+          ))}
+        </h1>
       </Grid>
 
       <Grid item lg={2} xs={12} mb={3}>
-        <Typography
-          noWrap
-          component={motion.div}
-          className={styles.version}
-          variants={titleVariants}
-        >
-          {rightTitle}
-        </Typography>
+        <span className={styles.textMask}>
+          <motion.span className={styles.version} variants={titleVariants}>
+            {rightTitle}
+          </motion.span>
+        </span>
       </Grid>
 
-      <Grid item xs={12} mt={15}>
+      <Grid item xs={12}>
         <motion.div className={styles.divider} variants={dividerVariants} />
       </Grid>
     </Grid>

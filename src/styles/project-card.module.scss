@@ -9,6 +9,10 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
+
+  @media only screen and (max-width: variables.$breakpoints-md) {
+    height: 400px;
+  }
 }
 
 .banner {
@@ -26,7 +30,7 @@
 .image {
   object-fit: contain;
   max-width: 80%;
-  max-height: 70%;
+  max-height: 65%;
   z-index: 2;
   pointer-events: none;
 
@@ -66,5 +70,15 @@
 
   @media only screen and (max-width: variables.$breakpoints-md) {
     display: none;
+  }
+}
+
+.textMask {
+  display: inline-block;
+  vertical-align: center;
+  overflow: hidden;
+
+  span {
+    display: inline-block;
   }
 }

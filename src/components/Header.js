@@ -15,7 +15,7 @@ import actionType from 'src/redux/actionType';
 const headerVariants = {
   initial: {
     opacity: 0,
-    y: 130,
+    y: '10vh',
   },
   animate: {
     opacity: 1,
@@ -40,7 +40,7 @@ const NavItem = ({ title, href }) => {
 
   // ubah value width jika link active
   useEffect(() => {
-    if (router.asPath === href) {
+    if (router.route === href) {
       setWidth(25);
     } else {
       setWidth(10);
@@ -49,7 +49,7 @@ const NavItem = ({ title, href }) => {
 
   // fungsi handle hover nav link
   const handleHover = (value) => {
-    if (router.asPath !== href) {
+    if (router.route !== href) {
       if (value) {
         setWidth(20);
       } else {
@@ -64,7 +64,7 @@ const NavItem = ({ title, href }) => {
         onHoverStart={() => handleHover(true)}
         onHoverEnd={() => handleHover(false)}
         className={clsx(styles.navLink, {
-          [styles.active]: router.asPath === href,
+          [styles.active]: router.route === href,
         })}
       >
         <span>{title}</span>

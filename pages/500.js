@@ -5,11 +5,8 @@ import MainLayout from 'src/layouts/MainLayout';
 export default function Custom500() {
   return (
     <MainLayout title="500">
-      <Container>
-        <Hero
-          leftTitle={['5', '0', '0', '_']}
-          rightTitle="Internal server error"
-        />
+      <Container maxWIdth="md">
+        <Hero leftTitle="500_" rightTitle="Internal server error" />
       </Container>
     </MainLayout>
   );

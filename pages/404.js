@@ -5,11 +5,8 @@ import MainLayout from 'src/layouts/MainLayout';
 export default function Custom404() {
   return (
     <MainLayout title="404">
-      <Container>
-        <Hero
-          leftTitle={['4', '0', '4', '_']}
-          rightTitle="Page not found"
-        />
+      <Container maxWidth="md">
+        <Hero leftTitle="404_" rightTitle="Page not found" />
       </Container>
     </MainLayout>
   );

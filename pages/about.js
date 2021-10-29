@@ -23,7 +23,7 @@ export default function About() {
 
   return (
     <MainLayout title="About">
-      <Container>
+      <Container maxWidth="md">
         <Hero
           leftTitle="About."
           rightTitle={`v${process.env.APP_VERSION}`}
