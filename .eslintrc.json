@@ -21,6 +21,7 @@
     "react/react-in-jsx-scope": "off",
     "import/no-unresolved": "off",
     "jsx-a11y/anchor-is-valid": "off",
-    "react/no-array-index-key": "off"
+    "react/no-array-index-key": "off",
+    "max-len": "off"
   }
 }

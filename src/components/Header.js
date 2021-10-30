@@ -8,23 +8,26 @@ import styles from 'src/styles/header.module.scss';
 import transition from 'src/transition';
 import { useDispatch } from 'react-redux';
 import actionType from 'src/redux/actionType';
+import { Box } from '@mui/material';
 
 /**
  * animasi varian
  */
 const headerVariants = {
-  initial: {
+  hidden: {
     opacity: 0,
-    y: 130,
+    y: '10vh',
   },
-  animate: {
+  show: {
     opacity: 1,
     y: 0,
-    transition,
+    transition: {
+      ...transition,
+      delay: 0.5,
+    },
   },
   exit: {
     opacity: 0,
-    transition,
   },
 };
 
@@ -40,7 +43,7 @@ const NavItem = ({ title, href }) => {
 
   // ubah value width jika link active
   useEffect(() => {
-    if (router.asPath === href) {
+    if (router.route === href) {
       setWidth(25);
     } else {
       setWidth(10);
@@ -49,7 +52,7 @@ const NavItem = ({ title, href }) => {
 
   // fungsi handle hover nav link
   const handleHover = (value) => {
-    if (router.asPath !== href) {
+    if (router.route !== href) {
       if (value) {
         setWidth(20);
       } else {
@@ -64,7 +67,7 @@ const NavItem = ({ title, href }) => {
         onHoverStart={() => handleHover(true)}
         onHoverEnd={() => handleHover(false)}
         className={clsx(styles.navLink, {
-          [styles.active]: router.asPath === href,
+          [styles.active]: router.route === href,
         })}
       >
         <span>{title}</span>
@@ -104,7 +107,7 @@ const links = [
  * komponen utama
  * @returns
  */
-const Header = () => {
+const Header = ({ ...rest }) => {
   // redux
   const dispatch = useDispatch();
 
@@ -116,34 +119,33 @@ const Header = () => {
   };
 
   return (
-    <>
+    <React.Fragment {...rest}>
+
       {/* logo */}
-      <motion.div
-        className={styles.logo}
-        variants={headerVariants}
-        initial="initial"
-        animate="animate"
-        exit="exit"
-        onHoverStart={() => handleHover(true)}
-        onHoverEnd={() => handleHover(false)}
-      >
-        <Link href="/" scroll={false}>
-          <a>
-            <img
-              src="/images/logo/logo-dark.png"
-              alt="logo"
-              className={styles.image}
-            />
-          </a>
-        </Link>
-      </motion.div>
+      <Link href="/" scroll={false}>
+        <a>
+          <Box
+            component={motion.img}
+            boxShadow={2}
+            src="/images/logo/logo-dark.png"
+            alt="logo"
+            className={styles.logo}
+            variants={headerVariants}
+            initial="hidden"
+            animate="show"
+            exit="exit"
+            onHoverStart={() => handleHover(true)}
+            onHoverEnd={() => handleHover(false)}
+          />
+        </a>
+      </Link>
 
       {/* navbar */}
       <motion.nav
         className={styles.nav}
         variants={headerVariants}
-        initial="initial"
-        animate="animate"
+        initial="hidden"
+        animate="show"
         exit="exit"
       >
         <ul>
@@ -160,7 +162,7 @@ const Header = () => {
         </ul>
       </motion.nav>
       {/* end navbar */}
-    </>
+    </React.Fragment>
   );
 };
 

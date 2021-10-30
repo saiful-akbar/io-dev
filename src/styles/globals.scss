@@ -9,6 +9,7 @@
 
 #__next {
   background-color: variables.$bg-default;
+  height: 100%;
 }
 
 html,
@@ -19,20 +20,34 @@ body {
 body {
   width: 100%;
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
 a {
   text-decoration: none;
 }
 
-/* mui Container */
-.MuiContainer-root {
-  padding-left: 20px !important;
-  padding-right: 20px !important;
+@media screen and(max-width: variables.$breakpoints-md) {
+  .MuiContainer-root {
+    padding: 0 35px !important;
+  }
 }
 
 @media (min-width: 960px) {
-  .MuiContainer-maxWidthLg {
+  .MuiContainer-maxWidthMd {
     max-width: 1020px !important;
+  }
+}
+
+// text mask
+.textMask {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  margin: -0.2em;
+  padding: 0.2em;
+
+  .text {
+    display: inline-block;
   }
 }

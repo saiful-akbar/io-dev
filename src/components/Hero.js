@@ -1,4 +1,4 @@
-import { Grid, Typography } from '@mui/material';
+import { Grid } from '@mui/material';
 import { motion } from 'framer-motion';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -12,7 +12,7 @@ const heroVariants = {
   hidden: false,
   show: {
     transition: {
-      staggerChildren: 0.02,
+      staggerChildren: 0.15,
     },
   },
   exit: {
@@ -25,7 +25,7 @@ const heroVariants = {
 const titleVariants = {
   hidden: {
     opacity: 0,
-    y: 130,
+    y: '80%',
     skewY: 10,
   },
   show: {
@@ -36,18 +36,19 @@ const titleVariants = {
   },
   exit: {
     opacity: 0,
-    transition,
   },
 };
 
 const dividerVariants = {
   hidden: {
     opacity: 0,
-    width: 0,
+    scaleX: 0,
+    originX: 0,
   },
   show: {
     opacity: 1,
-    width: '100%',
+    scaleX: 1,
+    originX: 0,
     transition: {
       duration: 1,
       ease: transition.ease,
@@ -55,8 +56,6 @@ const dividerVariants = {
   },
   exit: {
     opacity: 0,
-    width: 0,
-    transition,
   },
 };
 
@@ -79,27 +78,26 @@ const Hero = ({ leftTitle, rightTitle }) => (
       alignItems="flex-end"
     >
       <Grid item lg={10} xs={12} mb={3} className={styles.titleWrapper}>
-        <Typography
-          className={styles.title}
-          component={motion.h1}
-          variants={titleVariants}
-        >
-          {leftTitle}
-        </Typography>
+        <h1 className={styles.title}>
+          {leftTitle.split(' ').map((title, key) => (
+            <span className={styles.textMask} key={key}>
+              <motion.span style={{ display: 'inline-block' }} variants={titleVariants}>
+                {title}
+              </motion.span>
+            </span>
+          ))}
+        </h1>
       </Grid>
 
       <Grid item lg={2} xs={12} mb={3}>
-        <Typography
-          noWrap
-          component={motion.div}
-          className={styles.version}
-          variants={titleVariants}
-        >
-          {rightTitle}
-        </Typography>
+        <span className={styles.textMask}>
+          <motion.span className={styles.version} variants={titleVariants}>
+            {rightTitle}
+          </motion.span>
+        </span>
       </Grid>
 
-      <Grid item xs={12} mt={15}>
+      <Grid item xs={12}>
         <motion.div className={styles.divider} variants={dividerVariants} />
       </Grid>
     </Grid>

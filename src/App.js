@@ -6,7 +6,10 @@ import { useSelector } from 'react-redux';
 import theme from 'src/theme';
 import Header from 'src/components/Header';
 import NextNprogress from 'nextjs-progressbar';
+import { useRouter } from 'next/router';
+import { AnimatePresence } from 'framer-motion';
 import Cursor from './components/Cursor';
+import ScrollToTop from './components/ScrollToTop';
 
 /**
  * komponen utama
@@ -14,6 +17,8 @@ import Cursor from './components/Cursor';
  * @returns
  */
 export default function App({ children }) {
+  const router = useRouter();
+
   // redux state
   const { settings } = useSelector((state) => state.globalReducer);
 
@@ -41,10 +46,16 @@ export default function App({ children }) {
 
       <ThemeProvider theme={theme}>
         <CssBaseline />
+        <div id="top" />
         <Cursor />
-        <Header />
+
+        <AnimatePresence exitBeforeEnter>
+          {router.route !== '/project/[slug]' && <Header key={router.query} />}
+        </AnimatePresence>
 
         {children}
+
+        <ScrollToTop />
       </ThemeProvider>
     </>
   );

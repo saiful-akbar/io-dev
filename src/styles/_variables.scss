@@ -3,8 +3,12 @@ $bg-default: #f7f7f7 !default;
 $bg-paper: #fff !default;
 
 /* text */
-$text-primary: #424242 !default;
-$text-secondary: #bdbdbd !default;
+$text-primary: rgba(0, 0, 0, 0.87) !default;
+$text-secondary: rgba(0, 0, 0, 0.3) !default;
+$text-disabled: rgba(0, 0, 0, 0.2) !default;
+$text-light-primary: #fff !default;
+$text-light-secondary: rgba(255, 255, 255, 0.6) !default;
+$text-light-disabled: rgba(255, 255, 255, 0.4) !default;
 
 /* color */
 $color-primary: #424242 !default;
