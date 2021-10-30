@@ -26,26 +26,29 @@ const titleVariants = {
   hidden: {
     opacity: 0,
     y: '80%',
+    skewY: 10,
   },
   show: {
     opacity: 1,
     y: 0,
+    skewY: 0,
     transition,
   },
   exit: {
     opacity: 0,
-    transition,
   },
 };
 
 const dividerVariants = {
   hidden: {
     opacity: 0,
-    width: 0,
+    scaleX: 0,
+    originX: 0,
   },
   show: {
     opacity: 1,
-    width: '100%',
+    scaleX: 1,
+    originX: 0,
     transition: {
       duration: 1,
       ease: transition.ease,
@@ -53,8 +56,6 @@ const dividerVariants = {
   },
   exit: {
     opacity: 0,
-    width: 0,
-    transition,
   },
 };
 

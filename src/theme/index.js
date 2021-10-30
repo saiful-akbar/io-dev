@@ -10,11 +10,15 @@ const theme = createTheme({
       paper: '#fff',
     },
     text: {
-      primary: '#424242',
-      secondary: '#bdbdbd',
+      primary: 'rgb(66, 66, 66)',
+      secondary: 'rgba(66, 66, 66, 0.3)',
+      disabled: 'rgba(66, 66, 66, 0.2)',
+      lightPrimary: 'rgb(255, 255, 255)',
+      lightSecondary: 'rgba(255, 255, 255, 0.6)',
+      lightDisabled: 'rgba(255, 255, 255, 0.4)',
     },
     primary: {
-      main: '#424242',
+      main: 'rgb(66, 66, 66)',
     },
   },
   typography,

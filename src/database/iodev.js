@@ -7,8 +7,9 @@ const iodev = {
       slug: 'naikdaun',
       category: 'web',
       year: 2021,
-      bannerColor: '#391A8F',
-      heroImage: '/images/projects/naikdaun.jpg',
+      bannerColor: '#7552BC',
+      url: 'https://naikdaun.id/',
+      heroImage: '/images/projects/naikdaun.png',
     },
     {
       id: 2,
@@ -17,6 +18,7 @@ const iodev = {
       category: 'web',
       year: 2021,
       bannerColor: '#353535',
+      url: 'https://github.com/saiful-akbar/scooter-work-shop/',
       heroImage: '/images/projects/2.jpg',
     },
     {
@@ -25,8 +27,9 @@ const iodev = {
       slug: 'slow-motor-inventory',
       category: 'web',
       year: 2021,
-      bannerColor: '#353741',
-      heroImage: '/images/projects/3.jpg',
+      bannerColor: '#990011',
+      url: 'https://github.com/saiful-akbar/slow-motor-inventory/',
+      heroImage: '/images/projects/1.jpg',
     },
     {
       id: 4,
@@ -35,6 +38,7 @@ const iodev = {
       category: 'web',
       year: 2021,
       bannerColor: '#363638',
+      url: '#',
       heroImage: '/images/projects/4.jpg',
     },
     {
@@ -44,6 +48,7 @@ const iodev = {
       category: 'ui/ux',
       year: 2021,
       bannerColor: '#3E3F42',
+      url: '#',
       heroImage: '/images/projects/5.jpg',
     },
     {
@@ -53,6 +58,7 @@ const iodev = {
       category: 'ui/ux',
       year: 2021,
       bannerColor: '#BA0E28',
+      url: '#',
       heroImage: '/images/projects/6.jpg',
     },
     {
@@ -62,6 +68,7 @@ const iodev = {
       category: 'ui/ux',
       year: 2021,
       bannerColor: '#008BFF',
+      url: '#',
       heroImage: '/images/projects/7.jpg',
     },
   ],

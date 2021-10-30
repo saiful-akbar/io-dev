@@ -1,6 +1,7 @@
 const typography = {
   h1: {
     fontWeight: 500,
+    fontSize: '5em',
   },
   h2: {
     fontWeight: 500,

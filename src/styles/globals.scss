@@ -27,10 +27,10 @@ a {
   text-decoration: none;
 }
 
-/* mui Container */
-.MuiContainer-root {
-  padding-left: 20px !important;
-  padding-right: 20px !important;
+@media screen and(max-width: variables.$breakpoints-md) {
+  .MuiContainer-root {
+    padding: 0 35px !important;
+  }
 }
 
 @media (min-width: 960px) {

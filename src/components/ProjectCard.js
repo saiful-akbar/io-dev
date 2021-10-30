@@ -1,12 +1,12 @@
-import { Icon, Box } from '@mui/material';
+import { Box, Icon } from '@mui/material';
 import { motion } from 'framer-motion';
+import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import actionType from 'src/redux/actionType';
 import styles from 'src/styles/project-card.module.scss';
 import transition from 'src/transition';
-import { useRouter } from 'next/router';
 
 /**
  * animasi variant
@@ -21,6 +21,7 @@ const rootVariants = {
   exit: {
     transition: {
       when: 'afterChildren',
+      staggerChildren: 5,
     },
   },
 };
@@ -38,7 +39,6 @@ const titleVariants = {
   },
   exit: {
     opacity: 0,
-    transition,
   },
 };
 
@@ -54,7 +54,6 @@ const imageVariants = {
   },
   exit: {
     opacity: 0,
-    transition,
   },
 };
 
@@ -80,7 +79,6 @@ const ProjectCard = ({
   const [show, setShow] = useState(false);
   const [exit, setExit] = useState({
     opacity: 0,
-    transition,
   });
 
   // fungsi untuk menampilkan text ketika seluruh elemen ada dalam viewport
@@ -191,11 +189,14 @@ const ProjectCard = ({
         }}
       />
 
-      <motion.img
+      <Box
+        boxShadow={3}
+        component={motion.img}
         src={image}
         alt={name}
         className={styles.image}
         variants={imageVariants}
+        sx={{ borderRadius: 5 }}
       />
 
       <div className={styles.topText} data-show={show}>
