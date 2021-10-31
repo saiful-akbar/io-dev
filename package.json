@@ -1,8 +1,21 @@
 {
-  "name": "io-dev-v3",
-  "version": "0.1.0",
+  "name": "io-dev",
+  "version": "3.0.0",
   "private": true,
+  "homepage": "/",
+  "author": {
+    "name": "Saiful Akbar",
+    "email": "saifulakbar.app@gmail.com"
+  },
   "dependencies": {
+    "@emotion/react": "^11.5.0",
+    "@emotion/styled": "^11.3.0",
+    "@mui/icons-material": "^5.0.4",
+    "@mui/lab": "^5.0.0-alpha.52",
+    "@mui/material": "^5.0.4",
+    "@mui/styled-engine": "npm:@mui/styled-engine-sc@5.0.3",
+    "@mui/styled-engine-sc": "^5.0.3",
+    "@mui/styles": "^5.0.1",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
@@ -40,5 +53,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "devDependencies": {}
 }

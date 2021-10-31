@@ -2,16 +2,16 @@ import actionType from "../actionType";
 
 // state
 const initialState = {
-  cursorHover: false,
+  sharedLayout: false,
 };
 
 // fungsi reducer untuk mengambil atau merubah state
-const globalReducer = (state = initialState, action) => {
+const projectReducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionType.setGlobalCursorHover:
+    case actionType.setProjectSharedLayout:
       return {
         ...state,
-        cursorHover: action.value,
+        sharedLayout: action.value,
       };
 
     default:
@@ -21,4 +21,4 @@ const globalReducer = (state = initialState, action) => {
   }
 };
 
-export default globalReducer;
+export default projectReducer;
