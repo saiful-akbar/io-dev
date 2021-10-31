@@ -1,0 +1,13 @@
+{
+  "categories": ["web", "ui/ux"],
+  "projects": [
+    {
+      "id": 1,
+      "name": "Naikdaun",
+      "slug": "naikdaun",
+      "category": "web",
+      "year": 2021,
+      "heroImage": "/assets/images/projects/naikdaun/hero.png"
+    }
+  ]
+}

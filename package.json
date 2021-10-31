@@ -1,51 +1,44 @@
 {
-  "name": "io-dev-nextjs",
+  "name": "io-dev-v3",
   "version": "0.1.0",
   "private": true,
-  "homepage": "/",
-  "author": {
-    "email": "saifulakbar.app@gmail.com",
-    "name": "Saiful Akbar",
-    "url": "https://saifulakbar.vercel.app"
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
+    "node-sass": "^6.0.1",
+    "prop-types": "^15.7.2",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-redux": "^7.2.6",
+    "react-router-dom": "^5.3.0",
+    "react-scripts": "4.0.3",
+    "redux": "^4.1.2",
+    "redux-thunk": "^2.4.0",
+    "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   },
-  "dependencies": {
-    "@emotion/cache": "^11.5.0",
-    "@emotion/react": "^11.5.0",
-    "@emotion/server": "^11.4.0",
-    "@emotion/styled": "^11.3.0",
-    "@mui/icons-material": "^5.0.4",
-    "@mui/lab": "^5.0.0-alpha.52",
-    "@mui/material": "^5.0.4",
-    "@mui/styled-engine": "npm:@mui/styled-engine-sc@5.0.3",
-    "@mui/styled-engine-sc": "^5.0.3",
-    "@mui/styles": "^5.0.1",
-    "clsx": "^1.1.1",
-    "framer-motion": "^4.1.17",
-    "next": "11.1.2",
-    "next-pwa": "^5.4.0",
-    "nextjs-progressbar": "^0.0.11",
-    "prop-types": "^15.7.2",
-    "react": "17.0.2",
-    "react-dom": "17.0.2",
-    "react-redux": "^7.2.5",
-    "redux": "^4.1.1",
-    "redux-thunk": "^2.3.0",
-    "sass": "^1.43.3",
-    "styled-components": "^5.3.3"
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
   },
-  "devDependencies": {
-    "eslint": "^7.32.0",
-    "eslint-config-airbnb": "^18.2.1",
-    "eslint-config-next": "11.1.2",
-    "eslint-plugin-import": "^2.25.2",
-    "eslint-plugin-jsx-a11y": "^6.4.1",
-    "eslint-plugin-react": "^7.26.1",
-    "eslint-plugin-react-hooks": "^4.2.0"
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
