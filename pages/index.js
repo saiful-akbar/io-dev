@@ -22,19 +22,15 @@ import { useRouter } from 'next/router';
 const tabVariants = {
   hidden: {
     opacity: 0,
-    y: '100%',
+    y: 150,
   },
   show: {
     opacity: 1,
     y: 0,
-    transition: {
-      ...transition,
-      delay: transition.duration,
-    },
+    transition,
   },
   exit: {
     opacity: 0,
-    transition,
   },
 };
 

@@ -4,6 +4,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import actionType from 'src/redux/actionType';
 import transition from 'src/transition';
+import { useTheme } from '@mui/material/styles';
 
 /**
  * Animasi varian
@@ -33,6 +34,8 @@ const rootVariants = {
  */
 const ScrollToTop = () => {
   const dispatch = useDispatch();
+  const theme = useTheme();
+  const { text } = theme.palette;
 
   // state
   const [inView, setInView] = React.useState(false);
@@ -51,6 +54,8 @@ const ScrollToTop = () => {
       } else {
         setShow(false);
       }
+    } else {
+      setShow(true);
     }
 
     // cek element project hero
@@ -61,6 +66,8 @@ const ScrollToTop = () => {
       } else {
         setInView(true);
       }
+    } else {
+      setInView(false);
     }
   }, [setInView]);
 
@@ -111,6 +118,7 @@ const ScrollToTop = () => {
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: '100%',
+        border: `1px solid ${inView ? text.lightDisabled : text.disabled}`,
         padding: 1.5,
         zIndex: 2000,
         position: 'fixed',
@@ -122,20 +130,11 @@ const ScrollToTop = () => {
           lg: 60,
           xs: 25,
         },
-        border: (themeValue) => `1px solid ${
-          inView
-            ? themeValue.palette.text.lightDisabled
-            : themeValue.palette.text.disabled
-        }`,
       }}
     >
       <Icon
         sx={{
-          color: (themeValue) => (
-            inView
-              ? themeValue.palette.text.lightPrimary
-              : themeValue.palette.text.primary
-          ),
+          color: inView ? text.lightPrimary : text.primary,
         }}
       >
         north

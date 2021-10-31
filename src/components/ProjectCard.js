@@ -1,12 +1,23 @@
 import { Box, Icon } from '@mui/material';
+import { makeStyles } from '@mui/styles';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import actionType from 'src/redux/actionType';
-import styles from 'src/styles/project-card.module.scss';
 import transition from 'src/transition';
+
+const useStyles = makeStyles(() => ({
+  textMask: {
+    display: 'inline-block',
+    verticalAlign: 'center',
+    overflow: 'hidden',
+    '& span': {
+      display: 'inline-block',
+    },
+  },
+}));
 
 /**
  * animasi variant
@@ -15,13 +26,14 @@ const rootVariants = {
   hidden: false,
   show: {
     transition: {
-      staggerChildren: 0.15,
+      staggerChildren: 0.05,
+      when: 'beforeChildren',
     },
   },
   exit: {
     transition: {
+      staggerChildren: 0.05,
       when: 'afterChildren',
-      staggerChildren: 5,
     },
   },
 };
@@ -30,12 +42,18 @@ const titleVariants = {
   hidden: {
     opacity: 0,
     y: '100%',
-    transition,
+    transition: {
+      duration: transition.duration / 2,
+      ease: transition.ease,
+    },
   },
   show: {
     opacity: 1,
     y: 0,
-    transition,
+    transition: {
+      duration: transition.duration / 2,
+      ease: transition.ease,
+    },
   },
   exit: {
     opacity: 0,
@@ -69,35 +87,35 @@ const imageVariants = {
 const ProjectCard = ({
   bannerColor, image, name, category, year, slug, ...rest
 }) => {
-  const ref = useRef(null);
   const router = useRouter();
+  const ref = React.useRef();
+  const classes = useStyles();
 
   // redux
   const dispatch = useDispatch();
 
   // state
-  const [show, setShow] = useState(false);
-  const [exit, setExit] = useState({
-    opacity: 0,
-  });
+  const [show, setShow] = React.useState(false);
+  const [animateExit, setAnimateExit] = React.useState({ opacity: 0 });
 
   // fungsi untuk menampilkan text ketika seluruh elemen ada dalam viewport
-  const handleShowTextOnScroll = React.useCallback(
-    () => {
-      const { top, height } = ref.current.getBoundingClientRect();
-      const diffTop = window.innerHeight - height;
+  const handleShowTextOnScroll = React.useCallback(() => {
+    const {
+      top,
+      height,
+    } = ref.current.getBoundingClientRect();
 
-      if (top < diffTop) {
-        return setShow(true);
-      }
+    const diffTop = window.innerHeight - height;
 
-      return setShow(false);
-    },
-    [ref, setShow],
-  );
+    if (top < diffTop) {
+      setShow(true);
+    } else {
+      setShow(false);
+    }
+  }, [ref, setShow]);
 
   // handle viewport scroll
-  useEffect(() => {
+  React.useEffect(() => {
     window.addEventListener('scroll', handleShowTextOnScroll);
 
     return () => {
@@ -106,7 +124,7 @@ const ProjectCard = ({
   }, [handleShowTextOnScroll]);
 
   // set value state cursorHover ketika element di hover
-  const handleHover = (isHover) => {
+  const handleCursorHover = (isHover) => {
     dispatch({
       type: actionType.setGlobalCursorHover,
       value: isHover,
@@ -114,27 +132,25 @@ const ProjectCard = ({
   };
 
   // handle click card
-  const handleClick = () => {
-    const { top, left } = ref.current.getBoundingClientRect();
-    setExit({
+  const handleTap = (event) => {
+    const domRect = event.target.getBoundingClientRect();
+
+    setAnimateExit({
+      borderRadius: 0,
       opacity: 1,
-      y: -top,
-      x: -left,
+      y: -domRect.top,
+      x: -domRect.left,
       height: window.innerHeight,
       width: window.innerWidth,
-      borderRadius: 0,
       transition: {
-        duration: 0.6,
-        ease: transition.ease,
-        width: {
-          duration: 0.6,
-          ease: transition.ease,
-          delay: 0.6 / 3,
+        ...transition,
+        y: {
+          ...transition,
+          delay: transition.duration / 4,
         },
-        x: {
-          duration: 0.6,
-          ease: transition.ease,
-          delay: 0.6 / 3,
+        height: {
+          ...transition,
+          delay: transition.duration / 4,
         },
       },
     });
@@ -146,32 +162,45 @@ const ProjectCard = ({
     });
 
     // push ke halaman project detail
-    router.push(`/project/${slug}`, undefined, { scroll: false });
+    router.push(`/project/${slug}`, undefined, {
+      scroll: false,
+    });
   };
 
   return (
-    <motion.div
+    <Box
       {...rest}
-      className={styles.root}
+      component={motion.div}
+      ref={ref}
       variants={rootVariants}
       initial="hidden"
       animate="show"
       exit="exit"
-      ref={ref}
-      onClick={handleClick}
+      onTap={handleTap}
+      sx={{
+        position: 'relative',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '100%',
+        height: {
+          md: 460,
+          xs: 400,
+        },
+      }}
     >
+
+      {/* banner */}
       <Box
-        component={motion.div}
         boxShadow={3}
-        style={{ backgroundColor: bannerColor }}
-        className={styles.banner}
-        onHoverStart={() => handleHover(true)}
-        onHoverEnd={() => handleHover(false)}
-        whileHover={{ scale: 1.03 }}
-        transition={{ ...transition }}
+        component={motion.div}
+        onHoverStart={() => handleCursorHover(true)}
+        onHoverEnd={() => handleCursorHover(false)}
+        transition={transition}
         initial="hidden"
         animate="show"
         exit="exit"
+        whileHover={{ scale: 1.03 }}
         variants={{
           hidden: {
             opacity: 0,
@@ -183,24 +212,55 @@ const ProjectCard = ({
             y: 1,
             transition,
           },
-          exit: {
-            ...exit,
-          },
+          exit: animateExit,
+        }}
+        sx={{
+          backgroundColor: bannerColor,
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          borderRadius: 3,
+          overflow: 'hidden',
         }}
       />
 
+      {/* Image */}
       <Box
         boxShadow={3}
         component={motion.img}
+        variants={imageVariants}
         src={image}
         alt={name}
-        className={styles.image}
-        variants={imageVariants}
-        sx={{ borderRadius: 5 }}
+        loading="eager"
+        sx={{
+          objectFit: 'contain',
+          maxWidth: '80%',
+          maxHeight: '65%',
+          pointerEvents: 'none',
+          position: 'absolute',
+          borderRadius: '10px',
+        }}
       />
 
-      <div className={styles.topText} data-show={show}>
-        <span className={styles.textMask}>
+      {/* Top text */}
+      <Box
+        sx={{
+          position: 'absolute',
+          top: 30,
+          width: '100%',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          color: '#fff',
+          fontSize: 17,
+          fontWeight: 500,
+          padding: '0 35px',
+          pointerEvents: 'none',
+        }}
+      >
+        <span className={classes.textMask}>
           <motion.span
             variants={titleVariants}
             initial="hidden"
@@ -211,7 +271,7 @@ const ProjectCard = ({
           </motion.span>
         </span>
 
-        <span className={styles.textMask}>
+        <span className={classes.textMask}>
           <motion.span
             variants={titleVariants}
             initial="hidden"
@@ -221,10 +281,29 @@ const ProjectCard = ({
             <Icon>east</Icon>
           </motion.span>
         </span>
-      </div>
+      </Box>
+      {/* End top text */}
 
-      <div className={styles.bottomText}>
-        <span className={styles.textMask}>
+      {/* Bottom text */}
+      <Box
+        sx={{
+          position: 'absolute',
+          bottom: 30,
+          width: '100%',
+          display: {
+            md: 'flex',
+            xs: 'none',
+          },
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          color: '#fff',
+          fontSize: 13,
+          fontWeight: 500,
+          padding: '0 35px',
+          pointerEvents: 'none',
+        }}
+      >
+        <span className={classes.textMask}>
           <motion.span
             variants={titleVariants}
             initial="hidden"
@@ -235,7 +314,7 @@ const ProjectCard = ({
           </motion.span>
         </span>
 
-        <span className={styles.textMask}>
+        <span className={classes.textMask}>
           <motion.span
             variants={titleVariants}
             initial="hidden"
@@ -245,8 +324,10 @@ const ProjectCard = ({
             {year}
           </motion.span>
         </span>
-      </div>
-    </motion.div>
+      </Box>
+      {/* End bottom text */}
+
+    </Box>
   );
 };
 

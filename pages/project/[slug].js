@@ -5,8 +5,8 @@ import ProjectHero from 'src/components/ProjectHero';
 import ProjectHeader from 'src/components/ProjectHeader';
 import MainLayout from 'src/layouts/MainLayout';
 import actionType from 'src/redux/actionType';
-import iodev from 'src/database/iodev';
 import { Container, Grid } from '@mui/material';
+import iodev from 'src/database/iodev';
 
 /**
  * Komponen utama ProjectDetail
@@ -73,15 +73,14 @@ ProjectDetail.propTypes = {
  *
  * @returns Object
  */
-export async function getStaticPaths() {
+export function getStaticPaths() {
   const { projects } = iodev;
-
-  // Dapatkan jalur yang ingin di pra-render berdasarkan slug project
   const paths = projects.map((value) => ({
-    params: { slug: value.slug },
+    params: {
+      slug: value.slug,
+    },
   }));
 
-  // { fallback: false } jika slug tidak ditemukan akan diarahkan ke /404.
   return { paths, fallback: false };
 }
 
@@ -91,13 +90,10 @@ export async function getStaticPaths() {
  * @param {Object} params
  * @returns
  */
-export async function getStaticProps({ params }) {
+export function getStaticProps({ params }) {
   const { projects } = iodev;
-
-  // ambil data project berdasarkan slug-nya
   const project = projects.find((data) => data.slug === params.slug);
 
-  // cek apakah data ada atau tidak
   if (!project) {
     return {
       redirect: {

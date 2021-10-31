@@ -6,6 +6,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import actionType from 'src/redux/actionType';
 import transition from 'src/transition';
+import { useTheme } from '@mui/material/styles';
 
 /**
  * Animasi varian
@@ -16,7 +17,7 @@ import transition from 'src/transition';
 const headerVariants = {
   hidden: {
     opacity: 0,
-    y: '10vh',
+    y: 150,
   },
   show: {
     opacity: 1,
@@ -36,6 +37,8 @@ const headerVariants = {
  */
 const ProjectHeader = ({ url }) => {
   const dispatch = useDispatch();
+  const theme = useTheme();
+  const { text } = theme.palette;
 
   // state
   const [inView, setInView] = React.useState(true);
@@ -170,20 +173,12 @@ const ProjectHeader = ({ url }) => {
                   lg: 0,
                   xs: 2,
                 },
-                border: (themeValue) => `1px solid ${
-                  inView
-                    ? themeValue.palette.text.lightDisabled
-                    : themeValue.palette.text.disabled
-                }`,
+                border: `1px solid ${inView ? text.lightDisabled : text.disabled}`,
               }}
             >
               <Icon
                 sx={{
-                  color: (themeValue) => (
-                    inView
-                      ? themeValue.palette.text.lightPrimary
-                      : themeValue.palette.text.primary
-                  ),
+                  color: inView ? text.lightPrimary : text.primary,
                 }}
               >
                 west
@@ -213,20 +208,12 @@ const ProjectHeader = ({ url }) => {
             justifyContent: 'center',
             alignItems: 'center',
             padding: 1.5,
-            border: (themeValue) => `1px solid ${
-              inView
-                ? themeValue.palette.text.lightDisabled
-                : themeValue.palette.text.disabled
-            }`,
+            border: `1px solid ${inView ? text.lightDisabled : text.disabled}`,
           }}
         >
           <Icon
             sx={{
-              color: (themeValue) => (
-                inView
-                  ? themeValue.palette.text.lightPrimary
-                  : themeValue.palette.text.primary
-              ),
+              color: inView ? text.lightPrimary : text.primary,
             }}
           >
             north_east
