@@ -1,4 +1,4 @@
 export default {
-  duration: 0.5,
-  ease: [0.70, 0.30, 0.40, 1.0],
+  duration: 1.5,
+  ease: [0.6, 0.01, -0.05, 0.95],
 };

@@ -16,14 +16,14 @@ import { Box } from '@mui/material';
 const headerVariants = {
   hidden: {
     opacity: 0,
-    y: '10vh',
+    y: 150,
   },
   show: {
     opacity: 1,
     y: 0,
     transition: {
       ...transition,
-      delay: 0.5,
+      delay: transition.duration,
     },
   },
   exit: {

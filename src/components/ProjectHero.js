@@ -37,10 +37,7 @@ const imageVariants = {
   show: {
     opacity: 1,
     y: 0,
-    transition: {
-      duration: 0.8,
-      ease: transition.ease,
-    },
+    transition,
   },
   exit: {
     opacity: 0,
@@ -102,13 +99,14 @@ const ProjectHero = ({
       variants={{
         hidden: {
           opacity: sharedLayout ? 1 : 0,
-          y: sharedLayout ? 0 : '20vh',
+          y: sharedLayout ? 0 : 200,
         },
         show: {
           opacity: 1,
           y: 0,
           transition: {
-            ...transition,
+            duration: sharedLayout ? 0 : transition.duration,
+            ease: transition.ease,
             staggerChildren: 0.05,
             when: 'beforeChildren',
           },
@@ -116,7 +114,6 @@ const ProjectHero = ({
         exit: {
           opacity: 0,
           transition: {
-            staggerChildren: 0.02,
             when: 'afterChildren',
           },
         },
@@ -258,7 +255,7 @@ const ProjectHero = ({
               variants={imageVariants}
               sx={{
                 m: 1,
-                borderRadius: 5,
+                borderRadius: 3,
                 maxWidth: '100%',
                 maxHeight: 450,
                 objectFit: 'cover',

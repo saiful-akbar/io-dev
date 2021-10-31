@@ -13,7 +13,6 @@ export default class MyDocument extends Document {
         <Head>
           <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
           <meta name="theme-color" content={theme.palette.primary.main} />
-          <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover" />
           <meta name="description" content="IO Dev portfolio" />
           <meta name="author" content="Saiful Akbar" />
           <meta name="keywords" content="IO Dev, iodev, io-dev, portfolio web app" />
