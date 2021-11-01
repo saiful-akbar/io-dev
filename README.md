@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="public/images/logo/logo-dark.svg" width="200" height="200">
+  <img src="public/images/logo/logo-dark.png" width="200" height="200">
 </p>
 
 # IO Dev
