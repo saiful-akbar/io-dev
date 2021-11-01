@@ -1,10 +1,27 @@
 <p align="center">
-  <img src="public/images/logo/logo-dark.png" width="200" height="200">
+  <img src="public/images/logo/logo-dark.svg" width="200" height="200">
 </p>
 
 # IO Dev
 
 Portfolio web app
+
+## Instalation
+```bash
+git clone https://github.com/saiful-akbar/io-dev.git
+```
+```bash
+cd io-dev
+```
+```bash
+git checkout develop
+```
+```bash
+cp .env.local.example .env.local
+```
+```bash
+npm install && run start
+```
 
 ## Tags
 
@@ -14,9 +31,6 @@ Portfolio web app
   </a>
   <a href="https://reactjs.org/" target="_blank">
     <img alt="React JS" src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" />
-  </a>
-  <a href="https://nextjs.org/" target="_blank">
-    <img alt="Next JS" src="https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white" />
   </a>
   <a href="https://redux.js.org/" target="_blank">
     <img alt="Redux" src="https://img.shields.io/badge/Redux-593D88?style=for-the-badge&logo=redux&logoColor=white" />
