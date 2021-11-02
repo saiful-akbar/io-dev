@@ -34,7 +34,7 @@
     "slug": "project-3",
     "category": "web",
     "year": 2021,
-    "url": "https://github.com/saiful-akbar/slow-motor-inventory/",
+    "url": "#",
     "heroImage": "/images/projects/3.jpg"
   },
   {
@@ -43,7 +43,7 @@
     "slug": "project-4",
     "category": "web",
     "year": 2021,
-    "url": "https://github.com/saiful-akbar/slow-motor-inventory/",
+    "url": "#",
     "heroImage": "/images/projects/4.jpg"
   },
   {
@@ -52,7 +52,7 @@
     "slug": "project-5",
     "category": "web",
     "year": 2021,
-    "url": "https://github.com/saiful-akbar/slow-motor-inventory/",
+    "url": "#",
     "heroImage": "/images/projects/5.jpg"
   },
   {
@@ -61,7 +61,7 @@
     "slug": "project-6",
     "category": "web",
     "year": 2021,
-    "url": "https://github.com/saiful-akbar/slow-motor-inventory/",
+    "url": "#",
     "heroImage": "/images/projects/6.jpg"
   },
   {
@@ -70,7 +70,7 @@
     "slug": "project-7",
     "category": "web",
     "year": 2021,
-    "url": "https://github.com/saiful-akbar/slow-motor-inventory/",
+    "url": "#",
     "heroImage": "/images/projects/7.jpg"
   }, ]
 }
