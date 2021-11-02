@@ -1,66 +1,22 @@
-import CssBaseline from '@mui/material/CssBaseline';
-import { ThemeProvider } from '@mui/material/styles';
-import PropTypes from 'prop-types';
-import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import theme from 'src/theme';
-import Header from 'src/components/Header';
-import NextNprogress from 'nextjs-progressbar';
-import { useRouter } from 'next/router';
-import { AnimatePresence } from 'framer-motion';
-import Cursor from './components/Cursor';
-import ScrollToTop from './components/ScrollToTop';
+import { CssBaseline } from "@mui/material";
+import { ThemeProvider } from "@mui/material/styles";
+import React from "react";
+import Router from "src/route/Router";
+import theme from "src/themes/theme";
+import Header from "./components/Header";
 
 /**
- * komponen utama
- * @param {node} children
+ * Komponen utama
  * @returns
  */
-export default function App({ children }) {
-  const router = useRouter();
-
-  // redux state
-  const { settings } = useSelector((state) => state.globalReducer);
-
-  useEffect(() => {
-    // ambil data setting pada localstorage
-    const storageSettings = JSON.parse(localStorage.getItem('settings'));
-
-    // cek apakah ada data settings pada localstorage
-    // jika tidak ada buat baru
-    if (!storageSettings) {
-      localStorage.setItem('settings', JSON.stringify(settings));
-    }
-  }, []);
-
+function App() {
   return (
-    <>
-      <NextNprogress
-        color="#e76f51"
-        startPosition={0.2}
-        stopDelayMs={100}
-        height={2.5}
-        showOnShallow
-        options={{ showSpinner: false }}
-      />
-
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <div id="top" />
-        <Cursor />
-
-        <AnimatePresence exitBeforeEnter>
-          {router.route !== '/project/[slug]' && <Header key={router.query} />}
-        </AnimatePresence>
-
-        {children}
-
-        <ScrollToTop />
-      </ThemeProvider>
-    </>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Header />
+      <Router />
+    </ThemeProvider>
   );
 }
 
-App.propTypes = {
-  children: PropTypes.node.isRequired,
-};
+export default App;

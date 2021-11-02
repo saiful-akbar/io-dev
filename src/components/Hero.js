@@ -1,12 +1,13 @@
-import { Grid } from '@mui/material';
-import { motion } from 'framer-motion';
-import PropTypes from 'prop-types';
-import React from 'react';
-import styles from 'src/styles/hero.module.scss';
-import transition from 'src/transition';
+import React from "react";
+import PropTypes from "prop-types";
+import styles from "src/styles/hero.module.scss";
+import transition from "src/transition";
+import { Grid } from "@mui/material";
+import { motion } from "framer-motion";
+import TextMask from "./TextMask";
 
 /**
- * animasi variants
+ * hero animasi variants
  */
 const heroVariants = {
   hidden: false,
@@ -17,15 +18,18 @@ const heroVariants = {
   },
   exit: {
     transition: {
-      when: 'afterChildren',
+      when: "afterChildren",
     },
   },
 };
 
+/**
+ * title animasi varian
+ */
 const titleVariants = {
   hidden: {
     opacity: 0,
-    y: '80%',
+    y: "80%",
     skewY: 10,
   },
   show: {
@@ -39,6 +43,9 @@ const titleVariants = {
   },
 };
 
+/**
+ * divider animasi variant
+ */
 const dividerVariants = {
   hidden: {
     opacity: 0,
@@ -66,25 +73,16 @@ const dividerVariants = {
  */
 const Hero = ({ leftTitle, rightTitle }) => (
   <motion.div
-    className={styles.root}
     variants={heroVariants}
     initial="hidden"
     animate="show"
     exit="exit"
   >
-    <Grid
-      container
-      justifyContent="space-between"
-      alignItems="flex-end"
-    >
+    <Grid container justifyContent="space-between" alignItems="flex-end">
       <Grid item lg={10} xs={12} mb={3} className={styles.titleWrapper}>
         <h1 className={styles.title}>
-          {leftTitle.split(' ').map((title, key) => (
-            <span className={styles.textMask} key={key}>
-              <motion.span style={{ display: 'inline-block' }} variants={titleVariants}>
-                {title}
-              </motion.span>
-            </span>
+          {leftTitle.split(" ").map((title, key) => (
+            <TextMask text={title} variants={titleVariants} key={key} />
           ))}
         </h1>
       </Grid>

@@ -1,4 +1,5 @@
-@use "variables";
+@use "variable";
+@use "mixin";
 
 // navbar
 .nav {
@@ -12,7 +13,7 @@
     margin-bottom: 1em;
 
     .navLink {
-      color: variables.$text-secondary;
+      color: variable.$text-secondary;
       font-weight: 500;
       font-size: 0.9em;
       cursor: pointer;
@@ -21,24 +22,24 @@
       align-items: center;
 
       .divider {
-        border-bottom: 2px solid variables.$text-secondary;
+        border-bottom: 2px solid variable.$text-secondary;
         width: 10px;
         margin-left: 10px;
       }
     }
 
     .active {
-      color: variables.$text-primary !important;
+      color: variable.$text-primary !important;
       font-weight: 700 !important;
 
       .divider {
-        border-bottom: 2px solid variables.$text-primary;
+        border-bottom: 2px solid variable.$text-primary;
       }
     }
   }
 
   // tablet mode
-  @media only screen and (max-width: variables.$breakpoints-lg) {
+  @include mixin.breakpoints(md) {
     position: absolute;
     top: 25px;
     right: 30px;
@@ -70,7 +71,7 @@
   width: 60px;
   height: 60px;
 
-  @media only screen and (max-width: variables.$breakpoints-lg) {
+  @include mixin.breakpoints(md) {
     position: absolute;
     top: 15px;
     left: 25px;

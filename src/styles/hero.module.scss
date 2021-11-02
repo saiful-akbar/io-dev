@@ -1,8 +1,5 @@
-@use "variables";
-
-.root {
-  padding-top: 25vh;
-}
+@use "variable";
+@use "mixin";
 
 .titleWrapper {
   display: flex;
@@ -16,15 +13,15 @@
     font-weight: 600;
     white-space: pre-line;
 
-    @media screen and (max-width: variables.$breakpoints-lg) {
+    @include mixin.breakpoints(md) {
       font-size: 7em;
     }
 
-    @media screen and (max-width: variables.$breakpoints-md) {
+    @include mixin.breakpoints(sm) {
       font-size: 6em;
     }
 
-    @media screen and (max-width: variables.$breakpoints-sm) {
+    @include mixin.breakpoints(xs) {
       font-size: 5.5em;
     }
   }
@@ -33,9 +30,12 @@
 .textMask {
   display: inline-block;
   overflow: hidden;
-  margin: -0.2em;
   padding: 0.2em;
-  vertical-align: top;
+  vertical-align: middle;
+
+  span {
+    display: inline-block;
+  }
 }
 
 .version {
@@ -45,11 +45,11 @@
 }
 
 .divider {
-  border: 2px solid variables.$text-primary;
+  border: 2px solid variable.$text-primary;
   width: 100%;
   margin-top: 20vh;
 
-  @media screen and (max-width: variables.$breakpoints-sm) {
+  @include mixin.breakpoints(xs) {
     margin-top: 15vh;
   }
 }

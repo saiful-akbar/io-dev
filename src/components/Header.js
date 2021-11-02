@@ -1,14 +1,13 @@
-import clsx from 'clsx';
-import { motion } from 'framer-motion';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import PropTypes from 'prop-types';
-import React, { useEffect, useState } from 'react';
-import styles from 'src/styles/header.module.scss';
-import transition from 'src/transition';
-import { useDispatch } from 'react-redux';
-import actionType from 'src/redux/actionType';
-import { Box } from '@mui/material';
+import React from "react";
+import clsx from "clsx";
+import PropTypes from "prop-types";
+import styles from "src/styles/header.module.scss";
+import transition from "src/transition";
+import actionType from "src/redux/actionType";
+import { useDispatch } from "react-redux";
+import { motion } from "framer-motion";
+import { NavLink, useLocation } from "react-router-dom";
+import { Box } from "@mui/material";
 
 /**
  * animasi varian
@@ -23,7 +22,7 @@ const headerVariants = {
     y: 0,
     transition: {
       ...transition,
-      delay: transition.duration,
+      delay: transition.duration / 2,
     },
   },
   exit: {
@@ -38,21 +37,21 @@ const headerVariants = {
  * @returns
  */
 const NavItem = ({ title, href }) => {
-  const router = useRouter();
-  const [width, setWidth] = useState(10);
+  const location = useLocation();
+  const [width, setWidth] = React.useState(10);
 
   // ubah value width jika link active
-  useEffect(() => {
-    if (router.route === href) {
+  React.useEffect(() => {
+    if (location.pathname === href) {
       setWidth(25);
     } else {
       setWidth(10);
     }
-  }, [setWidth, router, href]);
+  }, [setWidth, location, href]);
 
   // fungsi handle hover nav link
-  const handleHover = (value) => {
-    if (router.route !== href) {
+  const handleCursorHover = (value) => {
+    if (location.pathname !== href) {
       if (value) {
         setWidth(20);
       } else {
@@ -62,12 +61,12 @@ const NavItem = ({ title, href }) => {
   };
 
   return (
-    <Link href={href} scroll={false}>
-      <motion.a
-        onHoverStart={() => handleHover(true)}
-        onHoverEnd={() => handleHover(false)}
+    <NavLink to={href} exact>
+      <motion.div
+        onHoverStart={() => handleCursorHover(true)}
+        onHoverEnd={() => handleCursorHover(false)}
         className={clsx(styles.navLink, {
-          [styles.active]: router.route === href,
+          [styles.active]: location.pathname === href,
         })}
       >
         <span>{title}</span>
@@ -82,8 +81,8 @@ const NavItem = ({ title, href }) => {
             },
           }}
         />
-      </motion.a>
-    </Link>
+      </motion.div>
+    </NavLink>
   );
 };
 
@@ -99,8 +98,8 @@ NavItem.propTypes = {
  * list link menu
  */
 const links = [
-  { title: 'Work', href: '/' },
-  { title: 'About', href: '/about' },
+  { title: "Work", href: "/" },
+  { title: "About", href: "/about" },
 ];
 
 /**
@@ -108,10 +107,10 @@ const links = [
  * @returns
  */
 const Header = ({ ...rest }) => {
-  // redux
   const dispatch = useDispatch();
 
-  const handleHover = (isHover) => {
+  // Handle cursor hover
+  const handleCursorHover = (isHover) => {
     dispatch({
       type: actionType.setGlobalCursorHover,
       value: isHover,
@@ -120,27 +119,25 @@ const Header = ({ ...rest }) => {
 
   return (
     <React.Fragment {...rest}>
-
       {/* logo */}
-      <Link href="/" scroll={false}>
-        <a>
-          <Box
-            component={motion.img}
-            boxShadow={2}
-            src="/images/logo/logo-dark.png"
-            alt="logo"
-            className={styles.logo}
-            variants={headerVariants}
-            initial="hidden"
-            animate="show"
-            exit="exit"
-            onHoverStart={() => handleHover(true)}
-            onHoverEnd={() => handleHover(false)}
-          />
-        </a>
-      </Link>
+      <NavLink to="/" exact>
+        <Box
+          component={motion.img}
+          boxShadow={2}
+          src="/images/logo/logo-dark.png"
+          alt="logo"
+          className={styles.logo}
+          variants={headerVariants}
+          initial="hidden"
+          animate="show"
+          exit="exit"
+          onHoverStart={() => handleCursorHover(true)}
+          onHoverEnd={() => handleCursorHover(false)}
+        />
+      </NavLink>
+      {/* End logo */}
 
-      {/* navbar */}
+      {/* Navbar */}
       <motion.nav
         className={styles.nav}
         variants={headerVariants}
@@ -153,8 +150,8 @@ const Header = ({ ...rest }) => {
             <motion.li
               key={link.href}
               className={styles.navItem}
-              onHoverStart={() => handleHover(true)}
-              onHoverEnd={() => handleHover(false)}
+              onHoverStart={() => handleCursorHover(true)}
+              onHoverEnd={() => handleCursorHover(false)}
             >
               <NavItem title={link.title} href={link.href} />
             </motion.li>

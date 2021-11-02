@@ -1,0 +1,39 @@
+@use "variable";
+
+/* mixin breakpoints */
+@mixin breakpoints($screen) {
+  // layar extra-small
+  @if ($screen == xs) {
+    @media (max-width: variable.$breakpoints-sm) {
+      @content;
+    }
+  }
+
+  // layar small
+  @if ($screen == sm) {
+    @media (max-width: variable.$breakpoints-md) {
+      @content;
+    }
+  }
+
+  // layar medium
+  @if ($screen == md) {
+    @media (max-width: variable.$breakpoints-lg) {
+      @content;
+    }
+  }
+
+  // layar large
+  @if ($screen == lg) {
+    @media (max-width: variable.$breakpoints-xl) {
+      @content;
+    }
+  }
+
+  // layar extra-large
+  @if ($screen == xl) {
+    @media (min-width: variable.$breakpoints-xl) {
+      @content;
+    }
+  }
+}

@@ -1,25 +1,14 @@
-@use "variables";
+@use "variable";
+@use "mixin";
 
 * {
-  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  cursor: none !important;
-}
-
-#__next {
-  background-color: variables.$bg-default;
-  height: 100%;
-}
-
-html,
-body {
-  font-family: -apple-system, Segoe UI, Roboto, Helvetica Neue, sans-serif;
 }
 
 body {
-  width: 100%;
   min-height: 100vh;
+  width: 100%;
   overflow-x: hidden;
 }
 
@@ -27,27 +16,18 @@ a {
   text-decoration: none;
 }
 
-@media screen and(max-width: variables.$breakpoints-md) {
+#root {
+  background-color: variable.$bg-default;
+}
+
+@include mixin.breakpoints(sm) {
   .MuiContainer-root {
     padding: 0 35px !important;
   }
 }
 
-@media (min-width: 960px) {
+@include mixin.breakpoints(lg) {
   .MuiContainer-maxWidthMd {
-    max-width: 1020px !important;
-  }
-}
-
-// text mask
-.textMask {
-  display: inline-block;
-  overflow: hidden;
-  vertical-align: top;
-  margin: -0.2em;
-  padding: 0.2em;
-
-  .text {
-    display: inline-block;
+    max-width: 1000px !important;
   }
 }
