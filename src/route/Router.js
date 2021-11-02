@@ -28,7 +28,6 @@ function Router() {
       <Switch location={location} key={location.pathname}>
         <Route
           exact
-          strict
           path="/"
           render={(routeProps) => (
             <Work {...routeProps} />
@@ -37,7 +36,6 @@ function Router() {
 
         <Route
           exact
-          strict
           path="/about"
           render={(routeProps) => (
             <About {...routeProps} />
@@ -46,7 +44,6 @@ function Router() {
 
         <Route
           exact
-          strict
           path="/project/:slug"
           render={(routeProps) => (
             <Project {...routeProps} />
@@ -55,7 +52,6 @@ function Router() {
 
         <Route
           exact
-          strict
           path="/404"
           render={(routeProps) => (
             <NotFound {...routeProps} />

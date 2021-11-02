@@ -1,4 +1,5 @@
-@use "variable";
+@import "variable";
+
 
 * {
   margin: 0;
@@ -13,4 +14,8 @@ body {
 
 a {
   text-decoration: none;
+}
+
+#root {
+  background-color: $bg-default;
 }

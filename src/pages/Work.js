@@ -6,7 +6,7 @@ import MainLayout from 'src/layouts/MainLayout';
  */
 const Work = () => {
   return (
-    <MainLayout title="Work" pt={25} pb={10}>
+    <MainLayout title="Work" pt={15} pb={5}>
       <section>
         <h1>Hero</h1>
       </section>

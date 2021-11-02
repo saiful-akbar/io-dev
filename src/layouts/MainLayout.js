@@ -6,14 +6,14 @@ import { Box } from '@mui/material';
 /**
  * Styles class
  */
-const useStyles = makeStyles((theme) => {
+const useStyles = makeStyles((theme) => ({
   root: {
     minHeight: '100vh',
     widht: '100%',
     backgroundColor: theme.palette.background.default,
     overflowX: 'hidden',
   },
-});
+}));
 
 /**
  * Komponen utama MainLayout
@@ -29,7 +29,7 @@ const MainLayout = ({ children, title, ...rest }) => {
   // Set title pada halaman
   React.useEffect(() => {
     document.title = `${appName} : ${title}`;
-  }, [title]);
+  }, [title, appName]);
 
   // Render komponen
   return (
