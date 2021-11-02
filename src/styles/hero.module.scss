@@ -1,0 +1,55 @@
+@use "variable";
+@use "mixin";
+
+.titleWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+
+  .title {
+    font-size: 9em;
+    line-height: 100%;
+    font-weight: 600;
+    white-space: pre-line;
+
+    @include mixin.breakpoints(md) {
+      font-size: 7em;
+    }
+
+    @include mixin.breakpoints(sm) {
+      font-size: 6em;
+    }
+
+    @include mixin.breakpoints(xs) {
+      font-size: 5.5em;
+    }
+  }
+}
+
+.textMask {
+  display: inline-block;
+  overflow: hidden;
+  padding: 0.2em;
+  vertical-align: middle;
+
+  span {
+    display: inline-block;
+  }
+}
+
+.version {
+  font-size: 1em;
+  display: inline-block;
+  font-weight: bold !important;
+}
+
+.divider {
+  border: 2px solid variable.$text-primary;
+  width: 100%;
+  margin-top: 20vh;
+
+  @include mixin.breakpoints(xs) {
+    margin-top: 15vh;
+  }
+}

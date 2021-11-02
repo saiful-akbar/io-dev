@@ -1,12 +1,19 @@
-import React from 'react'
+import { Container } from "@mui/material";
+import React from "react";
+import Hero from "src/components/Hero";
+import MainLayout from "src/layouts/MainLayout";
 
 /**
- * Komponen utama NotFound
+ * Komponen utama Work
  */
-export default function NotFound() {
+const NotFound = () => {
   return (
-    <div>
-			<h1>404</h1>
-		</div>
+    <MainLayout title="404" pt={20} pb={5}>
+      <Container maxWidth="md">
+        <Hero leftTitle="404_" rightTitle={process.env.REACT_APP_VERSION} />
+      </Container>
+    </MainLayout>
   );
 };
+
+export default NotFound;
