@@ -1,23 +1,23 @@
-import React from "react";
-import PropTypes from "prop-types";
-import styles from "src/styles/textmask.module.scss";
 import { motion } from "framer-motion";
+import PropTypes from "prop-types";
+import React from "react";
+import styles from "src/styles/textmask.module.scss";
 
 /**
  * Komponen utam TextMask
  * @param {String} text
  * @returns
  */
-const TextMask = ({ text, ...rest }) => {
+const TextMask = ({ children, ...rest }) => {
   return (
     <span className={styles.textMask}>
-      <motion.span {...rest}>{text}</motion.span>
+      <motion.span {...rest}>{children}</motion.span>
     </span>
   );
 };
 
 TextMask.propTypes = {
-  text: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 export default TextMask;

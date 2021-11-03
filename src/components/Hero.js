@@ -56,10 +56,7 @@ const dividerVariants = {
     opacity: 1,
     scaleX: 1,
     originX: 0,
-    transition: {
-      duration: 1,
-      ease: transition.ease,
-    },
+    transition,
   },
   exit: {
     opacity: 0,
@@ -82,7 +79,9 @@ const Hero = ({ leftTitle, rightTitle }) => (
       <Grid item lg={10} xs={12} mb={3} className={styles.titleWrapper}>
         <h1 className={styles.title}>
           {leftTitle.split(" ").map((title, key) => (
-            <TextMask text={title} variants={titleVariants} key={key} />
+            <TextMask variants={titleVariants} key={key}>
+              {title}
+            </TextMask>
           ))}
         </h1>
       </Grid>
