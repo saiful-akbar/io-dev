@@ -1,5 +1,5 @@
 const iodev = {
-  categories: ["web", "ui/ux"],
+  categories: ["web", "ui-ux"],
   projects: [{
       id: 0,
       name: "Naikdaun",
@@ -40,7 +40,7 @@ const iodev = {
       id: 4,
       name: "Project 4",
       slug: "project-4",
-      category: "web",
+      category: "ui-ux",
       year: 2021,
       url: "#",
       heroImage: "/images/projects/4.jpg"
@@ -49,7 +49,7 @@ const iodev = {
       id: 5,
       name: "Project 5",
       slug: "project-5",
-      category: "web",
+      category: "ui-ux",
       year: 2021,
       url: "#",
       heroImage: "/images/projects/5.jpg"
@@ -58,7 +58,7 @@ const iodev = {
       id: 6,
       name: "Project 6",
       slug: "project-6",
-      category: "web",
+      category: "ui-ux",
       year: 2021,
       url: "#",
       heroImage: "/images/projects/6.jpg"
@@ -67,7 +67,7 @@ const iodev = {
       id: 7,
       name: "Project 7",
       slug: "project-7",
-      category: "web",
+      category: "ui-ux",
       year: 2021,
       url: "#",
       heroImage: "/images/projects/7.jpg"

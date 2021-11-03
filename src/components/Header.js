@@ -32,6 +32,7 @@ const headerVariants = {
 
 /**
  * komponen NavItem
+ * 
  * @param {string} title
  * @param {string} href
  * @returns
@@ -40,7 +41,7 @@ const NavItem = ({ title, href }) => {
   const location = useLocation();
   const [width, setWidth] = React.useState(10);
 
-  // ubah value width jika link active
+  // cek link active atau tidak
   React.useEffect(() => {
     if (location.pathname === href) {
       setWidth(25);
@@ -51,7 +52,7 @@ const NavItem = ({ title, href }) => {
 
   // fungsi handle hover nav link
   const handleCursorHover = (value) => {
-    if (location.pathname !== href) {
+    if (!location.pathname === href) {
       if (value) {
         setWidth(20);
       } else {
@@ -66,11 +67,10 @@ const NavItem = ({ title, href }) => {
         onHoverStart={() => handleCursorHover(true)}
         onHoverEnd={() => handleCursorHover(false)}
         className={clsx(styles.navLink, {
-          [styles.active]: location.pathname === href,
+          [styles.active]: Boolean(location.pathname === href),
         })}
       >
         <span>{title}</span>
-
         <motion.div
           className={styles.divider}
           animate={{
@@ -98,8 +98,8 @@ NavItem.propTypes = {
  * list link menu
  */
 const links = [
-  { title: "Work", href: "/" },
-  { title: "About", href: "/about" },
+  { title: "Work", href: "/", path: '/:category' },
+  { title: "About", href: "/about", path: '/about' },
 ];
 
 /**
@@ -153,7 +153,7 @@ const Header = ({ ...rest }) => {
               onHoverStart={() => handleCursorHover(true)}
               onHoverEnd={() => handleCursorHover(false)}
             >
-              <NavItem title={link.title} href={link.href} />
+              <NavItem title={link.title} href={link.href} path={link.path} />
             </motion.li>
           ))}
         </ul>

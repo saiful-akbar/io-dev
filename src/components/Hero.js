@@ -56,10 +56,7 @@ const dividerVariants = {
     opacity: 1,
     scaleX: 1,
     originX: 0,
-    transition: {
-      duration: 1,
-      ease: transition.ease,
-    },
+    transition,
   },
   exit: {
     opacity: 0,

@@ -22,7 +22,7 @@ a {
 
 @include mixin.breakpoints(sm) {
   .MuiContainer-root {
-    padding: 0 35px !important;
+    padding: 0 25px !important;
   }
 }
 
