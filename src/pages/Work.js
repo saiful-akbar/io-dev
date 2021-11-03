@@ -1,16 +1,18 @@
 import React from "react";
 import MainLayout from "src/layouts/MainLayout";
-import TabContext from '@mui/lab/TabContext';
-import TabList from '@mui/lab/TabList';
-import TabPanel from '@mui/lab/TabPanel';
-import { Container, Grid, Tab } from '@mui/material';
+import TabContext from "@mui/lab/TabContext";
+import TabList from "@mui/lab/TabList";
+import TabPanel from "@mui/lab/TabPanel";
+import { Container, Grid, Tab } from "@mui/material";
 import Hero from "src/components/Hero";
 import ProjectFetch from "src/utils/projectFetch";
 import CategoryFetch from "src/utils/categoryFetch";
-import { useDispatch } from 'react-redux';
-import actionType from 'src/redux/actionType';
-import transition from 'src/transition';
-import { motion } from 'framer-motion';
+import { useDispatch } from "react-redux";
+import actionType from "src/redux/actionType";
+import transition from "src/transition";
+import { motion } from "framer-motion";
+import ProjectCard from "src/components/ProjectCard";
+import Footer from "src/components/Footer";
 
 /**
  * animasi variant
@@ -45,7 +47,7 @@ const Work = ({ history, location }) => {
 
   // query string seacrh params
   const qs = new URLSearchParams(location.search);
-  const categoryParams = qs.get('category') || 'web';
+  const categoryParams = qs.get("category") || "web";
 
   // state
   const [tabValue, setTabValue] = React.useState(categoryParams);
@@ -64,9 +66,8 @@ const Work = ({ history, location }) => {
     history.push(`/?category=${newValue}`);
   };
 
-
   return (
-    <MainLayout title="Work" pt={20} pb={5}>
+    <MainLayout title="Work" pt={15} pb={5}>
       <Container maxWidth="md">
         <Grid container spacing={3}>
           <Grid item xs={12}>
@@ -79,7 +80,7 @@ const Work = ({ history, location }) => {
           <Grid item xs={12} mt={10}>
             <TabContext value={tabValue}>
               <Grid container spacing={3}>
-                <Grid 
+                <Grid
                   item
                   xs={12}
                   component={motion.div}
@@ -100,20 +101,27 @@ const Work = ({ history, location }) => {
                 </Grid>
 
                 <Grid item xs={12}>
-
                   {categories.map((category) => (
                     <TabPanel key={category} value={category.toLowerCase()}>
-                      <Grid container spacing={3}>
-                        {projects.map((project) => project.category === category && (
-                          <Grid item xs={12} key={project.slug}>{project.name}</Grid>
-                        ))}
+                      <Grid container>
+                        {projects.map(
+                          (project) =>
+                            project.category === category && (
+                              <Grid item xs={12} my={5} key={project.slug}>
+                                <ProjectCard project={project} />
+                              </Grid>
+                            )
+                        )}
                       </Grid>
                     </TabPanel>
                   ))}
-
                 </Grid>
               </Grid>
             </TabContext>
+          </Grid>
+
+          <Grid item xs={12}>
+            <Footer />
           </Grid>
         </Grid>
       </Container>

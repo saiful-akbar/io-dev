@@ -1,13 +1,15 @@
 const iodev = {
   categories: ["web", "ui-ux"],
-  projects: [{
+  projects: [
+    {
       id: 0,
       name: "Naikdaun",
       slug: "naikdaun",
       category: "web",
       year: 2021,
       url: "https://github.com/saiful-akbar/naikdaun/",
-      heroImage: "/images/projects/naikdaun/hero.png"
+      heroImage: "/images/projects/naikdaun/hero.png",
+      bannerColor: "#6D3DDF",
     },
     {
       id: 1,
@@ -16,7 +18,8 @@ const iodev = {
       category: "web",
       year: 2021,
       url: "https://github.com/saiful-akbar/naikdaun/",
-      heroImage: "/images/projects/1.jpg"
+      heroImage: "/images/projects/1.jpg",
+      bannerColor: "#aa0013",
     },
     {
       id: 2,
@@ -25,7 +28,8 @@ const iodev = {
       category: "web",
       year: 2021,
       url: "https://github.com/saiful-akbar/slow-motor-inventory/",
-      heroImage: "/images/projects/2.jpg"
+      heroImage: "/images/projects/2.jpg",
+      bannerColor: "#4c4c4c",
     },
     {
       id: 3,
@@ -34,7 +38,8 @@ const iodev = {
       category: "web",
       year: 2021,
       url: "#",
-      heroImage: "/images/projects/3.jpg"
+      heroImage: "/images/projects/3.jpg",
+      bannerColor: "#4c4c4c",
     },
     {
       id: 4,
@@ -43,7 +48,8 @@ const iodev = {
       category: "ui-ux",
       year: 2021,
       url: "#",
-      heroImage: "/images/projects/4.jpg"
+      heroImage: "/images/projects/4.jpg",
+      bannerColor: "#4c4c4c",
     },
     {
       id: 5,
@@ -52,7 +58,8 @@ const iodev = {
       category: "ui-ux",
       year: 2021,
       url: "#",
-      heroImage: "/images/projects/5.jpg"
+      heroImage: "/images/projects/5.jpg",
+      bannerColor: "#4c4c4c",
     },
     {
       id: 6,
@@ -61,7 +68,8 @@ const iodev = {
       category: "ui-ux",
       year: 2021,
       url: "#",
-      heroImage: "/images/projects/6.jpg"
+      heroImage: "/images/projects/6.jpg",
+      bannerColor: "#4c4c4c",
     },
     {
       id: 7,
@@ -70,9 +78,10 @@ const iodev = {
       category: "ui-ux",
       year: 2021,
       url: "#",
-      heroImage: "/images/projects/7.jpg"
+      heroImage: "/images/projects/7.jpg",
+      bannerColor: "#4c4c4c",
     },
-  ]
-}
+  ],
+};
 
 export default iodev;
