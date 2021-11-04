@@ -14,7 +14,6 @@
   white-space: pre-line;
   display: inline-block;
   font-weight: 600;
-  line-height: 100%;
 
   @include mixin.breakpoints(sm) {
     font-size: 4em;
@@ -27,14 +26,10 @@
 
 .subTitle {
   color: variable.$text-light-secondary;
-  font-weight: 600;
-  font-size: 1em;
 }
 
 .subValue {
   color: variable.$text-light-primary;
-  font-weight: 600;
-  font-size: 1.1em;
 }
 
 .imageWrapper {
@@ -53,6 +48,6 @@
     object-fit: contain;
     max-width: 100%;
     max-height: 70vh;
-    border-radius: 15px
+    border-radius: 15px;
   }
 }

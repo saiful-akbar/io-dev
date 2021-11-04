@@ -33,7 +33,6 @@ const headerVariants = {
  * @returns
  */
 const ProjectHeader = ({ url }) => {
-  const projectHeroEl = document.querySelector("#project-hero");
   const dispatch = useDispatch();
 
   /**
@@ -45,6 +44,8 @@ const ProjectHeader = ({ url }) => {
    * set inView ketika element ProjectHero ada dalam viewport
    */
   const handleInViewOnScroll = React.useCallback(() => {
+    const projectHeroEl = document.querySelector("#project-hero");
+
     if (projectHeroEl) {
       const { bottom } = projectHeroEl.getBoundingClientRect();
 
@@ -54,7 +55,7 @@ const ProjectHeader = ({ url }) => {
         setInView(true);
       }
     }
-  }, [setInView, projectHeroEl]);
+  }, [setInView]);
 
   /**
    * jalankan fungsi handleInViewOnScroll
@@ -111,10 +112,9 @@ const ProjectHeader = ({ url }) => {
             onHoverStart={() => handleCursorHover(true)}
             onHoverEnd={() => handleCursorHover(false)}
             whileHover={{
-              backgroundColor:
-                inView
-                  ? "rgba(255, 255, 255, 0.1)"
-                  : "rgba(0, 0, 0, 0.1)",
+              backgroundColor: inView
+                ? "rgba(255, 255, 255, 0.1)"
+                : "rgba(0, 0, 0, 0.1)",
             }}
           >
             <Icon className={styles.icon} data-inview={inView}>
@@ -133,10 +133,9 @@ const ProjectHeader = ({ url }) => {
           onHoverStart={() => handleCursorHover(true)}
           onHoverEnd={() => handleCursorHover(false)}
           whileHover={{
-            backgroundColor:
-              inView ?
-                "rgba(255, 255, 255, 0.1)" :
-                "rgba(0, 0, 0, 0.1)",
+            backgroundColor: inView
+              ? "rgba(255, 255, 255, 0.1)"
+              : "rgba(0, 0, 0, 0.1)",
           }}
         >
           <Icon className={styles.icon} data-inview={inView}>

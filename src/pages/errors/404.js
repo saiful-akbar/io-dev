@@ -20,7 +20,7 @@ const About = () => {
   }, [dispatch]);
 
   return (
-    <MainLayout title="404" pt={15} pb={5}>
+    <MainLayout title="404" pt={20} pb={5}>
       <Container maxWidth="md">
         <Hero leftTitle="404_" rightTitle={process.env.REACT_APP_VERSION} />
       </Container>

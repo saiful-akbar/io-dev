@@ -1,18 +1,18 @@
-import React from "react";
-import MainLayout from "src/layouts/MainLayout";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 import { Container, Grid, Tab } from "@mui/material";
-import Hero from "src/components/Hero";
-import ProjectFetch from "src/utils/projectFetch";
-import CategoryFetch from "src/utils/categoryFetch";
+import { motion } from "framer-motion";
+import React from "react";
 import { useDispatch } from "react-redux";
+import Footer from "src/components/Footer";
+import Hero from "src/components/Hero";
+import ProjectCard from "src/components/ProjectCard";
+import MainLayout from "src/layouts/MainLayout";
 import actionType from "src/redux/actionType";
 import transition from "src/transition";
-import { motion } from "framer-motion";
-import ProjectCard from "src/components/ProjectCard";
-import Footer from "src/components/Footer";
+import CategoryFetch from "src/utils/categoryFetch";
+import ProjectFetch from "src/utils/projectFetch";
 
 /**
  * animasi variant
@@ -67,7 +67,7 @@ const Work = ({ history, location }) => {
   };
 
   return (
-    <MainLayout title="Work" pt={25} pb={5}>
+    <MainLayout title="Work" pt={20} pb={2}>
       <Container maxWidth="md">
         <Grid container spacing={3}>
           <Grid item xs={12}>
@@ -77,9 +77,9 @@ const Work = ({ history, location }) => {
             />
           </Grid>
 
-          <Grid item xs={12} mt={10}>
+          <Grid item xs={12} mt={5}>
             <TabContext value={tabValue}>
-              <Grid container spacing={3}>
+              <Grid container>
                 <Grid
                   item
                   xs={12}
@@ -95,6 +95,7 @@ const Work = ({ history, location }) => {
                         key={category}
                         label={category.toUpperCase()}
                         value={category}
+                        sx={{ fontWeight: "bold" }}
                       />
                     ))}
                   </TabList>

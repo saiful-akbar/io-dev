@@ -32,7 +32,7 @@ const headerVariants = {
 
 /**
  * komponen NavItem
- * 
+ *
  * @param {string} title
  * @param {string} href
  * @returns
@@ -52,7 +52,7 @@ const NavItem = ({ title, href }) => {
 
   // fungsi handle hover nav link
   const handleCursorHover = (value) => {
-    if (!location.pathname === href) {
+    if (location.pathname !== href) {
       if (value) {
         setWidth(20);
       } else {
@@ -98,8 +98,8 @@ NavItem.propTypes = {
  * list link menu
  */
 const links = [
-  { title: "Work", href: "/", path: '/:category' },
-  { title: "About", href: "/about", path: '/about' },
+  { title: "Work", href: "/", path: "/:category" },
+  { title: "About", href: "/about", path: "/about" },
 ];
 
 /**

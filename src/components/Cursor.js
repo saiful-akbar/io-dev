@@ -47,8 +47,8 @@ const Cursor = () => {
         }}
         animate={{
           scale: isClick ? 0.7 : 1,
-          width: cursorHover ? "200%" : "100%",
-          height: cursorHover ? "200%" : "100%",
+          width: cursorHover ? "230%" : "100%",
+          height: cursorHover ? "230%" : "100%",
           transition: {
             duration: 0.1,
             ease: "linear",

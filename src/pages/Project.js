@@ -1,13 +1,14 @@
+import { Box, Container, Chip, Grid, Typography } from "@mui/material";
 import React from "react";
-import MainLayout from "src/layouts/MainLayout";
-import ProjectFetch from "src/utils/projectFetch";
-import { Redirect } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { Redirect } from "react-router-dom";
+import ProjectDetail from "src/components/ProjectDetail";
+import ProjectFooter from "src/components/ProjectFooter";
+import ProjectHeader from "src/components/ProjectHeader";
+import ProjectHero from "src/components/ProjectHero";
+import MainLayout from "src/layouts/MainLayout";
 import actionType from "src/redux/actionType";
-import { Box, Container, Grid } from "@mui/material";
-import ProjectHeader from "src/components/ProjectHeader"
-import ProjectHero from "src/components/ProjectHero"
-import ProjectFooter from "src/components/ProjectFooter"
+import ProjectFetch from "src/utils/projectFetch";
 
 /**
  * Komponen utam project
@@ -45,23 +46,28 @@ const Project = ({ match }) => {
         <ProjectHero data={projectData} />
       </Box>
 
-      <Box
-        id="project-content"
-        component="section"
-        py={5}
-        sx={{ minHeight: '100vh' }}
-      >
-        <Container maxWidth="md">
-          <Grid container spacing={3}>
-            {[...new Array(10)].map((i, key) => (
-              <Grid item xs={12} key={key} my={5}>
-                <p>
-                  Lorem ipsum dolor sit, amet consectetur, adipisicing elit. Placeat nesciunt quisquam, voluptas laborum eos eius magni vero voluptate maxime consequatur? Tempora neque animi beatae fugit accusantium quisquam suscipit sed voluptatum culpa voluptatem, eum nesciunt! Quasi, nemo, rem obcaecati repellendus eius praesentium et natus ipsum expedita consequatur a, debitis provident, eligendi.
-                </p>
+      <Box id="project-detail" component="section">
+        {projectData.details.map((detail, key) => (
+          <ProjectDetail data={detail} key={key} />
+        ))}
+
+        <Box my={10} component="section" id="tags">
+          <Container maxWidth="md">
+            <Grid container spacing={1}>
+              <Grid item xs={12} mb={5}>
+                <Typography variant="subtitle2" color="textSecondary">
+                  _Tags
+                </Typography>
               </Grid>
-            ))}
-          </Grid>
-        </Container>
+
+              {projectData.tags.map((tag) => (
+                <Grid item key={tag}>
+                  <Chip label={tag} variant="outlined" />
+                </Grid>
+              ))}
+            </Grid>
+          </Container>
+        </Box>
       </Box>
 
       <Box id="project-footer" component="section">
