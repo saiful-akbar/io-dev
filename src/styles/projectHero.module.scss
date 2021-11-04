@@ -1,0 +1,58 @@
+@use "variable";
+@use "mixin";
+
+.root {
+  width: 100%;
+  min-height: 100vh;
+  padding-top: 25vh;
+  padding-bottom: 10vh;
+}
+
+.title {
+  font-size: 5em;
+  color: variable.$text-light-primary;
+  white-space: pre-line;
+  display: inline-block;
+  font-weight: 600;
+  line-height: 100%;
+
+  @include mixin.breakpoints(sm) {
+    font-size: 4em;
+  }
+
+  @include mixin.breakpoints(xs) {
+    font-size: 3.5em;
+  }
+}
+
+.subTitle {
+  color: variable.$text-light-secondary;
+  font-weight: 600;
+  font-size: 1em;
+}
+
+.subValue {
+  color: variable.$text-light-primary;
+  font-weight: 600;
+  font-size: 1.1em;
+}
+
+.imageWrapper {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  overflow: hidden;
+  padding: 5px;
+
+  @include mixin.breakpoints(sm) {
+    justify-content: center;
+    padding-top: 10vh !important;
+  }
+
+  .heroImage {
+    object-fit: contain;
+    max-width: 100%;
+    max-height: 70vh;
+    border-radius: 15px
+  }
+}

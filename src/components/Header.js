@@ -22,7 +22,7 @@ const headerVariants = {
     y: 0,
     transition: {
       ...transition,
-      delay: transition.duration / 2,
+      delay: transition.duration / 4,
     },
   },
   exit: {

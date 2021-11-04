@@ -67,7 +67,7 @@ const Work = ({ history, location }) => {
   };
 
   return (
-    <MainLayout title="Work" pt={15} pb={5}>
+    <MainLayout title="Work" pt={25} pb={5}>
       <Container maxWidth="md">
         <Grid container spacing={3}>
           <Grid item xs={12}>
@@ -107,7 +107,7 @@ const Work = ({ history, location }) => {
                         {projects.map(
                           (project) =>
                             project.category === category && (
-                              <Grid item xs={12} my={5} key={project.slug}>
+                              <Grid item xs={12} my={7} key={project.slug}>
                                 <ProjectCard project={project} />
                               </Grid>
                             )
