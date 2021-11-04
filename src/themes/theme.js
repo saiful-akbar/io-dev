@@ -5,12 +5,12 @@ const theme = createTheme({
   palette: {
     mode: "light",
     background: {
-      default: "#f7f7f7",
+      default: "#fafafa",
       paper: "#fff",
     },
     text: {
-      primary: "rgb(66, 66, 66)",
-      secondary: "rgba(66, 66, 66, 0.3)",
+      primary: "#4f535c",
+      secondary: "#8e8e99",
       disabled: "rgba(66, 66, 66, 0.2)",
       lightPrimary: "rgb(255, 255, 255)",
       lightSecondary: "rgba(255, 255, 255, 0.6)",

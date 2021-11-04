@@ -55,7 +55,7 @@ const Footer = () => {
         variants={linkVariants}
       >
         <TextMask>
-          <InstagramIcon style={{ fontSize: 25 }} />
+          <InstagramIcon style={{ fontSize: 30 }} />
         </TextMask>
       </motion.a>
     </footer>

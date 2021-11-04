@@ -34,6 +34,7 @@ const ScrollToTop = () => {
 
   // state
   const [show, setShow] = React.useState(true);
+  const [isHover, setIsHover] = React.useState(false);
 
   // set inView ketika element ProjectHero ada atau tidak dalan viewport saat di-scroll
   const handleInViewOnScroll = React.useCallback(() => {
@@ -58,6 +59,7 @@ const ScrollToTop = () => {
 
   // ubah state cussorHover menjadi tru ketika komponen di hover
   const handleCursorHover = (value) => {
+    setIsHover(value);
     dispatch({
       type: actionType.setGlobalCursorHover,
       value,
@@ -86,11 +88,18 @@ const ScrollToTop = () => {
       animate={show ? "show" : "hidden"}
       exit="exit"
       variants={rootVariants}
-      whileHover={{ scale: 1.3 }}
     >
-      <Icon className={styles.icon}>
-        north
-      </Icon>
+      <Box
+        boxShadow={2}
+        component={motion.div}
+        className={styles.banner}
+        transition={transition}
+        animate={{
+          borderRadius: isHover ? "100%" : "25%",
+          rotate: isHover ? 180 : 0,
+        }}
+      />
+      <Icon className={styles.icon}>north</Icon>
     </Box>
   );
 };

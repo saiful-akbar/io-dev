@@ -1,33 +1,63 @@
 const typography = {
   h1: {
-    fontWeight: 500,
+    fontSize: 64,
+    lineHeight: "80%",
+    fontWeight: 700,
   },
   h2: {
-    fontWeight: 500,
+    fontSize: 48,
+    lineHeight: "80%",
+    fontWeight: 700,
   },
   h3: {
-    fontWeight: 500,
+    fontSize: 32,
+    lineHeight: "80%",
+    fontWeight: 700,
   },
   h4: {
-    fontWeight: 500,
+    fontSize: 24,
+    lineHeight: "80%",
+    fontWeight: 700,
   },
   h5: {
-    fontWeight: 500,
+    fontSize: 20,
+    lineHeight: "80%",
+    fontWeight: 700,
   },
   h6: {
-    fontWeight: 500,
+    fontSize: 18,
+    lineHeight: "80%",
+    fontWeight: 700,
+  },
+  subtitle1: {
+    fontSize: 16,
+    lineHeight: "150%",
+    fontWeight: 600,
+  },
+  subtitle2: {
+    fontSize: 14,
+    lineHeight: "150%",
+    fontWeight: 600,
+  },
+  body1: {
+    fontSize: 19.2,
+    lineHeight: "150%",
+    fontWeight: 400,
+  },
+  body2: {
+    fontSize: 16,
+    lineHeight: "150%",
+    fontWeight: 400,
   },
   overline: {
-    fontWeight: 500,
+    fontSize: 12,
+    lineHeight: "150%",
+    fontWeight: 700,
   },
   button: { textTransform: "capitalize" },
-  fontFamily: [
-    '"-apple-system"',
-    '"Segoe UI"',
-    '"Roboto"',
-    '"Helvetica"',
-    '"sans-serif"',
-  ].join(","),
+  fontFamily: ['"-apple-system"', '"Lato"', '"Roboto"', '"sans-serif"'].join(
+    ","
+  ),
 };
 
 export default typography;

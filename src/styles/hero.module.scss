@@ -47,7 +47,7 @@
 .divider {
   border-bottom: 3px solid variable.$text-primary;
   width: 100%;
-  margin-top: 15vh;
+  margin-top: 10vh;
 
   @include mixin.breakpoints(sm) {
     margin-top: 10vh;

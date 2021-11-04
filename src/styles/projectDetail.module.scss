@@ -1,0 +1,6 @@
+@use "variable";
+@use "mixin";
+
+.title {
+  color: variable.$text-primary;
+}

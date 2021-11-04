@@ -2,8 +2,8 @@
 @use "mixin";
 
 .root {
-  height: 50vh;
   width: 100%;
+  min-height: 50vh;
   position: relative;
 }
 

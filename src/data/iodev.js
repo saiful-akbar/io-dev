@@ -1,6 +1,7 @@
 const iodev = {
   categories: ["web", "ui-ux"],
-  projects: [{
+  projects: [
+    {
       id: 0,
       name: "Naikdaun",
       slug: "naikdaun",
@@ -10,12 +11,16 @@ const iodev = {
       heroImage: "/images/projects/naikdaun/hero.png",
       bannerColor: { primary: "#4c2a9c", secondary: "#8a63e5" },
       tags: ["PHP", "Laravel", "Bootstrap", "Javascript", "jQuery"],
-      details: [{
-        title: 'Overview',
-        description: '',
-        subDescription: '',
-        images: [],
-      }, ],
+      details: [
+        {
+          title: "Overview",
+          description:
+            "Naikdaun is an idea and concept generator house. With complete understanding of technology and wide range experience for conventional, digital and integrated media communication campaign.",
+          subDescription:
+            "Naikdaun is an idea and concept generator house. With complete understanding of technology and wide range experience for conventional, digital and integrated media communication campaign.",
+          images: [],
+        },
+      ],
     },
     {
       id: 1,
@@ -26,13 +31,23 @@ const iodev = {
       url: "https://github.com/saiful-akbar/naikdaun/",
       heroImage: "/images/projects/1.jpg",
       bannerColor: { primary: "#76000d", secondary: "#bb3342" },
-      tags: ["PHP", "Laravel", "MySql", "Javascript", "jQuery", "Datatables", "Bootstrap"],
-      details: [{
-        title: 'Overview',
-        description: '',
-        subDescription: '',
-        images: [],
-      }, ],
+      tags: [
+        "PHP",
+        "Laravel",
+        "MySql",
+        "Javascript",
+        "jQuery",
+        "Datatables",
+        "Bootstrap",
+      ],
+      details: [
+        {
+          title: "Overview",
+          description: null,
+          subDescription: null,
+          images: [],
+        },
+      ],
     },
     {
       id: 2,
@@ -42,14 +57,23 @@ const iodev = {
       year: 2021,
       url: "https://github.com/saiful-akbar/slow-motor-inventory/",
       heroImage: "/images/projects/2.jpg",
-      bannerColor: { primary: "#212121", secondary: "#4d4d4d" },
-      tags: ["PHP", "MySql", "Materialize css", "Javascript", "jQuery", "Datatables"],
-      details: [{
-        title: 'Overview',
-        description: '',
-        subDescription: '',
-        images: [],
-      }, ],
+      bannerColor: { primary: "#1769aa", secondary: "#4dabf5" },
+      tags: [
+        "PHP",
+        "MySql",
+        "Materialize css",
+        "Javascript",
+        "jQuery",
+        "Datatables",
+      ],
+      details: [
+        {
+          title: "Overview",
+          description: "",
+          subDescription: null,
+          images: [],
+        },
+      ],
     },
     {
       id: 3,
@@ -61,12 +85,14 @@ const iodev = {
       heroImage: "/images/projects/3.jpg",
       bannerColor: { primary: "#212121", secondary: "#4d4d4d" },
       tags: [],
-      details: [{
-        title: 'Overview',
-        description: '',
-        subDescription: '',
-        images: [],
-      }, ],
+      details: [
+        {
+          title: "Overview",
+          description: "",
+          subDescription: null,
+          images: [],
+        },
+      ],
     },
     {
       id: 4,
@@ -78,12 +104,14 @@ const iodev = {
       heroImage: "/images/projects/4.jpg",
       bannerColor: { primary: "#212121", secondary: "#4d4d4d" },
       tags: [],
-      details: [{
-        title: 'Overview',
-        description: '',
-        subDescription: '',
-        images: [],
-      }, ],
+      details: [
+        {
+          title: "Overview",
+          description: "",
+          subDescription: null,
+          images: [],
+        },
+      ],
     },
   ],
 };
