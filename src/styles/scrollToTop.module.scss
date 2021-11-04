@@ -6,19 +6,19 @@
   justify-content: center;
   align-items: center;
   border-radius: 100%;
-  border: 1px solid variable.$text-disabled;
   padding: 10px;
   z-index: 2000;
   position: fixed;
   bottom: 60px;
   right: 60px;
-
-  &[data-inview="true"] {
-    border: 1px solid variable.$text-light-disabled;
-  }
+  background-color: variable.$color-primary;
 
   @include mixin.breakpoints(xs) {
     bottom: 15px;
     right: 25px;
+  }
+
+  .icon {
+    color: variable.$text-light-primary;
   }
 }

@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import { useDispatch } from "react-redux";
 import actionType from "src/redux/actionType";
 import transition from "src/transition";
-import { useTheme } from "@mui/material/styles";
 import styles from "src/styles/scrollToTop.module.scss";
 
 /**
@@ -32,42 +31,22 @@ const rootVariants = {
  */
 const ScrollToTop = () => {
   const dispatch = useDispatch();
-  const theme = useTheme();
-  const { text } = theme.palette;
 
   // state
-  const [inView, setInView] = React.useState(false);
   const [show, setShow] = React.useState(true);
 
   // set inView ketika element ProjectHero ada atau tidak dalan viewport saat di-scroll
   const handleInViewOnScroll = React.useCallback(() => {
-    const projectHeroEl = document.querySelector("#project-hero");
     const topEl = document.querySelector("#top");
+    const { top } = topEl.getBoundingClientRect();
 
     // cek element #top
-    if (topEl) {
-      const topElRect = topEl.getBoundingClientRect();
-      if (topElRect.top < -10) {
-        setShow(true);
-      } else {
-        setShow(false);
-      }
-    } else {
+    if (top < -10) {
       setShow(true);
-    }
-
-    // cek element project hero
-    if (projectHeroEl) {
-      const projectHeroElRect = projectHeroEl.getBoundingClientRect();
-      if (projectHeroElRect.bottom <= window.innerHeight - 50) {
-        setInView(false);
-      } else {
-        setInView(true);
-      }
     } else {
-      setInView(false);
+      setShow(false);
     }
-  }, [setInView]);
+  }, []);
 
   // jalankan fungsi handleInViewOnScroll saat viewport di-scroll
   React.useEffect(() => {
@@ -97,7 +76,6 @@ const ScrollToTop = () => {
   // render komponen
   return (
     <Box
-      data-inview={inView}
       className={styles.root}
       onTap={handleScrollToTop}
       component={motion.div}
@@ -108,14 +86,9 @@ const ScrollToTop = () => {
       animate={show ? "show" : "hidden"}
       exit="exit"
       variants={rootVariants}
-      whileHover={{
-        scale: 1.3,
-        backgroundColor: inView
-          ? "rgba(255, 255, 255, 0.1)"
-          : "rgba(0, 0, 0, 0.1)",
-      }}
+      whileHover={{ scale: 1.3 }}
     >
-      <Icon sx={{ color: inView ? text.lightPrimary : text.primary }}>
+      <Icon className={styles.icon}>
         north
       </Icon>
     </Box>

@@ -76,6 +76,16 @@ const ProjectCard = ({ project }) => {
   const dispatch = useDispatch();
   const ref = React.useRef();
 
+  // data project
+  const {
+    heroImage,
+    name,
+    category,
+    year,
+    bannerColor,
+    slug,
+  } = project;
+
   // state
   const [show, setShow] = React.useState(false);
   const [bannerVariants, setBannerVariants] = React.useState({
@@ -92,7 +102,7 @@ const ProjectCard = ({ project }) => {
     exit: {
       opacity: 0,
       transition: {
-        duration: 0.4,
+        duration: 0.5,
       },
     },
   });
@@ -141,11 +151,11 @@ const ProjectCard = ({ project }) => {
         ...transition,
         y: {
           ...transition,
-          delay: transition.duration / 3,
+          delay: transition.duration / 5,
         },
         height: {
           ...transition,
-          delay: transition.duration / 3,
+          delay: transition.duration / 5,
         },
       },
     };
@@ -159,7 +169,7 @@ const ProjectCard = ({ project }) => {
     });
 
     // push ke halaman project detail
-    history.push(`/project/${project.slug}`);
+    history.push(`/project/${slug}`);
   };
 
   return (
@@ -183,8 +193,10 @@ const ProjectCard = ({ project }) => {
         initial="hidden"
         animate="show"
         exit="exit"
-        style={{ backgroundColor: project.bannerColor }}
         variants={bannerVariants}
+        sx={{
+          backgroundImage: `linear-gradient(to top left, ${bannerColor.primary}, ${bannerColor.secondary})`
+        }}
       />
 
       <div className={styles.content}>
@@ -195,7 +207,7 @@ const ProjectCard = ({ project }) => {
             animate={show ? "show" : "hidden"}
             exit="exit"
           >
-            {project.name}
+            {name}
           </TextMask>
 
           <TextMask
@@ -211,8 +223,8 @@ const ProjectCard = ({ project }) => {
         <Box
           boxShadow={2}
           component={motion.img}
-          src={project.heroImage}
-          alt={project.name}
+          src={heroImage}
+          alt={name}
           loading="eager"
           className={styles.image}
           variants={imageVariants}
@@ -225,7 +237,7 @@ const ProjectCard = ({ project }) => {
             animate={show ? "show" : "hidden"}
             exit="exit"
           >
-            {project.category}
+            {category}
           </TextMask>
 
           <TextMask
@@ -234,7 +246,7 @@ const ProjectCard = ({ project }) => {
             animate={show ? "show" : "hidden"}
             exit="exit"
           >
-            {project.year}
+            {year}
           </TextMask>
         </div>
       </div>
