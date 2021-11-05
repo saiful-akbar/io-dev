@@ -40,7 +40,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1em;
+  padding: 0.8em;
   margin-bottom: 1em;
   border: 1px solid variable.$text-disabled;
 
@@ -52,7 +52,6 @@
     margin-bottom: 0;
     margin-right: 1em;
   }
-
 }
 
 .iconUrl {
@@ -60,7 +59,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1em;
+  padding: 0.8em;
   border: 1px solid variable.$text-disabled;
 
   &[data-inview="true"] {

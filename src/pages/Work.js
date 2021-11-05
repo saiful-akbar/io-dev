@@ -66,6 +66,14 @@ const Work = ({ history, location }) => {
     history.push(`/?category=${newValue}`);
   };
 
+  // handle cursor hover
+  const handleCursorHover = (value) => {
+    dispatch({
+      type: actionType.setGlobalCursorHover,
+      value,
+    });
+  };
+
   return (
     <MainLayout title="Work" pt={20} pb={2}>
       <Container maxWidth="md">
@@ -96,6 +104,8 @@ const Work = ({ history, location }) => {
                         label={category.toUpperCase()}
                         value={category}
                         sx={{ fontWeight: "bold" }}
+                        onMouseEnter={() => handleCursorHover(true)}
+                        onMouseLeave={() => handleCursorHover(false)}
                       />
                     ))}
                   </TabList>
@@ -105,14 +115,15 @@ const Work = ({ history, location }) => {
                   {categories.map((category) => (
                     <TabPanel key={category} value={category.toLowerCase()}>
                       <Grid container>
-                        {projects.map(
-                          (project) =>
+                        {projects.map((project) => {
+                          return (
                             project.category === category && (
                               <Grid item xs={12} my={7} key={project.slug}>
                                 <ProjectCard project={project} />
                               </Grid>
                             )
-                        )}
+                          );
+                        })}
                       </Grid>
                     </TabPanel>
                   ))}

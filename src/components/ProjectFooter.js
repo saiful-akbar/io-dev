@@ -10,24 +10,6 @@ import TextMask from "src/components/TextMask";
 import { useHistory } from "react-router";
 
 /**
- * Animasi variant
- */
-const textVariants = {
-  hidden: {
-    opacity: 0,
-    y: "80%",
-  },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition,
-  },
-  exit: {
-    opacity: 0,
-  },
-};
-
-/**
  * Komponen utama
  *
  * @param {Object} options.data Data project next
@@ -61,6 +43,21 @@ export default function ProjectFooter({ data }) {
     },
   });
 
+  const [textVariants, setTextVariants] = React.useState({
+    hidden: {
+      opacity: 0,
+      y: "80%",
+    },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition,
+    },
+    exit: {
+      opacity: 0,
+    },
+  });
+
   // handle cursor hover
   const handleCursorHover = (value) => {
     dispatch({
@@ -73,6 +70,7 @@ export default function ProjectFooter({ data }) {
   const handleTap = () => {
     const { top } = ref.current.getBoundingClientRect();
     const newRootVariants = rootVariants;
+    const newTextVariants = textVariants;
 
     // ubah animasi exit pada fooer
     newRootVariants.exit = {
@@ -82,7 +80,14 @@ export default function ProjectFooter({ data }) {
       originY: 1,
       transition: { ...transition },
     };
+
+    newTextVariants.exit = {
+      opacity: 0,
+      transition,
+    };
+
     setRootVariants(newRootVariants);
+    setTextVariants(newTextVariants);
 
     // set sharedLayout pada redux state ke true
     dispatch({

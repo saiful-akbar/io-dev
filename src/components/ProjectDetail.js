@@ -4,7 +4,7 @@ import React from "react";
 import styles from "src/styles/projectDetail.module.scss";
 
 const ProjectDetail = ({ data, ...rest }) => {
-  const { title, description, subDescription } = data;
+  const { title, description, subDescription, images } = data;
 
   return (
     <Box
@@ -15,8 +15,8 @@ const ProjectDetail = ({ data, ...rest }) => {
       {...rest}
     >
       <Container maxWidth="md">
-        <Grid container spacing={5}>
-          <Grid item xs={12}>
+        <Grid container spacing={3}>
+          <Grid item xs={12} mb={3}>
             <Typography variant="subtitle2" color="textSecondary">
               _{title}
             </Typography>
@@ -35,6 +35,24 @@ const ProjectDetail = ({ data, ...rest }) => {
               <Typography variant="body2" color="textSecondary">
                 {description}
               </Typography>
+            </Grid>
+          )}
+
+          {images.length > 0 && (
+            <Grid item xs={12}>
+              <div className={styles.sectionImage}>
+                {images.map((img) => (
+                  <div key={img} className={styles.imageWrapper}>
+                    <img
+                      component="img"
+                      src={img}
+                      alt={title}
+                      loading="lazy"
+                      className={styles.image}
+                    />
+                  </div>
+                ))}
+              </div>
             </Grid>
           )}
         </Grid>

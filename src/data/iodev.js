@@ -17,8 +17,19 @@ const iodev = {
           description:
             "Naikdaun is an idea and concept generator house. With complete understanding of technology and wide range experience for conventional, digital and integrated media communication campaign.",
           subDescription:
-            "Naikdaun is an idea and concept generator house. With complete understanding of technology and wide range experience for conventional, digital and integrated media communication campaign.",
+            "We also have unmatched believe in people. Theyʼre the essence of our agency. As we build our team with the same values.",
           images: [],
+        },
+        {
+          title: "UI",
+          description: null,
+          subDescription: null,
+          images: [
+            "/images/projects/naikdaun/mobile-home.png",
+            "/images/projects/naikdaun/mobile-about.png",
+            "/images/projects/naikdaun/mobile-works.png",
+            "/images/projects/naikdaun/mobile-works-detail.png",
+          ],
         },
       ],
     },
