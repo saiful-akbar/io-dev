@@ -10,63 +10,6 @@ import actionType from "src/redux/actionType";
 import { useHistory } from "react-router-dom";
 
 /**
- * animasi variant
- */
-const rootVariants = {
-  hidden: {
-    opacity: 1,
-  },
-  show: {
-    transition: {
-      staggerChildren: 0.05,
-      when: "beforeChildren",
-    },
-  },
-  exit: {
-    transition: {
-      when: "afterChildren",
-    },
-  },
-};
-
-const titleVariants = {
-  hidden: {
-    opacity: 0,
-    y: "80%",
-    transition: {
-      duration: transition.duration / 1.5,
-      ease: transition.ease,
-    },
-  },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: transition.duration / 1.5,
-      ease: transition.ease,
-    },
-  },
-  exit: {
-    opacity: 0,
-  },
-};
-
-const imageVariants = {
-  hidden: {
-    opacity: 0,
-    y: 150,
-  },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition,
-  },
-  exit: {
-    opacity: 0,
-  },
-};
-
-/**
  * Kompoen utama ProjectCard
  *
  * @returns
@@ -74,40 +17,84 @@ const imageVariants = {
 const ProjectCard = ({ project }) => {
   const history = useHistory();
   const dispatch = useDispatch();
-  const ref = React.useRef();
+  const rootRef = React.useRef();
+  const body = document.querySelector("body");
 
   // data project
-  const {
-    heroImage,
-    name,
-    category,
-    year,
-    bannerColor,
-    slug,
-  } = project;
+  const { heroImage, name, category, year, bannerColor, slug } = project;
 
   // state
   const [show, setShow] = React.useState(false);
-  const [bannerVariants, setBannerVariants] = React.useState({
-    hidden: {
-      opacity: 0,
-      y: "10vh",
-      scale: 1,
+  const [animateVariants, setAnimateVariants] = React.useState({
+    root: {
+      hidden: {
+        opacity: 1,
+      },
+      show: {
+        transition: {
+          staggerChildren: 0.05,
+          when: "beforeChildren",
+        },
+      },
+      exit: {
+        opacity: 0,
+      },
     },
-    show: {
-      opacity: 1,
-      y: 1,
-      transition,
+    banner: {
+      hidden: {
+        opacity: 0,
+        y: 150,
+      },
+      show: {
+        opacity: 1,
+        y: 1,
+        transition,
+      },
+      exit: {
+        opacity: 0,
+        transition: {
+          duration: 0.5,
+        },
+      },
     },
-    exit: {
-      opacity: 0,
-      transition: {
-        duration: 0.5,
+    text: {
+      hidden: {
+        opacity: 0,
+        y: "80%",
+        transition: {
+          duration: transition.duration / 1.5,
+          ease: transition.ease,
+        },
+      },
+      show: {
+        opacity: 1,
+        y: 0,
+        transition: {
+          duration: transition.duration / 1.5,
+          ease: transition.ease,
+        },
+      },
+      exit: {
+        opacity: 0,
+      },
+    },
+    image: {
+      hidden: {
+        opacity: 0,
+        y: 150,
+      },
+      show: {
+        opacity: 1,
+        y: 0,
+        transition,
+      },
+      exit: {
+        opacity: 0,
       },
     },
   });
 
-  // set value state cursorHover ketika element di hover
+  // Handle cursor hover
   const handleCursorHover = (isHover) => {
     dispatch({
       type: actionType.setGlobalCursorHover,
@@ -117,7 +104,7 @@ const ProjectCard = ({ project }) => {
 
   // fungsi untuk menampilkan text ketika seluruh elemen ada dalam viewport
   const handleShowTextOnScroll = React.useCallback(() => {
-    const { top, height } = ref.current.getBoundingClientRect();
+    const { top, height } = rootRef.current.getBoundingClientRect();
     const diffTop = window.innerHeight - height;
 
     if (top < diffTop) {
@@ -125,7 +112,7 @@ const ProjectCard = ({ project }) => {
     } else {
       setShow(false);
     }
-  }, [ref, setShow]);
+  }, [rootRef, setShow]);
 
   // handle viewport scroll
   React.useEffect(() => {
@@ -136,37 +123,53 @@ const ProjectCard = ({ project }) => {
   }, [handleShowTextOnScroll]);
 
   // handle click card
-  const handleTap = (event) => {
-    const { top, left } = event.target.getBoundingClientRect();
-    const newBannerVariants = bannerVariants;
-
-    newBannerVariants.exit = {
-      borderRadius: 0,
-      opacity: 1,
-      y: -top,
-      x: -left,
-      height: window.innerHeight,
-      width: window.innerWidth,
-      transition: {
-        ...transition,
-        y: {
-          ...transition,
-          delay: transition.duration / 5,
-        },
-        height: {
-          ...transition,
-          delay: transition.duration / 5,
-        },
-      },
-    };
-
-    setBannerVariants(newBannerVariants);
-
-    // set redux state workReducer sharedLayout
+  const handleTap = () => {
     dispatch({
       type: actionType.setProjectSharedLayout,
       value: true,
     });
+
+    const rootRect = rootRef.current.getBoundingClientRect();
+    const bodyRect = body.getBoundingClientRect();
+    const newAnimateVariants = animateVariants;
+
+    newAnimateVariants.root.exit = {
+      borderRadius: 0,
+      opacity: 1,
+      y: -rootRect.top,
+      x: -rootRect.left,
+      height: window.innerHeight,
+      width: bodyRect.width,
+      transition: {
+        ...transition,
+        y: {
+          ...transition,
+          delay: transition.duration / 3,
+        },
+        height: {
+          ...transition,
+          delay: transition.duration / 3,
+        },
+      },
+    };
+
+    newAnimateVariants.banner.exit = {
+      opacity: 1,
+      borderRadius: 0,
+      transition,
+    };
+
+    newAnimateVariants.text.exit = {
+      opacity: 0,
+      transition,
+    };
+
+    newAnimateVariants.image.exit = {
+      opacity: 0,
+      transition,
+    };
+
+    setAnimateVariants(newAnimateVariants);
 
     // push ke halaman project detail
     history.push(`/project/${slug}`);
@@ -174,12 +177,13 @@ const ProjectCard = ({ project }) => {
 
   return (
     <motion.div
-      ref={ref}
+      ref={rootRef}
       className={styles.root}
       initial="hidden"
       animate="show"
       exit="exit"
-      variants={rootVariants}
+      variants={animateVariants.root}
+      onTap={handleTap}
     >
       <Box
         boxShadow={2}
@@ -189,20 +193,19 @@ const ProjectCard = ({ project }) => {
         whileHover={{ scale: 1.03 }}
         onHoverStart={() => handleCursorHover(true)}
         onHoverEnd={() => handleCursorHover(false)}
-        onTap={handleTap}
         initial="hidden"
         animate="show"
         exit="exit"
-        variants={bannerVariants}
+        variants={animateVariants.banner}
         sx={{
-          backgroundImage: `linear-gradient(to top left, ${bannerColor.primary}, ${bannerColor.secondary})`
+          backgroundImage: `linear-gradient(to top left, ${bannerColor.primary}, ${bannerColor.secondary})`,
         }}
       />
 
       <div className={styles.content}>
         <div className={styles.topText}>
           <TextMask
-            variants={titleVariants}
+            variants={animateVariants.text}
             initial="hidden"
             animate={show ? "show" : "hidden"}
             exit="exit"
@@ -211,7 +214,7 @@ const ProjectCard = ({ project }) => {
           </TextMask>
 
           <TextMask
-            variants={titleVariants}
+            variants={animateVariants.text}
             initial="hidden"
             animate={show ? "show" : "hidden"}
             exit="exit"
@@ -227,12 +230,12 @@ const ProjectCard = ({ project }) => {
           alt={name}
           loading="eager"
           className={styles.image}
-          variants={imageVariants}
+          variants={animateVariants.image}
         />
 
         <div className={styles.bottomText}>
           <TextMask
-            variants={titleVariants}
+            variants={animateVariants.text}
             initial="hidden"
             animate={show ? "show" : "hidden"}
             exit="exit"
@@ -241,7 +244,7 @@ const ProjectCard = ({ project }) => {
           </TextMask>
 
           <TextMask
-            variants={titleVariants}
+            variants={animateVariants.text}
             initial="hidden"
             animate={show ? "show" : "hidden"}
             exit="exit"

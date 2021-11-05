@@ -42,11 +42,11 @@ const Project = ({ match }) => {
     <MainLayout title={projectData.name}>
       <ProjectHeader url={projectData.url} />
 
-      <Box id="project-hero" component="section">
+      <section id="project-hero">
         <ProjectHero data={projectData} />
-      </Box>
+      </section>
 
-      <Box id="project-detail" component="section">
+      <section id="project-detail">
         {projectData.details.map((detail, key) => (
           <ProjectDetail data={detail} key={key} />
         ))}
@@ -62,17 +62,17 @@ const Project = ({ match }) => {
 
               {projectData.tags.map((tag) => (
                 <Grid item key={tag}>
-                  <Chip label={tag} variant="outlined" />
+                  <Chip label={tag} />
                 </Grid>
               ))}
             </Grid>
           </Container>
         </Box>
-      </Box>
+      </section>
 
-      <Box id="project-footer" component="section">
+      <section id="project-footer">
         <ProjectFooter data={projectNext} />
-      </Box>
+      </section>
     </MainLayout>
   );
 };

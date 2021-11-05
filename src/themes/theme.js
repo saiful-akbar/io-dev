@@ -9,7 +9,7 @@ const theme = createTheme({
       paper: "#fff",
     },
     text: {
-      primary: "#4f535c",
+      primary: "#424242",
       secondary: "#8e8e99",
       disabled: "rgba(66, 66, 66, 0.2)",
       lightPrimary: "rgb(255, 255, 255)",

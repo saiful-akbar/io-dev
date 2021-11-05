@@ -1,6 +1,27 @@
 @use "variable";
 @use "mixin";
 
-.title {
-  color: variable.$text-primary;
+.sectionImage {
+  display: flex;
+  flex-flow: row nowrap;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: auto;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.imageWrapper {
+  scroll-snap-align: center;
+  flex-shrink: 0;
+  margin: auto;
+  padding: 0 10px;
+}
+
+.image {
+  width: 100%;
+  max-height: 55vh;
+  object-fit: contain;
 }

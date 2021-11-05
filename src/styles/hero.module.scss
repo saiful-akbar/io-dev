@@ -9,7 +9,7 @@
 
   .title {
     font-size: 9em;
-    line-height: 100%;
+    line-height: 80%;
     font-weight: 600;
     white-space: pre-line;
 
@@ -22,7 +22,7 @@
     }
 
     @include mixin.breakpoints(xs) {
-      font-size: 5.5em;
+      font-size: 5em;
     }
   }
 }
