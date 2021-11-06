@@ -40,12 +40,12 @@ const typography = {
     fontWeight: 600,
   },
   body1: {
-    fontSize: 19.2,
+    fontSize: 20,
     lineHeight: "150%",
     fontWeight: 400,
   },
   body2: {
-    fontSize: 16,
+    fontSize: 15,
     lineHeight: "150%",
     fontWeight: 400,
   },

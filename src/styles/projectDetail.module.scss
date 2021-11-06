@@ -1,7 +1,36 @@
 @use "variable";
 @use "mixin";
 
+.root {
+  scroll-snap-align: start;
+}
+
 .sectionImage {
+  padding: 0 170px;
+  margin-top: 15vh;
+
+  @include mixin.breakpoints(md) {
+    padding: 0 50px;
+  }
+
+  @include mixin.breakpoints(sm) {
+    padding: 0;
+  }
+}
+
+.image {
+  width: 100%;
+  max-height: 55vh;
+  object-fit: contain;
+}
+
+.imageWrapper {
+  margin: auto;
+  padding: 0 10px;
+}
+
+// image horizontal
+.horizontal {
   display: flex;
   flex-flow: row nowrap;
   overflow-x: auto;
@@ -11,17 +40,16 @@
   &::-webkit-scrollbar {
     display: none;
   }
+
+  .imageWrapper {
+    scroll-snap-align: center;
+    flex-shrink: 0;
+  }
 }
 
-.imageWrapper {
-  scroll-snap-align: center;
-  flex-shrink: 0;
-  margin: auto;
-  padding: 0 10px;
-}
-
-.image {
-  width: 100%;
-  max-height: 55vh;
+.imageVertical {
   object-fit: contain;
+  max-width: 100%;
+  max-height: 60vh;
+  border-radius: 10px;
 }

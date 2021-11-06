@@ -22,13 +22,30 @@ const iodev = {
         },
         {
           title: "UI",
-          description: null,
-          subDescription: null,
+          description:
+            "UI Since hierarchy and design have a huge impact on usability, We complete all remaining functional decisions in the Design phase.",
+          subDescription:
+            "We designed page by page to look perfect on all types of devices. However, we pay extra attention to mobile devices because they are the ones that are used the most.",
           images: [
-            "/images/projects/naikdaun/mobile-home.png",
-            "/images/projects/naikdaun/mobile-about.png",
-            "/images/projects/naikdaun/mobile-works.png",
-            "/images/projects/naikdaun/mobile-works-detail.png",
+            {
+              orientation: "horizontal",
+              src: [
+                "/images/projects/naikdaun/mobile-home.png",
+                "/images/projects/naikdaun/mobile-about.png",
+                "/images/projects/naikdaun/mobile-works.png",
+                "/images/projects/naikdaun/mobile-works-detail.png",
+              ],
+            },
+
+            {
+              orientation: "vertical",
+              src: [
+                "/images/projects/naikdaun/laptop-home.png",
+                "/images/projects/naikdaun/laptop-about.png",
+                "/images/projects/naikdaun/laptop-works.png",
+                "/images/projects/naikdaun/laptop-works-detail.png",
+              ],
+            },
           ],
         },
       ],
@@ -56,7 +73,17 @@ const iodev = {
           title: "Overview",
           description: null,
           subDescription: null,
-          images: [],
+          images: [
+            {
+              orientation: "horizontal",
+              src: [],
+            },
+
+            {
+              orientation: "vertical",
+              src: [],
+            },
+          ],
         },
       ],
     },
@@ -82,45 +109,16 @@ const iodev = {
           title: "Overview",
           description: "",
           subDescription: null,
-          images: [],
-        },
-      ],
-    },
-    {
-      id: 3,
-      name: "Project 3",
-      slug: "project-3",
-      category: "ui-ux",
-      year: 2021,
-      url: "#",
-      heroImage: "/images/projects/3.jpg",
-      bannerColor: { primary: "#212121", secondary: "#4d4d4d" },
-      tags: [],
-      details: [
-        {
-          title: "Overview",
-          description: "",
-          subDescription: null,
-          images: [],
-        },
-      ],
-    },
-    {
-      id: 4,
-      name: "Project 4",
-      slug: "project-4",
-      category: "ui-ux",
-      year: 2021,
-      url: "#",
-      heroImage: "/images/projects/4.jpg",
-      bannerColor: { primary: "#212121", secondary: "#4d4d4d" },
-      tags: [],
-      details: [
-        {
-          title: "Overview",
-          description: "",
-          subDescription: null,
-          images: [],
+          images: [
+            {
+              orientation: "horizontal",
+              src: [],
+            },
+            {
+              orientation: "vertical",
+              src: [],
+            },
+          ],
         },
       ],
     },

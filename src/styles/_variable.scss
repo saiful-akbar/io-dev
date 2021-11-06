@@ -1,21 +1,21 @@
 /* background */
-$bg-default: #fafafa !default;
-$bg-paper: #fff !default;
+$bg-default: #f4f4f4;
+$bg-paper: #fff;
 
 /* text */
-$text-primary: #424242 !default;
-$text-secondary: #8e8e99 !default;
-$text-disabled: rgba(0, 0, 0, 0.2) !default;
-$text-light-primary: #fff !default;
-$text-light-secondary: rgba(255, 255, 255, 0.6) !default;
-$text-light-disabled: rgba(255, 255, 255, 0.4) !default;
+$text-primary: #424242;
+$text-secondary: #8e8e99;
+$text-disabled: rgba(0, 0, 0, 0.2);
+$text-light-primary: #fff;
+$text-light-secondary: rgba(255, 255, 255, 0.6);
+$text-light-disabled: rgba(255, 255, 255, 0.4);
 
 /* color */
-$color-primary: #424242 !default;
+$color-primary: #424242;
 
 /* breakpoints */
-$breakpoints-xs: 0 !default;
-$breakpoints-sm: 600px !default;
-$breakpoints-md: 900px !default;
-$breakpoints-lg: 1200px !default;
-$breakpoints-xl: 1536px !default;
+$breakpoints-xs: 0;
+$breakpoints-sm: 600px;
+$breakpoints-md: 900px;
+$breakpoints-lg: 1200px;
+$breakpoints-xl: 1536px;

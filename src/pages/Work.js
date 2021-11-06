@@ -98,16 +98,25 @@ const Work = ({ history, location }) => {
                   variants={tabVariants}
                 >
                   <TabList onChange={handleChangeTab} aria-label="tab project">
-                    {categories.map((category) => (
-                      <Tab
-                        key={category}
-                        label={category.toUpperCase()}
-                        value={category}
-                        sx={{ fontWeight: "bold" }}
-                        onMouseEnter={() => handleCursorHover(true)}
-                        onMouseLeave={() => handleCursorHover(false)}
-                      />
-                    ))}
+                    {categories.map((category) => {
+                      const projectPerCategory = projects.filter(
+                        (project) => project.category === category
+                      );
+
+                      return (
+                        <Tab
+                          key={category}
+                          label={category.toUpperCase()}
+                          value={category}
+                          sx={{ fontWeight: "bold" }}
+                          onMouseEnter={() => handleCursorHover(true)}
+                          onMouseLeave={() => handleCursorHover(false)}
+                          disabled={
+                            projectPerCategory.length <= 0 ? true : false
+                          }
+                        />
+                      );
+                    })}
                   </TabList>
                 </Grid>
 

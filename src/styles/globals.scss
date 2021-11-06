@@ -39,3 +39,9 @@ a {
     max-width: 1000px !important;
   }
 }
+
+@include mixin.breakpoints(lg) {
+  .MuiContainer-maxWidthSm {
+    max-width: 800px !important;
+  }
+}

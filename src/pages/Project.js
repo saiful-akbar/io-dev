@@ -2,13 +2,14 @@ import { Box, Container, Chip, Grid, Typography } from "@mui/material";
 import React from "react";
 import { useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
-import ProjectDetail from "src/components/ProjectDetail";
+import ProjectContent from "src/components/ProjectContent";
 import ProjectFooter from "src/components/ProjectFooter";
 import ProjectHeader from "src/components/ProjectHeader";
 import ProjectHero from "src/components/ProjectHero";
 import MainLayout from "src/layouts/MainLayout";
 import actionType from "src/redux/actionType";
 import ProjectFetch from "src/utils/projectFetch";
+import styles from "src/styles/project.module.scss";
 
 /**
  * Komponen utam project
@@ -46,13 +47,13 @@ const Project = ({ match }) => {
         <ProjectHero data={projectData} />
       </section>
 
-      <section id="project-detail">
+      <section id="project-content" className={styles.projectContent}>
         {projectData.details.map((detail, key) => (
-          <ProjectDetail data={detail} key={key} />
+          <ProjectContent data={detail} key={key} />
         ))}
 
         <Box my={10} component="section" id="tags">
-          <Container maxWidth="md">
+          <Container maxWidth="sm">
             <Grid container spacing={1}>
               <Grid item xs={12} mb={5}>
                 <Typography variant="subtitle2" color="textSecondary">

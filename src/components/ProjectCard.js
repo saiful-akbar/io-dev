@@ -38,6 +38,7 @@ const ProjectCard = ({ project }) => {
       },
       exit: {
         opacity: 0,
+        when: "afterChildren",
       },
     },
     banner: {
@@ -133,7 +134,7 @@ const ProjectCard = ({ project }) => {
     const bodyRect = body.getBoundingClientRect();
     const newAnimateVariants = animateVariants;
 
-    newAnimateVariants.root.exit = {
+    newAnimateVariants.banner.exit = {
       borderRadius: 0,
       opacity: 1,
       y: -rootRect.top,
@@ -144,19 +145,18 @@ const ProjectCard = ({ project }) => {
         ...transition,
         y: {
           ...transition,
-          delay: transition.duration / 3,
+          delay: transition.duration / 4,
         },
         height: {
           ...transition,
-          delay: transition.duration / 3,
+          delay: transition.duration / 4,
         },
       },
     };
 
-    newAnimateVariants.banner.exit = {
+    newAnimateVariants.root.exit = {
       opacity: 1,
-      borderRadius: 0,
-      transition,
+      when: "afterChildren",
     };
 
     newAnimateVariants.text.exit = {

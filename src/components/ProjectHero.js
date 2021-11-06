@@ -79,7 +79,7 @@ const ProjectHero = ({ data }) => {
       variants={{
         hidden: {
           opacity: sharedLayout ? 1 : 0,
-          y: sharedLayout ? 0 : 200,
+          y: sharedLayout ? 0 : 150,
         },
         show: {
           opacity: 1,
@@ -162,7 +162,7 @@ const ProjectHero = ({ data }) => {
                 </Typography>
               </Grid>
               <Grid item xs={8}>
-                <Typography variant="body1">
+                <Typography variant="body2">
                   <TextMask
                     className={styles.subValue}
                     variants={animateVariants.text}
