@@ -24,11 +24,6 @@
   object-fit: contain;
 }
 
-.imageWrapper {
-  margin: auto;
-  padding: 0 10px;
-}
-
 // image horizontal
 .horizontal {
   display: flex;
@@ -44,6 +39,8 @@
   .imageWrapper {
     scroll-snap-align: center;
     flex-shrink: 0;
+    margin: auto;
+    padding: 10px 20px;
   }
 }
 

@@ -44,7 +44,7 @@ const animateVariants = {
   image: {
     hidden: {
       opacity: 0,
-      y: "80%",
+      y: 150,
     },
     show: {
       opacity: 1,
@@ -183,7 +183,7 @@ const ProjectHero = ({ data }) => {
               alt={name}
               loading="eager"
               className={styles.heroImage}
-              boxShadow={2}
+              boxShadow={10}
               variants={animateVariants.image}
             />
           </Grid>

@@ -42,25 +42,10 @@ const animateVariants = {
       opacity: 0,
     },
   },
-  imageVertival: {
+  image: {
     hidden: {
       opacity: 0,
-      scale: 0.9,
-      transition,
-    },
-    show: {
-      opacity: 1,
-      scale: 1,
-      transition,
-    },
-    exit: {
-      opacity: 0,
-    },
-  },
-  imageHorizontal: {
-    hidden: {
-      opacity: 0,
-      scale: 0.9,
+      scale: 0.8,
       transition,
     },
     show: {
@@ -180,7 +165,7 @@ const ProjectContent = ({ data, ...rest }) => {
                           initial="hidden"
                           animate={inView ? "show" : "hidden"}
                           exit="exit"
-                          variants={animateVariants.imageVertival}
+                          variants={animateVariants.image}
                         />
                       )}
                     </InView>
@@ -227,7 +212,7 @@ const ProjectContent = ({ data, ...rest }) => {
                           initial="hidden"
                           animate={inView ? "show" : "hidden"}
                           exit="exit"
-                          variants={animateVariants.imageHorizontal}
+                          variants={animateVariants.image}
                         />
                       )}
                     </InView>

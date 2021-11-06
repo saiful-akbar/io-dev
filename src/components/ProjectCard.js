@@ -134,6 +134,11 @@ const ProjectCard = ({ project }) => {
     const bodyRect = body.getBoundingClientRect();
     const newAnimateVariants = animateVariants;
 
+    newAnimateVariants.root.exit = {
+      opacity: 1,
+      when: "afterChildren",
+    };
+
     newAnimateVariants.banner.exit = {
       borderRadius: 0,
       opacity: 1,
@@ -141,22 +146,7 @@ const ProjectCard = ({ project }) => {
       x: -rootRect.left,
       height: window.innerHeight,
       width: bodyRect.width,
-      transition: {
-        ...transition,
-        y: {
-          ...transition,
-          delay: transition.duration / 4,
-        },
-        height: {
-          ...transition,
-          delay: transition.duration / 4,
-        },
-      },
-    };
-
-    newAnimateVariants.root.exit = {
-      opacity: 1,
-      when: "afterChildren",
+      transition,
     };
 
     newAnimateVariants.text.exit = {
@@ -186,7 +176,7 @@ const ProjectCard = ({ project }) => {
       onTap={handleTap}
     >
       <Box
-        boxShadow={2}
+        boxShadow={10}
         className={styles.banner}
         component={motion.div}
         transition={transition}
@@ -224,7 +214,7 @@ const ProjectCard = ({ project }) => {
         </div>
 
         <Box
-          boxShadow={2}
+          boxShadow={10}
           component={motion.img}
           src={heroImage}
           alt={name}

@@ -8,8 +8,8 @@ const iodev = {
       category: "web",
       year: 2021,
       url: "https://github.com/saiful-akbar/naikdaun/",
-      heroImage: "/images/projects/naikdaun/hero.png",
-      bannerColor: { primary: "#4c2a9c", secondary: "#8a63e5" },
+      heroImage: "/images/projects/naikdaun/hero.webp",
+      bannerColor: { primary: "#4c308e", secondary: "#7c44ff" },
       tags: ["PHP", "Laravel", "Bootstrap", "Javascript", "jQuery"],
       details: [
         {
@@ -30,20 +30,20 @@ const iodev = {
             {
               orientation: "horizontal",
               src: [
-                "/images/projects/naikdaun/mobile-home.png",
-                "/images/projects/naikdaun/mobile-about.png",
-                "/images/projects/naikdaun/mobile-works.png",
-                "/images/projects/naikdaun/mobile-works-detail.png",
+                "/images/projects/naikdaun/mobile-home.webp",
+                "/images/projects/naikdaun/mobile-about.webp",
+                "/images/projects/naikdaun/mobile-works.webp",
+                "/images/projects/naikdaun/mobile-works-detail.webp",
               ],
             },
 
             {
               orientation: "vertical",
               src: [
-                "/images/projects/naikdaun/laptop-home.png",
-                "/images/projects/naikdaun/laptop-about.png",
-                "/images/projects/naikdaun/laptop-works.png",
-                "/images/projects/naikdaun/laptop-works-detail.png",
+                "/images/projects/naikdaun/desktop-home.webp",
+                "/images/projects/naikdaun/desktop-about.webp",
+                "/images/projects/naikdaun/desktop-works.webp",
+                "/images/projects/naikdaun/desktop-works-detail.webp",
               ],
             },
           ],
@@ -57,8 +57,8 @@ const iodev = {
       category: "web",
       year: 2021,
       url: "https://github.com/saiful-akbar/naikdaun/",
-      heroImage: "/images/projects/1.jpg",
-      bannerColor: { primary: "#76000d", secondary: "#bb3342" },
+      heroImage: "/images/projects/scooter-work-shop/hero.webp",
+      bannerColor: { primary: "#553d89", secondary: "#8f67e5" },
       tags: [
         "PHP",
         "Laravel",
@@ -94,8 +94,8 @@ const iodev = {
       category: "web",
       year: 2021,
       url: "https://github.com/saiful-akbar/slow-motor-inventory/",
-      heroImage: "/images/projects/2.jpg",
-      bannerColor: { primary: "#1769aa", secondary: "#4dabf5" },
+      heroImage: "/images/projects/slow-motor-inventory/hero.webp",
+      bannerColor: { primary: "#005149", secondary: "#00bca9" },
       tags: [
         "PHP",
         "MySql",

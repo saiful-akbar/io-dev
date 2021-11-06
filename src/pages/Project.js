@@ -1,7 +1,9 @@
-import { Box, Container, Chip, Grid, Typography } from "@mui/material";
 import React from "react";
+import { Box, Container, Chip, Grid, Typography } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
+import { motion } from "framer-motion";
+import { InView } from "react-intersection-observer";
 import ProjectContent from "src/components/ProjectContent";
 import ProjectFooter from "src/components/ProjectFooter";
 import ProjectHeader from "src/components/ProjectHeader";
@@ -10,6 +12,59 @@ import MainLayout from "src/layouts/MainLayout";
 import actionType from "src/redux/actionType";
 import ProjectFetch from "src/utils/projectFetch";
 import styles from "src/styles/project.module.scss";
+import transition from "src/transition";
+
+/**
+ * Animasi variant
+ */
+const animateVariants = {
+  root: {
+    hidden: {
+      opacity: 0,
+      y: 150,
+      transition,
+    },
+    show: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        ...transition,
+        when: "beforeChildren",
+      },
+    },
+    exit: {
+      opacity: 0,
+    },
+  },
+  text: {
+    hidden: {
+      opacity: 0,
+      transition,
+    },
+    show: {
+      opacity: 1,
+      transition,
+    },
+    exit: {
+      opacity: 0,
+    },
+  },
+  chip: {
+    hidden: {
+      opacity: 0,
+      scale: 0.8,
+      transition,
+    },
+    show: {
+      opacity: 1,
+      scale: 1,
+      transition,
+    },
+    exit: {
+      opacity: 0,
+    },
+  },
+};
 
 /**
  * Komponen utam project
@@ -52,18 +107,50 @@ const Project = ({ match }) => {
           <ProjectContent data={detail} key={key} />
         ))}
 
-        <Box my={10} component="section" id="tags">
+        <Box
+          my={10}
+          component={motion.div}
+          initial="hidden"
+          animate="show"
+          exit="exit"
+          variants={animateVariants.root}
+        >
           <Container maxWidth="sm">
             <Grid container spacing={1}>
               <Grid item xs={12} mb={5}>
-                <Typography variant="subtitle2" color="textSecondary">
-                  _Tags
-                </Typography>
+                <InView triggerOnce>
+                  {({ inView, ref }) => (
+                    <Typography
+                      variant="subtitle2"
+                      color="textSecondary"
+                      component={motion.h6}
+                      ref={ref}
+                      initial="hidden"
+                      animate={inView ? "show" : "hidden"}
+                      exit="exit"
+                      variants={animateVariants.text}
+                    >
+                      _Tags
+                    </Typography>
+                  )}
+                </InView>
               </Grid>
 
               {projectData.tags.map((tag) => (
                 <Grid item key={tag}>
-                  <Chip label={tag} />
+                  <InView triggerOnce>
+                    {({ inView, ref }) => (
+                      <motion.div
+                        ref={ref}
+                        initial="hidden"
+                        animate={inView ? "show" : "hidden"}
+                        exit="exit"
+                        variants={animateVariants.chip}
+                      >
+                        <Chip label={tag} />
+                      </motion.div>
+                    )}
+                  </InView>
                 </Grid>
               ))}
             </Grid>

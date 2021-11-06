@@ -36,8 +36,6 @@
   display: flex;
   justify-content: flex-end;
   align-items: flex-start;
-  overflow: hidden;
-  padding: 5px;
 
   @include mixin.breakpoints(sm) {
     justify-content: center;
