@@ -1,7 +1,7 @@
 import { Box, Container, Grid, Typography } from "@mui/material";
 import PropTypes from "prop-types";
 import React from "react";
-import styles from "src/styles/projectDetail.module.scss";
+import styles from "src/styles/projectContent.module.scss";
 import clsx from "clsx";
 import { InView } from "react-intersection-observer";
 import { motion } from "framer-motion";
