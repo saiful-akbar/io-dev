@@ -50,6 +50,10 @@
     color: variable.$text-light-primary;
     font-size: 0.9em;
     font-weight: 600;
+    
+    @include mixin.breakpoints(xs) {
+      font-size: 0.8em
+    }
   }
 
   .bottomText {
