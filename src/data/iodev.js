@@ -56,7 +56,7 @@ const iodev = {
       slug: "scooter-work-shop",
       category: "web",
       year: 2021,
-      url: "https://github.com/saiful-akbar/naikdaun/",
+      url: "https://github.com/saiful-akbar/scooter-work-shop/",
       heroImage: "/images/projects/scooter-work-shop/hero.webp",
       bannerColor: { primary: "#553d89", secondary: "#8f67e5" },
       tags: [
