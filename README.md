@@ -25,7 +25,7 @@ cp .env.local.example .env.local
 ```
 
 ```bash
-npm install && run start
+npm install && npm run start
 ```
 
 ## Tags
