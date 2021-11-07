@@ -188,7 +188,7 @@ const ProjectCard = ({ project }) => {
         exit="exit"
         variants={animateVariants.banner}
         sx={{
-          backgroundImage: `linear-gradient(to top left, ${bannerColor.primary}, ${bannerColor.secondary})`,
+          backgroundImage: `linear-gradient(to bottom right, ${bannerColor.primary}, ${bannerColor.secondary})`,
         }}
       />
 

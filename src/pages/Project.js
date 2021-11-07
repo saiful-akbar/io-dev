@@ -25,8 +25,8 @@ const animateVariants = {
       transition,
     },
     show: {
-      y: 0,
       opacity: 1,
+      y: 0,
       transition: {
         ...transition,
         when: "beforeChildren",
@@ -81,13 +81,19 @@ const Project = ({ match }) => {
   const projectData = projectFetch.find(slug);
   const projectNext = projectFetch.next(slug);
 
-  // kembalikan cursor hover ke false
   React.useEffect(() => {
+    // kembalikan cursor hover ke false
     dispatch({
       type: actionType.setGlobalCursorHover,
       value: false,
     });
-  }, [dispatch]);
+
+    // set warna background #root
+    dispatch({
+      type: actionType.setGlobalBgColor,
+      value: "#f4f4f4",
+    });
+  }, [dispatch, projectData]);
 
   // Jika data project tidak ada atau undefined arahkan ke 404
   if (typeof projectData === "undefined") {
@@ -95,7 +101,7 @@ const Project = ({ match }) => {
   }
 
   return (
-    <MainLayout title={projectData.name}>
+    <MainLayout title={`Work - ${projectData.name}`}>
       <ProjectHeader url={projectData.url} />
 
       <section id="project-hero">
@@ -104,7 +110,11 @@ const Project = ({ match }) => {
 
       <section id="project-content" className={styles.projectContent}>
         {projectData.details.map((detail, key) => (
-          <ProjectContent data={detail} key={key} />
+          <ProjectContent
+            data={detail}
+            color={projectData.bannerColor.secondary}
+            key={key}
+          />
         ))}
 
         <Box
@@ -122,15 +132,17 @@ const Project = ({ match }) => {
                   {({ inView, ref }) => (
                     <Typography
                       variant="subtitle2"
-                      color="textSecondary"
                       component={motion.h6}
                       ref={ref}
                       initial="hidden"
                       animate={inView ? "show" : "hidden"}
                       exit="exit"
                       variants={animateVariants.text}
+                      sx={{
+                        color: projectData.bannerColor.secondary,
+                      }}
                     >
-                      _Tags
+                      _Technology Used
                     </Typography>
                   )}
                 </InView>

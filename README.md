@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="public/images/logo/logo-dark.png" width="200" height="200">
+  <img src="public/images/logo/logo-dark.webp" width="200" height="200">
 </p>
 
 # IO Dev
@@ -7,18 +7,23 @@
 Portfolio web app
 
 ## Instalation
+
 ```bash
 git clone https://github.com/saiful-akbar/io-dev.git
 ```
+
 ```bash
 cd io-dev
 ```
+
 ```bash
 git checkout develop
 ```
+
 ```bash
 cp .env.local.example .env.local
 ```
+
 ```bash
 npm install && run start
 ```
@@ -51,4 +56,3 @@ npm install && run start
     <img alt="Vercel" src="https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white" />
   </a>
 </div>
-

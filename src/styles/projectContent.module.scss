@@ -19,7 +19,7 @@
 }
 
 .image {
-  width: 100%;
+  max-width: 100%;
   max-height: 55vh;
   object-fit: contain;
 }
@@ -27,10 +27,13 @@
 // image horizontal
 .horizontal {
   display: flex;
-  flex-flow: row nowrap;
+  flex-flow: row wrap;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   overscroll-behavior-x: auto;
+  @include mixin.breakpoints(sm) {
+    flex-flow: row nowrap;
+  }
 
   &::-webkit-scrollbar {
     display: none;
@@ -40,13 +43,13 @@
     scroll-snap-align: center;
     flex-shrink: 0;
     margin: auto;
-    padding: 10px 20px;
+    padding: 10px;
   }
 }
 
 .imageVertical {
+  margin: auto;
   object-fit: contain;
   max-width: 100%;
-  max-height: 60vh;
-  border-radius: 10px;
+  max-height: 75vh;
 }

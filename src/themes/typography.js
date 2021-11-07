@@ -45,7 +45,7 @@ const typography = {
     fontWeight: 400,
   },
   body2: {
-    fontSize: 15,
+    fontSize: 16,
     lineHeight: "150%",
     fontWeight: 400,
   },

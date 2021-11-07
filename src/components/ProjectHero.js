@@ -44,11 +44,11 @@ const animateVariants = {
   image: {
     hidden: {
       opacity: 0,
-      y: 150,
+      scale: 0.8,
     },
     show: {
       opacity: 1,
-      y: 0,
+      scale: 1,
       transition,
     },
     exit: {
@@ -79,15 +79,13 @@ const ProjectHero = ({ data }) => {
       variants={{
         hidden: {
           opacity: sharedLayout ? 1 : 0,
-          y: sharedLayout ? 0 : 150,
         },
         show: {
           opacity: 1,
-          y: 0,
           transition: {
             ...transition,
             when: "beforeChildren",
-            staggerChildren: 0.08,
+            staggerChildren: 0.05,
           },
         },
         exit: {
@@ -95,7 +93,7 @@ const ProjectHero = ({ data }) => {
         },
       }}
       sx={{
-        backgroundImage: `linear-gradient(to top left, ${bannerColor.primary}, ${bannerColor.secondary})`,
+        backgroundImage: `linear-gradient(to bottom right, ${bannerColor.primary}, ${bannerColor.secondary})`,
       }}
     >
       <Container maxWidth="md">

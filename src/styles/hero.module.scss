@@ -8,21 +8,17 @@
   align-items: center;
 
   .title {
-    font-size: 9em;
+    font-size: 7em;
     line-height: 80%;
     font-weight: 600;
     white-space: pre-line;
 
-    @include mixin.breakpoints(md) {
-      font-size: 7em;
-    }
-
     @include mixin.breakpoints(sm) {
-      font-size: 6em;
+      font-size: 5.5em;
     }
 
     @include mixin.breakpoints(xs) {
-      font-size: 5em;
+      font-size: 4em;
     }
   }
 }
@@ -39,17 +35,17 @@
 }
 
 .version {
-  font-size: 1em;
+  font-size: 0.8em;
   display: inline-block;
-  font-weight: bold !important;
+  font-weight: 800 !important;
 }
 
 .divider {
-  border-bottom: 3px solid variable.$text-primary;
+  border-bottom: 4px solid variable.$text-primary;
   width: 100%;
-  margin-top: 10vh;
+  margin-top: 100px;
 
   @include mixin.breakpoints(sm) {
-    margin-top: 10vh;
+    margin-top: 50px;
   }
 }
