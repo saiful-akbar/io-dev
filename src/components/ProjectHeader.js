@@ -85,7 +85,7 @@ const ProjectHeader = ({ url }) => {
         <Box
           component={motion.img}
           boxShadow={2}
-          src="/images/logo/logo-dark.png"
+          src="/images/logo/logo-dark.webp"
           alt="logo"
           className={styles.logo}
           onHoverStart={() => handleCursorHover(true)}

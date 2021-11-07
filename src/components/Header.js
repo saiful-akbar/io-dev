@@ -1,13 +1,13 @@
-import React from "react";
+import { Box } from "@mui/material";
 import clsx from "clsx";
+import { motion } from "framer-motion";
 import PropTypes from "prop-types";
+import React from "react";
+import { useDispatch } from "react-redux";
+import { NavLink, useLocation } from "react-router-dom";
+import actionType from "src/redux/actionType";
 import styles from "src/styles/header.module.scss";
 import transition from "src/transition";
-import actionType from "src/redux/actionType";
-import { useDispatch } from "react-redux";
-import { motion } from "framer-motion";
-import { NavLink, useLocation } from "react-router-dom";
-import { Box } from "@mui/material";
 
 /**
  * animasi varian
@@ -118,13 +118,12 @@ const Header = ({ ...rest }) => {
   };
 
   return (
-    <React.Fragment {...rest}>
-      {/* logo */}
+    <motion.header {...rest} className={styles.header}>
       <NavLink to="/" exact>
         <Box
           component={motion.img}
           boxShadow={2}
-          src="/images/logo/logo-dark.png"
+          src="/images/logo/logo-dark.webp"
           alt="logo"
           className={styles.logo}
           variants={headerVariants}
@@ -135,9 +134,7 @@ const Header = ({ ...rest }) => {
           onHoverEnd={() => handleCursorHover(false)}
         />
       </NavLink>
-      {/* End logo */}
 
-      {/* Navbar */}
       <motion.nav
         className={styles.nav}
         variants={headerVariants}
@@ -158,8 +155,7 @@ const Header = ({ ...rest }) => {
           ))}
         </ul>
       </motion.nav>
-      {/* end navbar */}
-    </React.Fragment>
+    </motion.header>
   );
 };
 

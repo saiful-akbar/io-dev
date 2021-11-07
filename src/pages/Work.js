@@ -52,11 +52,17 @@ const Work = ({ history, location }) => {
   // state
   const [tabValue, setTabValue] = React.useState(categoryParams);
 
-  // kembalihan cursor hover ke false
   React.useEffect(() => {
+    // kembalihan cursor hover ke false
     dispatch({
       type: actionType.setGlobalCursorHover,
       value: false,
+    });
+
+    // set warna background root element
+    dispatch({
+      type: actionType.setGlobalBgColor,
+      value: "#fff",
     });
   }, [dispatch]);
 
@@ -81,7 +87,7 @@ const Work = ({ history, location }) => {
           <Grid item xs={12}>
             <Hero
               leftTitle="Work_"
-              rightTitle={process.env.REACT_APP_VERSION}
+              rightTitle={`v${process.env.REACT_APP_VERSION}`}
             />
           </Grid>
 

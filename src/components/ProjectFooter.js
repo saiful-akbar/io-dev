@@ -26,12 +26,9 @@ export default function ProjectFooter({ data }) {
   const [rootVariants, setRootVariants] = React.useState({
     hidden: {
       opacity: 0,
-      y: 150,
-      originY: 1,
     },
     show: {
       opacity: 1,
-      y: 0,
       transition: {
         ...transition,
         staggerChildren: 0.05,
@@ -75,9 +72,9 @@ export default function ProjectFooter({ data }) {
     // ubah animasi exit pada fooer
     newRootVariants.exit = {
       opacity: 1,
+      originY: 1,
       y: -top,
       height: window.innerHeight,
-      originY: 1,
       transition: { ...transition },
     };
 
@@ -108,22 +105,16 @@ export default function ProjectFooter({ data }) {
       animate="show"
       exit="exit"
       variants={rootVariants}
-      style={{
-        backgroundImage: `linear-gradient(to top left, ${bannerColor.primary}, ${bannerColor.secondary})`,
-        originY: 1,
-      }}
+      style={{ originY: 1 }}
     >
       <motion.div
         className={styles.banner}
         transition={transition}
         onHoverStart={() => handleCursorHover(true)}
         onHoverEnd={() => handleCursorHover(false)}
-        whileHover={{
-          scaleY: 1.1,
-          originY: 1,
-        }}
+        whileHover={{ scaleY: 1.1, originY: 1 }}
         style={{
-          backgroundImage: `linear-gradient(to top left, ${bannerColor.primary}, ${bannerColor.secondary})`,
+          backgroundImage: `linear-gradient(to bottom right, ${bannerColor.primary}, ${bannerColor.secondary})`,
           originY: 1,
         }}
       />

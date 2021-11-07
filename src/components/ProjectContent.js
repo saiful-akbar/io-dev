@@ -65,7 +65,7 @@ const animateVariants = {
  * @param {Object} data
  * @returns
  */
-const ProjectContent = ({ data, ...rest }) => {
+const ProjectContent = ({ data, color, ...rest }) => {
   const { title, description, subDescription, images } = data;
 
   return (
@@ -87,12 +87,12 @@ const ProjectContent = ({ data, ...rest }) => {
                 <Typography
                   ref={ref}
                   variant="subtitle2"
-                  color="textSecondary"
                   component={motion.h6}
                   initial="hidden"
                   animate={inView ? "show" : "hidden"}
                   exit="exit"
                   variants={animateVariants.text}
+                  sx={{ color }}
                 >
                   _{title}
                 </Typography>
@@ -113,6 +113,7 @@ const ProjectContent = ({ data, ...rest }) => {
                     animate={inView ? "show" : "hidden"}
                     exit="exit"
                     variants={animateVariants.text}
+                    sx={{ fontSize: { md: 23, xs: 19 } }}
                   >
                     {description}
                   </Typography>
@@ -179,15 +180,15 @@ const ProjectContent = ({ data, ...rest }) => {
             <Container maxWidth="md" key={key}>
               <Grid
                 container
-                spacing={3}
-                mt={10}
+                spacing={img.src.length > 1 ? 5 : 0}
+                mt={8}
                 justifyContent="space-around"
                 alignItems="flex-start"
               >
                 {img.src.map((src, key) => (
                   <Grid
                     item
-                    md={6}
+                    md={img.src.length > 1 ? 6 : 12}
                     xs={12}
                     key={src}
                     sx={{
@@ -195,7 +196,10 @@ const ProjectContent = ({ data, ...rest }) => {
                       justifyContent: "center",
                       mt: {
                         md: key % 2 !== 0 ? 10 : 0,
-                        xs: 5,
+                      },
+                      mb: {
+                        md: 0,
+                        xs: 3,
                       },
                     }}
                   >
@@ -230,6 +234,7 @@ const ProjectContent = ({ data, ...rest }) => {
 
 ProjectContent.propTypes = {
   data: PropTypes.object.isRequired,
+  color: PropTypes.string.isRequired,
 };
 
 export default ProjectContent;

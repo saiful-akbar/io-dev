@@ -7,6 +7,8 @@ import Header from "./components/Header";
 import Cursor from "./components/Cursor";
 import ScrollToTop from "./components/ScrollToTop";
 import { useRouteMatch } from "react-router-dom";
+import { AnimatePresence, motion } from "framer-motion";
+import { useSelector } from "react-redux";
 
 /**
  * Komponen utama
@@ -14,18 +16,24 @@ import { useRouteMatch } from "react-router-dom";
  */
 function App() {
   const match = useRouteMatch("/project/:slug");
+  const { bgColor } = useSelector((state) => state.globalReducer);
 
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <div id="top" />
 
-      <Cursor />
-      {!match && <Header />}
-
-      <Router />
-
-      <ScrollToTop />
+      <motion.div
+        initial={{ backgroundColor: bgColor }}
+        animate={{ backgroundColor: bgColor }}
+      >
+        <Cursor />
+        <AnimatePresence exitBeforeEnter>
+          {!match && <Header key={match} />}
+        </AnimatePresence>
+        <Router />
+        <ScrollToTop />
+      </motion.div>
     </ThemeProvider>
   );
 }

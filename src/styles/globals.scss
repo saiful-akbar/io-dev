@@ -24,10 +24,6 @@ a {
   text-decoration: none;
 }
 
-#root {
-  background-color: variable.$bg-default;
-}
-
 @include mixin.breakpoints(sm) {
   .MuiContainer-root {
     padding: 0 25px !important;

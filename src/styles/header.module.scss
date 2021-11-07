@@ -1,21 +1,35 @@
 @use "variable";
 @use "mixin";
 
-// navbar
-.nav {
-  z-index: inherit;
+.header {
   position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+
+  @include mixin.breakpoints(md) {
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 25px;
+  }
+}
+
+.nav {
+  position: absolute;
   top: 60px;
   right: 60px;
 
-  li.navItem {
+  .navItem {
     list-style: none;
     margin-bottom: 1em;
 
     .navLink {
       color: variable.$text-secondary;
       font-weight: 500;
-      font-size: 0.9em;
+      font-size: 0.75em;
       cursor: pointer;
       display: flex;
       justify-content: flex-end;
@@ -40,11 +54,9 @@
 
   // tablet mode
   @include mixin.breakpoints(md) {
-    position: absolute;
-    top: 25px;
-    right: 30px;
+    position: unset;
 
-    li.navItem {
+    .navItem {
       display: inline-block;
       margin-bottom: 0;
       margin-left: 1.5em;
@@ -63,19 +75,16 @@
 
 // logo
 .logo {
-  z-index: inherit;
-  position: fixed;
+  object-fit: contain;
+  position: absolute;
   top: 60px;
   left: 60px;
-  object-fit: contain;
   width: 60px;
   height: 60px;
 
   @include mixin.breakpoints(md) {
-    position: absolute;
-    top: 15px;
-    left: 25px;
-    width: 50px;
-    height: 50px;
+    position: unset;
+    width: 45px;
+    height: 45px;
   }
 }

@@ -1,7 +1,6 @@
-import React from "react";
-import PropTypes from "prop-types";
-// import { makeStyles } from '@mui/styles';
 import { Box } from "@mui/material";
+import PropTypes from "prop-types";
+import React from "react";
 import styles from "src/styles/layout.module.scss";
 
 /**
@@ -21,7 +20,7 @@ const MainLayout = ({ children, title, ...rest }) => {
 
   // Render komponen
   return (
-    <Box className={styles.wrapper} {...rest}>
+    <Box {...rest} className={styles.wrapper}>
       {children}
     </Box>
   );
