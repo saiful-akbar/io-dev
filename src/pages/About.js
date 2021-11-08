@@ -1,9 +1,10 @@
-import { Container } from "@mui/material";
+import { Container, Grid } from "@mui/material";
 import React from "react";
 import Hero from "src/components/Hero";
 import MainLayout from "src/layouts/MainLayout";
 import { useDispatch } from "react-redux";
 import actionType from "src/redux/actionType";
+// import styles from "src/styles/about.module.scss";
 
 /**
  * Komponen utama Work
@@ -28,10 +29,12 @@ const About = () => {
   return (
     <MainLayout title="About" pt={20} pb={5}>
       <Container maxWidth="md">
-        <Hero
-          leftTitle="About_"
-          rightTitle={`v${process.env.REACT_APP_VERSION}`}
-        />
+        <Hero leftTitle="About_" rightTitle="Us" />
+
+        {/* content */}
+        <Grid container spacing={3}>
+          <Grid></Grid>
+        </Grid>
       </Container>
     </MainLayout>
   );

@@ -41,11 +41,11 @@
 }
 
 .divider {
-  border-bottom: 4px solid variable.$text-primary;
+  border-bottom: medium solid variable.$text-primary;
   width: 100%;
-  margin-top: 100px;
+  margin-top: 150px;
 
   @include mixin.breakpoints(sm) {
-    margin-top: 50px;
+    margin-top: 70px;
   }
 }

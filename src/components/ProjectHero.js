@@ -184,7 +184,7 @@ const ProjectHero = ({ data }) => {
               alt={name}
               loading="eager"
               className={styles.heroImage}
-              boxShadow={10}
+              boxShadow={7}
               variants={animateVariants.image}
             />
           </Grid>
