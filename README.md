@@ -4,7 +4,7 @@
 
 # IO Dev
 
-Portfolio web app
+IO Dev is a website portfolio to showcase the work and projects we have made
 
 ## Instalation
 
