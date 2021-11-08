@@ -90,7 +90,7 @@ const ScrollToTop = () => {
       variants={rootVariants}
     >
       <Box
-        boxShadow={2}
+        boxShadow={5}
         component={motion.div}
         className={styles.banner}
         transition={transition}

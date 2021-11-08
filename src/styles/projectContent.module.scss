@@ -5,23 +5,11 @@
   scroll-snap-align: start;
 }
 
-.sectionImage {
-  padding: 0 170px;
-  margin-top: 15vh;
-
-  @include mixin.breakpoints(md) {
-    padding: 0 50px;
-  }
-
-  @include mixin.breakpoints(sm) {
-    padding: 0;
-  }
-}
-
 .image {
   max-width: 100%;
   max-height: 55vh;
   object-fit: contain;
+  pointer-events: none;
 }
 
 // image horizontal
@@ -31,12 +19,20 @@
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   overscroll-behavior-x: auto;
-  @include mixin.breakpoints(sm) {
-    flex-flow: row nowrap;
-  }
+  padding: 0 170px;
+  margin-top: 15vh;
 
   &::-webkit-scrollbar {
     display: none;
+  }
+
+  @include mixin.breakpoints(md) {
+    padding: 0 50px;
+  }
+
+  @include mixin.breakpoints(sm) {
+    flex-flow: row nowrap;
+    padding: 0;
   }
 
   .imageWrapper {
@@ -52,4 +48,5 @@
   object-fit: contain;
   max-width: 100%;
   max-height: 75vh;
+  pointer-events: none;
 }

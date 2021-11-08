@@ -1,10 +1,9 @@
 import { Box, Container, Grid, Typography } from "@mui/material";
+import { motion } from "framer-motion";
 import PropTypes from "prop-types";
 import React from "react";
-import styles from "src/styles/projectContent.module.scss";
-import clsx from "clsx";
 import { InView } from "react-intersection-observer";
-import { motion } from "framer-motion";
+import styles from "src/styles/projectContent.module.scss";
 import transition from "src/transition";
 
 /**
@@ -32,11 +31,17 @@ const animateVariants = {
   text: {
     hidden: {
       opacity: 0,
-      transition,
+      transition: {
+        duration: 1,
+        ease: transition.ease,
+      },
     },
     show: {
       opacity: 1,
-      transition,
+      transition: {
+        duration: 1,
+        ease: transition.ease,
+      },
     },
     exit: {
       opacity: 0,
@@ -155,10 +160,7 @@ const ProjectContent = ({ data, color, ...rest }) => {
         images.map((img, key) => {
           if (img.orientation === "horizontal") {
             return (
-              <div
-                key={key}
-                className={clsx(styles.sectionImage, styles.horizontal)}
-              >
+              <div key={key} className={styles.horizontal}>
                 {img.src.map((src) => (
                   <div key={src} className={styles.imageWrapper}>
                     <InView triggerOnce>
@@ -186,10 +188,11 @@ const ProjectContent = ({ data, color, ...rest }) => {
             <Container maxWidth="md" key={key}>
               <Grid
                 container
-                spacing={img.src.length > 1 ? 5 : 0}
-                mt={8}
                 justifyContent="space-around"
                 alignItems="flex-start"
+                mt={8}
+                rowSpacing={5}
+                columnSpacing={{ xs: 1, md: img.src.length > 1 ? 7 : 1 }}
               >
                 {img.src.map((src, key) => (
                   <Grid
@@ -213,7 +216,7 @@ const ProjectContent = ({ data, color, ...rest }) => {
                       {({ inView, ref }) => (
                         <Box
                           ref={ref}
-                          boxShadow={10}
+                          boxShadow={7}
                           component={motion.img}
                           src={src}
                           alt={title}

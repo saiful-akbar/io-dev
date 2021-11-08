@@ -84,7 +84,7 @@ const ProjectHeader = ({ url }) => {
       <Link to="/">
         <Box
           component={motion.img}
-          boxShadow={2}
+          boxShadow={5}
           src="/images/logo/logo-dark.webp"
           alt="logo"
           className={styles.logo}

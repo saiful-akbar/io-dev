@@ -146,7 +146,17 @@ const ProjectCard = ({ project }) => {
       x: -rootRect.left,
       height: window.innerHeight,
       width: bodyRect.width,
-      transition,
+      transition: {
+        ...transition,
+        x: {
+          ...transition,
+          delay: transition.duration / 4,
+        },
+        width: {
+          ...transition,
+          delay: transition.duration / 4,
+        },
+      },
     };
 
     newAnimateVariants.text.exit = {
@@ -176,7 +186,7 @@ const ProjectCard = ({ project }) => {
       onTap={handleTap}
     >
       <Box
-        boxShadow={10}
+        boxShadow={7}
         className={styles.banner}
         component={motion.div}
         transition={transition}
@@ -214,7 +224,7 @@ const ProjectCard = ({ project }) => {
         </div>
 
         <Box
-          boxShadow={10}
+          boxShadow={7}
           component={motion.img}
           src={heroImage}
           alt={name}
