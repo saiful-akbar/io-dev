@@ -102,7 +102,6 @@ const Project = ({ match }) => {
 
   return (
     <MainLayout title={`Work - ${projectData.name}`}>
-
       {/* header */}
       <ProjectHeader url={projectData.url} />
 

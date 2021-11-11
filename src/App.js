@@ -18,17 +18,24 @@ function App() {
   const match = useRouteMatch("/project/:slug");
   const { bgColor } = useSelector((state) => state.globalReducer);
 
+  // set warna background color pada tag body
+  React.useEffect(() => {
+    const bodyEl = document.querySelector("body");
+    if (bodyEl) {
+      bodyEl.style.backgroundColor = bgColor;
+    }
+  }, [bgColor]);
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <div id="top" />
-      
       <motion.div
         initial={{ backgroundColor: bgColor }}
         animate={{ backgroundColor: bgColor }}
       >
+        <div id="top" />
         <Cursor />
-      
+
         <AnimatePresence exitBeforeEnter>
           {!match && <Header key={match} />}
         </AnimatePresence>

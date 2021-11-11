@@ -8,6 +8,7 @@ import { NavLink, useLocation } from "react-router-dom";
 import actionType from "src/redux/actionType";
 import styles from "src/styles/header.module.scss";
 import transition from "src/transition";
+import { logoDark } from "src/components/ImageLoader";
 
 /**
  * animasi varian
@@ -35,7 +36,7 @@ const headerVariants = {
  *
  * @param {string} title
  * @param {string} href
- * 
+ *
  * @returns
  */
 const NavItem = ({ title, href }) => {
@@ -101,7 +102,8 @@ NavItem.propTypes = {
 /**
  * list link menu
  */
-const links = [{
+const links = [
+  {
     title: "Work",
     href: "/",
     path: "/:category",
@@ -115,11 +117,10 @@ const links = [{
 
 /**
  * komponen Header
- * 
+ *
  * @returns
  */
 const Header = ({ ...rest }) => {
-
   // redux state & dispatch
   const dispatch = useDispatch();
 
@@ -134,13 +135,12 @@ const Header = ({ ...rest }) => {
   // render komponen
   return (
     <motion.header {...rest} className={styles.header}>
-
       {/* logo */}
       <NavLink to="/" exact>
         <Box
           component={motion.img}
           boxShadow={5}
-          src="/images/logo/logo-dark.webp"
+          src={logoDark}
           alt="logo"
           className={styles.logo}
           variants={headerVariants}
@@ -169,17 +169,12 @@ const Header = ({ ...rest }) => {
               onHoverStart={() => handleCursorHover(true)}
               onHoverEnd={() => handleCursorHover(false)}
             >
-              <NavItem
-                title={link.title}
-                href={link.href}
-                path={link.path}
-              />
+              <NavItem title={link.title} href={link.href} path={link.path} />
             </motion.li>
           ))}
         </ul>
       </motion.nav>
-    {/* end navbar */}
-    
+      {/* end navbar */}
     </motion.header>
   );
 };

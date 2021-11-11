@@ -156,14 +156,13 @@ export default function ProjectFooter({ data }) {
         </Container>
       </div>
       {/* end content */}
-
     </motion.footer>
   );
 }
 
 /**
  * prop types ProjectFooter
- * 
+ *
  * @type {Object}
  */
 ProjectFooter.propTypes = {

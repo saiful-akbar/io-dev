@@ -5,10 +5,10 @@ import styles from "src/styles/textmask.module.scss";
 
 /**
  * Komponen utam TextMask
- * 
+ *
  * @param  {React Node} options.children
  * @param  {...any} options.rest
- * 
+ *
  * @return
  */
 const TextMask = ({ children, ...rest }) => {
@@ -21,7 +21,7 @@ const TextMask = ({ children, ...rest }) => {
 
 /**
  * prop types komponen TextMask
- * 
+ *
  * @type {Object}
  */
 TextMask.propTypes = {

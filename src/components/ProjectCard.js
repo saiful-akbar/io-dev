@@ -11,7 +11,7 @@ import { useHistory } from "react-router-dom";
 
 /**
  * komponen ProjectCard
- * 
+ *
  * @param  {Object} options.project
  * @return {React Node}
  */
@@ -22,14 +22,7 @@ const ProjectCard = ({ project }) => {
   const body = document.querySelector("body");
 
   // data project
-  const {
-    heroImage,
-    name,
-    category,
-    year,
-    bannerColor,
-    slug
-  } = project;
+  const { heroImage, name, category, year, bannerColor, slug } = project;
 
   // state
   const [show, setShow] = React.useState(false);
@@ -113,10 +106,7 @@ const ProjectCard = ({ project }) => {
 
   // fungsi untuk menampilkan text ketika seluruh elemen ada dalam viewport
   const handleShowTextOnScroll = React.useCallback(() => {
-    const {
-      top,
-      height,
-    } = rootRef.current.getBoundingClientRect();
+    const { top, height } = rootRef.current.getBoundingClientRect();
     const diffTop = window.innerHeight - height;
 
     if (top < diffTop) {
@@ -136,7 +126,6 @@ const ProjectCard = ({ project }) => {
 
   // handle click card
   const handleTap = () => {
-
     // update redux state sharedLayout
     dispatch({
       type: actionType.setProjectSharedLayout,
@@ -220,11 +209,10 @@ const ProjectCard = ({ project }) => {
           backgroundImage: `linear-gradient(to bottom right, ${bannerColor.primary}, ${bannerColor.secondary})`,
         }}
       />
-     {/* end banner */}
+      {/* end banner */}
 
-     {/* card content */}
+      {/* card content */}
       <div className={styles.content}>
-
         {/* top text */}
         <div className={styles.topText}>
           <TextMask
@@ -279,10 +267,8 @@ const ProjectCard = ({ project }) => {
           </TextMask>
         </div>
         {/* end bottom text */}
-
       </div>
       {/* enf card content */}
-
     </motion.div>
   );
 };

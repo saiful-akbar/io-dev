@@ -1,2 +1,16 @@
 @use "variable";
 @use "mixin";
+
+.contentWrapper {
+  margin-top: 150px;
+}
+
+.divider {
+  border-bottom: medium solid variable.$text-primary;
+  width: 100%;
+}
+
+.title {
+  display: block;
+  overflow: hidden;
+}

@@ -8,11 +8,12 @@ import TextMask from "./TextMask";
 
 /**
  * Animasi variant
- * 
+ *
  * @type {Object}
  */
 const animateVariants = {
-  hero: { // hero animate
+  hero: {
+    // hero animate
     hidden: false,
     show: {
       transition: {
@@ -25,7 +26,8 @@ const animateVariants = {
       },
     },
   },
-  text: { // text animate
+  text: {
+    // text animate
     hidden: {
       opacity: 0,
       y: "80%",
@@ -41,7 +43,8 @@ const animateVariants = {
       opacity: 0,
     },
   },
-  divider: { // divider animate
+  divider: {
+    // divider animate
     hidden: {
       opacity: 0,
       scaleX: 0,
@@ -61,9 +64,9 @@ const animateVariants = {
 
 /**
  * komponen Hero
- * 
+ *
  * @param  {String} {leftTitle, rightTitle}
- * 
+ *
  * @return
  */
 const Hero = ({ leftTitle, rightTitle }) => (
@@ -72,20 +75,11 @@ const Hero = ({ leftTitle, rightTitle }) => (
     initial="hidden"
     animate="show"
     exit="exit"
+    id="hero"
   >
-    <Grid
-      container
-      justifyContent="space-between"
-      alignItems="flex-end"
-    >
+    <Grid container justifyContent="space-between" alignItems="flex-end">
       {/* text kiri || text utama */}
-      <Grid 
-        item
-        lg={10}
-        xs={12}
-        mb={3}
-        className={styles.titleWrapper}
-      >
+      <Grid item lg={10} xs={12} mb={3} className={styles.titleWrapper}>
         <h1 className={styles.title}>
           {leftTitle.split(" ").map((title, key) => (
             <TextMask variants={animateVariants.text} key={key}>
@@ -99,7 +93,10 @@ const Hero = ({ leftTitle, rightTitle }) => (
       {/* text kanan */}
       <Grid item lg={2} xs={12} mb={3}>
         <span className={styles.textMask}>
-          <motion.span className={styles.version} variants={animateVariants.text}>
+          <motion.span
+            className={styles.version}
+            variants={animateVariants.text}
+          >
             {rightTitle}
           </motion.span>
         </span>
@@ -108,17 +105,19 @@ const Hero = ({ leftTitle, rightTitle }) => (
 
       {/* divider */}
       <Grid item xs={12}>
-        <motion.div className={styles.divider} variants={animateVariants.divider} />
+        <motion.div
+          className={styles.divider}
+          variants={animateVariants.divider}
+        />
       </Grid>
       {/* divider */}
-
     </Grid>
   </motion.div>
 );
 
 /**
  * prop type komponen Hero
- * 
+ *
  * @type {Object}
  */
 Hero.propTypes = {

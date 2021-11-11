@@ -11,7 +11,7 @@ import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 
 /**
  * komponen RootApp
- * 
+ *
  * @return {React Node}
  */
 const Root = () => (
@@ -22,10 +22,9 @@ const Root = () => (
   </Provider>
 );
 
-
 ReactDOM.render(
   <React.StrictMode>
-    <Root />  
+    <Root />
   </React.StrictMode>,
   document.getElementById("root")
 );

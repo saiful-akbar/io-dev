@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
 
 /**
- * komponen utama
+ * komponen Cursor
  * @returns
  */
 const Cursor = () => {

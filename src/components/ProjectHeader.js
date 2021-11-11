@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import actionType from "src/redux/actionType";
 import transition from "src/transition";
 import styles from "src/styles/projectHeader.module.scss";
+import { logoDark } from "src/components/ImageLoader";
 
 /**
  * animasi varian
@@ -72,13 +73,12 @@ const ProjectHeader = ({ url }) => {
   // render komponen
   return (
     <React.Fragment>
-
       {/* logo */}
       <Link to="/">
         <Box
           component={motion.img}
           boxShadow={5}
-          src="/images/logo/logo-dark.webp"
+          src={logoDark}
           alt="logo"
           className={styles.logo}
           onHoverStart={() => handleCursorHover(true)}
@@ -106,7 +106,11 @@ const ProjectHeader = ({ url }) => {
             transition={transition}
             onHoverStart={() => handleCursorHover(true)}
             onHoverEnd={() => handleCursorHover(false)}
-            whileHover={{ backgroundColor: inView ? "rgba(255, 255, 255, 0.1)" : "rgba(0, 0, 0, 0.1)" }}
+            whileHover={{
+              backgroundColor: inView
+                ? "rgba(255, 255, 255, 0.1)"
+                : "rgba(0, 0, 0, 0.1)",
+            }}
           >
             <Icon className={styles.icon} data-inview={inView}>
               west
@@ -125,14 +129,17 @@ const ProjectHeader = ({ url }) => {
           transition={transition}
           onHoverStart={() => handleCursorHover(true)}
           onHoverEnd={() => handleCursorHover(false)}
-          whileHover={{ backgroundColor: inView ? "rgba(255, 255, 255, 0.1)" : "rgba(0, 0, 0, 0.1)" }}
+          whileHover={{
+            backgroundColor: inView
+              ? "rgba(255, 255, 255, 0.1)"
+              : "rgba(0, 0, 0, 0.1)",
+          }}
         >
           <Icon className={styles.icon} data-inview={inView}>
             north_east
           </Icon>
         </motion.a>
         {/* end button url */}
-
       </motion.div>
     </React.Fragment>
   );
@@ -140,7 +147,7 @@ const ProjectHeader = ({ url }) => {
 
 /**
  * prop types ProjectHeader
- * 
+ *
  * @type {Object}
  */
 ProjectHeader.propTypes = {

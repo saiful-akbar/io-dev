@@ -11,7 +11,8 @@ import TextMask from "src/components/TextMask";
  * Animasi variants
  */
 const animateVariants = {
-  text: { // animasi text
+  text: {
+    // animasi text
     hidden: {
       opacity: 0,
       y: "80%",
@@ -25,7 +26,8 @@ const animateVariants = {
       opacity: 0,
     },
   },
-  divider: { // animasi divider
+  divider: {
+    // animasi divider
     hidden: {
       opacity: 0,
       scaleX: 0,
@@ -41,7 +43,8 @@ const animateVariants = {
       opacity: 0,
     },
   },
-  image: { // animasi image
+  image: {
+    // animasi image
     hidden: {
       opacity: 0,
       scale: 0.8,
@@ -67,20 +70,16 @@ const animateVariants = {
  * @return {React Node}
  */
 const ProjectHero = ({ data }) => {
-  const {
-    bannerColor,
-    heroImage,
-    name,
-    category,
-    year
-  } = data;
+  const { bannerColor, heroImage, name, category, year } = data;
 
   // redux state
   const { sharedLayout } = useSelector((state) => state.projectReducer);
 
   return (
     <Box
-      sx={{ backgroundImage: `linear-gradient(to bottom right, ${bannerColor.primary}, ${bannerColor.secondary})` }}
+      sx={{
+        backgroundImage: `linear-gradient(to bottom right, ${bannerColor.primary}, ${bannerColor.secondary})`,
+      }}
       className={styles.root}
       component={motion.div}
       initial="hidden"
@@ -101,7 +100,7 @@ const ProjectHero = ({ data }) => {
         exit: {
           opacity: 0,
         },
-      }}      
+      }}
     >
       <Container maxWidth="md">
         <Grid
@@ -112,7 +111,6 @@ const ProjectHero = ({ data }) => {
         >
           {/* Left content */}
           <Grid item md={6} xs={12} container spacing={3}>
-
             {/* project name */}
             <Grid item xs={12}>
               <Typography
@@ -186,7 +184,6 @@ const ProjectHero = ({ data }) => {
 
           {/* Right content */}
           <Grid item md={6} xs={12} className={styles.imageWrapper}>
-
             {/* project hero image */}
             <Box
               component={motion.img}
@@ -199,7 +196,6 @@ const ProjectHero = ({ data }) => {
             />
           </Grid>
           {/* End right content */}
-
         </Grid>
       </Container>
     </Box>

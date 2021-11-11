@@ -8,7 +8,7 @@ import styles from "src/styles/layout.module.scss";
  *
  * @param  {Node} options.children Komponen atau element anak
  * @param  {String} options.title Title document
- * 
+ *
  * @return {React node}
  */
 const MainLayout = ({ children, title, ...rest }) => {

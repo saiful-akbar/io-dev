@@ -84,17 +84,18 @@ const Work = ({ history, location }) => {
     <MainLayout title="Work" pt={20} pb={2}>
       <Container maxWidth="md">
         <Grid container spacing={3}>
-
           {/* hero */}
           <Grid item xs={12}>
-            <Hero leftTitle="Work_" rightTitle={`v${process.env.REACT_APP_VERSION}`} />
+            <Hero
+              leftTitle="Work_"
+              rightTitle={`v${process.env.REACT_APP_VERSION}`}
+            />
           </Grid>
 
           {/* content */}
           <Grid item xs={12} mt={5}>
             <TabContext value={tabValue}>
               <Grid container>
-                
                 {/* tab category project */}
                 <Grid
                   item
@@ -148,7 +149,6 @@ const Work = ({ history, location }) => {
                   ))}
                 </Grid>
                 {/* end project list */}
-
               </Grid>
             </TabContext>
           </Grid>
@@ -158,7 +158,6 @@ const Work = ({ history, location }) => {
           <Grid item xs={12}>
             <Footer />
           </Grid>
-
         </Grid>
       </Container>
     </MainLayout>
