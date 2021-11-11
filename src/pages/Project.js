@@ -102,28 +102,32 @@ const Project = ({ match }) => {
 
   return (
     <MainLayout title={`Work - ${projectData.name}`}>
+
+      {/* header */}
       <ProjectHeader url={projectData.url} />
 
+      {/* hero */}
       <section id="project-hero">
         <ProjectHero data={projectData} />
       </section>
 
+      {/* content */}
       <section id="project-content" className={styles.projectContent}>
         {projectData.details.map((detail, key) => (
           <ProjectContent
+            key={key}
             data={detail}
             color={projectData.bannerColor.secondary}
-            key={key}
           />
         ))}
 
         <Box
           my={10}
           component={motion.div}
+          variants={animateVariants.root}
           initial="hidden"
           animate="show"
           exit="exit"
-          variants={animateVariants.root}
         >
           <Container maxWidth="sm">
             <Grid container spacing={1}>
@@ -169,7 +173,9 @@ const Project = ({ match }) => {
           </Container>
         </Box>
       </section>
+      {/* end content */}
 
+      {/* footer */}
       <section id="project-footer">
         <ProjectFooter data={projectNext} />
       </section>

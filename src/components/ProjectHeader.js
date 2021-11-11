@@ -35,20 +35,15 @@ const headerVariants = {
 const ProjectHeader = ({ url }) => {
   const dispatch = useDispatch();
 
-  /**
-   * State
-   */
+  // state
   const [inView, setInView] = React.useState(true);
 
-  /**
-   * set inView ketika element ProjectHero ada dalam viewport
-   */
+  // set inView ketika element ProjectHero ada dalam viewport
   const handleInViewOnScroll = React.useCallback(() => {
     const projectHeroEl = document.querySelector("#project-hero");
 
     if (projectHeroEl) {
       const { bottom } = projectHeroEl.getBoundingClientRect();
-
       if (bottom <= 60) {
         setInView(false);
       } else {
@@ -57,20 +52,16 @@ const ProjectHeader = ({ url }) => {
     }
   }, [setInView]);
 
-  /**
-   * jalankan fungsi handleInViewOnScroll
-   * saat viewport di-scroll
-   */
+  // jalankan fungsi handleInViewOnScroll saat viewport di-scroll
   React.useEffect(() => {
     window.addEventListener("scroll", handleInViewOnScroll);
+
     return () => {
       window.removeEventListener("scroll", handleInViewOnScroll);
     };
   }, [handleInViewOnScroll]);
 
-  /**
-   * ubah redux state cursorHover menjadi true
-   */
+  // fungsi handle style cursor saat ada event hover
   const handleCursorHover = (value) => {
     dispatch({
       type: actionType.setGlobalCursorHover,
@@ -81,6 +72,8 @@ const ProjectHeader = ({ url }) => {
   // render komponen
   return (
     <React.Fragment>
+
+      {/* logo */}
       <Link to="/">
         <Box
           component={motion.img}
@@ -96,14 +89,16 @@ const ProjectHeader = ({ url }) => {
           variants={headerVariants}
         />
       </Link>
+      {/* end logo */}
 
       <motion.div
         className={styles.wrapper}
+        variants={headerVariants}
         initial="hidden"
         animate="show"
         exit="exit"
-        variants={headerVariants}
       >
+        {/* button kembali */}
         <Link to="/">
           <motion.div
             data-inview={inView}
@@ -111,18 +106,16 @@ const ProjectHeader = ({ url }) => {
             transition={transition}
             onHoverStart={() => handleCursorHover(true)}
             onHoverEnd={() => handleCursorHover(false)}
-            whileHover={{
-              backgroundColor: inView
-                ? "rgba(255, 255, 255, 0.1)"
-                : "rgba(0, 0, 0, 0.1)",
-            }}
+            whileHover={{ backgroundColor: inView ? "rgba(255, 255, 255, 0.1)" : "rgba(0, 0, 0, 0.1)" }}
           >
             <Icon className={styles.icon} data-inview={inView}>
               west
             </Icon>
           </motion.div>
         </Link>
+        {/* end button kembali */}
 
+        {/* button url */}
         <motion.a
           href={url}
           target="_blank"
@@ -132,21 +125,24 @@ const ProjectHeader = ({ url }) => {
           transition={transition}
           onHoverStart={() => handleCursorHover(true)}
           onHoverEnd={() => handleCursorHover(false)}
-          whileHover={{
-            backgroundColor: inView
-              ? "rgba(255, 255, 255, 0.1)"
-              : "rgba(0, 0, 0, 0.1)",
-          }}
+          whileHover={{ backgroundColor: inView ? "rgba(255, 255, 255, 0.1)" : "rgba(0, 0, 0, 0.1)" }}
         >
           <Icon className={styles.icon} data-inview={inView}>
             north_east
           </Icon>
         </motion.a>
+        {/* end button url */}
+
       </motion.div>
     </React.Fragment>
   );
 };
 
+/**
+ * prop types ProjectHeader
+ * 
+ * @type {Object}
+ */
 ProjectHeader.propTypes = {
   url: PropTypes.string.isRequired,
 };

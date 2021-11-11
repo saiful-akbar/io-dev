@@ -23,6 +23,7 @@ function Router() {
     window.scroll(0, 0);
   }
 
+  // render komponen
   return (
     <AnimatePresence exitBeforeEnter onExitComplete={handleScroll}>
       <Switch location={location} key={location.pathname}>

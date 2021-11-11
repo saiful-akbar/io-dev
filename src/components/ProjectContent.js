@@ -10,7 +10,7 @@ import transition from "src/transition";
  * Animasi variant
  */
 const animateVariants = {
-  root: {
+  root: { // root animasi
     hidden: {
       opacity: 0,
       y: 150,
@@ -28,7 +28,7 @@ const animateVariants = {
       opacity: 0,
     },
   },
-  text: {
+  text: { // text animasi
     hidden: {
       opacity: 0,
       transition: {
@@ -47,7 +47,7 @@ const animateVariants = {
       opacity: 0,
     },
   },
-  image: {
+  image: { // image animasi
     hidden: {
       opacity: 0,
       scale: 0.8,
@@ -71,13 +71,18 @@ const animateVariants = {
 };
 
 /**
- * Kompoenn utama ProjectContent
+ * Komponen ProjectContent
  *
  * @param {Object} data
  * @returns
  */
 const ProjectContent = ({ data, color, ...rest }) => {
-  const { title, description, subDescription, images } = data;
+  const {
+    title,
+    images,
+    description,
+    subDescription,
+  } = data;
 
   return (
     <Box
@@ -92,6 +97,8 @@ const ProjectContent = ({ data, color, ...rest }) => {
     >
       <Container maxWidth="sm">
         <Grid container spacing={3}>
+
+          {/* title */}
           <Grid item xs={12} mb={3}>
             <InView triggerOnce>
               {({ inView, ref }) => (
@@ -110,7 +117,9 @@ const ProjectContent = ({ data, color, ...rest }) => {
               )}
             </InView>
           </Grid>
+          {/* end title */}
 
+          {/* deskripsi */}
           {description !== null && (
             <Grid item xs={12}>
               <InView triggerOnce>
@@ -132,7 +141,9 @@ const ProjectContent = ({ data, color, ...rest }) => {
               </InView>
             </Grid>
           )}
+          {/* end deskripsi */}
 
+          {/* sub deskripsi */}
           {subDescription !== null && (
             <Grid item xs={12}>
               <InView triggerOnce>
@@ -153,94 +164,108 @@ const ProjectContent = ({ data, color, ...rest }) => {
               </InView>
             </Grid>
           )}
+          {/* end sub deskripsi */}
+
         </Grid>
       </Container>
 
-      {images.length > 0 &&
-        images.map((img, key) => {
-          if (img.orientation === "horizontal") {
-            return (
-              <div key={key} className={styles.horizontal}>
-                {img.src.map((src) => (
-                  <div key={src} className={styles.imageWrapper}>
-                    <InView triggerOnce>
-                      {({ inView, ref }) => (
-                        <motion.img
-                          ref={ref}
-                          src={src}
-                          alt={title}
-                          loading="lazy"
-                          className={styles.image}
-                          initial="hidden"
-                          animate={inView ? "show" : "hidden"}
-                          exit="exit"
-                          variants={animateVariants.image}
-                        />
-                      )}
-                    </InView>
-                  </div>
-                ))}
-              </div>
-            );
-          }
+      {/* image */}
+      {images.length > 0 && images.map((img, key) => {
 
+        // cek apakah image berorientasi horizontal atau vertical
+        if (img.orientation === "horizontal") {
+
+          // image horizontal
           return (
-            <Container maxWidth="md" key={key}>
-              <Grid
-                container
-                justifyContent="space-around"
-                alignItems="flex-start"
-                mt={8}
-                rowSpacing={5}
-                columnSpacing={{ xs: 1, md: img.src.length > 1 ? 7 : 1 }}
-              >
-                {img.src.map((src, key) => (
-                  <Grid
-                    item
-                    md={img.src.length > 1 ? 6 : 12}
-                    xs={12}
-                    key={src}
-                    sx={{
-                      display: "flex",
-                      justifyContent: "center",
-                      mt: {
-                        md: key % 2 !== 0 ? 10 : 0,
-                      },
-                      mb: {
-                        md: 0,
-                        xs: 3,
-                      },
-                    }}
-                  >
-                    <InView triggerOnce>
-                      {({ inView, ref }) => (
-                        <Box
-                          ref={ref}
-                          boxShadow={7}
-                          component={motion.img}
-                          src={src}
-                          alt={title}
-                          loading="lazy"
-                          className={styles.imageVertical}
-                          initial="hidden"
-                          animate={inView ? "show" : "hidden"}
-                          exit="exit"
-                          variants={animateVariants.image}
-                        />
-                      )}
-                    </InView>
-                  </Grid>
-                ))}
-              </Grid>
-            </Container>
+            <div key={key} className={styles.horizontal}>
+              {img.src.map((src) => (
+                <div key={src} className={styles.imageWrapper}>
+                  <InView triggerOnce>
+                    {({ inView, ref }) => (
+                      <motion.img
+                        ref={ref}
+                        src={src}
+                        alt={title}
+                        loading="lazy"
+                        className={styles.image}
+                        initial="hidden"
+                        animate={inView ? "show" : "hidden"}
+                        exit="exit"
+                        variants={animateVariants.image}
+                      />
+                    )}
+                  </InView>
+                </div>
+              ))}
+            </div>
           );
-        })}
+        }
 
+        // image vertical
+        return (
+          <Container maxWidth="md" key={key}>
+            <Grid
+              container
+              justifyContent="space-around"
+              alignItems="flex-start"
+              mt={8}
+              rowSpacing={5}
+              columnSpacing={{ xs: 1, md: img.src.length > 1 ? 7 : 1 }}
+            >
+              {img.src.map((src, key) => (
+                <Grid
+                  item
+                  md={img.src.length > 1 ? 6 : 12}
+                  xs={12}
+                  key={src}
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    mt: {
+                      md: key % 2 !== 0 ? 10 : 0,
+                    },
+                    mb: {
+                      md: 0,
+                      xs: 3,
+                    },
+                  }}
+                >
+                  <InView triggerOnce>
+                    {({ inView, ref }) => (
+                      <Box
+                        ref={ref}
+                        boxShadow={7}
+                        component={motion.img}
+                        src={src}
+                        alt={title}
+                        loading="lazy"
+                        className={styles.imageVertical}
+                        initial="hidden"
+                        animate={inView ? "show" : "hidden"}
+                        exit="exit"
+                        variants={animateVariants.image}
+                      />
+                    )}
+                  </InView>
+                </Grid>
+              ))}
+            </Grid>
+          </Container>
+        );
+      })}
+      {/* image */}
+
+      {/* divider */}
       <Box mt={10} sx={{ borderBottom: 1, borderColor: "divider" }} />
     </Box>
   );
 };
 
+/**
+ * prop types ProjectContent
+ * 
+ * @type {Object}
+ */
 ProjectContent.propTypes = {
   data: PropTypes.object.isRequired,
   color: PropTypes.string.isRequired,

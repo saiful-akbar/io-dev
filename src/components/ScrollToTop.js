@@ -25,7 +25,7 @@ const rootVariants = {
 };
 
 /**
- * Komponen utama ProjectHeader
+ * Komponen ScrollToTop
  *
  * @returns
  */

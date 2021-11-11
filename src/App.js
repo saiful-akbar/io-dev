@@ -22,15 +22,17 @@ function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <div id="top" />
-
+      
       <motion.div
         initial={{ backgroundColor: bgColor }}
         animate={{ backgroundColor: bgColor }}
       >
         <Cursor />
+      
         <AnimatePresence exitBeforeEnter>
           {!match && <Header key={match} />}
         </AnimatePresence>
+
         <Router />
         <ScrollToTop />
       </motion.div>

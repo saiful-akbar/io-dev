@@ -11,7 +11,7 @@ import TextMask from "src/components/TextMask";
  * Animasi variants
  */
 const animateVariants = {
-  text: {
+  text: { // animasi text
     hidden: {
       opacity: 0,
       y: "80%",
@@ -25,7 +25,7 @@ const animateVariants = {
       opacity: 0,
     },
   },
-  divider: {
+  divider: { // animasi divider
     hidden: {
       opacity: 0,
       scaleX: 0,
@@ -41,7 +41,7 @@ const animateVariants = {
       opacity: 0,
     },
   },
-  image: {
+  image: { // animasi image
     hidden: {
       opacity: 0,
       scale: 0.8,
@@ -67,13 +67,20 @@ const animateVariants = {
  * @return {React Node}
  */
 const ProjectHero = ({ data }) => {
-  const { bannerColor, heroImage, name, category, year } = data;
+  const {
+    bannerColor,
+    heroImage,
+    name,
+    category,
+    year
+  } = data;
 
   // redux state
   const { sharedLayout } = useSelector((state) => state.projectReducer);
 
   return (
     <Box
+      sx={{ backgroundImage: `linear-gradient(to bottom right, ${bannerColor.primary}, ${bannerColor.secondary})` }}
       className={styles.root}
       component={motion.div}
       initial="hidden"
@@ -94,10 +101,7 @@ const ProjectHero = ({ data }) => {
         exit: {
           opacity: 0,
         },
-      }}
-      sx={{
-        backgroundImage: `linear-gradient(to bottom right, ${bannerColor.primary}, ${bannerColor.secondary})`,
-      }}
+      }}      
     >
       <Container maxWidth="md">
         <Grid
@@ -108,6 +112,8 @@ const ProjectHero = ({ data }) => {
         >
           {/* Left content */}
           <Grid item md={6} xs={12} container spacing={3}>
+
+            {/* project name */}
             <Grid item xs={12}>
               <Typography
                 component={motion.h1}
@@ -122,6 +128,7 @@ const ProjectHero = ({ data }) => {
               </Typography>
             </Grid>
 
+            {/* divider */}
             <Grid item xs={12} my={5}>
               <Divider
                 sx={{ borderColor: (theme) => theme.palette.text.lightPrimary }}
@@ -130,6 +137,7 @@ const ProjectHero = ({ data }) => {
               />
             </Grid>
 
+            {/* project category & year */}
             <Grid item xs={12} container spacing={1}>
               <Grid item xs={4}>
                 <Typography variant="subtitle1">
@@ -178,6 +186,8 @@ const ProjectHero = ({ data }) => {
 
           {/* Right content */}
           <Grid item md={6} xs={12} className={styles.imageWrapper}>
+
+            {/* project hero image */}
             <Box
               component={motion.img}
               src={heroImage}
@@ -189,6 +199,7 @@ const ProjectHero = ({ data }) => {
             />
           </Grid>
           {/* End right content */}
+
         </Grid>
       </Container>
     </Box>
@@ -196,7 +207,7 @@ const ProjectHero = ({ data }) => {
 };
 
 /**
- * Prop types komponen ProjectHero
+ * Prop types ProjectHero
  *
  * @type {Object}
  */

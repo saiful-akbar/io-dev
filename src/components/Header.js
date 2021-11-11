@@ -35,13 +35,15 @@ const headerVariants = {
  *
  * @param {string} title
  * @param {string} href
+ * 
  * @returns
  */
 const NavItem = ({ title, href }) => {
   const location = useLocation();
   const [width, setWidth] = React.useState(10);
 
-  // cek link active atau tidak
+  // cek apakah link active atau tidak
+  // jika link active update state width
   React.useEffect(() => {
     if (location.pathname === href) {
       setWidth(25);
@@ -50,8 +52,10 @@ const NavItem = ({ title, href }) => {
     }
   }, [setWidth, location, href]);
 
-  // fungsi handle hover nav link
+  // fungsi handle style ketika di-hover
   const handleCursorHover = (value) => {
+    // cek apakah url = link pada menu
+    // jika berbeda update state width
     if (location.pathname !== href) {
       if (value) {
         setWidth(20);
@@ -97,19 +101,29 @@ NavItem.propTypes = {
 /**
  * list link menu
  */
-const links = [
-  { title: "Work", href: "/", path: "/:category" },
-  { title: "About", href: "/about", path: "/about" },
+const links = [{
+    title: "Work",
+    href: "/",
+    path: "/:category",
+  },
+  {
+    title: "About",
+    href: "/about",
+    path: "/about",
+  },
 ];
 
 /**
- * komponen utama
+ * komponen Header
+ * 
  * @returns
  */
 const Header = ({ ...rest }) => {
+
+  // redux state & dispatch
   const dispatch = useDispatch();
 
-  // Handle cursor hover
+  // fungsi handle style pada cursor ketika ada event hover
   const handleCursorHover = (isHover) => {
     dispatch({
       type: actionType.setGlobalCursorHover,
@@ -117,8 +131,11 @@ const Header = ({ ...rest }) => {
     });
   };
 
+  // render komponen
   return (
     <motion.header {...rest} className={styles.header}>
+
+      {/* logo */}
       <NavLink to="/" exact>
         <Box
           component={motion.img}
@@ -134,7 +151,9 @@ const Header = ({ ...rest }) => {
           onHoverEnd={() => handleCursorHover(false)}
         />
       </NavLink>
+      {/* end logo */}
 
+      {/* navbar */}
       <motion.nav
         className={styles.nav}
         variants={headerVariants}
@@ -150,11 +169,17 @@ const Header = ({ ...rest }) => {
               onHoverStart={() => handleCursorHover(true)}
               onHoverEnd={() => handleCursorHover(false)}
             >
-              <NavItem title={link.title} href={link.href} path={link.path} />
+              <NavItem
+                title={link.title}
+                href={link.href}
+                path={link.path}
+              />
             </motion.li>
           ))}
         </ul>
       </motion.nav>
+    {/* end navbar */}
+    
     </motion.header>
   );
 };

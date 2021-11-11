@@ -7,7 +7,7 @@ import actionType from "src/redux/actionType";
 // import styles from "src/styles/about.module.scss";
 
 /**
- * Komponen utama Work
+ * Komponen About
  */
 const About = () => {
   const dispatch = useDispatch();
@@ -26,15 +26,20 @@ const About = () => {
     });
   }, [dispatch]);
 
+  // render komponen
   return (
     <MainLayout title="About" pt={20} pb={5}>
       <Container maxWidth="md">
+
+        {/* hero */}
         <Hero leftTitle="About_" rightTitle="Us" />
 
         {/* content */}
         <Grid container spacing={3}>
           <Grid></Grid>
         </Grid>
+        {/* end content */}
+
       </Container>
     </MainLayout>
   );

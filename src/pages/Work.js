@@ -84,24 +84,26 @@ const Work = ({ history, location }) => {
     <MainLayout title="Work" pt={20} pb={2}>
       <Container maxWidth="md">
         <Grid container spacing={3}>
+
+          {/* hero */}
           <Grid item xs={12}>
-            <Hero
-              leftTitle="Work_"
-              rightTitle={`v${process.env.REACT_APP_VERSION}`}
-            />
+            <Hero leftTitle="Work_" rightTitle={`v${process.env.REACT_APP_VERSION}`} />
           </Grid>
 
+          {/* content */}
           <Grid item xs={12} mt={5}>
             <TabContext value={tabValue}>
               <Grid container>
+                
+                {/* tab category project */}
                 <Grid
                   item
                   xs={12}
                   component={motion.div}
+                  variants={tabVariants}
                   initial="hidden"
                   animate="show"
                   exit="exit"
-                  variants={tabVariants}
                 >
                   <TabList onChange={handleChangeTab} aria-label="tab project">
                     {categories.map((category) => {
@@ -125,7 +127,9 @@ const Work = ({ history, location }) => {
                     })}
                   </TabList>
                 </Grid>
+                {/* end teb acategory project */}
 
+                {/* project list */}
                 <Grid item xs={12}>
                   {categories.map((category) => (
                     <TabPanel key={category} value={category.toLowerCase()}>
@@ -143,13 +147,18 @@ const Work = ({ history, location }) => {
                     </TabPanel>
                   ))}
                 </Grid>
+                {/* end project list */}
+
               </Grid>
             </TabContext>
           </Grid>
+          {/* end content */}
 
+          {/* footer */}
           <Grid item xs={12}>
             <Footer />
           </Grid>
+
         </Grid>
       </Container>
     </MainLayout>
