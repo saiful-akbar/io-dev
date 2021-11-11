@@ -1,3 +1,22 @@
+import {
+  naikdaunHero,
+  naikdaunDesktop1,
+  naikdaunDesktop2,
+  naikdaunDesktop3,
+  naikdaunDesktop4,
+  naikdaunMobile1,
+  naikdaunMobile2,
+  naikdaunMobile3,
+  naikdaunMobile4,
+  scooterWorkShopHero,
+  scooterWorkShopDesktop1,
+  scooterWorkShopDesktop2,
+  scooterWorkShopDesktop3,
+  scooterWorkShopMobile1,
+  scooterWorkShopMobile2,
+  scooterWorkShopMobile3,
+} from "src/components/ImageLoader";
+
 const iodev = {
   categories: ["web", "ui-ux"],
   projects: [
@@ -7,8 +26,8 @@ const iodev = {
       slug: "naikdaun",
       category: "web",
       year: 2021,
-      url: "https://github.com/saiful-akbar/naikdaun/",
-      heroImage: "/images/projects/naikdaun/hero.webp",
+      url: "https://naikdaun.id",
+      heroImage: naikdaunHero,
       bannerColor: { primary: "#321272", secondary: "#a461b7" },
       tags: ["PHP", "Laravel", "Bootstrap", "Javascript", "jQuery"],
       details: [
@@ -30,19 +49,19 @@ const iodev = {
             {
               orientation: "horizontal",
               src: [
-                "/images/projects/naikdaun/mobile-home.webp",
-                "/images/projects/naikdaun/mobile-works.webp",
-                "/images/projects/naikdaun/mobile-works-detail.webp",
-                "/images/projects/naikdaun/mobile-about.webp",
+                naikdaunMobile1,
+                naikdaunMobile2,
+                naikdaunMobile3,
+                naikdaunMobile4,
               ],
             },
             {
               orientation: "vertical",
               src: [
-                "/images/projects/naikdaun/desktop-home.webp",
-                "/images/projects/naikdaun/desktop-about.webp",
-                "/images/projects/naikdaun/desktop-works.webp",
-                "/images/projects/naikdaun/desktop-works-detail.webp",
+                naikdaunDesktop1,
+                naikdaunDesktop2,
+                naikdaunDesktop3,
+                naikdaunDesktop4,
               ],
             },
           ],
@@ -56,7 +75,7 @@ const iodev = {
       category: "web",
       year: 2021,
       url: "https://github.com/saiful-akbar/scooter-work-shop/",
-      heroImage: "/images/projects/scooter-work-shop/hero.webp",
+      heroImage: scooterWorkShopHero,
       bannerColor: { primary: "#222859", secondary: "#5e6ba0" },
       tags: [
         "PHP",
@@ -85,17 +104,17 @@ const iodev = {
             {
               orientation: "horizontal",
               src: [
-                "/images/projects/scooter-work-shop/mobile-home.webp",
-                "/images/projects/scooter-work-shop/mobile-report.webp",
-                "/images/projects/scooter-work-shop/mobile-transaction.webp",
+                scooterWorkShopMobile1,
+                scooterWorkShopMobile2,
+                scooterWorkShopMobile3,
               ],
             },
             {
               orientation: "vertical",
               src: [
-                "/images/projects/scooter-work-shop/desktop-home.webp",
-                "/images/projects/scooter-work-shop/desktop-sales-item-list.webp",
-                "/images/projects/scooter-work-shop/desktop-user.webp",
+                scooterWorkShopDesktop1,
+                scooterWorkShopDesktop2,
+                scooterWorkShopDesktop3,
               ],
             },
           ],
@@ -118,6 +137,7 @@ const iodev = {
       ],
     },
   ],
+  clients: ["Naikdaun", "Scooter Work Shop"],
 };
 
 export default iodev;

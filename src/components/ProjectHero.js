@@ -12,6 +12,7 @@ import TextMask from "src/components/TextMask";
  */
 const animateVariants = {
   text: {
+    // animasi text
     hidden: {
       opacity: 0,
       y: "80%",
@@ -26,6 +27,7 @@ const animateVariants = {
     },
   },
   divider: {
+    // animasi divider
     hidden: {
       opacity: 0,
       scaleX: 0,
@@ -42,6 +44,7 @@ const animateVariants = {
     },
   },
   image: {
+    // animasi image
     hidden: {
       opacity: 0,
       scale: 0.8,
@@ -74,6 +77,9 @@ const ProjectHero = ({ data }) => {
 
   return (
     <Box
+      sx={{
+        backgroundImage: `linear-gradient(to bottom right, ${bannerColor.primary}, ${bannerColor.secondary})`,
+      }}
       className={styles.root}
       component={motion.div}
       initial="hidden"
@@ -95,9 +101,6 @@ const ProjectHero = ({ data }) => {
           opacity: 0,
         },
       }}
-      sx={{
-        backgroundImage: `linear-gradient(to bottom right, ${bannerColor.primary}, ${bannerColor.secondary})`,
-      }}
     >
       <Container maxWidth="md">
         <Grid
@@ -108,6 +111,7 @@ const ProjectHero = ({ data }) => {
         >
           {/* Left content */}
           <Grid item md={6} xs={12} container spacing={3}>
+            {/* project name */}
             <Grid item xs={12}>
               <Typography
                 component={motion.h1}
@@ -122,6 +126,7 @@ const ProjectHero = ({ data }) => {
               </Typography>
             </Grid>
 
+            {/* divider */}
             <Grid item xs={12} my={5}>
               <Divider
                 sx={{ borderColor: (theme) => theme.palette.text.lightPrimary }}
@@ -130,6 +135,7 @@ const ProjectHero = ({ data }) => {
               />
             </Grid>
 
+            {/* project category & year */}
             <Grid item xs={12} container spacing={1}>
               <Grid item xs={4}>
                 <Typography variant="subtitle1">
@@ -178,6 +184,7 @@ const ProjectHero = ({ data }) => {
 
           {/* Right content */}
           <Grid item md={6} xs={12} className={styles.imageWrapper}>
+            {/* project hero image */}
             <Box
               component={motion.img}
               src={heroImage}
@@ -196,7 +203,7 @@ const ProjectHero = ({ data }) => {
 };
 
 /**
- * Prop types komponen ProjectHero
+ * Prop types ProjectHero
  *
  * @type {Object}
  */

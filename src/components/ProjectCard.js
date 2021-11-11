@@ -10,9 +10,10 @@ import actionType from "src/redux/actionType";
 import { useHistory } from "react-router-dom";
 
 /**
- * Kompoen utama ProjectCard
+ * komponen ProjectCard
  *
- * @returns
+ * @param  {Object} options.project
+ * @return {React Node}
  */
 const ProjectCard = ({ project }) => {
   const history = useHistory();
@@ -125,6 +126,7 @@ const ProjectCard = ({ project }) => {
 
   // handle click card
   const handleTap = () => {
+    // update redux state sharedLayout
     dispatch({
       type: actionType.setProjectSharedLayout,
       value: true,
@@ -134,11 +136,13 @@ const ProjectCard = ({ project }) => {
     const bodyRect = body.getBoundingClientRect();
     const newAnimateVariants = animateVariants;
 
+    // update animasi exit root
     newAnimateVariants.root.exit = {
       opacity: 1,
       when: "afterChildren",
     };
 
+    // update animasi exit banner
     newAnimateVariants.banner.exit = {
       borderRadius: 0,
       opacity: 1,
@@ -159,16 +163,19 @@ const ProjectCard = ({ project }) => {
       },
     };
 
+    // update animasi exit text
     newAnimateVariants.text.exit = {
       opacity: 0,
       transition,
     };
 
+    // update animasi exit image
     newAnimateVariants.image.exit = {
       opacity: 0,
       transition,
     };
 
+    // update animasi pada state
     setAnimateVariants(newAnimateVariants);
 
     // push ke halaman project detail
@@ -185,6 +192,7 @@ const ProjectCard = ({ project }) => {
       variants={animateVariants.root}
       onTap={handleTap}
     >
+      {/* banner */}
       <Box
         boxShadow={7}
         className={styles.banner}
@@ -201,8 +209,11 @@ const ProjectCard = ({ project }) => {
           backgroundImage: `linear-gradient(to bottom right, ${bannerColor.primary}, ${bannerColor.secondary})`,
         }}
       />
+      {/* end banner */}
 
+      {/* card content */}
       <div className={styles.content}>
+        {/* top text */}
         <div className={styles.topText}>
           <TextMask
             variants={animateVariants.text}
@@ -222,7 +233,9 @@ const ProjectCard = ({ project }) => {
             <Icon sx={{ marginTop: 1.5 }}>east</Icon>
           </TextMask>
         </div>
+        {/* end top text */}
 
+        {/* hero image */}
         <Box
           boxShadow={7}
           component={motion.img}
@@ -233,6 +246,7 @@ const ProjectCard = ({ project }) => {
           variants={animateVariants.image}
         />
 
+        {/* bottom text */}
         <div className={styles.bottomText}>
           <TextMask
             variants={animateVariants.text}
@@ -252,13 +266,15 @@ const ProjectCard = ({ project }) => {
             {year}
           </TextMask>
         </div>
+        {/* end bottom text */}
       </div>
+      {/* enf card content */}
     </motion.div>
   );
 };
 
 /**
- * ProjectCard prop types
+ * prop types ProjectCard
  */
 ProjectCard.propTypes = {
   project: PropTypes.object.isRequired,

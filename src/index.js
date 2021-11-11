@@ -9,13 +9,22 @@ import { Provider } from "react-redux";
 import { BrowserRouter as Router } from "react-router-dom";
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 
+/**
+ * komponen RootApp
+ *
+ * @return {React Node}
+ */
+const Root = () => (
+  <Provider store={store}>
+    <Router>
+      <App />
+    </Router>
+  </Provider>
+);
+
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <Router>
-        <App />
-      </Router>
-    </Provider>
+    <Root />
   </React.StrictMode>,
   document.getElementById("root")
 );

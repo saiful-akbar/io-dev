@@ -8,6 +8,7 @@ import { NavLink, useLocation } from "react-router-dom";
 import actionType from "src/redux/actionType";
 import styles from "src/styles/header.module.scss";
 import transition from "src/transition";
+import { logoDark } from "src/components/ImageLoader";
 
 /**
  * animasi varian
@@ -35,13 +36,15 @@ const headerVariants = {
  *
  * @param {string} title
  * @param {string} href
+ *
  * @returns
  */
 const NavItem = ({ title, href }) => {
   const location = useLocation();
   const [width, setWidth] = React.useState(10);
 
-  // cek link active atau tidak
+  // cek apakah link active atau tidak
+  // jika link active update state width
   React.useEffect(() => {
     if (location.pathname === href) {
       setWidth(25);
@@ -50,8 +53,10 @@ const NavItem = ({ title, href }) => {
     }
   }, [setWidth, location, href]);
 
-  // fungsi handle hover nav link
+  // fungsi handle style ketika di-hover
   const handleCursorHover = (value) => {
+    // cek apakah url = link pada menu
+    // jika berbeda update state width
     if (location.pathname !== href) {
       if (value) {
         setWidth(20);
@@ -98,18 +103,28 @@ NavItem.propTypes = {
  * list link menu
  */
 const links = [
-  { title: "Work", href: "/", path: "/:category" },
-  { title: "About", href: "/about", path: "/about" },
+  {
+    title: "Work",
+    href: "/",
+    path: "/:category",
+  },
+  {
+    title: "About",
+    href: "/about",
+    path: "/about",
+  },
 ];
 
 /**
- * komponen utama
+ * komponen Header
+ *
  * @returns
  */
 const Header = ({ ...rest }) => {
+  // redux state & dispatch
   const dispatch = useDispatch();
 
-  // Handle cursor hover
+  // fungsi handle style pada cursor ketika ada event hover
   const handleCursorHover = (isHover) => {
     dispatch({
       type: actionType.setGlobalCursorHover,
@@ -117,13 +132,15 @@ const Header = ({ ...rest }) => {
     });
   };
 
+  // render komponen
   return (
     <motion.header {...rest} className={styles.header}>
+      {/* logo */}
       <NavLink to="/" exact>
         <Box
           component={motion.img}
           boxShadow={5}
-          src="/images/logo/logo-dark.webp"
+          src={logoDark}
           alt="logo"
           className={styles.logo}
           variants={headerVariants}
@@ -134,7 +151,9 @@ const Header = ({ ...rest }) => {
           onHoverEnd={() => handleCursorHover(false)}
         />
       </NavLink>
+      {/* end logo */}
 
+      {/* navbar */}
       <motion.nav
         className={styles.nav}
         variants={headerVariants}
@@ -155,6 +174,7 @@ const Header = ({ ...rest }) => {
           ))}
         </ul>
       </motion.nav>
+      {/* end navbar */}
     </motion.header>
   );
 };

@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
 
 /**
- * komponen utama
+ * komponen Cursor
  * @returns
  */
 const Cursor = () => {
@@ -12,10 +12,10 @@ const Cursor = () => {
   const [y, setY] = useState(-12);
   const [isClick, setIsClick] = useState(false);
 
-  // redux
+  // redux state & dispatch
   const { cursorHover } = useSelector((state) => state.globalReducer);
 
-  // fungsi handle mouse move
+  // fungsi handle ketika mouse digerakan
   const handleMouseMove = useCallback(
     (e) => {
       setX(e.clientX - 12);
@@ -24,9 +24,12 @@ const Cursor = () => {
     [setX, setY]
   );
 
-  // jalankan fungsi handleMouse
+  // jalankan fungsi handleMouse setelah komponen selesai di render
   useEffect(() => {
+    // event ketika mouse digerakan
     window.addEventListener("mousemove", handleMouseMove);
+
+    // event ketika mouse diklik
     window.addEventListener("mousedown", () => setIsClick(true));
     window.addEventListener("mouseup", () => setIsClick(false));
 
@@ -37,6 +40,7 @@ const Cursor = () => {
     };
   }, [handleMouseMove, setIsClick]);
 
+  // render komponen
   return (
     <motion.div className={styles.cursor} style={{ x, y }}>
       <motion.div

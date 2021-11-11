@@ -10,19 +10,19 @@ import TextMask from "src/components/TextMask";
 import { useHistory } from "react-router";
 
 /**
- * Komponen utama
+ * Komponen ProjectFooter
  *
  * @param {Object} options.data Data project next
  */
 export default function ProjectFooter({ data }) {
-  const { bannerColor, name, slug } = data;
   const ref = React.useRef(null);
   const history = useHistory();
+  const { bannerColor, name, slug } = data;
 
-  // redux dispatch
+  // redux state & dispatch
   const dispatch = useDispatch();
 
-  // state
+  // state animasi root
   const [rootVariants, setRootVariants] = React.useState({
     hidden: {
       opacity: 0,
@@ -40,6 +40,7 @@ export default function ProjectFooter({ data }) {
     },
   });
 
+  // state animasi text
   const [textVariants, setTextVariants] = React.useState({
     hidden: {
       opacity: 0,
@@ -55,7 +56,7 @@ export default function ProjectFooter({ data }) {
     },
   });
 
-  // handle cursor hover
+  // fungsi handle style cursor ketika ada event hover
   const handleCursorHover = (value) => {
     dispatch({
       type: actionType.setGlobalCursorHover,
@@ -78,11 +79,13 @@ export default function ProjectFooter({ data }) {
       transition: { ...transition },
     };
 
+    // ubah animasi exit text
     newTextVariants.exit = {
       opacity: 0,
       transition,
     };
 
+    // update animasi pada state
     setRootVariants(newRootVariants);
     setTextVariants(newTextVariants);
 
@@ -107,6 +110,7 @@ export default function ProjectFooter({ data }) {
       variants={rootVariants}
       style={{ originY: 1 }}
     >
+      {/* banner */}
       <motion.div
         className={styles.banner}
         transition={transition}
@@ -114,11 +118,13 @@ export default function ProjectFooter({ data }) {
         onHoverEnd={() => handleCursorHover(false)}
         whileHover={{ scaleY: 1.1, originY: 1 }}
         style={{
-          backgroundImage: `linear-gradient(to bottom right, ${bannerColor.primary}, ${bannerColor.secondary})`,
           originY: 1,
+          backgroundImage: `linear-gradient(to bottom right, ${bannerColor.primary}, ${bannerColor.secondary})`,
         }}
       />
+      {/* end banner */}
 
+      {/* content */}
       <div className={styles.content}>
         <Container maxWidth="md">
           <Grid
@@ -149,10 +155,16 @@ export default function ProjectFooter({ data }) {
           </Grid>
         </Container>
       </div>
+      {/* end content */}
     </motion.footer>
   );
 }
 
+/**
+ * prop types ProjectFooter
+ *
+ * @type {Object}
+ */
 ProjectFooter.propTypes = {
   data: PropTypes.object.isRequired,
 };

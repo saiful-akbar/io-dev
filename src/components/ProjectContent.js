@@ -11,6 +11,7 @@ import transition from "src/transition";
  */
 const animateVariants = {
   root: {
+    // root animasi
     hidden: {
       opacity: 0,
       y: 150,
@@ -29,6 +30,7 @@ const animateVariants = {
     },
   },
   text: {
+    // text animasi
     hidden: {
       opacity: 0,
       transition: {
@@ -48,6 +50,7 @@ const animateVariants = {
     },
   },
   image: {
+    // image animasi
     hidden: {
       opacity: 0,
       scale: 0.8,
@@ -71,13 +74,13 @@ const animateVariants = {
 };
 
 /**
- * Kompoenn utama ProjectContent
+ * Komponen ProjectContent
  *
  * @param {Object} data
  * @returns
  */
 const ProjectContent = ({ data, color, ...rest }) => {
-  const { title, description, subDescription, images } = data;
+  const { title, images, description, subDescription } = data;
 
   return (
     <Box
@@ -92,6 +95,7 @@ const ProjectContent = ({ data, color, ...rest }) => {
     >
       <Container maxWidth="sm">
         <Grid container spacing={3}>
+          {/* title */}
           <Grid item xs={12} mb={3}>
             <InView triggerOnce>
               {({ inView, ref }) => (
@@ -110,7 +114,9 @@ const ProjectContent = ({ data, color, ...rest }) => {
               )}
             </InView>
           </Grid>
+          {/* end title */}
 
+          {/* deskripsi */}
           {description !== null && (
             <Grid item xs={12}>
               <InView triggerOnce>
@@ -132,7 +138,9 @@ const ProjectContent = ({ data, color, ...rest }) => {
               </InView>
             </Grid>
           )}
+          {/* end deskripsi */}
 
+          {/* sub deskripsi */}
           {subDescription !== null && (
             <Grid item xs={12}>
               <InView triggerOnce>
@@ -153,16 +161,19 @@ const ProjectContent = ({ data, color, ...rest }) => {
               </InView>
             </Grid>
           )}
+          {/* end sub deskripsi */}
         </Grid>
       </Container>
 
+      {/* image */}
       {images.length > 0 &&
         images.map((img, key) => {
+          // cek apakah image berorientasi horizontal atau vertical
           if (img.orientation === "horizontal") {
             return (
               <div key={key} className={styles.horizontal}>
-                {img.src.map((src) => (
-                  <div key={src} className={styles.imageWrapper}>
+                {img.src.map((src, key) => (
+                  <div key={key} className={styles.imageWrapper}>
                     <InView triggerOnce>
                       {({ inView, ref }) => (
                         <motion.img
@@ -184,6 +195,7 @@ const ProjectContent = ({ data, color, ...rest }) => {
             );
           }
 
+          // image vertical
           return (
             <Container maxWidth="md" key={key}>
               <Grid
@@ -199,7 +211,7 @@ const ProjectContent = ({ data, color, ...rest }) => {
                     item
                     md={img.src.length > 1 ? 6 : 12}
                     xs={12}
-                    key={src}
+                    key={key}
                     sx={{
                       display: "flex",
                       justifyContent: "center",
@@ -235,12 +247,19 @@ const ProjectContent = ({ data, color, ...rest }) => {
             </Container>
           );
         })}
+      {/* image */}
 
+      {/* divider */}
       <Box mt={10} sx={{ borderBottom: 1, borderColor: "divider" }} />
     </Box>
   );
 };
 
+/**
+ * prop types ProjectContent
+ *
+ * @type {Object}
+ */
 ProjectContent.propTypes = {
   data: PropTypes.object.isRequired,
   color: PropTypes.string.isRequired,

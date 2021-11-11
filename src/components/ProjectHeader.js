@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import actionType from "src/redux/actionType";
 import transition from "src/transition";
 import styles from "src/styles/projectHeader.module.scss";
+import { logoDark } from "src/components/ImageLoader";
 
 /**
  * animasi varian
@@ -35,20 +36,15 @@ const headerVariants = {
 const ProjectHeader = ({ url }) => {
   const dispatch = useDispatch();
 
-  /**
-   * State
-   */
+  // state
   const [inView, setInView] = React.useState(true);
 
-  /**
-   * set inView ketika element ProjectHero ada dalam viewport
-   */
+  // set inView ketika element ProjectHero ada dalam viewport
   const handleInViewOnScroll = React.useCallback(() => {
     const projectHeroEl = document.querySelector("#project-hero");
 
     if (projectHeroEl) {
       const { bottom } = projectHeroEl.getBoundingClientRect();
-
       if (bottom <= 60) {
         setInView(false);
       } else {
@@ -57,20 +53,16 @@ const ProjectHeader = ({ url }) => {
     }
   }, [setInView]);
 
-  /**
-   * jalankan fungsi handleInViewOnScroll
-   * saat viewport di-scroll
-   */
+  // jalankan fungsi handleInViewOnScroll saat viewport di-scroll
   React.useEffect(() => {
     window.addEventListener("scroll", handleInViewOnScroll);
+
     return () => {
       window.removeEventListener("scroll", handleInViewOnScroll);
     };
   }, [handleInViewOnScroll]);
 
-  /**
-   * ubah redux state cursorHover menjadi true
-   */
+  // fungsi handle style cursor saat ada event hover
   const handleCursorHover = (value) => {
     dispatch({
       type: actionType.setGlobalCursorHover,
@@ -81,11 +73,12 @@ const ProjectHeader = ({ url }) => {
   // render komponen
   return (
     <React.Fragment>
+      {/* logo */}
       <Link to="/">
         <Box
           component={motion.img}
           boxShadow={5}
-          src="/images/logo/logo-dark.webp"
+          src={logoDark}
           alt="logo"
           className={styles.logo}
           onHoverStart={() => handleCursorHover(true)}
@@ -96,14 +89,16 @@ const ProjectHeader = ({ url }) => {
           variants={headerVariants}
         />
       </Link>
+      {/* end logo */}
 
       <motion.div
         className={styles.wrapper}
+        variants={headerVariants}
         initial="hidden"
         animate="show"
         exit="exit"
-        variants={headerVariants}
       >
+        {/* button kembali */}
         <Link to="/">
           <motion.div
             data-inview={inView}
@@ -122,7 +117,9 @@ const ProjectHeader = ({ url }) => {
             </Icon>
           </motion.div>
         </Link>
+        {/* end button kembali */}
 
+        {/* button url */}
         <motion.a
           href={url}
           target="_blank"
@@ -142,11 +139,17 @@ const ProjectHeader = ({ url }) => {
             north_east
           </Icon>
         </motion.a>
+        {/* end button url */}
       </motion.div>
     </React.Fragment>
   );
 };
 
+/**
+ * prop types ProjectHeader
+ *
+ * @type {Object}
+ */
 ProjectHeader.propTypes = {
   url: PropTypes.string.isRequired,
 };

@@ -1,32 +1,32 @@
 const typography = {
   h1: {
     fontSize: 64,
-    lineHeight: "80%",
+    lineHeight: "100%",
     fontWeight: 700,
   },
   h2: {
     fontSize: 48,
-    lineHeight: "80%",
+    lineHeight: "100%",
     fontWeight: 700,
   },
   h3: {
     fontSize: 32,
-    lineHeight: "80%",
+    lineHeight: "100%",
     fontWeight: 700,
   },
   h4: {
     fontSize: 24,
-    lineHeight: "80%",
+    lineHeight: "100%",
     fontWeight: 700,
   },
   h5: {
     fontSize: 20,
-    lineHeight: "80%",
+    lineHeight: "100%",
     fontWeight: 700,
   },
   h6: {
     fontSize: 18,
-    lineHeight: "80%",
+    lineHeight: "100%",
     fontWeight: 700,
   },
   subtitle1: {
@@ -40,7 +40,7 @@ const typography = {
     fontWeight: 600,
   },
   body1: {
-    fontSize: 20,
+    fontSize: 21,
     lineHeight: "150%",
     fontWeight: 400,
   },

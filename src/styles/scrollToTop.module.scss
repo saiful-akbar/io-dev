@@ -30,4 +30,5 @@
 .icon {
   z-index: 2;
   color: variable.$text-light-primary;
+  pointer-events: none;
 }

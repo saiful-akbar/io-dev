@@ -33,7 +33,7 @@ const linkVariants = {
 const Footer = () => {
   const dispatch = useDispatch();
 
-  // set value state cursorHover ketika element di hover
+  // update redux state cursorHover ketika element di hover
   const handleCursorHover = (isHover) => {
     dispatch({
       type: actionType.setGlobalCursorHover,
@@ -41,18 +41,19 @@ const Footer = () => {
     });
   };
 
+  // render komponen
   return (
     <footer className={styles.footer}>
       <motion.a
         href="https://instagram.com/saifulakbar13"
         target="_blank"
         rel="noreferrer"
-        onHoverStart={() => handleCursorHover(true)}
-        onHoverEnd={() => handleCursorHover(false)}
         initial="hidden"
         animate="show"
         exit="exit"
         variants={linkVariants}
+        onHoverStart={() => handleCursorHover(true)}
+        onHoverEnd={() => handleCursorHover(false)}
       >
         <TextMask>
           <InstagramIcon style={{ fontSize: 30 }} />
