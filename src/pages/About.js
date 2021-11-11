@@ -12,6 +12,9 @@ import TextMask from "src/components/TextMask";
 import { motion } from "framer-motion";
 import ClientFetch from "src/utils/clientFetch";
 
+/**
+ * Animasi variants
+ */
 const animateVariants = {
   root: {
     hidden: {
@@ -381,7 +384,7 @@ const About = () => {
 
                   <Grid item lg={10} md={8} xs={12}>
                     <Typography variant="h5" color="textPrimary" mb={1}>
-                      (+63) 813-8904-8009
+                      (+62) 813-8904-8009
                     </Typography>
                     <Typography variant="h5" color="textPrimary">
                       (+62) 812-8048-6235
