@@ -15,6 +15,7 @@ import {
   scooterWorkShopMobile1,
   scooterWorkShopMobile2,
   scooterWorkShopMobile3,
+  scooterWorkShopDatabase,
 } from "src/components/ImageLoader";
 
 const iodev = {
@@ -128,9 +129,7 @@ const iodev = {
           images: [
             {
               orientation: "vertical",
-              src: [
-                "/images/projects/scooter-work-shop/database-relation.webp",
-              ],
+              src: [scooterWorkShopDatabase],
             },
           ],
         },

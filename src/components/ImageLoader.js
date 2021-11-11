@@ -21,6 +21,7 @@ import scooterWorkShopDesktop3 from "src/assets/img/projects/scooter-work-shop/d
 import scooterWorkShopMobile1 from "src/assets/img/projects/scooter-work-shop/mobile-1.webp";
 import scooterWorkShopMobile2 from "src/assets/img/projects/scooter-work-shop/mobile-2.webp";
 import scooterWorkShopMobile3 from "src/assets/img/projects/scooter-work-shop/mobile-3.webp";
+import scooterWorkShopDatabase from "src/assets/img/projects/scooter-work-shop/database.webp";
 
 export {
   logoDark,
@@ -41,4 +42,5 @@ export {
   scooterWorkShopMobile1,
   scooterWorkShopMobile2,
   scooterWorkShopMobile3,
+  scooterWorkShopDatabase,
 };
