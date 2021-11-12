@@ -1,4 +1,4 @@
-import iodev from 'src/data/iodev';
+import iodev from "src/data/iodev.json";
 
 /**
  * Class ProjectFetch
@@ -10,7 +10,7 @@ class ProjectFetch {
 
   /**
    * Method untuk mengambil semua data project
-   * 
+   *
    * @return {Object}
    */
   all() {
@@ -19,7 +19,7 @@ class ProjectFetch {
 
   /**
    * Method untuk mengambil data project berdasarkan slug-nya
-   * 
+   *
    * @param  {String} $slug
    * @return {Object}
    */
@@ -33,7 +33,7 @@ class ProjectFetch {
 
   /**
    * Method untuk mencari data project selanjutnya berdasarkan slug yang dikirim
-   * 
+   *
    * @param  {String} slug
    * @return {Object}
    */
@@ -41,13 +41,15 @@ class ProjectFetch {
     const projects = this.projects;
     const project = this.find(slug);
 
-    if (typeof project === 'undefined') {
+    if (typeof project === "undefined") {
       return undefined;
     }
 
     for (let i = 0; i < projects.length; i += 1) {
       if (projects[i].slug === slug) {
-        return typeof projects[i + 1] === 'undefined' ? projects[0] : projects[i + 1];
+        return typeof projects[i + 1] === "undefined"
+          ? projects[0]
+          : projects[i + 1];
       }
     }
   }

@@ -129,9 +129,12 @@ const ProjectHero = ({ data }) => {
             {/* divider */}
             <Grid item xs={12} my={5}>
               <Divider
-                sx={{ borderColor: (theme) => theme.palette.text.lightPrimary }}
                 component={motion.hr}
                 variants={animateVariants.divider}
+                sx={{
+                  borderColor: (theme) => theme.palette.text.lightPrimary,
+                  borderBottomWidth: 3,
+                }}
               />
             </Grid>
 

@@ -7,7 +7,6 @@ import { useDispatch } from "react-redux";
 import actionType from "src/redux/actionType";
 import transition from "src/transition";
 import styles from "src/styles/projectHeader.module.scss";
-import { logoDark } from "src/components/ImageLoader";
 
 /**
  * animasi varian
@@ -77,8 +76,8 @@ const ProjectHeader = ({ url }) => {
       <Link to="/">
         <Box
           component={motion.img}
-          boxShadow={5}
-          src={logoDark}
+          boxShadow={3}
+          src="/images/logo/logo-dark.webp"
           alt="logo"
           className={styles.logo}
           onHoverStart={() => handleCursorHover(true)}

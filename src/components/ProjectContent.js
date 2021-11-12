@@ -86,7 +86,7 @@ const ProjectContent = ({ data, color, ...rest }) => {
     <Box
       {...rest}
       className={styles.root}
-      mt={10}
+      mt={15}
       component={motion.div}
       initial="hidden"
       animate="show"
@@ -96,7 +96,7 @@ const ProjectContent = ({ data, color, ...rest }) => {
       <Container maxWidth="sm">
         <Grid container spacing={3}>
           {/* title */}
-          <Grid item xs={12} mb={3}>
+          <Grid item xs={12} mb={2}>
             <InView triggerOnce>
               {({ inView, ref }) => (
                 <Typography
@@ -245,7 +245,7 @@ const ProjectContent = ({ data, color, ...rest }) => {
       {/* image */}
 
       {/* divider */}
-      <Box mt={10} sx={{ borderBottom: 1, borderColor: "divider" }} />
+      <Box mt={15} sx={{ borderBottom: 1, borderColor: "divider" }} />
     </Box>
   );
 };

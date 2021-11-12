@@ -1,0 +1,159 @@
+{
+  "categories": ["web", "ui-ux"],
+  "clients": ["Naikdaun", "Scooter Work Shop"],
+  "projects": [
+    {
+      "name": "Naikdaun",
+      "slug": "naikdaun",
+      "category": "web",
+      "year": 2021,
+      "url": "https://naikdaun.id",
+      "heroImage": "/images/projects/naikdaun/hero.webp",
+      "bannerColor": { "primary": "#321272", "secondary": "#a461b7" },
+      "tags": ["PHP", "Laravel", "Bootstrap", "Javascript", "jQuery"],
+      "details": [
+        {
+          "title": "Overview",
+          "description": "Naikdaun is one of our first clients. We had the honor of being part of the team that developed this website.",
+          "subDescription": "Naikdaun is a company profile website that contains about them, to the various projects they have made",
+          "images": []
+        },
+        {
+          "title": "UI",
+          "description": "UI Since hierarchy and design have a huge impact on usability, We complete all remaining functional decisions in the Design phase.",
+          "subDescription": "We designed page by page to look perfect on all types of devices. However, we pay extra attention to mobile devices because they are the ones that are used the most.",
+          "images": [
+            {
+              "orientation": "horizontal",
+              "src": [
+                "/images/projects/naikdaun/mobile-1.webp",
+                "/images/projects/naikdaun/mobile-2.webp",
+                "/images/projects/naikdaun/mobile-3.webp",
+                "/images/projects/naikdaun/mobile-4.webp"
+              ]
+            },
+            {
+              "orientation": "vertical",
+              "src": [
+                "/images/projects/naikdaun/desktop-1.webp",
+                "/images/projects/naikdaun/desktop-2.webp",
+                "/images/projects/naikdaun/desktop-3.webp",
+                "/images/projects/naikdaun/desktop-4.webp"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Scooter Work Shop",
+      "slug": "scooter-work-shop",
+      "category": "web",
+      "year": 2020,
+      "url": "https://github.com/saiful-akbar/scooter-work-shop/",
+      "heroImage": "/images/projects/scooter-work-shop/hero.webp",
+      "bannerColor": { "primary": "#222859", "secondary": "#5e6ba0" },
+      "tags": ["PHP", "Laravel", "MySql", "Javascript", "jQuery", "Bootstrap"],
+      "details": [
+        {
+          "title": "Overview",
+          "description": "Scooter Work Shop is a home for various kinds of scooter motorcycle parts. The place where you can find everything you need for your scooter. We have the opportunity to change the transaction process into an application that makes the process easier.",
+          "subDescription": null,
+          "images": []
+        },
+        {
+          "title": "UI",
+          "description": "Although this application is mostly operated on desktop or laptop devices, we will not neglect the responsiveness of the user interface",
+          "subDescription": "Page after page we try to keep it looking perfect on various devices",
+          "images": [
+            {
+              "orientation": "horizontal",
+              "src": [
+                "/images/projects/scooter-work-shop/mobile-1.webp",
+                "/images/projects/scooter-work-shop/mobile-4.webp",
+                "/images/projects/scooter-work-shop/mobile-2.webp"
+              ]
+            },
+            {
+              "orientation": "vertical",
+              "src": [
+                "/images/projects/scooter-work-shop/desktop-1.webp",
+                "/images/projects/scooter-work-shop/desktop-2.webp",
+                "/images/projects/scooter-work-shop/desktop-3.webp"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Databases",
+          "description": "Database design is very important because it is the core of a system.",
+          "subDescription": "we did not 1 or 2 times overhaul this database design. We pay close attention to every relationship between table 1 and others to get maximum results",
+          "images": [
+            {
+              "orientation": "vertical",
+              "src": ["/images/projects/scooter-work-shop/database.webp"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Slow Motor Inventory",
+      "slug": "slow-motor-inventory",
+      "category": "web",
+      "year": 2019,
+      "url": "https://github.com/saiful-akbar/slow-motor-inventory/",
+      "heroImage": "/images/projects/slow-motor-inventory/hero.webp",
+      "bannerColor": { "primary": "#004e3e", "secondary": "#01A65C" },
+      "tags": ["PHP", "MySql", "Javascript", "jQuery", "Bootstrap"],
+      "details": [
+        {
+          "title": "Overview",
+          "description": "Slow Motorcycle Inventory is the first application that we made to complete Saiful Akbar's final project at a workshop in the city of south tangerang.",
+          "subDescription": "From this application development process, we deepen our web application development",
+          "images": [
+            {
+              "orientation": "vertical",
+              "src": ["/images/projects/slow-motor-inventory/hero.webp"]
+            }
+          ]
+        },
+        {
+          "title": "Database design",
+          "description": "Database design aims to obtain a database that is better, in the use of storage space, fast in accessing and easily manipulating data and free from data redundancy.",
+          "subDescription": null,
+          "images": [
+            {
+              "orientation": "vertical",
+              "src": [
+                "/images/projects/slow-motor-inventory/class-diagram.webp"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "UI",
+          "description": "We focus on speed and ease of use, and save precious seconds in every interaction.",
+          "subDescription": "The dashboard includes a high-level overview with useful shortcuts for active work. The main sidebar adjusts to show the most relevant content and navigation paths, keeping everything centered and easy to use.",
+          "images": [
+            {
+              "orientation": "horizontal",
+              "src": [
+                "/images/projects/slow-motor-inventory/mobile-1.webp",
+                "/images/projects/slow-motor-inventory/mobile-2.webp",
+                "/images/projects/slow-motor-inventory/mobile-3.webp"
+              ]
+            },
+            {
+              "orientation": "vertical",
+              "src": [
+                "/images/projects/slow-motor-inventory/desktop-2.webp",
+                "/images/projects/slow-motor-inventory/desktop-1.webp"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -8,7 +8,6 @@ import { NavLink, useLocation } from "react-router-dom";
 import actionType from "src/redux/actionType";
 import styles from "src/styles/header.module.scss";
 import transition from "src/transition";
-import { logoDark } from "src/components/ImageLoader";
 
 /**
  * animasi varian
@@ -102,7 +101,8 @@ NavItem.propTypes = {
 /**
  * list link menu
  */
-const links = [{
+const links = [
+  {
     title: "Work",
     href: "/",
     path: "/:category",
@@ -139,7 +139,7 @@ const Header = ({ ...rest }) => {
         <Box
           component={motion.img}
           boxShadow={3}
-          src={logoDark}
+          src="/images/logo/logo-dark.webp"
           alt="logo"
           className={styles.logo}
           variants={headerVariants}

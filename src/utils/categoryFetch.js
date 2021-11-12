@@ -1,4 +1,4 @@
-import iodev from 'src/data/iodev';
+import iodev from "src/data/iodev.json";
 
 class CategoryFetch {
   constructor() {
@@ -7,7 +7,7 @@ class CategoryFetch {
 
   /**
    * Method untuk mengambil semua data category
-   * 
+   *
    * @return {Object} data category
    */
   all() {
@@ -16,7 +16,7 @@ class CategoryFetch {
 
   /**
    * Method untuk mencari date category
-   * 
+   *
    * @param  {String} name Nama katagory
    * @return {Object} Data category
    */

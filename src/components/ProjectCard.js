@@ -152,11 +152,11 @@ const ProjectCard = ({ project }) => {
       width: bodyRect.width,
       transition: {
         ...transition,
-        x: {
+        y: {
           ...transition,
           delay: transition.duration / 4,
         },
-        width: {
+        height: {
           ...transition,
           delay: transition.duration / 4,
         },
