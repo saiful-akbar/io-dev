@@ -6,11 +6,23 @@
 }
 
 .divider {
-  border-bottom: medium solid variable.$text-primary;
+  border-bottom: 3px solid variable.$text-primary;
   width: 100%;
 }
 
 .title {
   display: block;
   overflow: hidden;
+}
+
+.list {
+  margin-left: 23px;
+
+  li {
+    margin-bottom: 25px;
+  }
+
+  li:last-child {
+    margin-bottom: 0;
+  }
 }

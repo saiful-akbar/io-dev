@@ -105,6 +105,7 @@ const About = () => {
     <MainLayout title="About" pt={20} pb={2}>
       <Container maxWidth="md">
         <Grid container spacing={3}>
+
           {/* hero */}
           <Grid item xs={12}>
             <Hero leftTitle="About_" rightTitle="Us" />
@@ -114,7 +115,6 @@ const About = () => {
           <Grid
             item
             xs={12}
-            container
             component={motion.div}
             variants={animateVariants.root}
             initial="hidden"
@@ -125,10 +125,10 @@ const About = () => {
             <Grid
               item
               xs={12}
-              mt={10}
               container
               spacing={3}
               justifyContent="flex-end"
+              pt={10}
             >
               <Grid item md={4} xs={12} mb={3}>
                 <InView triggerOnce>
@@ -206,7 +206,7 @@ const About = () => {
               container
               spacing={3}
               justifyContent="flex-end"
-              mt={10}
+              pt={10}
             >
               <Grid item md={4} xs={12} mb={3}>
                 <InView triggerOnce>
@@ -249,16 +249,15 @@ const About = () => {
               </Grid>
 
               <Grid item md={8} xs={12}>
-                {clients.map((client) => (
-                  <Typography
-                    key={client}
-                    variant="h3"
-                    color="textPrimary"
-                    mb={2}
-                  >
-                    - {client}.
-                  </Typography>
-                ))}
+                <ul className={styles.list}>
+                  {clients.map((client) => (
+                    <li key={client}>
+                      <Typography variant="h3" color="textPrimary">
+                        {client}.
+                      </Typography>
+                    </li>
+                  ))}
+                </ul>
               </Grid>
 
               <Grid item md={8} xs={12} mt={10}>
@@ -284,7 +283,7 @@ const About = () => {
               container
               spacing={3}
               justifyContent="flex-end"
-              mt={10}
+              pt={10}
             >
               <Grid item md={4} xs={12} mb={3}>
                 <InView triggerOnce>

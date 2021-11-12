@@ -129,9 +129,12 @@ const ProjectHero = ({ data }) => {
             {/* divider */}
             <Grid item xs={12} my={5}>
               <Divider
-                sx={{ borderColor: (theme) => theme.palette.text.lightPrimary }}
                 component={motion.hr}
                 variants={animateVariants.divider}
+                sx={{
+                  borderColor: (theme) => theme.palette.text.lightPrimary,
+                  borderBottomWidth: 3,
+                }}
               />
             </Grid>
 
@@ -186,12 +189,12 @@ const ProjectHero = ({ data }) => {
           <Grid item md={6} xs={12} className={styles.imageWrapper}>
             {/* project hero image */}
             <Box
+              boxShadow={3}
               component={motion.img}
               src={heroImage}
               alt={name}
               loading="eager"
               className={styles.heroImage}
-              boxShadow={7}
               variants={animateVariants.image}
             />
           </Grid>

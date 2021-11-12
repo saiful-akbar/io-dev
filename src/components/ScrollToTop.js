@@ -88,13 +88,12 @@ const ScrollToTop = () => {
       variants={rootVariants}
     >
       <Box
-        boxShadow={5}
+        boxShadow={3}
         component={motion.div}
         className={styles.banner}
         transition={transition}
         whileHover={{
           borderRadius: "100%",
-          rotate: 180,
           scale: 1.2,
         }}
       />

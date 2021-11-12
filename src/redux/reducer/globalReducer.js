@@ -3,6 +3,8 @@ import theme from "src/themes/theme";
 
 // state
 const initialState = {
+  appName: "IO Dev",
+  appVersion: "v1.1.0",
   cursorHover: false,
   bgColor: theme.palette.background.default,
 };

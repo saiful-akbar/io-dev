@@ -1,4 +1,4 @@
-import iodev from "src/data/iodev";
+import iodev from "src/data/iodev.json";
 
 class ClientFetch {
   constructor() {

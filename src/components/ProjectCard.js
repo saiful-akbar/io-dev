@@ -152,11 +152,11 @@ const ProjectCard = ({ project }) => {
       width: bodyRect.width,
       transition: {
         ...transition,
-        x: {
+        y: {
           ...transition,
           delay: transition.duration / 4,
         },
-        width: {
+        height: {
           ...transition,
           delay: transition.duration / 4,
         },
@@ -194,7 +194,7 @@ const ProjectCard = ({ project }) => {
     >
       {/* banner */}
       <Box
-        boxShadow={7}
+        boxShadow={3}
         className={styles.banner}
         component={motion.div}
         transition={transition}
@@ -237,7 +237,7 @@ const ProjectCard = ({ project }) => {
 
         {/* hero image */}
         <Box
-          boxShadow={7}
+          boxShadow={3}
           component={motion.img}
           src={heroImage}
           alt={name}

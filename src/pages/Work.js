@@ -4,7 +4,7 @@ import TabPanel from "@mui/lab/TabPanel";
 import { Container, Grid, Tab } from "@mui/material";
 import { motion } from "framer-motion";
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Footer from "src/components/Footer";
 import Hero from "src/components/Hero";
 import ProjectCard from "src/components/ProjectCard";
@@ -37,6 +37,7 @@ const tabVariants = {
  */
 const Work = ({ history, location }) => {
   const dispatch = useDispatch();
+  const { appVersion } = useSelector((state) => state.globalReducer);
 
   const categoryFetch = new CategoryFetch();
   const projectFetch = new ProjectFetch();
@@ -84,18 +85,20 @@ const Work = ({ history, location }) => {
     <MainLayout title="Work" pt={20} pb={2}>
       <Container maxWidth="md">
         <Grid container spacing={3}>
+        
           {/* hero */}
           <Grid item xs={12}>
             <Hero
               leftTitle="Work_"
-              rightTitle={`v${process.env.REACT_APP_VERSION}`}
+              rightTitle={appVersion}
             />
           </Grid>
 
           {/* content */}
-          <Grid item xs={12} mt={5}>
+          <Grid item xs={12} mt={10}>
             <TabContext value={tabValue}>
               <Grid container>
+
                 {/* tab category project */}
                 <Grid
                   item
@@ -149,6 +152,7 @@ const Work = ({ history, location }) => {
                   ))}
                 </Grid>
                 {/* end project list */}
+
               </Grid>
             </TabContext>
           </Grid>

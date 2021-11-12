@@ -8,7 +8,6 @@ import { NavLink, useLocation } from "react-router-dom";
 import actionType from "src/redux/actionType";
 import styles from "src/styles/header.module.scss";
 import transition from "src/transition";
-import { logoDark } from "src/components/ImageLoader";
 
 /**
  * animasi varian
@@ -139,8 +138,8 @@ const Header = ({ ...rest }) => {
       <NavLink to="/" exact>
         <Box
           component={motion.img}
-          boxShadow={5}
-          src={logoDark}
+          boxShadow={3}
+          src="/images/logo/logo-dark.webp"
           alt="logo"
           className={styles.logo}
           variants={headerVariants}
