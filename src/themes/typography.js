@@ -1,16 +1,16 @@
 const typography = {
   h1: {
-    fontSize: 70,
+    fontSize: 65,
     lineHeight: "100%",
     fontWeight: 700,
   },
   h2: {
-    fontSize: 55,
+    fontSize: 50,
     lineHeight: "100%",
     fontWeight: 700,
   },
   h3: {
-    fontSize: 35,
+    fontSize: 33,
     lineHeight: "100%",
     fontWeight: 700,
   },

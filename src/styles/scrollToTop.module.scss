@@ -13,7 +13,7 @@
   right: 60px;
 
   @include mixin.breakpoints(xs) {
-    bottom: 15px;
+    bottom: 20px;
     right: 25px;
   }
 }
