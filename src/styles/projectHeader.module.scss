@@ -14,7 +14,7 @@
     width: 50;
     height: 50;
     position: absolute;
-    top: 15px;
+    top: 20px;
     left: 25px;
   }
 }
@@ -30,7 +30,7 @@
   @include mixin.breakpoints(md) {
     flex-direction: row;
     position: absolute;
-    top: 15px;
+    top: 20px;
     right: 25px;
   }
 }

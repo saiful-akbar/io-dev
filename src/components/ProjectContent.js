@@ -202,9 +202,9 @@ const ProjectContent = ({ data, color, ...rest }) => {
                 container
                 justifyContent="space-around"
                 alignItems="flex-start"
-                mt={8}
-                rowSpacing={5}
-                columnSpacing={{ xs: 1, md: img.src.length > 1 ? 7 : 1 }}
+                rowSpacing={{ xs: 5, md: 10 }}
+                columnSpacing={{ xs: 1, md: img.src.length > 1 ? 10 : 1 }}
+                style={{ marginTop: 40 }}
               >
                 {img.src.map((src, key) => (
                   <Grid
@@ -215,20 +215,15 @@ const ProjectContent = ({ data, color, ...rest }) => {
                     sx={{
                       display: "flex",
                       justifyContent: "center",
-                      mt: {
-                        md: key % 2 !== 0 ? 10 : 0,
-                      },
-                      mb: {
-                        md: 0,
-                        xs: 3,
-                      },
+                      mt: { md: key % 2 !== 0 ? 10 : 0, xs: 0 },
+                      mb: { md: 0, xs: 3 },
                     }}
                   >
                     <InView triggerOnce>
                       {({ inView, ref }) => (
                         <Box
                           ref={ref}
-                          boxShadow={7}
+                          boxShadow={4}
                           component={motion.img}
                           src={src}
                           alt={title}

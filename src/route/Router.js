@@ -53,7 +53,7 @@ function Router() {
 
         <Route
           exact
-          path={['/', '/:category']}
+          path="/"
           render={(routeProps) => (
             <Work {...routeProps} />
           )}
