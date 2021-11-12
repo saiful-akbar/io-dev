@@ -95,7 +95,7 @@ const Work = ({ history, location }) => {
           </Grid>
 
           {/* content */}
-          <Grid item xs={12} mt={5}>
+          <Grid item xs={12} mt={10}>
             <TabContext value={tabValue}>
               <Grid container>
 
