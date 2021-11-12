@@ -13,8 +13,12 @@
     font-weight: 600;
     white-space: pre-line;
 
+    @include mixin.breakpoints(md) {
+      font-size: 6em;
+    }
+
     @include mixin.breakpoints(sm) {
-      font-size: 5.5em;
+      font-size: 5em;
     }
 
     @include mixin.breakpoints(xs) {

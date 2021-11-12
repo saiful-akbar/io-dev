@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import styles from "src/styles/hero.module.scss";
 import transition from "src/transition";
-import { Grid } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import { motion } from "framer-motion";
 import TextMask from "./TextMask";
 
@@ -69,7 +69,7 @@ const animateVariants = {
  *
  * @return
  */
-const Hero = ({ leftTitle, rightTitle }) => (
+const Hero = ({ leftTitle, rightTitle, ...rest }) => (
   <motion.div
     variants={animateVariants.hero}
     initial="hidden"
@@ -80,13 +80,13 @@ const Hero = ({ leftTitle, rightTitle }) => (
     <Grid container justifyContent="space-between" alignItems="flex-end">
       {/* text kiri || text utama */}
       <Grid item lg={10} xs={12} mb={3} className={styles.titleWrapper}>
-        <h1 className={styles.title}>
+        <Typography {...rest} component="h1" className={styles.title}>
           {leftTitle.split(" ").map((title, key) => (
             <TextMask variants={animateVariants.text} key={key}>
               {title}
             </TextMask>
           ))}
-        </h1>
+        </Typography>
       </Grid>
       {/* end text kiri || text utama */}
 

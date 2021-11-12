@@ -29,10 +29,8 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <motion.div
-        initial={{ backgroundColor: bgColor }}
-        animate={{ backgroundColor: bgColor }}
-      >
+      
+      <motion.div initial={{ backgroundColor: bgColor }} animate={{ backgroundColor: bgColor }}>
         <div id="top" />
         <Cursor />
 

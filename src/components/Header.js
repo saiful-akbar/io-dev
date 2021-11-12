@@ -102,8 +102,7 @@ NavItem.propTypes = {
 /**
  * list link menu
  */
-const links = [
-  {
+const links = [{
     title: "Work",
     href: "/",
     path: "/:category",
@@ -139,7 +138,7 @@ const Header = ({ ...rest }) => {
       <NavLink to="/" exact>
         <Box
           component={motion.img}
-          boxShadow={5}
+          boxShadow={3}
           src={logoDark}
           alt="logo"
           className={styles.logo}
