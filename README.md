@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="src/assets/img/logo/logo-dark.webp" width="200" height="200">
+  <img src="public/images/logo/logo-dark.webp" width="200" height="200">
 </p>
 
 # IO Dev
