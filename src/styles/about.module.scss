@@ -14,3 +14,15 @@
   display: block;
   overflow: hidden;
 }
+
+.list {
+  margin-left: 23px;
+
+  li {
+    margin-bottom: 25px;
+  }
+
+  li:last-child {
+    margin-bottom: 0;
+  }
+}

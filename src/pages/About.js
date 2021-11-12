@@ -249,16 +249,15 @@ const About = () => {
               </Grid>
 
               <Grid item md={8} xs={12}>
-                {clients.map((client) => (
-                  <Typography
-                    key={client}
-                    variant="h3"
-                    color="textPrimary"
-                    mb={2}
-                  >
-                    - {client}.
-                  </Typography>
-                ))}
+                <ul className={styles.list}>
+                  {clients.map((client) => (
+                    <li key={client}>
+                      <Typography variant="h3" color="textPrimary">
+                        {client}.
+                      </Typography>
+                    </li>
+                  ))}
+                </ul>
               </Grid>
 
               <Grid item md={8} xs={12} mt={10}>
