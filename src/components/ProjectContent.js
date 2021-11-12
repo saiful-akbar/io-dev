@@ -223,7 +223,7 @@ const ProjectContent = ({ data, color, ...rest }) => {
                       {({ inView, ref }) => (
                         <Box
                           ref={ref}
-                          boxShadow={4}
+                          boxShadow={3}
                           component={motion.img}
                           src={src}
                           alt={title}
