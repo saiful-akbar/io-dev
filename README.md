@@ -4,7 +4,7 @@
 
 # IO Dev
 
-IO Dev is a website portfolio to showcase the work and projects we have made
+IO Dev is a portfolio website to showcase the work and projects I have created
 
 ## Instalation
 
