@@ -13,7 +13,7 @@
 # IO Dev
 
 IO Dev is a portfolio website to showcase the work and projects I have created.<br/>
-Please visit **[iodev.vercel.appl.app](https://iodev.vercel.app)** to preview
+Please visit **[iodev.vercel.app](https://iodev.vercel.app)** to preview
 
 ## Instalation
 
