@@ -1,10 +1,19 @@
-<p align="center">
-  <img src="public/images/logo/logo-dark.webp" width="200" height="200">
-</p>
+<div align="center">
+  <a href="https://iodev.vercel.app" target="_blank">
+    <img
+      loading="lazy"
+      alt="logo"
+      src="public/images/logo/logo-dark.webp"
+      width="200"
+      height="200"
+    />
+  </a>  
+</div>
 
 # IO Dev
 
-IO Dev is a website portfolio to showcase the work and projects we have made
+IO Dev is a portfolio website to showcase the work and projects I have created.<br/>
+Please visit **[iodev.vercel.appl.app](https://iodev.vercel.app)** to preview
 
 ## Instalation
 
@@ -30,7 +39,7 @@ npm install && npm run start
 
 ## Tags
 
-<div>
+<div align="center">
   <a href="https://www.javascript.com/" target="_blank">
     <img alt="Javascript" src="https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E" />
   </a>
